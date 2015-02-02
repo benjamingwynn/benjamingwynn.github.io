@@ -71,7 +71,7 @@ var particlebox = {
 		console.warn("Recreating objects from configuration.");
 	
 		// Define the size of the stack
-		particlebox.stack = [z_depth];
+		particlebox.stack = [particlebox.config.z_depth];
 		
 		// Populate the stack:
 		for (z = 0; z < particlebox.config.z_depth; z++) {

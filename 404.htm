@@ -1,27 +1,57 @@
+<!-- the code for my website is really messy, I'll sort it out One Day™ -->
 <!DOCTYPE html>
 <head>
-    <title>work in progress yo</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300' rel='stylesheet' type='text/css'>
-    <script src="banner.js"></script>
+	<title>Xenxier</title>
+	
+	<!-- Google Fonts -->
+	<link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:300' rel='stylesheet' type='text/css'>
+	
+	<!-- Vendor JS-->
+	<script src=".common/js/vendor/jquery.js"></script>
+	
+	<!-- Common CSS -->
+	<link href='.common/css/xenxier/default_layout.css' rel='stylesheet' type='text/css'>
+	<link href='.common/css/xenxier/default_style.css' rel='stylesheet' type='text/css'>
+	
+	<!-- Page CSS -->
+	<link href='index.css' rel='stylesheet' type='text/css'>
 </head>
-
 <body>
+	<canvas id="backgroundCanvas"></canvas>
 	<div id="wrapper">
-        <div id="header">
-        	<h1>my website like</h1>
-            <p>i think i make things on the internet</p>
-        </div>
-        <div id="menu">
-        	<p>TODO: menu (put menu in this div class)</p>
-        </div>
-        <div id="body">
-        	<div id="content0">
-                <h1>Awshit</h1>
-                <p>This is not the page you're looking for. <a href='index.htm'>Click here</a> to return to the homepage.</p>
-            </div>
-        <div id="footer">
-			<p>Copyright Benjamin Gwynn, 2013.</p>
-        </div>
+		<header>
+			<h1 style="font-size: 300px;" class="glitch">404</h1>
+			<h2 style="color: white" class="glitch">that page wasn't found</h2>
+		</header>
+		<footer>
+			<p style="color: white">Created by Benjamin Gwynn | powered by particlebox & glitch.js</p>
+		</footer>
 	</div>
 </body>
+
+<!-- My Common JS -->
+<script type="text/javascript" src="http://rawgit.com/benjamingwynn/glitch.js/master/glitch.js"></script>
+<script type="text/javascript" src=".common/js/xenxier/common.js"></script>
+<script type="text/javascript" src=".common/js/xenxier/canvas.js"></script>
+<script type="text/javascript" src=".common/js/xenxier/particlebox_presets.js"></script>
+<script type="text/javascript" src=".common/js/xenxier/particlebox.js"></script>
+
+<!-- Load Scripts -->
+<script type="text/javascript">
+	// Load glitch.js
+	distort_objects_one_at_a_time=true; distort_chance = 10; glitch();
+	
+	// Move sliders into correct place from preset
+	particlebox_presets.error();
+	
+	// Create particlebox objects from config
+	particlebox.create();
+	
+	// On refresh:
+	setInterval(function() {
+		// Draw:
+		particlebox.draw();
+	}, 1000 / particlebox.config.refresh_rate);
+</script>
