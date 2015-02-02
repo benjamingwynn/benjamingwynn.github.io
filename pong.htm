@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<head>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+	<title>THE BEST GAME OF PONG *EVER*</title>
+	<style>
+		@font-face {
+			font-family: 'Munro';
+			src: url('font/Munro.ttf');
+		}
+		
+		@font-face {
+			font-family: 'Munro Small';
+			src: url('font/MunroSmall.ttf');
+		}
+	
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		
+		html, body {
+            height: 100%;
+            width: 100%;
+			overflow-x: hidden;
+		}
+		
+		#backgroundCanvas {
+			top: 0;
+			position: fixed;
+			background-color: dimgray;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="backgroundCanvas">your browser doesn't support canvas, update your damn browser guy</canvas>
+</body>
+<script>
+	var canvas = document.getElementById("backgroundCanvas");
+	
+	// Before we get context, resize the canvas.
+	canvas.width  = window.innerWidth;
+	canvas.height = window.innerHeight;
+	
+	var context = canvas.getContext("2d");
+	
+	var stack = [];
+	var refresh_rate = 60;
+	var target_refresh_rate = 60;
+	
+	var size_multiplier = 1;
+	var size_velocity_constant = 10;
+	
+	var colour_base_r = 170;
+	var colour_base_g = 170;
+	var colour_base_b = 170;
+	var colour_depth = 2;
+	
+	var started_clicking = 0;
+	
+	var frame = [];
+	var ball = [];
+	var player_1 = [];
+	var player_2 = [];
+	
+	var player_1_score = 0;
+	var player_2_score = 0;
+	
+	var move_speed = 40;
+	
+	var interval;
+	var called = false;
+	
+	//roygbiv
+	var background_colours = ["DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000", "DC143C", "FF7F50", "00FA9A", "6A5ACD", "4B0082", "EE82EE", "696969", "000000"];
+	
+	function createObjects(x, y, amount, depth) {
+		stack = [];
+		
+		for (z = 0; z < depth; z++) {
+			layer = [amount];
+			
+			for (i = 0; i < amount; i++) {
+				size = z * size_multiplier;
+				
+				// Create a new object:
+				object = [];
+				
+				object["x_size"] = size;
+				object["x_position"] = x;
+				object["x_velocity"] = rng(0 - size * size_velocity_constant, size * size_velocity_constant);
+				
+				object["y_size"] = size;
+				object["y_position"] = y;
+				object["y_velocity"] = rng(0 - size * size_velocity_constant, size * size_velocity_constant);
+				
+				object["colour_r"] = colour_base_r + Math.round(size * colour_depth);
+				object["colour_g"] = colour_base_g + Math.round(size * colour_depth);
+				object["colour_b"] = colour_base_b + Math.round(size * colour_depth);
+				object["colour_a"] = 255;
+				
+				object["keep"] = false;
+				
+				layer[i] = object;
+			}
+			
+			stack[z] = layer;
+		}
+		
+		frame[frame.length] = stack;
+	}
+
+	function drawFrame() {
+		// Clear the canvas:
+		clearCanvas();
+		
+		// Ball logic:
+		ball["x_position"] += ball["x_velocity"];
+		ball["y_position"] += ball["y_velocity"];
+		
+		// hit boxes:
+		if (ball["x_position"] <= player_1["x_position"] + player_1["x_size"] && ball["y_position"] < player_1["y_position"] + player_1["y_size"] && ball["y_position"] + ball["y_size"] > player_1["y_position"]) {
+			// inverse the x velocity
+			console.log("hit 1");
+			ball["x_velocity"] = 0 - (ball["x_velocity"]);
+				createObjects(ball["x_position"], ball["y_position"], 8, 8);
+		} else if ((ball["x_position"] >= player_2["x_position"] - player_2["x_size"]) && (ball["y_position"] < player_2["y_position"] + player_2["y_size"]) && (ball["y_position"] + ball["y_size"] > player_2["y_position"])) {
+			// inverse the x velocity
+			console.log("hit 2");
+			ball["x_velocity"] = 0 - (ball["x_velocity"]);
+				createObjects(ball["x_position"], ball["y_position"], 8, 8);
+		} else {
+			// Did the ball try and leave the screen?
+			if (ball["x_position"] < player_1["x_size"] + player_1["x_position"]) {
+				player_2_score += 1;
+				ball["x_position"] = canvas.width / 2;
+				ball["y_position"] = canvas.height / 2;
+				createObjects(ball["x_position"], ball["y_position"], 8, 8);
+			} else if (ball["x_position"] > player_2["x_position"]) {
+				player_1_score += 1;
+				ball["x_position"] = canvas.width / 2;
+				ball["y_position"] = canvas.height / 2;
+				createObjects(ball["x_position"], ball["y_position"], 8, 8);
+			}
+			
+			if (ball["y_position"] + ball["y_size"] > canvas.height || ball["y_position"] < 0) {
+				ball["y_velocity"] = 0 - (ball["y_velocity"]);
+				createObjects(ball["x_position"], ball["y_position"], 8, 8);
+			}
+		}
+		
+		// Draw the ball:
+		context.fillStyle = 'rgba(255, 255, 255, 255)';
+		context.fillRect(ball["x_position"], ball["y_position"], ball["x_size"], ball["y_size"]);
+		
+		// Draw the players:
+		context.fillStyle = 'rgba(255, 255, 255, 255)';
+		context.fillRect(player_1["x_position"], player_1["y_position"], player_1["x_size"], player_1["y_size"]);
+		context.fillRect(player_2["x_position"], player_2["y_position"], player_2["x_size"], player_2["y_size"]);
+		
+		// Loop through all of the stacks to draw:
+		for (s = 0; s < frame.length; s++) {
+		
+			// Loop through all layers in the stack:
+			for (z = 0; z < frame[s].length; z++) {
+				
+				// Draw everything on this layer:
+				for (i = 0; i < frame[s][z].length; i++) {
+				
+					// Calculate new object position based on object velocity
+					frame[s][z][i]["x_position"] += frame[s][z][i]["x_velocity"];
+					frame[s][z][i]["y_position"] += frame[s][z][i]["y_velocity"];
+					
+					var donotdraw;
+					
+					// If the velocity of the object caused it to leave the screen, destroy or move it:
+					if (frame[s][z][i]["y_position"] > canvas.height || 
+						frame[s][z][i]["x_position"] > canvas.width ||
+						frame[s][z][i]["y_position"] < 0 - frame[s][z][i]["y_size"] ||
+						frame[s][z][i]["x_position"] < 0 - frame[s][z][i]["x_size"] ){
+							if (frame[s][z][i]["keep"]) {
+								if (frame[s][z][i]["x_position"] > canvas.width) {
+									frame[s][z][i]["x_position"]  = 0 - frame[s][z][i]["x_size"];
+								} else if (frame[s][z][i]["x_position"] < 0) {
+									frame[s][z][i]["x_position"]  = canvas.width - frame[s][z][i]["x_size"];
+								}
+								
+								if (frame[s][z][i]["y_position"] > canvas.height) {
+									frame[s][z][i]["y_position"]  = 0 - frame[s][z][i]["y_size"];
+								} else if (frame[s][z][i]["y_position"] < 0) {
+									frame[s][z][i]["y_position"]  = canvas.height;
+								}
+							} else {
+								donotdraw = true;
+							}
+					}
+				
+					// Colour:
+					if (!donotdraw) {
+						context.fillStyle = 'rgba(' + frame[s][z][i]["colour_r"].toString() + ', ' + frame[s][z][i]["colour_g"].toString() + ', ' + frame[s][z][i]["colour_b"].toString() + ', ' + frame[s][z][i]["colour_a"].toString() + ')';
+					}
+					
+					// Draw:
+					context.fillRect(frame[s][z][i]["x_position"], frame[s][z][i]["y_position"], frame[s][z][i]["x_size"], frame[s][z][i]["y_size"]);
+				}
+			}
+		}
+		
+		
+		// Draw the overlaying text:
+		context.font= '128px Munro';
+		context.fillStyle = 'white';
+		context.textAlign = 'center';
+		
+		current_unix_time = new Date().getTime() / 1000;
+		
+		// Footer:
+		context.font = '24px Munro Small';
+		context.fillText("THE BEST GAME OF PONG EVER", canvas.width / 2, canvas.height - 48);
+		context.fillText("Created by Benjamin Gwynn", canvas.width / 2, canvas.height - 24);
+		
+		// Draw scores:
+		context.font = '48px Munro Small';
+		context.fillText(player_1_score, 48, 68);
+		context.fillText(player_2_score, canvas.width - 68, 68);
+	}
+	
+	function rng(min, max) {
+		return Math.random() * (max - min) + min;
+	}
+	
+	function clearCanvas() {
+		context.clearRect(0, 0, canvas.width, canvas.height);
+	}
+	
+	window.addEventListener("resize", function(){
+		// Recalculate the size of the canvas:
+		canvas.width  = window.innerWidth;
+		canvas.height = window.innerHeight;
+	});
+	
+	setInterval(drawFrame, 1000 / refresh_rate);
+	
+	// Keyboard:
+	$(document).on('keydown', function(e) {
+		if(interval == null) {
+			called = false;
+			interval = setInterval(function() {
+				doSomething(e.keyCode);
+				called = true;
+			}, 1000);
+		}
+		
+	}).on('keyup', function(e) {
+		clearInterval(interval); 
+		interval = null;
+		if(!called)
+			doSomething(e.keyCode);
+	});
+	
+	function doSomething(keyCode) {
+			
+		 if (keyCode == 38) {
+			 // Player 2 up
+			 if (player_2["y_position"] - move_speed > 0) {
+				 	player_2["y_position"] -= move_speed;
+			 }
+		 }  else if (keyCode == 40) {
+			 // p2 down
+			 if (player_2["y_position"] + player_2["y_size"] + move_speed < canvas.height) {
+				 	player_2["y_position"] += move_speed;
+			 }
+		 }
+		 
+		 if (keyCode == 87) {
+			 // p1 up
+			 if (player_1["y_position"] - move_speed > 0) {
+				 	player_1["y_position"] -= move_speed;
+			 }
+		 }  else if (keyCode == 83) {
+			 // p1 down
+			 if (player_1["y_position"] + player_1["y_size"] + move_speed < canvas.height) {
+				 	player_1["y_position"] += move_speed;
+			 }
+		 }
+	}
+</script>
+<script>
+	ball["x_position"] = canvas.width / 2;
+	ball["y_position"] = canvas.height / 2;
+	ball["x_velocity"] = -5;
+	ball["y_velocity"] = 5;
+	ball["x_size"] = 16;
+	ball["y_size"] = 16;
+	
+	player_1["x_position"] = 20;
+	player_1["y_position"] = canvas.height / 2;
+	player_1["x_size"] = 8;
+	player_1["y_size"] = 128;
+	
+	player_2["x_size"] = 8;
+	player_2["y_size"] = 128;
+	player_2["x_position"] = canvas.width - 20 - player_2["x_size"];
+	player_2["y_position"] = canvas.height / 2;
+</script>

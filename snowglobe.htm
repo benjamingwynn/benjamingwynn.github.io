@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<head>
+	<title>Xenxier's Snowglobe</title>
+	<link href='http://rawgit.com/daneden/animate.css/master/animate.min.css' rel='stylesheet' type='text/css'>
+	<style>
+		@font-face {
+			font-family: 'Munro';
+			src: url('font/Munro.ttf');
+		}
+		
+		@font-face {
+			font-family: 'Munro Small';
+			src: url('font/MunroSmall.ttf');
+		}
+	
+		* {
+			margin: 0;
+			padding: 0;
+			margin-left: auto;
+			margin-right: auto;
+			color: white;
+			font-weight: 100;
+		}
+		
+		html, body {
+            height: 100%;
+            width: 100%;
+			overflow-x: hidden;
+		}
+		
+		#backgroundCanvas {
+			top: 0;
+			position: fixed;
+			z-index: -1;
+			background-color: skyblue;
+		}
+		
+		header {
+			position: fixed;
+			top: 50%;
+			bottom:50%;
+			width: 100%;
+			text-align: center;
+		}
+		
+		header h1 {
+			font-size: 100px;
+			font-family: 'Munro', sans-serif;
+			transform: translateY(-50%);
+			-ms-transform: translateY(-50%);
+			-webkit-transform: translateY(-50%);
+		}
+		
+		header h2 {
+			font-size: 24px;
+			font-family: 'Munro Small', sans-serif;
+			transform: translateY(-150%);
+			-ms-transform: translateY(-150%);
+			-webkit-transform: translateY(-150%);
+		}
+		
+		a:link {color:#696969; text-decoration:underline;}
+		a:visited {color:#696969; text-decoration:underline;}
+		a:hover {color:#09F; text-decoration:underline;}
+		a:active {color:#09F; text-decoration:underline;}
+	</style>
+</head>
+<body>
+	<canvas id="backgroundCanvas"></canvas>
+	<header>
+		<span>
+			<h1 id="thehappytext" class="animated zoomIn">Happy Christmas</h1>
+			<h2 id="thefortunetext" class="animated zoomIn">May you find Javascript in your browser this christmas.</h2>
+		</span>
+	</header>
+</body>
+<script>
+	var canvas = document.getElementById("backgroundCanvas");
+	
+	// Before we get context, resize the canvas.
+	canvas.width  = window.innerWidth;
+	canvas.height = window.innerHeight;
+	
+	var context = canvas.getContext("2d");
+	
+	var stack = [];
+	var refresh_rate = 60;
+	var target_refresh_rate = 60;
+	var draw_amount = 48;
+	
+	var min_x_velocity = -1;
+	var max_x_velocity = 1;
+	
+	var min_y_velocity = 1;
+	var max_y_velocity = 8;
+	
+	var z_depth = 8;
+	
+	var size_multiplier = 2;
+	
+	var colour_base_r = 200;
+	var colour_base_g = 200;
+	var colour_base_b = 200;
+	var colour_depth = 2;
+	
+	createObjects();
+	
+	function recreateObjects() {
+		objects = []; // reset
+		createObjects();
+	}
+	
+	function createObjects() {
+		stack = [z_depth];
+		
+		for (z = 0; z < z_depth; z++) {
+			layer = [draw_amount];
+			
+			for (i = 0; i < draw_amount; i++) {
+				size = z * size_multiplier;
+				
+				// Create a new object:
+				object = [];
+				
+				object["x_size"] = size;
+				object["x_position"] = rng(0, window.innerWidth - size);
+				object["x_velocity"] = (rng(min_x_velocity, max_x_velocity) / refresh_rate) * target_refresh_rate;
+				
+				object["y_size"] = size;
+				object["y_position"] = rng(0, window.innerHeight - size);
+				object["y_velocity"] = (rng(min_y_velocity, max_y_velocity) / refresh_rate) * target_refresh_rate;
+				
+				object["colour_r"] = colour_base_r + Math.round(size * colour_depth);
+				object["colour_g"] = colour_base_g + Math.round(size * colour_depth);
+				object["colour_b"] = colour_base_b + Math.round(size * colour_depth);
+				object["colour_a"] = 255;
+				
+				object["keep"] = true;
+				
+				layer[i] = object;
+			}
+			
+			stack[z] = layer;
+		}
+	}
+
+	function drawFrame() {
+		// Clear the canvas:
+		clearCanvas();
+		
+		// Loop through all layers in the stack:
+		for (z = 0; z < z_depth; z++) {
+			
+			// Draw everything on this layer:
+			for (i = 0; i < draw_amount; i++) {
+			
+				// Calculate new object position based on object velocity
+				stack[z][i]["x_position"] += stack[z][i]["x_velocity"];
+				stack[z][i]["y_position"] += stack[z][i]["y_velocity"];
+				
+				// If the velocity of the object caused it to leave the screen, destroy or move it:
+				if (stack[z][i]["y_position"] > canvas.height || 
+					stack[z][i]["x_position"] > canvas.width ||
+					stack[z][i]["y_position"] < 0 - stack[z][i]["y_size"] ||
+					stack[z][i]["x_position"] < 0 - stack[z][i]["x_size"] ){
+						if (stack[z][i]["keep"]) {
+							if (stack[z][i]["x_position"] > canvas.width) {
+								stack[z][i]["x_position"]  = 0 - stack[z][i]["x_size"];
+							} else if (stack[z][i]["x_position"] < 0) {
+								stack[z][i]["x_position"]  = canvas.width - stack[z][i]["x_size"];
+							}
+							
+							if (stack[z][i]["y_position"] > canvas.height) {
+								stack[z][i]["y_position"]  = 0 - stack[z][i]["y_size"];
+							} else if (stack[z][i]["y_position"] < 0) {
+								stack[z][i]["y_position"]  = canvas.height;
+							}
+						} else {
+							// Destroy this object by turning it into an empty string. Making it a string rather than null stops errors from being thrown when trying to access it.
+							stack[z][i] = "";
+						}
+				}
+			
+				// Colour:
+				context.fillStyle = 'rgba(' + stack[z][i]["colour_r"].toString() + ', ' + stack[z][i]["colour_g"].toString() + ', ' + stack[z][i]["colour_b"].toString() + ', ' + stack[z][i]["colour_a"].toString() + ')';
+				
+				// Draw:
+				context.fillRect(stack[z][i]["x_position"], stack[z][i]["y_position"], stack[z][i]["x_size"], stack[z][i]["y_size"]);
+			}
+		}
+	}
+	
+	function rng(min, max) {
+		return Math.random() * (max - min) + min;
+	}
+	
+	function clearCanvas() {
+		context.clearRect(0, 0, canvas.width, canvas.height);
+	}
+	
+	window.addEventListener("resize", function(){
+		// Recalculate the size of the canvas:
+		canvas.width  = window.innerWidth;
+		canvas.height = window.innerHeight;
+		
+		// Recreate all objects
+		recreateObjects();
+	});
+	
+	setInterval(drawFrame, 1000 / refresh_rate);
+	
+	// Bunch of random sample fortunes:
+	var fortune = ["may your future be merry and bright", "the cake is not a lie", "santa is real", "you're doing it wrong", "you're doing it right", "you don't know me, you're not god", "benjamin made this", "okay does not mean ok", "santa is watching", "father christmas can see you", "santa doesn't feed his elves", "i am santa", "benjamin is santa", "the government are working for santa", "it's snowing", "it's not raining", "santa is watching you", "behave for santa", "santa was 'ere 2014", "you should follow @iamxenxier", "the snow is cold", "wear gloves", "wear a hat this christmas", "top hats are not suitable for christmas", "fedora: not even once", "santa doesn't wear a fedora for a reason", "christmas hats are the new top hats", "bow ties are still cool", "remember, santa has elves", "santa isn't an elf", "brussel sprouts will always be bad", "rudolph is lactose intolerant", "undefined", "un-undefined" ,"turkey at christmas is overrated", "do not eat pizza at christmas", "diets are prohibited on christmas day", "wear a box for boxing day", "box your box for boxing day", "may the rng gods give you a good fortune", "this snow globe is written in pure js/css/html 5", "and a happy new year", "santa is god", "santa is omnipresent", "i want a divorce because you look like a horse", "i love it", "facebook is still bad"];
+	fortune[fortune.length] = "there are " + (fortune.length + 1) + " fortunes to be told";
+	document.getElementById("thefortunetext").innerHTML = fortune[Math.floor(rng(0, fortune.length))] + ".";
+	
+	rand = Math.floor(rng(0, 10));
+	if (rand === 0) {
+		document.getElementById("thehappytext").innerHTML = "Happy Holidays";
+	} else if (rand === 1) {
+		document.getElementById("thehappytext").innerHTML = "Merry Christmas";
+	}
+</script>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<head>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+	<link href='http://fonts.googleapis.com/css?family=Comfortaa:300' rel='stylesheet' type='text/css'>
+	<title>THE COMPUTING GAME</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		
+		html, body {
+            height: 100%;
+            width: 100%;
+			overflow-x: hidden;
+		}
+		
+		#backgroundCanvas {
+			top: 0;
+			position: fixed;
+			background-color: black;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="backgroundCanvas">This game uses 2D canvas. Your browser doesn't support that. Please enable canvas or update your browser.</canvas>
+</body>
+<script>
+	var canvas = document.getElementById("backgroundCanvas");
+	
+	// Before we get context, resize the canvas.
+	canvas.width  = window.innerWidth;
+	canvas.height = window.innerHeight;
+	
+	var context = canvas.getContext("2d");
+	
+	var stack = [];
+	var refresh_rate = 60;
+	var target_refresh_rate = 60;
+	var frame = 0;
+	
+	var colourmin = 150;
+	var colourmax = 255;
+	var colour = colourmin;
+	var colourdirection = true; // true = up, false = down
+	var colourmultiplier = 4;
+	
+	var quiz = []
+	var current = -1;
+	var currentq = -1;
+	
+	var q_frame_count_default = 30;
+	var q_frame_count = q_frame_count_default;
+	var q_frame_decend = 1;
+	
+	var gameover;
+	var score = 0;
+	
+	var font = 'Comfortaa';
+	
+	// Create the questions here:
+	// 1. Question
+	// 2. Answers
+	// 3. The correct answer number
+	createQuestion("What does FTP stand for?", ["File Transit Protocal", "Folder Technical Protocal", "File Transfer Proxy", "File Transfer Protocal"], 4);
+	createQuestion("What does HTTP stand for?", ["Hypertext Transfer Protocal", "Hippo Technically Too Potamus", "Nothing"], 1);
+	createQuestion("What is an example of a handshake?", ["Two programs holding hands", "A printer communicating print job status with a computer", "A Double Rainbow", "HTML5"], 2);
+	createQuestion("What does HTTP mainly transfer?", ["Web Pages", "Emails", "Commands", "Arrays"], 1);
+	createQuestion("What does SMTP mainly transfer?", ["Web Pages", "Emails", "Commands", "Arrays"], 1);
+	createQuestion("What does SMTP do?", ["Gets email messages from a server", "Sends emails", "Reads email messages directly from a server", "Send web pages", "Downloads Google Chrome"], 2);
+	quiz = shuffleArray(quiz); // The questions should be in a random order 
+	
+	// the question, bogus answers, actual answer
+	function createQuestion(question, answers, correct) {
+		var q = [];
+		q["question"] = question;
+		q["answers"] = answers;
+		q["answer"] = correct;
+		quiz[quiz.length] = q;
+	}
+	
+	function drawQuestion() {
+		frame++;
+		
+		// Draw a new question every X frames
+		if (frame % q_frame_count == 0) {
+			if (currentq == quiz[current]["answers"].length - 1) {
+				currentq = 0;
+				if (q_frame_count > 1) {
+					q_frame_count -= q_frame_decend;
+				}
+			} else {
+				currentq++;
+			}
+		}
+		
+		context.font = '64px ' + font;
+		context.fillStyle = 'rgba(' + 255 + ', ' + 255 + ', ' + 255 + ', ' + 255 + ')';
+		context.textAlign = 'center';
+		context.fillText(quiz[current]["question"], canvas.width / 2, (canvas.height / 2));
+		
+		context.font = '28px ' + font;
+		context.fillStyle = 'rgba(' + 240 + ', ' + 240 + ', ' + 240 + ', ' + 255 + ')';
+		context.textAlign = 'center';
+		context.fillText(quiz[current]["answers"][currentq], canvas.width / 2, (canvas.height / 2) + 38);
+	}
+
+	function drawFrame() {
+		// Clear the canvas:
+		clearCanvas();
+		
+		// Draw the overlaying text:
+		if (gameover) {
+			drawFlashText('GAME OVER', canvas.width / 2, canvas.height / 2, 128);
+			drawFlashText('~ You scored ' + score + ' out of ' + quiz.length + ' points! Press F5 to try again ~ ', canvas.width / 2, (canvas.height / 2) + 60, 32);
+		} else if (current < 0) {
+			drawFlashText('thecomputinggame', canvas.width / 2, canvas.height / 2, 128);
+			drawFlashText('~ Click Anywhere to Play ~', canvas.width / 2, (canvas.height / 2) + 60, 32);
+			context.font = 12 + 'px ' + font;
+			context.fillStyle = 'grey';
+			context.fillText('Disclaimer: This game is not fair. It will often change answer just before you click. I am not responsible for any crushed dreams.', canvas.width / 2, canvas.height - 12);
+		} else {
+			drawQuestion();
+		}
+	}
+	
+	function drawFlashText(text, x, y, size) {
+		context.font = size + 'px ' + font;
+
+		if (colourdirection) {
+			if (colour >= colourmax) {
+				colourdirection = false;
+			} else {
+				colour += colourmultiplier;
+			}
+		} else {
+			if (colour <= colourmin) {
+				colourdirection = true;
+			} else {
+				colour -= colourmultiplier;
+			}
+		}
+		context.fillStyle = 'rgba(' + colour + ', ' + colour + ', ' + colour + ', ' + 255 + ')';
+		context.textAlign = 'center';
+		context.fillText(text, x, y);
+	}
+	
+	function rng(min, max) {
+		return Math.random() * (max - min) + min;
+	}
+	
+	function noZeroRNG(min, max) {
+		var rand = 0;
+		while (rand = 0) {
+			rand = Math.random() * (max - min) + min;
+		}
+		return rand;
+	}
+	
+	function clearCanvas() {
+		context.clearRect(0, 0, canvas.width, canvas.height);
+	}
+	
+	function nextQuestion() {
+		if (current == quiz.length - 1) {
+			current = -1;
+			currentq = -1;
+			frame = 0;
+			gameover = true;
+		} else {
+			current++;
+			currentq = 0;
+			frame = 0;
+		}
+	}
+	
+	window.addEventListener("resize", function(){
+		// Recalculate the size of the canvas:
+		canvas.width  = window.innerWidth;
+		canvas.height = window.innerHeight;
+	});
+	
+	// On click:
+	canvas.addEventListener("mousedown", function() {
+		if (current > -1 && !gameover) {
+			if (currentq == quiz[current]["answer"] - 1) {
+				// Right
+				console.log("Correct answer!");
+				score++;
+				$('#backgroundCanvas').animate({backgroundColor: "#58E858"}, 'fast'); // green
+			} else {
+				// Wrong
+				console.log("Incorrect answer!");
+				$('#backgroundCanvas').animate({backgroundColor: "#FF3333"}, 'fast'); // red
+			}
+		}
+		nextQuestion();
+		if (gameover) {
+			$('#backgroundCanvas').animate({backgroundColor: "#000000"}, 'slow'); // red
+		}
+	});
+	
+	// Draw
+	setInterval(drawFrame, 1000 / refresh_rate);
+	
+	// kang from stackoverflow: http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+	function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    return array;
+}
+</script>

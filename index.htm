@@ -1,0 +1,742 @@
+<!-- the code for my website is really messy, I'll sort it out One Day™ -->
+<!DOCTYPE html>
+<head>
+	<title>Xenxier</title>
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Nova+Square' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:300' rel='stylesheet' type='text/css'>
+	<link href='css/normalize.css' rel='stylesheet' type='text/css'>
+	<link href='css/foundation.min.css' rel='stylesheet' type='text/css'>
+	<script src="js/vendor/jquery.js"></script>
+	<script src="js/foundation/foundation.js"></script>
+	<script src="js/foundation/foundation.slider.js"></script>
+	<script type="text/javascript" src="http://rawgit.com/benjamingwynn/glitch.js/master/glitch.js"></script>
+	<script type="text/javascript">distort_objects_one_at_a_time=false; distort_chance=8; glitch();</script>
+	<script>
+		$('html, body').bind('DOMMouseScroll MouseScrollEvent MozMousePixelScroll wheel scroll', function() { scroll() });
+		function scroll() {
+			if ($('#controls').position()["top"] - $('#controls').height() <= 0) {
+				$('#hideshowbutton').fadeIn('fast');
+			} else {
+				$('#hideshowbutton').fadeOut('fast');
+			}
+		}
+	</script>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		
+		html, body {
+            height: 100%;
+            width: 100%;
+			overflow-x: hidden;
+		}
+		
+		#backgroundCanvas {
+			top: 0;
+			position: fixed;
+			z-index: -1;
+			background-color: #111;
+		}
+		
+		h1 {
+			color: DimGray;
+			text-align: center;
+			font-family: 'Droid Sans Mono';
+			font-size: 40px;
+			font-weight: 300;
+		}
+		
+		h2 {
+			color: gray;
+			text-align: center;
+			font-family: 'Ubuntu Mono';
+			font-weight: 100;
+		}
+		
+		p {
+			margin: 10px;
+			color: gray;
+			text-align: center;
+			font-family: 'Ubuntu Mono', 'Roboto', 'Helvetica', sans-serif;
+			font-weight: 100;
+		}
+		
+		header {
+			top: 0;
+			position: relative;
+			display: table;
+			width: 100%;
+			background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.0));
+			padding: 100px;
+		}
+		
+		header * {
+			color: white;
+			text-align: center;
+			z-index: 10;
+			position: relative;
+			line-height: 1;
+			padding: 0;
+			margin: 0;
+		}
+		
+		header h1 {
+			font-size: 140px;
+			font-family: 'Source Code Pro';
+		}
+		
+		header h2 {
+			color: silver;
+		}
+		
+		.content * {
+			text-align: left;
+		}
+		
+		.content {
+			max-width: 750px;
+			margin-top: 25px;
+			margin-bottom: 25px;
+			background-color: black;
+			box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.5);
+			border-color: #464646;
+			border-style: solid;
+		}
+		
+		.content h1, h2, p {
+			padding-left: 12px;
+			padding-right: 12px;
+		}
+		
+		.content h1 {
+			color: silver !important;
+			text-shadow: none !important;
+			font-size: 30px !important;
+			font-family: 'Droid Sans Mono' !important;
+		}
+		
+			.content h1::before {
+				content: '> ';
+			}
+		
+			.content a::before {
+				content: '> ';
+			}
+		
+		.archived {
+			border-color: #464646 darkred #464646 #464646 !important;
+		}
+		
+		.archive-banner p {
+			float: right;
+			padding: 10px;
+			border-color: #464646 darkred #464646 #464646 !important;
+			border-style: solid;
+			box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.5);
+			background-color: black;
+			text-align: right;
+			text-transform: uppercase;
+			color: silver;
+			margin: 0;
+		}
+		
+		.stuff {
+			max-width: 800px;
+			margin-top: 40px;
+			margin-bottom: 40px;
+			padding-left: 40px;
+			padding-right: 40px;
+			background-color: rgba(20, 20, 20, 0.8);
+			box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.5);
+			border-color: #464646;
+			border-style: solid;
+		}
+		
+		.stuff h1 {
+			font-family: 'Source Code Pro';
+			color: white;
+			text-transform: uppercase;
+			text-shadow: 1px 1px 0 dimgray;
+			font-size: 50px;
+			margin-bottom: 20px !important;
+		}
+		
+		.nsfl {
+			box-shadow: 10px 10px 0 #E74A4A;
+			border-color: #E74A4A;
+			border-style: solid;
+		}
+		
+		.nsfl * {
+			display: none;
+		}
+		
+		.nsfl .nsfl-warning {
+			display: block;
+		}
+		
+		.nsfl .nsfl-warning * {
+			display: block;
+		}
+		
+		.nsfl .nsfl-button {
+			border-color: #E74A4A;
+			border-style: solid;
+			margin-right: auto;
+			margin-left: auto;
+		}
+		
+		button {
+			text-align: center;
+			margin: 20px;
+			padding: 14px;
+			color: silver;
+			border-color: #444;
+			border-style: solid;
+			background: rgba(30, 30, 30, 0.8);
+			text-transform: uppercase;
+			font-family: 'Droid Sans Mono';
+		}
+		
+		#hideshowbutton {
+			display: none;
+			position: fixed;
+			left: 0;
+			bottom: 0;
+			z-index: 2;
+		}
+		
+		#particles h1 {
+			margin: 0 !important;
+		}
+		
+		#particles #controls h2 {
+			color: gray;
+			text-align: left;
+			text-transform: uppercase;
+			font-family: 'Droid Sans Mono';
+		}
+		
+		#particles #controls {
+			height: 780px; /* Hard coded height */
+		}
+		
+		.indent {
+			height: 100%;
+			width: 100%;
+		}
+		
+		.indent section {
+			padding: 10px;
+			width: 50%;
+			float: left;
+		}
+		
+		.range-slider {
+			background: #333;
+			border: 1px solid grey;
+		}
+		
+		.range-slider-active-segment {
+			background: silver;
+		}
+		
+		.range-slider-handle {
+			background: grey;
+		}
+		
+		a:link {color:#696969; text-decoration:underline;}
+		a:visited {color:#696969; text-decoration:underline;}
+		a:hover {color:#09F; text-decoration:underline;}
+		a:active {color:#09F; text-decoration:underline;}
+	</style>
+</head>
+<body>
+	<canvas id="backgroundCanvas"></canvas>
+	<button id="hideshowbutton" onclick="hideshow()">Hide/Show Website</button>
+	<div id="wrapper">
+			<header>
+				<h1 class="glitch">xenxier</h1>
+				<h2 class="glitch">javascriptless</h2>
+			</header>
+		<div id="html5" class="stuff">
+			<h1>html5 projects</h1>
+			<p style="color:gray">Projects written to take advantage of the new HTML5 specification. This includes canvas games and more.</p>
+			<div id="clickit" class="content">
+				<h1>CLICK IT</h1>
+				<p><strong><span class="glitch">grnt</span></strong> was playing a click tester one day, I wanted to make it better so I made the text not selectable, changed the scale to be full screen and later recoded the entire thing in canvas with pretty particles from the snow globe project. I then added made the background change on every 10 clicks using jQuery UI and added a high score cookie. I (and may others) liked the game so much that I coded an Android App of the game, with multiplayer support and native rendering.</p>
+				<p><a href="http://gwynn.tk/click.htm">CLICK HERE TO OPEN</a></p>
+				<p><a href="https://play.google.com/store/apps/details?id=xenxier.android.game.tapit">GET THE FREE ANDROID APP</a></p>
+			</div>
+			<div id="pong" class="content archived">
+				<h1>The Best Game of Pong Ever</h1>
+				<p>A pong game I designed in a very small space of time using the particles from my snow globe after <strong><span class="glitch">REDACTED</span></strong> asked if I could make a pong game. The game is *almost* completely flawless, and is fully configurable using your browsers Javascript console. This game is two player, controlled with UP, DOWN and W, S.</p>
+				<p><a href="http://gwynn.tk/pong.htm">CLICK HERE TO OPEN</a></p>
+			</div>
+			<div id="thisfeed" class="content archived">
+				<h1>thisfeed</h1>
+				<p>Stalk any user on Twitter through beautiful HTML5. thisfeed works using PHP and can work with anybodies Twitter handle as long as their tweets aren't protected. Simply replace the /?user=iamxenxier argument at the end of the URL with some other Twitter handle, for example; http://gwynn.tk/thisfeed/?user=Dinnerbone. As with most of my projects, thisfeed is open source and available on GitHub.</p>
+				<p><a href="http://gwynn.tk/thisfeed/?user=iamxenxier">CLICK HERE TO OPEN</a></p>
+				<p><a href="https://github.com/benjamingwynn/thisfeed">GET THE SOURCE CODE</a></p>
+			</div>
+			<div id="computing" class="content archived">
+				<h1>The Computing Game</h1>
+				<p>A very unfair quiz game made for my computing homework. This version of the game has 6 simple questions relating to networking. However, it takes quick reactions and skill to play.</p>
+				<p><a href="http://gwynn.tk/thecomputinggame.htm">CLICK HERE TO OPEN</a></p>
+			</div>
+			<div id="snowglobe" class="content archived">
+				<h1>Fortune Snow Globe</h1>
+				<p>A snow globe for Christmas. Displays particles floating from the bottom of the screen to the top of the screen, then being moved to the top of the screen and falling back down to create a snow effect without needing to create/destroy particles.</p>
+				<p><a href="http://gwynn.tk/snowglobe.htm">CLICK HERE TO OPEN</a></p>
+				<p><a href="http://gwynn.tk/snowglobe_justsnow.htm">CLICK TO OPEN JUST THE SNOW</a></p>
+			</div>
+		</div>
+		<div id="troll" class="stuff" style="display:none">
+			<h1>trolling</h1>
+			<p style="color:gray">Fun HTML5 stuff to troll people with.</p>
+			<div id="celeb" class="content archived">
+				<h1>What Celebrity do I look like?</h1>
+				<p>I saw too many of these on my Facebook feed so decided to make my own version in a few minutes. It uses sea-plus-plus. Laughs were had.</p>
+				<p><a href="http://gwynn.tk/celeb.htm">CLICK HERE TO OPEN</a></p>
+			</div>
+			<div id="april" class="nsfl content archived">
+				<h1>Euphoric Website</h1>
+				<p>I made a HTML5 website "inspired" by <a href="http://reddit.com/r/montageparodies">/r/montageparodies</a>. It's features Comic Sans, Doge, Snoog Dogg and massive gifs, what more do you want in your life? Do note that this really messes up Chrome because of how many resources it has to load, a website this <del>bad</del> good tends to work best in Internet Explorer (I'm not joking, IE runs this page the best)</p>
+				<p><a href="http://gwynn.tk/wtf/index.htm">CLICK HERE TO OPEN</a></p>
+			</div>
+		</div>
+		<div id="java" class="stuff">
+			<h1>java</h1>
+			<p style="color:gray">Projects written in the Java programming language.</p>
+			<div id="servermagic" class="content">
+				<h1>ServerMagic</h1>
+				<p>An open source Java application to download, start, stop, maintain, backup and configure any number of Minecraft servers from a single JSON file. ServerMagic has some amazing features and works with any vanilla/modded server. This is by far one of my favourite projects.</p>
+				<p><a href="https://github.com/benjamingwynn/mc-servermagic/releases">GET THE JAR FILE</a></p>
+				<p><a href="https://github.com/benjamingwynn/mc-servermagic">GET THE SOURCE CODE</a></p>
+			</div>
+			<div id="xenlauncher" class="content archived">
+				<h1>XenLauncher</h1>
+				<p>A modded Minecraft Launcher I never finished. The code for this is 'meh' at best, I was working on recoding the entire thing but never got around to finishing it.</p>
+				<p><a href="https://github.com/benjamingwynn/xenlauncher">GET THE SOURCE CODE</a></p>
+			</div>
+		</div>
+		<div id="webapis" class="stuff">
+			<h1>Web APIs</h1>
+			<p style="color:gray">These are projects for making stuff look great on your website. These are for web developers.</p>
+			<div id="glitchjs" class="content">
+				<h1>glitch.js</h1>
+				<p>An API for creating a <span class="glitch">glitch like effect</span> on objects on a web page. The effect is fully customizable and free to use on any website.</p>
+				<p><a href="http://benjamingwynn.github.io/glitch.js/">CLICK HERE TO VIEW THE SITE</a></p>
+			</div>
+		</div>
+		<div id="particles" class="stuff">
+			<h1>particle box</h1>
+			<h2>Version 2.2</h2>
+			<p>Particle Box is a bunch of (now quite messy) code to customize the particles on this page. It's a heavily modified version of the Snow Globe particles. I plan to recode particle box so it's easier to use (and see what's happening in the code).</p>
+			<div id="controls" class="content indent">
+				<section>
+					<h2>Particle Count</h2>
+					<div id="draw_amount" class="range-slider" data-slider data-options="start: 1; end: 512;"><span class="range-slider-handle" role="slider" tabindex="0"></span><span class="range-slider-active-segment"></span><input type="hidden"></div>
+					<h2>Depth</h2>
+					<div id="z_depth" class="range-slider" data-slider data-options="start: 2; end: 128;"><span class="range-slider-handle" role="slider" tabindex="0"></span><span class="range-slider-active-segment"></span><input type="hidden"></div>
+					<h2>Size</h2>
+					<div id="size_multiplier" class="range-slider" data-slider data-options="start: 1; end: 16;"><span class="range-slider-handle" role="slider" tabindex="0"></span><span class="range-slider-active-segment"></span><input type="hidden"></div>
+					<h2>Red</h2>
+					<div id="colour_base_r" class="range-slider" data-slider data-options="start: 0; end: 255;"><span class="range-slider-handle" role="slider" tabindex="0"></span><span class="range-slider-active-segment"></span><input type="hidden"></div>
+					<h2>Green</h2>
+					<div id="colour_base_g" class="range-slider" data-slider data-options="start: 0; end: 255;"><span class="range-slider-handle" role="slider" tabindex="0"></span><span class="range-slider-active-segment"></span><input type="hidden"></div>
+					<h2>Blue</h2>
+					<div id="colour_base_b" class="range-slider" data-slider data-options="start: 0; end: 255;"><span class="range-slider-handle" role="slider" tabindex="0"></span><span class="range-slider-active-segment"></span><input type="hidden"></div>
+					<h2>Colour Depth</h2>
+					<div id="colour_depth" class="range-slider" data-slider data-options="start: -8; end: 8;"><span class="range-slider-handle" role="slider" tabindex="0"></span><span class="range-slider-active-segment"></span><input type="hidden"></div>
+					<h2>Spawn Location</h2>
+					<div id="spawn_location" class="range-slider" data-slider data-options="start: 0; end: 4; step 1;"><span class="range-slider-handle" role="slider" tabindex="0"></span><span class="range-slider-active-segment"></span><input type="hidden"></div>
+				</section>
+				<section>
+					<h2>Slowmo</h2>
+					<div id="refresh_rate" class="range-slider" data-slider data-options="start: 60; end: 3200;"><span class="range-slider-handle" role="slider" tabindex="0"></span><span class="range-slider-active-segment"></span><input type="hidden"></div>
+					<h2>Maximum X velocity</h2>
+					<div id="max_x_velocity" class="range-slider" data-slider data-options="start: -64; end: 64;"><span class="range-slider-handle" role="slider" tabindex="0"></span><span class="range-slider-active-segment"></span><input type="hidden"></div>
+					<h2>Maximum Y velocity</h2>
+					<div id="max_y_velocity" class="range-slider" data-slider data-options="start: -64; end: 64;"><span class="range-slider-handle" role="slider" tabindex="0"></span><span class="range-slider-active-segment"></span><input type="hidden"></div>
+					<h2>Minimum X velocity</h2>
+					<div id="min_x_velocity" class="range-slider" data-slider data-options="start: -1; end: 1; step: 0.01;"><span class="range-slider-handle" role="slider" tabindex="0"></span><span class="range-slider-active-segment"></span><input type="hidden"></div>
+					<h2>Minimum Y velocity</h2>
+					<div id="min_y_velocity" class="range-slider" data-slider data-options="start: -1; end: 1; step: 0.01;"><span class="range-slider-handle" role="slider" tabindex="0"></span><span class="range-slider-active-segment"></span><input type="hidden"></div>
+					<h2>Air Resistance</h2>
+					<div id="air_resistance" class="range-slider" data-slider data-options="start: 0; end: 1; step: 0.01;"><span class="range-slider-handle" role="slider" tabindex="0"></span><span class="range-slider-active-segment"></span><input type="hidden"></div>
+					<h2>Particle Mass</h2>
+					<div id="gravity" class="range-slider" data-slider data-options="start: 0; end: 10; step: 0.01;"><span class="range-slider-handle" role="slider" tabindex="0"></span><span class="range-slider-active-segment"></span><input type="hidden"></div>
+				</section>
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+	// call scroll check on page load
+	scroll();
+	
+	// nsfl warning
+	$('.nsfl').append("<div class='nsfl-warning'><h1>Hidden Content</h1><p>This project may contain bad language, flashing images, loud noises, obnoxious text or otherwise generally not be safe for work. This is your trigger warning.</p><div style='text-align=center; width=100%'><button class='nsfl-button' onclick='hidensfl()'>I'm cool with this</button></div></div>" );
+	
+	// nsfl button press
+	function hidensfl() {
+		$('.nsfl *').fadeIn('fast');
+		$('.nsfl-warning').hide();
+	}
+
+	// start slider api
+	$(document).foundation();
+	
+	// register archived hover
+	$(".archived").hover(
+	  function() {
+		$($(this).find("p:first")).append($("<div class='archive-banner'><p>This project has been archived and is no longer updated</p></div>"));
+	  }, function() {
+		$(this).find( ".archive-banner" ).remove();
+	  }
+	);
+	
+	// random tag lines
+	var rand = [
+		"sudo rm -rf --no-preserve-root /",
+		"home of particles and stuff",
+		"i make things on the internet",
+		"error 404 - tagline not found"
+	]
+	
+	$("header h2").text(rand[Math.floor(rng(0, rand.length))]);
+	
+	// We use the Xenxier pre set, unless its december
+	if (new Date().getMonth() == 11) { // indexes at 0
+		preset_Snow();
+	} else {
+		if (Math.floor(rng(0, 128)) == 0) {
+			preset_Rain();
+			$("header h2").text("made in wales");
+		} else {
+			preset_Xenxier2();
+		}
+	}
+	
+	// Pre sets:
+	function preset_Xenxier2() {
+		newParticleBoxValue('draw_amount', 14);
+		newParticleBoxValue('max_x_velocity', 8);
+		newParticleBoxValue('max_y_velocity', 8);
+		newParticleBoxValue('min_x_velocity', 1);
+		newParticleBoxValue('min_y_velocity', 1);
+		newParticleBoxValue('z_depth', 12);
+		newParticleBoxValue('size_multiplier', 1.5);
+		newParticleBoxValue('colour_base_r', 50);
+		newParticleBoxValue('colour_base_g', 220);
+		newParticleBoxValue('colour_base_b', 250);
+		newParticleBoxValue('colour_depth', 2);
+		newParticleBoxValue('spawn_location', 0);
+		newParticleBoxValue('refresh_rate', 60);
+		newParticleBoxValue('air_resistance', 0);
+		newParticleBoxValue('gravity', 1);
+	}
+	
+	function preset_Xenxier() {
+		newParticleBoxValue('draw_amount', 16);
+		newParticleBoxValue('max_x_velocity', 8);
+		newParticleBoxValue('max_y_velocity', 8);
+		newParticleBoxValue('min_x_velocity', -1);
+		newParticleBoxValue('min_y_velocity', -1);
+		newParticleBoxValue('z_depth', 8);
+		newParticleBoxValue('size_multiplier', 2);
+		newParticleBoxValue('colour_base_r', 50);
+		newParticleBoxValue('colour_base_g', 220);
+		newParticleBoxValue('colour_base_b', 250);
+		newParticleBoxValue('colour_depth', 2);
+		newParticleBoxValue('spawn_location', 0);
+		newParticleBoxValue('refresh_rate', 60);
+		newParticleBoxValue('air_resistance', 0);
+		newParticleBoxValue('gravity', 0);
+	}
+	
+	function preset_Rain() {
+		newParticleBoxValue('draw_amount', 262);
+		newParticleBoxValue('max_x_velocity', 0);
+		newParticleBoxValue('max_y_velocity', 18);
+		newParticleBoxValue('min_x_velocity', 1);
+		newParticleBoxValue('min_y_velocity', 1);
+		newParticleBoxValue('z_depth', 4);
+		newParticleBoxValue('size_multiplier', 2);
+		newParticleBoxValue('colour_base_r', 120);
+		newParticleBoxValue('colour_base_g', 120);
+		newParticleBoxValue('colour_base_b', 255);
+		newParticleBoxValue('colour_depth', -4);
+		newParticleBoxValue('spawn_location', 0);
+		newParticleBoxValue('refresh_rate', 94);
+		newParticleBoxValue('air_resistance', 0);
+		newParticleBoxValue('gravity', 1);
+	}
+	
+	function preset_Snow() {
+		newParticleBoxValue('draw_amount', 250);
+		newParticleBoxValue('max_x_velocity', 2);
+		newParticleBoxValue('max_y_velocity', 5);
+		newParticleBoxValue('min_x_velocity', -1);
+		newParticleBoxValue('min_y_velocity', 1);
+		newParticleBoxValue('z_depth', 4);
+		newParticleBoxValue('size_multiplier', 2);
+		newParticleBoxValue('colour_base_r', 255);
+		newParticleBoxValue('colour_base_g', 255);
+		newParticleBoxValue('colour_base_b', 255);
+		newParticleBoxValue('colour_depth', 0);
+		newParticleBoxValue('spawn_location', 0);
+		newParticleBoxValue('refresh_rate', 60);
+		newParticleBoxValue('air_resistance', 0);
+		newParticleBoxValue('gravity', 1);
+	}
+	
+	function newParticleBoxValue(variable, value) {
+		$('#' + variable).foundation('slider', 'set_value', value);
+	}
+	
+	var canvas = document.getElementById("backgroundCanvas");
+	
+	// Before we get context, resize the canvas.
+	canvas.width  = window.innerWidth;
+	canvas.height = window.innerHeight;
+	
+	var context = canvas.getContext("2d");
+	
+	var stack = [];
+	var refresh_rate
+	var target_refresh_rate = 60;
+	
+	var draw_amount;
+	
+	var min_x_velocity;
+	var max_x_velocity;
+	
+	var min_y_velocity;
+	var max_y_velocity;
+	
+	var z_depth;
+	
+	var size_multiplier;
+	
+	var colour_base_r;
+	var colour_base_g;
+	var colour_base_b;
+	var colour_depth;
+	
+	var spawn_location;
+	var air_resistance;
+	
+	var gravity;
+	
+	createObjects();
+	
+	function hideshow() {
+		if ($('#wrapper').css('opacity') == 0) {
+			// The site is hidden, the button was pressed, show the site.
+			$('#wrapper').fadeTo(250, 255);
+		} else {
+			// The site is visible, the button was pressed, hide the site.
+			$('#wrapper').fadeTo(250, 0);
+		}
+	}
+	
+	$('[data-slider]').on('change.fndtn.slider', function() {
+		recreateObjects();
+	});
+	
+	function recreateObjects() {
+		objects = []; // reset
+		createObjects();
+	}
+	
+	function createObjects() {
+		draw_amount = parseInt($('#draw_amount').attr('data-slider'));
+		max_x_velocity = parseInt($('#max_x_velocity').attr('data-slider'));
+		max_y_velocity = parseInt($('#max_y_velocity').attr('data-slider'));
+		z_depth = parseInt($('#z_depth').attr('data-slider'));
+		size_multiplier = parseInt($('#size_multiplier').attr('data-slider'));
+		colour_base_r = parseInt($('#colour_base_r').attr('data-slider'));
+		colour_base_g = parseInt($('#colour_base_g').attr('data-slider'));
+		colour_base_b = parseInt($('#colour_base_b').attr('data-slider'));
+		colour_depth = parseInt($('#colour_depth').attr('data-slider'));
+		spawn_location = parseInt($('#spawn_location').attr('data-slider'));
+		refresh_rate = parseInt($('#refresh_rate').attr('data-slider'));
+		
+		min_x_velocity = max_x_velocity * parseFloat($('#min_x_velocity').attr('data-slider'));
+		min_y_velocity = max_y_velocity * parseFloat($('#min_y_velocity').attr('data-slider'));
+		air_resistance = parseFloat($('#air_resistance').attr('data-slider'));
+		gravity = parseFloat($('#gravity').attr('data-slider'));
+		
+		stack = [z_depth];
+		
+		for (z = 0; z < z_depth; z++) {
+			layer = [draw_amount];
+			
+			for (i = 0; i < draw_amount; i++) {
+				size = z * size_multiplier;
+				
+				// Create a new object:
+				object = [];
+				
+				object["x_size"] = size;
+				object["y_size"] = size;
+				
+				if (gravity > 0) {
+					object["weight"] = size * gravity;
+				} else {
+					object["weight"] = 1;
+				}
+				
+				object["x_velocity"] = (rng(min_x_velocity / object["weight"], max_x_velocity / object["weight"]) / refresh_rate) * target_refresh_rate;
+				object["y_velocity"] = (rng(min_y_velocity / object["weight"], max_y_velocity / object["weight"]) / refresh_rate) * target_refresh_rate;
+				
+				object["colour_r"] = colour_base_r + Math.round(size * colour_depth);
+				object["colour_g"] = colour_base_g + Math.round(size * colour_depth);
+				object["colour_b"] = colour_base_b + Math.round(size * colour_depth);
+				object["colour_a"] = 255;
+				
+				res = air_resistance * (z / z_depth)
+				object["x_resistance"] = res;
+				object["y_resistance"] = res;
+				
+				
+				// Spawn:
+				switch(spawn_location) {
+					case 0: // Random position on screen
+						object["y_position"] = rng(0, window.innerHeight - size);
+						object["x_position"] = rng(0, window.innerWidth - size);
+						break;
+					case 1: // Screen centre
+						object["y_position"] = window.innerHeight / 2;
+						object["x_position"] = window.innerWidth / 2;
+						break;
+					case 2: // 0, 0 (top left)
+						object["y_position"] = 0;
+						object["x_position"] = 0;
+						break;
+					case 3: // Spread X
+						object["y_position"] = window.innerHeight / 2;
+						object["x_position"] = rng(0, window.innerWidth - size);
+						break;
+					case 4: // Spread Y
+						object["y_position"] = rng(0, window.innerHeight - size);
+						object["x_position"] = window.innerWidth / 2;
+						break;
+				}
+				
+				object["keep"] = true;
+				
+				layer[i] = object;
+			}
+			
+			stack[z] = layer;
+		}
+	}
+
+	function drawFrame() {
+		// Clear the canvas:
+		clearCanvas();
+		
+		// Loop through all layers in the stack:
+		for (z = 0; z < z_depth; z++) {
+			
+			// Draw everything on this layer:
+			for (i = 0; i < draw_amount; i++) {
+			
+				// Calculate new object position
+				stack[z][i]["x_position"] += stack[z][i]["x_velocity"];
+				stack[z][i]["y_position"] += stack[z][i]["y_velocity"];
+				
+				// Calculate the new velocity based on air resistance and *gravity*:
+				if (stack[z][i]["x_velocity"] < 0) {
+					// Going backwards:
+					if (stack[z][i]["x_velocity"] + stack[z][i]["x_resistance"] > 0) {
+						stack[z][i]["x_velocity"] = 0;
+					} else {
+						stack[z][i]["x_velocity"] += stack[z][i]["x_resistance"];
+					}
+				} else if (stack[z][i]["x_velocity"] > 0) {
+					// Going forwards:
+					if (stack[z][i]["x_velocity"] + stack[z][i]["x_resistance"] < 0) {
+						stack[z][i]["x_velocity"] = 0;
+					} else {
+						stack[z][i]["x_velocity"] -= stack[z][i]["x_resistance"];
+					}
+				}
+				
+				if (stack[z][i]["y_velocity"] < 0) {
+					// Going backwards:
+					if (stack[z][i]["y_velocity"] + stack[z][i]["y_resistance"] > 0) {
+						stack[z][i]["y_velocity"] = 0;
+					} else {
+						stack[z][i]["y_velocity"] += stack[z][i]["y_resistance"];
+					}
+				} else if (stack[z][i]["y_velocity"] > 0) {
+					// Going forwards:
+					if (stack[z][i]["y_velocity"] + stack[z][i]["y_resistance"] < 0) {
+						stack[z][i]["y_velocity"] = 0;
+					} else {
+						stack[z][i]["y_velocity"] -= stack[z][i]["y_resistance"];
+					}
+				}
+				
+				// If the velocity of the object caused it to leave the screen, destroy or move it:
+				if (stack[z][i]["y_position"] > canvas.height || 
+					stack[z][i]["x_position"] > canvas.width ||
+					stack[z][i]["y_position"] < 0 - stack[z][i]["y_size"] ||
+					stack[z][i]["x_position"] < 0 - stack[z][i]["x_size"] ){
+						if (stack[z][i]["keep"]) {
+							if (stack[z][i]["x_position"] > canvas.width) {
+								stack[z][i]["x_position"]  = 0 - stack[z][i]["x_size"];
+							} else if (stack[z][i]["x_position"] < 0) {
+								stack[z][i]["x_position"]  = canvas.width - stack[z][i]["x_size"];
+							}
+							
+							if (stack[z][i]["y_position"] > canvas.height) {
+								stack[z][i]["y_position"]  = 0 - stack[z][i]["y_size"];
+							} else if (stack[z][i]["y_position"] < 0) {
+								stack[z][i]["y_position"]  = canvas.height;
+							}
+						} else {
+							// Destroy this object by turning it into an empty string. Making it a string rather than null stops errors from being thrown when trying to access it.
+							stack[z][i] = "";
+						}
+				}
+			
+				// Colour:
+				context.fillStyle = 'rgba(' + stack[z][i]["colour_r"].toString() + ', ' + stack[z][i]["colour_g"].toString() + ', ' + stack[z][i]["colour_b"].toString() + ', ' + stack[z][i]["colour_a"].toString() + ')';
+				
+				// Draw:
+				context.fillRect(stack[z][i]["x_position"], stack[z][i]["y_position"], stack[z][i]["x_size"], stack[z][i]["y_size"]);
+			}
+		}
+	}
+	
+	function rng(min, max) {
+		return Math.random() * (max - min) + min;
+	}
+	
+	function clearCanvas() {
+		context.clearRect(0, 0, canvas.width, canvas.height);
+	}
+	
+	window.addEventListener("resize", function(){
+		// Recalculate the size of the canvas:
+		canvas.width  = window.innerWidth;
+		canvas.height = window.innerHeight;
+		
+		// Recreate all objects
+		recreateObjects();
+	});
+	
+	setInterval(drawFrame, 1000 / refresh_rate);
+</script>

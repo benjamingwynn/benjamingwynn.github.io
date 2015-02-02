@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<head>
+	<title>Xenxier's Snowglobe</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		
+		html, body {
+            height: 100%;
+            width: 100%;
+			overflow-x: hidden;
+		}
+		
+		#backgroundCanvas {
+			top: 0;
+			position: fixed;
+			z-index: -1;
+			background-color: skyblue;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="backgroundCanvas"></canvas>
+</body>
+<script>
+	var canvas = document.getElementById("backgroundCanvas");
+	
+	// Before we get context, resize the canvas.
+	canvas.width  = window.innerWidth;
+	canvas.height = window.innerHeight;
+	
+	var context = canvas.getContext("2d");
+	
+	var stack = [];
+	var refresh_rate = 60;
+	var target_refresh_rate = 60;
+	var draw_amount = 48;
+	
+	var min_x_velocity = -1;
+	var max_x_velocity = 1;
+	
+	var min_y_velocity = 1;
+	var max_y_velocity = 8;
+	
+	var z_depth = 8;
+	
+	var size_multiplier = 2;
+	
+	var colour_base_r = 200;
+	var colour_base_g = 200;
+	var colour_base_b = 200;
+	var colour_depth = 2;
+	
+	createObjects();
+	
+	function recreateObjects() {
+		objects = []; // reset
+		createObjects();
+	}
+	
+	function createObjects() {
+		stack = [z_depth];
+		
+		for (z = 0; z < z_depth; z++) {
+			layer = [draw_amount];
+			
+			for (i = 0; i < draw_amount; i++) {
+				size = z * size_multiplier;
+				
+				// Create a new object:
+				object = [];
+				
+				object["x_size"] = size;
+				object["x_position"] = rng(0, window.innerWidth - size);
+				object["x_velocity"] = (rng(min_x_velocity, max_x_velocity) / refresh_rate) * target_refresh_rate;
+				
+				object["y_size"] = size;
+				object["y_position"] = rng(0, window.innerHeight - size);
+				object["y_velocity"] = (rng(min_y_velocity, max_y_velocity) / refresh_rate) * target_refresh_rate;
+				
+				object["colour_r"] = colour_base_r + Math.round(size * colour_depth);
+				object["colour_g"] = colour_base_g + Math.round(size * colour_depth);
+				object["colour_b"] = colour_base_b + Math.round(size * colour_depth);
+				object["colour_a"] = 255;
+				
+				object["keep"] = true;
+				
+				layer[i] = object;
+			}
+			
+			stack[z] = layer;
+		}
+	}
+
+	function drawFrame() {
+		// Clear the canvas:
+		clearCanvas();
+		
+		// Loop through all layers in the stack:
+		for (z = 0; z < z_depth; z++) {
+			
+			// Draw everything on this layer:
+			for (i = 0; i < draw_amount; i++) {
+			
+				// Calculate new object position based on object velocity
+				stack[z][i]["x_position"] += stack[z][i]["x_velocity"];
+				stack[z][i]["y_position"] += stack[z][i]["y_velocity"];
+				
+				// If the velocity of the object caused it to leave the screen, destroy or move it:
+				if (stack[z][i]["y_position"] > canvas.height || 
+					stack[z][i]["x_position"] > canvas.width ||
+					stack[z][i]["y_position"] < 0 - stack[z][i]["y_size"] ||
+					stack[z][i]["x_position"] < 0 - stack[z][i]["x_size"] ){
+						if (stack[z][i]["keep"]) {
+							if (stack[z][i]["x_position"] > canvas.width) {
+								stack[z][i]["x_position"]  = 0 - stack[z][i]["x_size"];
+							} else if (stack[z][i]["x_position"] < 0) {
+								stack[z][i]["x_position"]  = canvas.width - stack[z][i]["x_size"];
+							}
+							
+							if (stack[z][i]["y_position"] > canvas.height) {
+								stack[z][i]["y_position"]  = 0 - stack[z][i]["y_size"];
+							} else if (stack[z][i]["y_position"] < 0) {
+								stack[z][i]["y_position"]  = canvas.height;
+							}
+						} else {
+							// Destroy this object by turning it into an empty string. Making it a string rather than null stops errors from being thrown when trying to access it.
+							stack[z][i] = "";
+						}
+				}
+			
+				// Colour:
+				context.fillStyle = 'rgba(' + stack[z][i]["colour_r"].toString() + ', ' + stack[z][i]["colour_g"].toString() + ', ' + stack[z][i]["colour_b"].toString() + ', ' + stack[z][i]["colour_a"].toString() + ')';
+				
+				// Draw:
+				context.fillRect(stack[z][i]["x_position"], stack[z][i]["y_position"], stack[z][i]["x_size"], stack[z][i]["y_size"]);
+			}
+		}
+	}
+	
+	function rng(min, max) {
+		return Math.random() * (max - min) + min;
+	}
+	
+	function clearCanvas() {
+		context.clearRect(0, 0, canvas.width, canvas.height);
+	}
+	
+	window.addEventListener("resize", function(){
+		// Recalculate the size of the canvas:
+		canvas.width  = window.innerWidth;
+		canvas.height = window.innerHeight;
+		
+		// Recreate all objects
+		recreateObjects();
+	});
+	
+	setInterval(drawFrame, 1000 / refresh_rate);
+</script>

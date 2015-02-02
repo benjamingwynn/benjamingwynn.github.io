@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<head>
+	<title>Untitled Motherfucking Document</title>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://rawgit.com/xoxco/Rainbow-Text/master/rainbow.js"></script>
+	<style>
+		* {
+			font-family: 'Comic Sans MS';
+		}
+		
+		html {
+			width: 100%;
+			height: 100%;
+		}
+		
+		body {
+			background-color: red;
+			background-image: url('frog.gif');
+			width: 100%;
+			height: 100%;
+		}
+		
+		header {
+			width: 800px;
+		}
+		
+		header h1 {
+			text-align: center;
+			font-size: 100px;
+		}
+		
+		#overlay {
+			position: fixed;
+			width: 50%;
+			height: 100%;
+			right: 0;
+		}
+		
+		#overlay * {
+			width: 100%;
+			height: 100%;
+		}
+		
+		#fbi {
+			position: fixed;
+			z-index: 100;
+			width: 100%;
+			height: 100%;
+			background: black;
+			display: none;
+			top: 0;
+		}
+		
+		#fbi img {
+			width: 100%;
+			height: 100%;
+		}
+		
+		#doge {
+			position: fixed;
+			bottom: 0;
+			right: 0;
+			z-index: 101;
+			display: none;
+		}
+		
+		#doge h1 {
+			text-align: right;
+			font-size: 30px;
+		}
+	</style>
+</head>
+<body>
+	<h1 id="load">this page contains a fuck tonne of resources, plz wait</h1>
+	<div id="overlay"><marquee behavior="alternate" direction="left"><marquee behavior="alternate" direction="up"><img src="http://www.w3.org/html/logo/downloads/HTML5_Logo_512.png"></marquee></marquee></img></div>
+	<header>
+		<marquee behavior="alternate" direction="up">
+			<marquee behavior="alternate" scrollamount="40"><h1 class="rainbow">welcome to my webshite</h1></marquee>
+		</marquee>
+		<video id="wow" width="600" height="600" autoplay loop>
+		  <source src="wally.mp4" type="video/mp4">
+		</video>
+		<audio id="snoopaudio">
+			<source src="snoop.mp3" type="audio/mpeg">
+		</audio>
+		<img src="snoop.gif"></img>
+		<img src="snoop.gif"></img>
+		<img src="snoop.gif"></img>
+		<img src="boom.gif"></img>
+		<img src="brokenonpurposelololol.gif"></img>
+		<img src="brokenonpurposelololol.gif"></img>
+		<img src="brokenonpurposelololol.gif"></img>
+		<img src="fat.gif"></img>
+		<img src="brokenonpurposelololol.gif"></img>
+		<img src="skele.gif"></img>
+		<h2>fuck teh police lel my name is benjamin i think</h2>
+		<img src="skele.gif"></img>
+		<marquee behavior="alternate" direction="left" scrollamount="10" >
+			<h2>welcome to teh website of xenxier - i hope u r having a fun good day yes okay. i am a website maker-er and i make websites and things that are rly good if u lick mi stuff th3n plz dwnld my app, tap it - thx lol</h2>
+		</marquee>
+		<img src="brokenonpurposelololol.gif"></img>
+		<img src="dance.gif"></img>
+		<img src="snoop.gif"></img>
+		<img src="snoop.gif"></img>
+		<img src="snoop.gif"></img>
+		<img src="snoop.gif"></img>
+		<img src="snoop.gif"></img>
+		<img src="dance.gif"></img>
+		<img src="brokenonpurposelololol.gif"></img>
+		<img src="brokenonpurposelololol.gif"></img>
+		<img src="brokenonpurposelololol.gif"></img>
+		<img src="brokenonpurposelololol.gif"></img>
+		<img src="dance.gif"></img>
+	</header>
+	<div id="fbi">
+		<audio id="fbiaudio">
+			<source src="fbi.mp3" type="audio/mpeg">
+		</audio>
+		<img src="seizure.jpg"></img>
+		<div id="doge">
+			<h1 id="dogetext">much seizure very wow</h1>
+			<img src="doge.gif"></img>
+		</div>
+	</div>
+	<footer>
+		<center>
+			<p>coded by benjamin gwynn in HTML5 LOL</p>
+		<img src="boom.gif"></img>
+		<img src="boom.gif"></img>
+		<img src="boom.gif"></img>
+		<img src="boom.gif"></img>
+		<img src="boom.gif"></img>
+		<img src="me.gif"></img>
+		<img src="boom.gif"></img>
+		<img src="boom.gif"></img>
+		<img src="boom.gif"></img>
+		<img src="boom.gif"></img>
+		<img src="boom.gif"></img>
+		</center>
+	</footer>
+</body>
+<script>
+	$('*').hide();
+	$('#load').show();
+	jQuery(window).load(function () {
+		$('*').show();
+		$('#load').hide();
+		$('#fbi').hide();
+		$('#doge').hide();
+		$('.rainbow').rainbow({ 
+			colors: [
+				//'#FF0000',
+				//'#f26522',
+				'#fff200',
+				'#00a651',
+				'#28abe2',
+				'#2e3192',
+				'#6868ff'
+			],
+			animate: true,
+			animateInterval: 100,
+			pad: false,
+			pauseLength: 100,
+		});
+		// play audio
+		snoopaudio.play();
+		
+		setTimeout(function() {
+			$("#fbi").show();
+			snoopaudio.pause();
+			fbiaudio.play();
+			setTimeout(function() {
+				$("#doge").show();
+				setTimeout(function() {
+					$("#dogetext").show();
+					setInterval(function() {
+						$("#dogetext").css('color', 'silver');
+						setTimeout(function() {
+							$("#dogetext").css('color', 'black');
+						}, 17);
+					}, 34);
+				}, 100);
+			}, 7500);
+		}, 35000);
+	});
+</script>

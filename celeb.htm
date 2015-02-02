@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<head>
+	<title>WHAT CELEB DO YOU LOOK LIKE?</title>
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300' rel='stylesheet' type='text/css'>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			margin-left: auto;
+			margin-right: auto;
+			font-family: 'Roboto', 'Helvetica', sans-serif;
+			font-weight: 300;
+		}
+		
+		h1 {
+			color: DimGray;
+			text-align: center;
+			font-size: 40px;
+		}
+		
+		h2 {
+			text-align:center;
+		}
+		
+		p {
+			margin: 10px;
+			color: gray;
+			text-align:center;
+		}
+		
+		header {
+			padding-top: 100px;
+			padding-bottom: 100px;
+		}
+		
+		header h1 {
+			font-weight: 100;
+			font-size: 100px;
+			color: Gray;
+		}
+		
+		header h2 {
+			color: DimGray;
+			font-size:30px;
+		}
+		
+		.content {
+			max-width: 800px;
+			margin-top: 25px;
+			margin-bottom: 25px;
+			padding: 12px;
+			background-color: white;
+			box-shadow: 0 0 10px black;
+		}
+		
+		#thebutton {
+			text-align:center;
+			width: 500px;
+			height: 50px;
+			font-size: 20px;
+			margin-bottom: 100px;
+			color: cyan;
+			border-color: cyan;
+			border-style: solid;
+			background: none;
+		}
+		
+		#troll {
+			background-color: rgba(0, 0, 0, 0.7);
+			position: fixed;
+			height: 100%;
+			width: 100%;
+			display: none;
+		}
+		
+		#troll h1 {
+			font-size: 120px;
+		}
+		
+		#troll * {
+			color: white;
+		}
+		
+		#loltext {
+			word-wrap: break-word;
+		}
+		
+		#loltext::after {
+			content: 'l';
+		}
+		
+		a:link {color:#696969; text-decoration:underline;}
+		a:visited {color:#696969; text-decoration:underline;}
+		a:hover {color:#09F; text-decoration:underline;}
+		a:active {color:#09F; text-decoration:underline;}
+	</style>
+	<script>
+		function troll() {
+			document.getElementById("trollaudio").play();
+			setInterval(addLol, 50);
+			$("#troll").fadeIn();
+		}
+		function addLol() {
+			var lol = document.getElementById("loltext").innerHTML;
+			document.getElementById("loltext").innerHTML = lol + "lo";
+		}
+	</script>
+</head>
+<body>
+	<div id="troll">
+		<audio id="trollaudio">
+			<source src="troll.mp3" type="audio/mpeg">
+		</audio>
+		<h1>NONE OF THEM</h1>
+		<p id="loltext">lo</p>
+	</div>
+	<header>
+		<h1>Which Celebrity Are You?</h1>
+		<h2>Find out now, it's free and works in one click!</h2>
+	</header>
+	<div style="text-align:center"><button id="thebutton" onclick="troll()">FIND OUT NOW</button></div>
+	<div class="content">
+		<h1>How does it work?</h1>
+		<p>Simple! This amazing technology uses your web cam on your computer to detect your face and uses special algorithms written in sea-plus-plus to detect and analyse your face.</p>
+		<p>Don't have a camera? That's okay, your computer remembers what you look like to help your government combat terrorism in your country, this information is insecure, so any website, including this one can use that information to find out what you look like exactly, and use the special programming code to show you what celeb best resembles you!</p>
+		<p>Don't believe me? Try it out for yourself!</p>
+	</div>
+	<footer>
+		<p>Created by Benjamin Gwynn<p>
+		<p style="font-size:8px">im so sorry</p>
+	</footer>
+</body>
