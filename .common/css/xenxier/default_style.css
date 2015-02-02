@@ -1,0 +1,6 @@
+/* Link formatting */
+
+a:link {color:#696969; text-decoration:underline;}
+a:visited {color:#696969; text-decoration:underline;}
+a:hover {color:#09F; text-decoration:underline;}
+a:active {color:#09F; text-decoration:underline;}

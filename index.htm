@@ -2,19 +2,26 @@
 <!DOCTYPE html>
 <head>
 	<title>Xenxier</title>
-	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300' rel='stylesheet' type='text/css'>
-	<link href='http://fonts.googleapis.com/css?family=Nova+Square' rel='stylesheet' type='text/css'>
+	
+	<!-- Google Fonts -->
 	<link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:300' rel='stylesheet' type='text/css'>
-	<link href='css/normalize.css' rel='stylesheet' type='text/css'>
-	<link href='css/foundation.min.css' rel='stylesheet' type='text/css'>
-	<script src="js/vendor/jquery.js"></script>
-	<script src="js/foundation/foundation.js"></script>
-	<script src="js/foundation/foundation.slider.js"></script>
-	<script type="text/javascript" src="http://rawgit.com/benjamingwynn/glitch.js/master/glitch.js"></script>
-	<script type="text/javascript">distort_objects_one_at_a_time=false; distort_chance=8; glitch();</script>
-	<script>
+	
+	<!-- Vendor CSS -->
+	<link href='.common/css/vendor/normalize.css' rel='stylesheet' type='text/css'>
+	<link href='.common/css/vendor/foundation.min.css' rel='stylesheet' type='text/css'>
+	
+	<!-- Vendor JS-->
+	<script src=".common/js/vendor/jquery.js"></script>
+	<script src=".common/js/vendor/foundation.js"></script>
+	<script src=".common/js/vendor/foundation.slider.js"></script>
+	
+	<!-- Common CSS -->
+	<link href='.common/css/xenxier/default_layout.css' rel='stylesheet' type='text/css'>
+	<link href='.common/css/xenxier/default_style.css' rel='stylesheet' type='text/css'>
+	
+	<script>// clean this shit up
 		$('html, body').bind('DOMMouseScroll MouseScrollEvent MozMousePixelScroll wheel scroll', function() { scroll() });
 		function scroll() {
 			if ($('#controls').position()["top"] - $('#controls').height() <= 0) {
@@ -25,24 +32,8 @@
 		}
 	</script>
 	<style>
-		* {
-			margin: 0;
-			padding: 0;
-			margin-left: auto;
-			margin-right: auto;
-		}
-		
-		html, body {
-            height: 100%;
-            width: 100%;
-			overflow-x: hidden;
-		}
-		
-		#backgroundCanvas {
-			top: 0;
-			position: fixed;
-			z-index: -1;
-			background-color: #111;
+		canvas {
+			background: #111;
 		}
 		
 		h1 {
@@ -64,7 +55,7 @@
 			margin: 10px;
 			color: gray;
 			text-align: center;
-			font-family: 'Ubuntu Mono', 'Roboto', 'Helvetica', sans-serif;
+			font-family: 'Ubuntu Mono', sans-serif;
 			font-weight: 100;
 		}
 		
@@ -251,11 +242,6 @@
 		.range-slider-handle {
 			background: grey;
 		}
-		
-		a:link {color:#696969; text-decoration:underline;}
-		a:visited {color:#696969; text-decoration:underline;}
-		a:hover {color:#09F; text-decoration:underline;}
-		a:active {color:#09F; text-decoration:underline;}
 	</style>
 </head>
 <body>
@@ -379,10 +365,42 @@
 		</div>
 	</div>
 </body>
-<script>
-	// call scroll check on page load
-	scroll();
+
+<!-- Page has loaded -->
+<!-- My Common JS -->
+<!--<script type="text/javascript" src=".common/js/xenxier/glitch.js"></script> -->
+<script type="text/javascript" src=".common/js/xenxier/canvas.js"></script>
+<script type="text/javascript" src=".common/js/xenxier/particlebox.js"></script>
+<script type="text/javascript" src=".common/js/xenxier/particlebox_presets.js"></script>
+
+<!-- Load Scripts -->
+<script type="text/javascript">
+	// Load glitch.js
+	//distort_objects_one_at_a_time=false; distort_chance=8; glitch();
 	
+	// Load Foundation (we use this for our particlebox sliders)
+	$(document).foundation();
+	
+	// Move sliders into correct place from preset
+	particlebox_presets.xenxier2();
+	
+	// Create particlebox objects from config
+	particlebox.create();
+	
+	// 
+	$('[data-slider]').on('change.fndtn.slider', function(event) {
+		particlebox.parseslider(event.target);
+	});
+	
+	// On refresh:
+	setInterval(function() {
+		// Draw:
+		particlebox.draw();
+	}, 1000 / particlebox.config.refresh_rate);
+</script>
+
+<!-- Misc scripting -->
+<script type="text/javascript">
 	// nsfl warning
 	$('.nsfl').append("<div class='nsfl-warning'><h1>Hidden Content</h1><p>This project may contain bad language, flashing images, loud noises, obnoxious text or otherwise generally not be safe for work. This is your trigger warning.</p><div style='text-align=center; width=100%'><button class='nsfl-button' onclick='hidensfl()'>I'm cool with this</button></div></div>" );
 	
@@ -391,9 +409,6 @@
 		$('.nsfl *').fadeIn('fast');
 		$('.nsfl-warning').hide();
 	}
-
-	// start slider api
-	$(document).foundation();
 	
 	// register archived hover
 	$(".archived").hover(
@@ -414,130 +429,9 @@
 	
 	$("header h2").text(rand[Math.floor(rng(0, rand.length))]);
 	
-	// We use the Xenxier pre set, unless its december
-	if (new Date().getMonth() == 11) { // indexes at 0
-		preset_Snow();
-	} else {
-		if (Math.floor(rng(0, 128)) == 0) {
-			preset_Rain();
-			$("header h2").text("made in wales");
-		} else {
-			preset_Xenxier2();
-		}
-	}
-	
-	// Pre sets:
-	function preset_Xenxier2() {
-		newParticleBoxValue('draw_amount', 14);
-		newParticleBoxValue('max_x_velocity', 8);
-		newParticleBoxValue('max_y_velocity', 8);
-		newParticleBoxValue('min_x_velocity', 1);
-		newParticleBoxValue('min_y_velocity', 1);
-		newParticleBoxValue('z_depth', 12);
-		newParticleBoxValue('size_multiplier', 1.5);
-		newParticleBoxValue('colour_base_r', 50);
-		newParticleBoxValue('colour_base_g', 220);
-		newParticleBoxValue('colour_base_b', 250);
-		newParticleBoxValue('colour_depth', 2);
-		newParticleBoxValue('spawn_location', 0);
-		newParticleBoxValue('refresh_rate', 60);
-		newParticleBoxValue('air_resistance', 0);
-		newParticleBoxValue('gravity', 1);
-	}
-	
-	function preset_Xenxier() {
-		newParticleBoxValue('draw_amount', 16);
-		newParticleBoxValue('max_x_velocity', 8);
-		newParticleBoxValue('max_y_velocity', 8);
-		newParticleBoxValue('min_x_velocity', -1);
-		newParticleBoxValue('min_y_velocity', -1);
-		newParticleBoxValue('z_depth', 8);
-		newParticleBoxValue('size_multiplier', 2);
-		newParticleBoxValue('colour_base_r', 50);
-		newParticleBoxValue('colour_base_g', 220);
-		newParticleBoxValue('colour_base_b', 250);
-		newParticleBoxValue('colour_depth', 2);
-		newParticleBoxValue('spawn_location', 0);
-		newParticleBoxValue('refresh_rate', 60);
-		newParticleBoxValue('air_resistance', 0);
-		newParticleBoxValue('gravity', 0);
-	}
-	
-	function preset_Rain() {
-		newParticleBoxValue('draw_amount', 262);
-		newParticleBoxValue('max_x_velocity', 0);
-		newParticleBoxValue('max_y_velocity', 18);
-		newParticleBoxValue('min_x_velocity', 1);
-		newParticleBoxValue('min_y_velocity', 1);
-		newParticleBoxValue('z_depth', 4);
-		newParticleBoxValue('size_multiplier', 2);
-		newParticleBoxValue('colour_base_r', 120);
-		newParticleBoxValue('colour_base_g', 120);
-		newParticleBoxValue('colour_base_b', 255);
-		newParticleBoxValue('colour_depth', -4);
-		newParticleBoxValue('spawn_location', 0);
-		newParticleBoxValue('refresh_rate', 94);
-		newParticleBoxValue('air_resistance', 0);
-		newParticleBoxValue('gravity', 1);
-	}
-	
-	function preset_Snow() {
-		newParticleBoxValue('draw_amount', 250);
-		newParticleBoxValue('max_x_velocity', 2);
-		newParticleBoxValue('max_y_velocity', 5);
-		newParticleBoxValue('min_x_velocity', -1);
-		newParticleBoxValue('min_y_velocity', 1);
-		newParticleBoxValue('z_depth', 4);
-		newParticleBoxValue('size_multiplier', 2);
-		newParticleBoxValue('colour_base_r', 255);
-		newParticleBoxValue('colour_base_g', 255);
-		newParticleBoxValue('colour_base_b', 255);
-		newParticleBoxValue('colour_depth', 0);
-		newParticleBoxValue('spawn_location', 0);
-		newParticleBoxValue('refresh_rate', 60);
-		newParticleBoxValue('air_resistance', 0);
-		newParticleBoxValue('gravity', 1);
-	}
-	
 	function newParticleBoxValue(variable, value) {
 		$('#' + variable).foundation('slider', 'set_value', value);
 	}
-	
-	var canvas = document.getElementById("backgroundCanvas");
-	
-	// Before we get context, resize the canvas.
-	canvas.width  = window.innerWidth;
-	canvas.height = window.innerHeight;
-	
-	var context = canvas.getContext("2d");
-	
-	var stack = [];
-	var refresh_rate
-	var target_refresh_rate = 60;
-	
-	var draw_amount;
-	
-	var min_x_velocity;
-	var max_x_velocity;
-	
-	var min_y_velocity;
-	var max_y_velocity;
-	
-	var z_depth;
-	
-	var size_multiplier;
-	
-	var colour_base_r;
-	var colour_base_g;
-	var colour_base_b;
-	var colour_depth;
-	
-	var spawn_location;
-	var air_resistance;
-	
-	var gravity;
-	
-	createObjects();
 	
 	function hideshow() {
 		if ($('#wrapper').css('opacity') == 0) {
@@ -549,194 +443,4 @@
 		}
 	}
 	
-	$('[data-slider]').on('change.fndtn.slider', function() {
-		recreateObjects();
-	});
-	
-	function recreateObjects() {
-		objects = []; // reset
-		createObjects();
-	}
-	
-	function createObjects() {
-		draw_amount = parseInt($('#draw_amount').attr('data-slider'));
-		max_x_velocity = parseInt($('#max_x_velocity').attr('data-slider'));
-		max_y_velocity = parseInt($('#max_y_velocity').attr('data-slider'));
-		z_depth = parseInt($('#z_depth').attr('data-slider'));
-		size_multiplier = parseInt($('#size_multiplier').attr('data-slider'));
-		colour_base_r = parseInt($('#colour_base_r').attr('data-slider'));
-		colour_base_g = parseInt($('#colour_base_g').attr('data-slider'));
-		colour_base_b = parseInt($('#colour_base_b').attr('data-slider'));
-		colour_depth = parseInt($('#colour_depth').attr('data-slider'));
-		spawn_location = parseInt($('#spawn_location').attr('data-slider'));
-		refresh_rate = parseInt($('#refresh_rate').attr('data-slider'));
-		
-		min_x_velocity = max_x_velocity * parseFloat($('#min_x_velocity').attr('data-slider'));
-		min_y_velocity = max_y_velocity * parseFloat($('#min_y_velocity').attr('data-slider'));
-		air_resistance = parseFloat($('#air_resistance').attr('data-slider'));
-		gravity = parseFloat($('#gravity').attr('data-slider'));
-		
-		stack = [z_depth];
-		
-		for (z = 0; z < z_depth; z++) {
-			layer = [draw_amount];
-			
-			for (i = 0; i < draw_amount; i++) {
-				size = z * size_multiplier;
-				
-				// Create a new object:
-				object = [];
-				
-				object["x_size"] = size;
-				object["y_size"] = size;
-				
-				if (gravity > 0) {
-					object["weight"] = size * gravity;
-				} else {
-					object["weight"] = 1;
-				}
-				
-				object["x_velocity"] = (rng(min_x_velocity / object["weight"], max_x_velocity / object["weight"]) / refresh_rate) * target_refresh_rate;
-				object["y_velocity"] = (rng(min_y_velocity / object["weight"], max_y_velocity / object["weight"]) / refresh_rate) * target_refresh_rate;
-				
-				object["colour_r"] = colour_base_r + Math.round(size * colour_depth);
-				object["colour_g"] = colour_base_g + Math.round(size * colour_depth);
-				object["colour_b"] = colour_base_b + Math.round(size * colour_depth);
-				object["colour_a"] = 255;
-				
-				res = air_resistance * (z / z_depth)
-				object["x_resistance"] = res;
-				object["y_resistance"] = res;
-				
-				
-				// Spawn:
-				switch(spawn_location) {
-					case 0: // Random position on screen
-						object["y_position"] = rng(0, window.innerHeight - size);
-						object["x_position"] = rng(0, window.innerWidth - size);
-						break;
-					case 1: // Screen centre
-						object["y_position"] = window.innerHeight / 2;
-						object["x_position"] = window.innerWidth / 2;
-						break;
-					case 2: // 0, 0 (top left)
-						object["y_position"] = 0;
-						object["x_position"] = 0;
-						break;
-					case 3: // Spread X
-						object["y_position"] = window.innerHeight / 2;
-						object["x_position"] = rng(0, window.innerWidth - size);
-						break;
-					case 4: // Spread Y
-						object["y_position"] = rng(0, window.innerHeight - size);
-						object["x_position"] = window.innerWidth / 2;
-						break;
-				}
-				
-				object["keep"] = true;
-				
-				layer[i] = object;
-			}
-			
-			stack[z] = layer;
-		}
-	}
-
-	function drawFrame() {
-		// Clear the canvas:
-		clearCanvas();
-		
-		// Loop through all layers in the stack:
-		for (z = 0; z < z_depth; z++) {
-			
-			// Draw everything on this layer:
-			for (i = 0; i < draw_amount; i++) {
-			
-				// Calculate new object position
-				stack[z][i]["x_position"] += stack[z][i]["x_velocity"];
-				stack[z][i]["y_position"] += stack[z][i]["y_velocity"];
-				
-				// Calculate the new velocity based on air resistance and *gravity*:
-				if (stack[z][i]["x_velocity"] < 0) {
-					// Going backwards:
-					if (stack[z][i]["x_velocity"] + stack[z][i]["x_resistance"] > 0) {
-						stack[z][i]["x_velocity"] = 0;
-					} else {
-						stack[z][i]["x_velocity"] += stack[z][i]["x_resistance"];
-					}
-				} else if (stack[z][i]["x_velocity"] > 0) {
-					// Going forwards:
-					if (stack[z][i]["x_velocity"] + stack[z][i]["x_resistance"] < 0) {
-						stack[z][i]["x_velocity"] = 0;
-					} else {
-						stack[z][i]["x_velocity"] -= stack[z][i]["x_resistance"];
-					}
-				}
-				
-				if (stack[z][i]["y_velocity"] < 0) {
-					// Going backwards:
-					if (stack[z][i]["y_velocity"] + stack[z][i]["y_resistance"] > 0) {
-						stack[z][i]["y_velocity"] = 0;
-					} else {
-						stack[z][i]["y_velocity"] += stack[z][i]["y_resistance"];
-					}
-				} else if (stack[z][i]["y_velocity"] > 0) {
-					// Going forwards:
-					if (stack[z][i]["y_velocity"] + stack[z][i]["y_resistance"] < 0) {
-						stack[z][i]["y_velocity"] = 0;
-					} else {
-						stack[z][i]["y_velocity"] -= stack[z][i]["y_resistance"];
-					}
-				}
-				
-				// If the velocity of the object caused it to leave the screen, destroy or move it:
-				if (stack[z][i]["y_position"] > canvas.height || 
-					stack[z][i]["x_position"] > canvas.width ||
-					stack[z][i]["y_position"] < 0 - stack[z][i]["y_size"] ||
-					stack[z][i]["x_position"] < 0 - stack[z][i]["x_size"] ){
-						if (stack[z][i]["keep"]) {
-							if (stack[z][i]["x_position"] > canvas.width) {
-								stack[z][i]["x_position"]  = 0 - stack[z][i]["x_size"];
-							} else if (stack[z][i]["x_position"] < 0) {
-								stack[z][i]["x_position"]  = canvas.width - stack[z][i]["x_size"];
-							}
-							
-							if (stack[z][i]["y_position"] > canvas.height) {
-								stack[z][i]["y_position"]  = 0 - stack[z][i]["y_size"];
-							} else if (stack[z][i]["y_position"] < 0) {
-								stack[z][i]["y_position"]  = canvas.height;
-							}
-						} else {
-							// Destroy this object by turning it into an empty string. Making it a string rather than null stops errors from being thrown when trying to access it.
-							stack[z][i] = "";
-						}
-				}
-			
-				// Colour:
-				context.fillStyle = 'rgba(' + stack[z][i]["colour_r"].toString() + ', ' + stack[z][i]["colour_g"].toString() + ', ' + stack[z][i]["colour_b"].toString() + ', ' + stack[z][i]["colour_a"].toString() + ')';
-				
-				// Draw:
-				context.fillRect(stack[z][i]["x_position"], stack[z][i]["y_position"], stack[z][i]["x_size"], stack[z][i]["y_size"]);
-			}
-		}
-	}
-	
-	function rng(min, max) {
-		return Math.random() * (max - min) + min;
-	}
-	
-	function clearCanvas() {
-		context.clearRect(0, 0, canvas.width, canvas.height);
-	}
-	
-	window.addEventListener("resize", function(){
-		// Recalculate the size of the canvas:
-		canvas.width  = window.innerWidth;
-		canvas.height = window.innerHeight;
-		
-		// Recreate all objects
-		recreateObjects();
-	});
-	
-	setInterval(drawFrame, 1000 / refresh_rate);
 </script>
