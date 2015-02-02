@@ -21,228 +21,8 @@
 	<link href='.common/css/xenxier/default_layout.css' rel='stylesheet' type='text/css'>
 	<link href='.common/css/xenxier/default_style.css' rel='stylesheet' type='text/css'>
 	
-	<script>// clean this shit up
-		$('html, body').bind('DOMMouseScroll MouseScrollEvent MozMousePixelScroll wheel scroll', function() { scroll() });
-		function scroll() {
-			if ($('#controls').position()["top"] - $('#controls').height() <= 0) {
-				$('#hideshowbutton').fadeIn('fast');
-			} else {
-				$('#hideshowbutton').fadeOut('fast');
-			}
-		}
-	</script>
-	<style>
-		canvas {
-			background: #111;
-		}
-		
-		h1 {
-			color: DimGray;
-			text-align: center;
-			font-family: 'Droid Sans Mono';
-			font-size: 40px;
-			font-weight: 300;
-		}
-		
-		h2 {
-			color: gray;
-			text-align: center;
-			font-family: 'Ubuntu Mono';
-			font-weight: 100;
-		}
-		
-		p {
-			margin: 10px;
-			color: gray;
-			text-align: center;
-			font-family: 'Ubuntu Mono', sans-serif;
-			font-weight: 100;
-		}
-		
-		header {
-			top: 0;
-			position: relative;
-			display: table;
-			width: 100%;
-			background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.0));
-			padding: 100px;
-		}
-		
-		header * {
-			color: white;
-			text-align: center;
-			z-index: 10;
-			position: relative;
-			line-height: 1;
-			padding: 0;
-			margin: 0;
-		}
-		
-		header h1 {
-			font-size: 140px;
-			font-family: 'Source Code Pro';
-		}
-		
-		header h2 {
-			color: silver;
-		}
-		
-		.content * {
-			text-align: left;
-		}
-		
-		.content {
-			max-width: 750px;
-			margin-top: 25px;
-			margin-bottom: 25px;
-			background-color: black;
-			box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.5);
-			border-color: #464646;
-			border-style: solid;
-		}
-		
-		.content h1, h2, p {
-			padding-left: 12px;
-			padding-right: 12px;
-		}
-		
-		.content h1 {
-			color: silver !important;
-			text-shadow: none !important;
-			font-size: 30px !important;
-			font-family: 'Droid Sans Mono' !important;
-		}
-		
-			.content h1::before {
-				content: '> ';
-			}
-		
-			.content a::before {
-				content: '> ';
-			}
-		
-		.archived {
-			border-color: #464646 darkred #464646 #464646 !important;
-		}
-		
-		.archive-banner p {
-			float: right;
-			padding: 10px;
-			border-color: #464646 darkred #464646 #464646 !important;
-			border-style: solid;
-			box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.5);
-			background-color: black;
-			text-align: right;
-			text-transform: uppercase;
-			color: silver;
-			margin: 0;
-		}
-		
-		.stuff {
-			max-width: 800px;
-			margin-top: 40px;
-			margin-bottom: 40px;
-			padding-left: 40px;
-			padding-right: 40px;
-			background-color: rgba(20, 20, 20, 0.8);
-			box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.5);
-			border-color: #464646;
-			border-style: solid;
-		}
-		
-		.stuff h1 {
-			font-family: 'Source Code Pro';
-			color: white;
-			text-transform: uppercase;
-			text-shadow: 1px 1px 0 dimgray;
-			font-size: 50px;
-			margin-bottom: 20px !important;
-		}
-		
-		.nsfl {
-			box-shadow: 10px 10px 0 #E74A4A;
-			border-color: #E74A4A;
-			border-style: solid;
-		}
-		
-		.nsfl * {
-			display: none;
-		}
-		
-		.nsfl .nsfl-warning {
-			display: block;
-		}
-		
-		.nsfl .nsfl-warning * {
-			display: block;
-		}
-		
-		.nsfl .nsfl-button {
-			border-color: #E74A4A;
-			border-style: solid;
-			margin-right: auto;
-			margin-left: auto;
-		}
-		
-		button {
-			text-align: center;
-			margin: 20px;
-			padding: 14px;
-			color: silver;
-			border-color: #444;
-			border-style: solid;
-			background: rgba(30, 30, 30, 0.8);
-			text-transform: uppercase;
-			font-family: 'Droid Sans Mono';
-		}
-		
-		#hideshowbutton {
-			display: none;
-			position: fixed;
-			left: 0;
-			bottom: 0;
-			z-index: 2;
-		}
-		
-		#particles h1 {
-			margin: 0 !important;
-		}
-		
-		#particles #controls h2 {
-			color: gray;
-			text-align: left;
-			text-transform: uppercase;
-			font-family: 'Droid Sans Mono';
-		}
-		
-		#particles #controls {
-			height: 780px; /* Hard coded height */
-		}
-		
-		.indent {
-			height: 100%;
-			width: 100%;
-		}
-		
-		.indent section {
-			padding: 10px;
-			width: 50%;
-			float: left;
-		}
-		
-		.range-slider {
-			background: #333;
-			border: 1px solid grey;
-		}
-		
-		.range-slider-active-segment {
-			background: silver;
-		}
-		
-		.range-slider-handle {
-			background: grey;
-		}
-	</style>
+	<!-- Page CSS -->
+	<link href='index.css' rel='stylesheet' type='text/css'>
 </head>
 <body>
 	<canvas id="backgroundCanvas"></canvas>
@@ -366,12 +146,15 @@
 	</div>
 </body>
 
-<!-- Page has loaded -->
 <!-- My Common JS -->
 <script type="text/javascript" src="http://rawgit.com/benjamingwynn/glitch.js/master/glitch.js"></script>
+<script type="text/javascript" src=".common/js/xenxier/common.js"></script>
 <script type="text/javascript" src=".common/js/xenxier/canvas.js"></script>
-<script type="text/javascript" src=".common/js/xenxier/particlebox.js"></script>
 <script type="text/javascript" src=".common/js/xenxier/particlebox_presets.js"></script>
+<script type="text/javascript" src=".common/js/xenxier/particlebox.js"></script>
+
+<!-- Page has loaded, load our JS for the page -->
+<script type="text/javascript" src="index.js"></script>
 
 <!-- Load Scripts -->
 <script type="text/javascript">
@@ -397,50 +180,4 @@
 		// Draw:
 		particlebox.draw();
 	}, 1000 / particlebox.config.refresh_rate);
-</script>
-
-<!-- Misc scripting -->
-<script type="text/javascript">
-	// nsfl warning
-	$('.nsfl').append("<div class='nsfl-warning'><h1>Hidden Content</h1><p>This project may contain bad language, flashing images, loud noises, obnoxious text or otherwise generally not be safe for work. This is your trigger warning.</p><div style='text-align=center; width=100%'><button class='nsfl-button' onclick='hidensfl()'>I'm cool with this</button></div></div>" );
-	
-	// nsfl button press
-	function hidensfl() {
-		$('.nsfl *').fadeIn('fast');
-		$('.nsfl-warning').hide();
-	}
-	
-	// register archived hover
-	$(".archived").hover(
-	  function() {
-		$($(this).find("p:first")).append($("<div class='archive-banner'><p>This project has been archived and is no longer updated</p></div>"));
-	  }, function() {
-		$(this).find( ".archive-banner" ).remove();
-	  }
-	);
-	
-	// random tag lines
-	var rand = [
-		"sudo rm -rf --no-preserve-root /",
-		"home of particles and stuff",
-		"i make things on the internet",
-		"error 404 - tagline not found"
-	]
-	
-	$("header h2").text(rand[Math.floor(rng(0, rand.length))]);
-	
-	function newParticleBoxValue(variable, value) {
-		$('#' + variable).foundation('slider', 'set_value', value);
-	}
-	
-	function hideshow() {
-		if ($('#wrapper').css('opacity') == 0) {
-			// The site is hidden, the button was pressed, show the site.
-			$('#wrapper').fadeTo(250, 255);
-		} else {
-			// The site is visible, the button was pressed, hide the site.
-			$('#wrapper').fadeTo(250, 0);
-		}
-	}
-	
 </script>
