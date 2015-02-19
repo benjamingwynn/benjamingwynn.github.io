@@ -1,9 +1,26 @@
-canvas {
-	background: #111;
+body {
+	background: #FFF;
+}
+
+#wrapper * {
+	display: none;
+}
+
+#typewriter {
+	color: white;
+	text-align: left;
+	background: black;
+	border-color: #111;
+	border-style: solid;
+	font-family: 'Ubuntu Mono', sans-serif !important;
+	font-weight: 100 !important;
+	position: fixed;
+	width: 500px;
+	z-index: 99;
 }
 
 h1 {
-	color: DimGray;
+	color: #111;
 	text-align: center;
 	font-family: 'Droid Sans Mono';
 	font-size: 40px;
@@ -11,7 +28,7 @@ h1 {
 }
 
 h2 {
-	color: gray;
+	color: #222;
 	text-align: center;
 	font-family: 'Ubuntu Mono';
 	font-weight: 100;
@@ -19,7 +36,7 @@ h2 {
 
 p {
 	margin: 10px;
-	color: gray;
+	color: #333;
 	text-align: center;
 	font-family: 'Ubuntu Mono', sans-serif;
 	font-weight: 100;
@@ -30,13 +47,13 @@ header {
 	position: relative;
 	display: table;
 	width: 100%;
-	background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.0));
+	/* background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.0)); */
 	padding-top: 100px;
 	padding-bottom: 100px;
 }
 
 header * {
-	color: white;
+	color: #111;
 	text-align: center;
 	z-index: 10;
 	position: relative;
@@ -50,10 +67,6 @@ header h1 {
 	font-family: 'Source Code Pro';
 }
 
-header h2 {
-	color: silver;
-}
-
 .content * {
 	text-align: left;
 }
@@ -62,10 +75,9 @@ header h2 {
 	max-width: 750px;
 	margin-top: 25px;
 	margin-bottom: 25px;
-	background-color: black;
-	box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.5);
+	background-color: rgba(240, 240, 240, 1);
 	border-color: #464646;
-	border-style: solid;
+	border-style: dashed;
 }
 
 .content h1, h2, p {
@@ -74,8 +86,6 @@ header h2 {
 }
 
 .content h1 {
-	color: silver !important;
-	text-shadow: none !important;
 	font-size: 30px !important;
 	font-family: 'Droid Sans Mono' !important;
 }
@@ -92,63 +102,22 @@ header h2 {
 	border-color: #464646 darkred #464646 #464646 !important;
 }
 
-.archive-banner p {
-	float: right;
-	padding: 10px;
-	border-color: #464646 darkred #464646 #464646 !important;
-	border-style: solid;
-	box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.5);
-	background-color: black;
-	text-align: right;
-	text-transform: uppercase;
-	color: silver;
-	margin: 0;
-}
-
 .stuff {
 	max-width: 800px;
 	margin-top: 40px;
 	margin-bottom: 40px;
 	padding-left: 40px;
 	padding-right: 40px;
-	background-color: rgba(20, 20, 20, 0.8);
-	box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.5);
+	background-color: rgba(230, 230, 230, 0.8);
 	border-color: #464646;
 	border-style: solid;
 }
 
 .stuff h1 {
 	font-family: 'Source Code Pro';
-	color: white;
 	text-transform: uppercase;
-	text-shadow: 1px 1px 0 dimgray;
 	font-size: 50px;
 	margin-bottom: 20px !important;
-}
-
-.nsfl {
-	box-shadow: 10px 10px 0 #E74A4A;
-	border-color: #E74A4A;
-	border-style: solid;
-}
-
-.nsfl * {
-	display: none;
-}
-
-.nsfl .nsfl-warning {
-	display: block;
-}
-
-.nsfl .nsfl-warning * {
-	display: block;
-}
-
-.nsfl .nsfl-button {
-	border-color: #E74A4A;
-	border-style: solid;
-	margin-right: auto;
-	margin-left: auto;
 }
 
 button {
@@ -163,29 +132,6 @@ button {
 	font-family: 'Droid Sans Mono';
 }
 
-#hideshowbutton {
-	display: none;
-	position: fixed;
-	left: 0;
-	bottom: 0;
-	z-index: 2;
-}
-
-#particles h1 {
-	margin: 0 !important;
-}
-
-#particles #controls h2 {
-	color: gray;
-	text-align: left;
-	text-transform: uppercase;
-	font-family: 'Droid Sans Mono';
-}
-
-#particles #controls {
-	height: 780px; /* Hard coded height */
-}
-
 .indent {
 	height: 100%;
 	width: 100%;
@@ -195,17 +141,4 @@ button {
 	padding: 10px;
 	width: 50%;
 	float: left;
-}
-
-.range-slider {
-	background: #333;
-	border: 1px solid grey;
-}
-
-.range-slider-active-segment {
-	background: silver;
-}
-
-.range-slider-handle {
-	background: grey;
 }
