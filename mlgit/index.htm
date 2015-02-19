@@ -1,0 +1,339 @@
+<!-- the code for this is beyond shit. it's a hacked, nasty fork of clickit -->
+<!DOCTYPE html>
+<head>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+	<title>MLG IT</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			font-family: 'Comic Sans MS';
+			text-align: center;
+			cursor: url('../grnt/hit.gif'), help;
+			color: white;
+		}
+
+		h1 {
+			color: yellow !important;
+			font-size: 99px;
+		}
+		
+		html, body {
+            height: 100%;
+            width: 100%;
+			overflow-x: hidden;
+			background-image: url('../grnt/weed.gif');
+		}
+
+		img {
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<h1>mlg it</h1>
+	<p>a fukin sick pro mlg game</p>
+	<marquee scrolldelay="10" truespeed="10" behavior="alternate">
+		<canvas id="backgroundCanvas" height="620px" width="620px">updat ur fokin brozur</canvas>
+	</marquee>
+	<h2>lederbordz</h2>
+	<p>hakker noun as fortran..............999999</p>
+	<p>grnt...................................420</p>
+	<p>xen...................................6969</p>
+	<p>sam...................................9001</p>
+	<p>milez.................................1337</p>
+	<p>tom......................................0</p>
+	<p>ris.....................................-1</p>
+	<p>barrk obama...................illimuminiaii</p>
+	<p>(these are obvs real)</p>
+
+	<div id="use">
+		<img src="../grnt/blazeit.gif">
+		<img src="../grnt/superweed.gif">
+		<img src="../grnt/snoop.gif">
+		<img src="../grnt/omgchad.gif">
+		<img src="../grnt/etho.gif">
+		<img src="../wtf/dance.gif">
+		<img src="../wtf/boom.gif">
+	</div>
+
+	<img id="will" src="will.jpg">
+	<img id="snoop" src="../grnt/snooper.gif">
+
+	<audio id="end" >
+		<source src="end.mp3">
+	</audio>
+	<audio id="mlg" >
+		<source src="mlg.mp3">
+	</audio>
+	<audio id="yay" >
+		<source src="wub.mp3">
+	</audio>
+</body>
+<script>
+	var canvas = document.getElementById("backgroundCanvas");
+	
+	var context = canvas.getContext("2d");
+	
+	var click_x = new Number();
+	var click_y = new Number();
+	var click_count = 0;
+	var click_allow = true;
+	
+	var stack = [];
+	var refresh_rate = 60;
+	var target_refresh_rate = 60;
+	
+	var size_multiplier = 100;
+	var size_velocity_constant = 0.15;
+	
+	var colour_base_r = 200;
+	var colour_base_g = 200;
+	var colour_base_b = 200;
+	var colour_depth = 2;
+	
+	var started_clicking = 0;
+	
+	var frame = [];
+	
+	var high_score = parseInt(getCookie("click_it_score"));
+	
+	function createObjects(x, y, amount, depth) {
+		stack = [];
+		
+		for (z = 0; z < depth; z++) {
+			layer = [amount];
+			
+			for (i = 0; i < amount; i++) {
+				size = z * size_multiplier;
+				
+				// Create a new object:
+				object = [];
+				
+				object["x_size"] = size;
+				object["x_position"] = x;
+				object["x_velocity"] = rng(0 - size * size_velocity_constant, size * size_velocity_constant);
+				
+				object["y_size"] = size;
+				object["y_position"] = y;
+				object["y_velocity"] = rng(0 - size * size_velocity_constant, size * size_velocity_constant);
+				
+				object["colour_r"] = colour_base_r + Math.round(size * colour_depth);
+				object["colour_g"] = colour_base_g + Math.round(size * colour_depth);
+				object["colour_b"] = colour_base_b + Math.round(size * colour_depth);
+				object["colour_a"] = 255;
+				
+				object["keep"] = false;
+				object["img"] = $('#use > img')[Math.floor(rng(0, $('#use > img').length))];
+				
+				layer[i] = object;
+			}
+			
+			stack[z] = layer;
+		}
+		
+		frame[frame.length] = stack;
+	}
+
+	function drawFrame() {
+		// Clear the canvas:
+		clearCanvas();
+
+		// rotate
+		context.save();
+		context.translate(canvas.width /2, canvas.height /2);
+		context.rotate(click_count * 90 * (Math.PI / 180));
+		context.translate(-canvas.width /2, -canvas.height/2);
+		context.drawImage(document.getElementById("will"), canvas.width / 2 - document.getElementById("will").width / 2, canvas.height / 2 - document.getElementById("will").height / 2);
+		context.restore();
+		
+		// Loop through all of the stacks to draw:
+		for (s = 0; s < click_count; s++) {
+		
+			// Loop through all layers in the stack:
+			for (z = 0; z < frame[s].length; z++) {
+				
+				// Draw everything on this layer:
+				for (i = 0; i < frame[s][z].length; i++) {
+				
+					// Calculate new object position based on object velocity
+					frame[s][z][i]["x_position"] += frame[s][z][i]["x_velocity"];
+					frame[s][z][i]["y_position"] += frame[s][z][i]["y_velocity"];
+					
+					var donotdraw;
+					
+					// If the velocity of the object caused it to leave the screen, destroy or move it:
+					if (frame[s][z][i]["y_position"] > canvas.height || 
+						frame[s][z][i]["x_position"] > canvas.width ||
+						frame[s][z][i]["y_position"] < 0 - frame[s][z][i]["y_size"] ||
+						frame[s][z][i]["x_position"] < 0 - frame[s][z][i]["x_size"] ){
+							if (frame[s][z][i]["keep"]) {
+								if (frame[s][z][i]["x_position"] > canvas.width) {
+									frame[s][z][i]["x_position"]  = 0 - frame[s][z][i]["x_size"];
+								} else if (frame[s][z][i]["x_position"] < 0) {
+									frame[s][z][i]["x_position"]  = canvas.width - frame[s][z][i]["x_size"];
+								}
+								
+								if (frame[s][z][i]["y_position"] > canvas.height) {
+									frame[s][z][i]["y_position"]  = 0 - frame[s][z][i]["y_size"];
+								} else if (frame[s][z][i]["y_position"] < 0) {
+									frame[s][z][i]["y_position"]  = canvas.height;
+								}
+							} else {
+								donotdraw = true;
+							}
+					}
+				
+					// Colour:
+					if (!donotdraw) {
+						context.fillStyle = 'rgba(' + frame[s][z][i]["colour_r"].toString() + ', ' + frame[s][z][i]["colour_g"].toString() + ', ' + frame[s][z][i]["colour_b"].toString() + ', ' + frame[s][z][i]["colour_a"].toString() + ')';
+					}
+					
+					// Draw:
+					context.drawImage(frame[s][z][i]["img"], frame[s][z][i]["x_position"], frame[s][z][i]["y_position"], frame[s][z][i]["x_size"], frame[s][z][i]["y_size"]);
+				}
+			}
+		}
+		
+		
+		// Draw the overlaying text:
+		context.font= '128px Comic Sans MS';
+		context.fillStyle = 'white';
+		context.textAlign = 'center';
+		
+		current_unix_time = new Date().getTime() / 1000;
+		if (started_clicking > 0 && started_clicking + 20 <= current_unix_time) {
+			
+
+			// New high score?
+			if (click_count > high_score) {
+				setCookie("click_it_score", click_count);
+				context.font = '24px Comic Sans MS';
+				context.fillText("MOM GET THE CAMERA MOOMM I BEAT MY HIGH SCORE", canvas.width / 2, 24);
+				context.font = '24px Comic Sans MS';
+				context.fillText("U JUST FUKIN MLG'D", canvas.width / 2, (canvas.height / 2) - (128 / 2) - (24 * 1.3));
+				context.font = '128px Comic Sans MS';
+				context.fillText(click_count, canvas.width / 2, canvas.height / 2);
+				context.font = '24px Comic Sans MS';
+				context.fillText("FUKKIN TIMES!!!! GETTT NOOO SCOPPEDDD", canvas.width / 2, (canvas.height / 2) + 24);
+				context.drawImage(document.getElementById("snoop"), canvas.width / 2 - document.getElementById("snoop").width / 2, (canvas.height / 2 - document.getElementById("snoop").height / 2) + 150);
+				if ($('#yay')[0].paused) {
+					$('#yay')[0].play();
+				}
+			} else {
+				context.font = '24px Comic Sans MS';
+				context.fillText("u still suk lel " + high_score + " is shit", canvas.width / 2, 24);
+				context.font = '24px Comic Sans MS';
+				context.fillText("u only mlg'd", canvas.width / 2, (canvas.height / 2) - (128 / 2) - (24 * 1.3));
+				context.font = '128px Comic Sans MS';
+				context.fillText(click_count, canvas.width / 2, canvas.height / 2);
+				context.font = '24px Comic Sans MS';
+				context.fillText("timms :'(", canvas.width / 2, (canvas.height / 2) + 24);
+				if ($('#end')[0].paused) {
+					$('#end')[0].play();
+				}
+			}
+			
+			click_allow = false;
+		} else {
+			if (click_count < 1) {
+				$('audio').each(function(i) {this.pause()}); // stfu
+				context.fillText("MLG IT", canvas.width / 2, canvas.height / 2);
+			} else {
+				context.fillText(click_count, canvas.width / 2, canvas.height / 2);
+				if ($('#mlg')[0].paused) {
+					$('#mlg')[0].play();
+				}
+			}
+		
+			// High score:
+			context.font = '24px Comic Sans MS';
+			context.fillText("sick high scure: " + high_score, canvas.width / 2, 24);
+		}
+		
+		if (started_clicking > 0 && started_clicking + 23 <= current_unix_time) {
+			context.font = '24px Comic Sans MS';
+			if (click_count > high_score) {
+				context.fillText("CLICK TO REMATCH AND KICK MUR ASS", canvas.width / 2, (canvas.height / 2) + 72);
+			} else {
+				context.fillText("rip in peace :'(", canvas.width / 2, (canvas.height / 2) + 72);
+			}	
+		}
+		
+		// Footer:
+		context.font = '24px Comic Sans MS';
+		if (current_unix_time < 20 + started_clicking && started_clicking > 0) {
+			context.fillText(Math.floor(((20 - (current_unix_time - started_clicking))) * 1000), canvas.width / 2, canvas.height - 48);
+		} else if (!started_clicking > 0) {
+			context.fillText("but is will rly kil?", canvas.width / 2, canvas.height - 48);
+		}
+		context.fillText("made bi grnt la hax0r", canvas.width / 2, canvas.height - 24);
+	}
+	
+	function rng(min, max) {
+		return Math.random() * (max - min) + min;
+	}
+	
+	function clearCanvas() {
+		context.clearRect(0, 0, canvas.width, canvas.height);
+	}
+	
+	$('canvas').mousedown(function(event) {
+		if (event.which === 1) {
+			if (click_allow) {
+				if (started_clicking == 0) {
+					started_clicking = new Date().getTime() / 1000;
+				}
+			
+				if (event.x != undefined && event.y != undefined) {
+				  click_x = event.x;
+				  click_y = event.y;
+				} else {
+				  click_x = event.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+				  click_y = event.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+				}
+
+				click_x -= canvas.offsetLeft;
+				click_y -= canvas.offsetTop;
+				
+				click_count++;
+				
+				createObjects(click_x, click_y, 10, 2);
+			} else {
+				current_unix_time = new Date().getTime() / 1000;
+				if (started_clicking > 0 && started_clicking + 23 <= current_unix_time) {
+					click_allow = true;
+					click_count = 0;
+					started_clicking = 0;
+					frame = [];
+					stack = [];
+					high_score = parseInt(getCookie("click_it_score"));
+					clearCanvas();
+				}
+			}
+		}
+	});
+	
+	setInterval(drawFrame, 1000 / refresh_rate);
+	
+	// cookies:
+	function setCookie(cname, cvalue) {
+		var d = new Date();
+		d.setTime(d.getTime() + (3650 * 24 * 60 * 60 * 1000));
+		var expires = "expires="+d.toUTCString();
+		document.cookie = cname + "=" + cvalue + "; " + expires;
+	}
+	
+	function getCookie(cname) {
+		 var name = cname + "=";
+		 var ca = document.cookie.split(';');
+		 for(var i=0; i<ca.length; i++) {
+			 var c = ca[i];
+			while (c.charAt(0)==' ') c = c.substring(1);
+			 if (c.indexOf(name) != -1) return c.substring(name.length,c.length);
+		 }
+		 return "0";
+	} 
+</script>
