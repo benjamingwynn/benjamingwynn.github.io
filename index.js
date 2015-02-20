@@ -1,11 +1,5 @@
-// On hover of 'archived' class
-$(".archived").hover(
-	function() {
-		$($(this).find("p:first")).append($("<div class='archive-banner'><p>This project has been archived and is no longer updated</p></div>"));
-	}, function() {
-		$(this).find( ".archive-banner" ).remove();
-	}
-);
+// blur
+$('#background1').blurjs({customClass: 'blurjs', radius: 10, persist: false });
 
 // Random array
 var rand = [
