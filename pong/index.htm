@@ -263,9 +263,7 @@
 
 				player_2_score ++;
 				
-				if (ball["x_velocity"] < ball["x_max_velocity"] && ball["x_velocity"] > -ball["x_max_velocity"] ) {
-					ball["x_velocity"] *= 1.05
-				}
+				ball["x_velocity"] -= 1;
 				
 				ball["x_position"] = canvas.width / 2;
 
@@ -277,9 +275,8 @@
 
 				player_1_score++;
 				
-				if (ball["x_velocity"] < ball["x_max_velocity"] && ball["x_velocity"] > -ball["x_max_velocity"] ) {
-					ball["x_velocity"] *= 1.05
-				}
+				
+				ball["x_velocity"] += 1;
 				
 				ball["x_position"] = canvas.width / 2;
 
@@ -588,8 +585,6 @@
 	ball["x_size"] = 16;
 
 	ball["y_size"] = 16;
-	
-	ball["x_max_velocity"] = 25;
 
 	
 
