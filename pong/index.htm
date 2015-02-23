@@ -2,6 +2,7 @@
 <head>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+	<script src="http://jeremyckahn.github.io/keydrown/dist/keydrown.min.js"></script>
 	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
 	<title>THE BEST GAME OF PONG *EVER*</title>
 	<style>
@@ -496,91 +497,37 @@
 	
 
 	// Keyboard:
-
-	$(document).on('keydown', function(e) {
-
-		if(interval == null) {
-
-			called = false;
-
-			interval = setInterval(function() {
-
-				doSomething(e.keyCode);
-
-				called = true;
-
-			}, 1000);
-
-		}
-
-		
-
-	}).on('keyup', function(e) {
-
-		clearInterval(interval); 
-
-		interval = null;
-
-		if(!called)
-
-			doSomething(e.keyCode);
-
+	kd.run(function () {
+	  kd.tick();
 	});
 
-	
-
-	function doSomething(keyCode) {
-
-			
-
-		 if (keyCode == 38) {
-
-			 // Player 2 up
-
-			 if (player_2["y_position"] - move_speed > 0) {
-
-				 	player_2["y_position"] -= move_speed;
-
-			 }
-
-		 }  else if (keyCode == 40) {
-
-			 // p2 down
-
-			 if (player_2["y_position"] + player_2["y_size"] + move_speed < canvas.height) {
-
-				 	player_2["y_position"] += move_speed;
-
-			 }
-
+	kd.UP.down(function () {
+		 if (player_2["y_position"] - move_speed > 0) {
+			player_2["y_position"] -= move_speed;
 		 }
+	});
+	
+	kd.DOWN.down(function () {
+		 if (player_2["y_position"] + player_2["y_size"] + move_speed < canvas.height) {
+			player_2["y_position"] += move_speed;
+		 }
+	});
+	
+	kd.W.down(function () {
+	 if (player_1["y_position"] - move_speed > 0) {
 
-		 
+		 	player_1["y_position"] -= move_speed;
 
-		 if (keyCode == 87) {
-
-			 // p1 up
-
-			 if (player_1["y_position"] - move_speed > 0) {
-
-				 	player_1["y_position"] -= move_speed;
-
-			 }
-
-		 }  else if (keyCode == 83) {
-
-			 // p1 down
-
+	 }
+	});
+	
+	kd.S.down(function () {
 			 if (player_1["y_position"] + player_1["y_size"] + move_speed < canvas.height) {
 
 				 	player_1["y_position"] += move_speed;
 
 			 }
-
-		 }
-
-	}
-
+	});
 </script>
 
 <script>
