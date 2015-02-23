@@ -265,6 +265,12 @@
 				
 				ball["x_velocity"] -= 1;
 				
+				if (ball["y_velocity"] < 0) {
+					ball["y_velocity"]--;
+				} else {
+					ball["y_velocity"]++;
+				}
+				
 				ball["x_position"] = canvas.width / 2;
 
 				ball["y_position"] = canvas.height / 2;
@@ -275,8 +281,13 @@
 
 				player_1_score++;
 				
-				
 				ball["x_velocity"] += 1;
+				
+				if (ball["y_velocity"] < 0) {
+					ball["y_velocity"]--;
+				} else {
+					ball["y_velocity"]++;
+				}
 				
 				ball["x_position"] = canvas.width / 2;
 
