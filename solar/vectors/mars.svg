@@ -1,0 +1,58 @@
+<svg width="480" height="480" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+ <defs>
+  <linearGradient id="svg_5" x1="0" y1="0" x2="1" y2="1">
+   <stop offset="0" stop-color="#00ffb2"/>
+   <stop offset="1" stop-color="#00ff04"/>
+  </linearGradient>
+  <linearGradient id="svg_6" x1="0.51172" y1="0" x2="1" y2="1">
+   <stop offset="0" stop-color="#00ffb2"/>
+   <stop offset="1" stop-color="#00ff04"/>
+  </linearGradient>
+  <linearGradient id="svg_7" x1="0.53906" y1="0.98438" x2="0.77344" y2="0.00781">
+   <stop offset="0" stop-color="#00ffb2"/>
+   <stop offset="1" stop-color="#00ff04"/>
+  </linearGradient>
+  <linearGradient id="svg_8" x1="0.53906" y1="0.98438" x2="0.77344" y2="0.00781">
+   <stop offset="0" stop-color="#00e9ff"/>
+   <stop offset="1" stop-color="#00bbff"/>
+  </linearGradient>
+  <linearGradient id="svg_9" x1="0.53906" y1="0.98438" x2="0.77344" y2="0.00781">
+   <stop offset="0" stop-color="#04ff00"/>
+   <stop offset="1" stop-color="#94ff00"/>
+  </linearGradient>
+  <linearGradient id="svg_11" x1="0.41406" y1="0.06641" x2="0.64063" y2="0.95703">
+   <stop offset="0" stop-color="#04ff00"/>
+   <stop offset="1" stop-color="#94ff00"/>
+  </linearGradient>
+  <linearGradient id="svg_14" x1="0.53906" y1="0.98438" x2="0.77344" y2="0.00781">
+   <stop offset="0" stop-color="#dbdbdb"/>
+   <stop offset="1" stop-color="#ffffff"/>
+  </linearGradient>
+  <linearGradient id="svg_24" x1="0.53906" y1="0.98438" x2="0.26172" y2="0.01563">
+   <stop offset="0" stop-color="#a05000"/>
+   <stop offset="1" stop-color="#e29b00"/>
+  </linearGradient>
+  <linearGradient id="svg_25" x1="0.53906" y1="0.98438" x2="0.26172" y2="0.01563">
+   <stop offset="0" stop-color="#8e8e8e"/>
+   <stop offset="1" stop-color="#666666"/>
+  </linearGradient>
+  <linearGradient id="svg_26" x1="0.53906" y1="0.98438" x2="0.26172" y2="0.01563">
+   <stop offset="0" stop-color="#aa3a0d"/>
+   <stop offset="1" stop-color="#d13b2e"/>
+  </linearGradient>
+  <linearGradient id="svg_27" x1="0.53906" y1="0.98438" x2="0.26172" y2="0.01563">
+   <stop offset="0" stop-color="#aa3a0d"/>
+   <stop offset="1" stop-color="#d13b2e"/>
+  </linearGradient>
+ </defs>
+ <g>
+  <title>Layer 1</title>
+  <path fill="url(#svg_27)" stroke="#000000" stroke-width="5" stroke-linejoin="null" stroke-linecap="null" d="m6.4021,240.00002c0,-129.05962 104.5383,-233.59792 233.5979,-233.59792c129.05963,0 233.5979,104.53828 233.5979,233.59792c0,129.05962 -104.53827,233.59789 -233.5979,233.59789c-129.0596,0 -233.5979,-104.53827 -233.5979,-233.59789z" id="svg_4"/>
+  <rect fill="#FF0000" stroke="#000000" stroke-width="5" x="564" y="233" width="1" height="0" id="svg_2"/>
+  <rect fill="#FF0000" stroke="#000000" stroke-width="5" x="105" y="78" width="0" height="1" id="svg_3"/>
+  <path fill="url(#svg_27)" stroke="#000000" stroke-width="5" stroke-linejoin="null" stroke-linecap="null" opacity="0.95" d="m190,110.00001l50,53.33334l20,80l80,0l100,26.66669l-30,-133.33337l-80,-93.33332l-100,-13.33333l-50,53.33332l20,0l-10,26.66668z" id="svg_28"/>
+  <path fill="url(#svg_27)" stroke="#000000" stroke-width="5" stroke-linejoin="null" stroke-linecap="null" opacity="0.95" d="m190,50l-40,50l20,10l0,60l-100,10l-30,-40l100,-90l50,0z" id="svg_29"/>
+  <path fill="url(#svg_27)" stroke="#000000" stroke-width="5" stroke-linejoin="null" stroke-linecap="null" opacity="0.95" d="m310,260l60,9.5l70,19l-60,123.5l-70,38l-60,-152l60,-38z" id="svg_30"/>
+ </g>
+</svg>

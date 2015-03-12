@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<head>
+	<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300' rel='stylesheet' type='text/css'>
+	<script type="text/javascript" src="game.js"></script>
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" src="particlebox.js"></script>
+	<title>test</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			margin-left: auto;
+			margin-right: auto;
+   			-webkit-font-smoothing: antialiased;
+   			font-smoothing: antialiased;
+		}
+		
+		html, body {
+            height: 100%;
+            width: 100%;
+			overflow-x: hidden;
+		}
+		
+		body {
+			background: #111;
+		}
+		
+		canvas {
+			top: 0;
+			position: fixed;
+			z-index: -1;
+		}
+		
+		#images * {
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="backgroundCanvas"></canvas>
+	<canvas id="gameCanvas"></canvas>
+	<div id="images">
+		<img id="sun" src="vectors/sun.svg">
+		<img id="mercury" src="vectors/mercury.svg">
+		<img id="venus" src="vectors/venus.svg">
+		<img id="earth" src="vectors/earth.svg">
+		<img id="mars" src="vectors/mars.svg">
+		<img id="jupiter" src="vectors/jupiter.svg">
+		<img id="saturn" src="vectors/saturn.svg">
+		<img id="uranus" src="vectors/uranus.svg">
+		<img id="neptune" src="vectors/neptune.svg">
+		
+		<img id="moon" src="vectors/earthsmoon.svg">
+		<img id="moon2" src="vectors/genericmoon.svg">
+	</div>
+</body>
+<script>
+	var canvas = document.getElementById("gameCanvas");
+	var c = document.getElementById("backgroundCanvas");
+	
+	// Before we get context, resize the canvas.
+	canvas.width  = window.innerWidth;
+	canvas.height = window.innerHeight;
+	
+	c.width  = window.innerWidth;
+	c.height = window.innerHeight;
+	
+	// Get the context
+	var context = canvas.getContext("2d");
+	var ctx = c.getContext("2d");
+	
+	// Refresh rate:
+	var refresh_rate = 60;
+	
+	// Set up particle box
+	particlebox.control('draw_amount', 10);
+	particlebox.control('max_x_velocity', 0.05);
+	particlebox.control('max_y_velocity', 0.05);
+	particlebox.control('min_x_velocity', -1);
+	particlebox.control('min_y_velocity', -1);
+	particlebox.control('z_depth', 20);
+	particlebox.control('size_multiplier', 0.1);
+	particlebox.control('colour_base_r', 200);
+	particlebox.control('colour_base_g', 200);
+	particlebox.control('colour_base_b', 200);
+	particlebox.control('colour_depth', 200);
+	particlebox.control('spawn_location', 0);
+	particlebox.control('refresh_rate', 94);
+	particlebox.control('air_resistance', 0);
+	particlebox.control('gravity', 1.3);
+	
+	// Create particlebox objects from config
+	particlebox.create();
+	
+	setInterval(function() {
+		particlebox.draw();
+	}, 1000 / particlebox.config.refresh_rate);
+
+	function drawFrame() {
+		// Clear the canvas:
+		clearCanvas();
+		
+		// Draw the game:
+		drawGame();
+	}
+	
+	function rng(min, max) {
+		return Math.random() * (max - min) + min;
+	}
+	
+	function clearCanvas() {
+		context.clearRect(0, 0, canvas.width, canvas.height);
+	}
+	
+	window.addEventListener("resize", function(){
+		// Recalculate the size of the canvas:
+		canvas.width  = window.innerWidth;
+		canvas.height = window.innerHeight;
+	});
+	
+	setInterval(drawFrame, 1000 / refresh_rate);
+	setInterval(updateGame, 1);
+</script>

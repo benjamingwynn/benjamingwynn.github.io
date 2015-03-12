@@ -1,0 +1,45 @@
+<svg width="480" height="480" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+ <defs>
+  <linearGradient y2="1" x2="1" y1="0" x1="0" id="svg_5">
+   <stop stop-color="#00ffb2" offset="0"/>
+   <stop stop-color="#00ff04" offset="1"/>
+  </linearGradient>
+  <linearGradient y2="1" x2="1" y1="0" x1="0.51172" id="svg_6">
+   <stop stop-color="#00ffb2" offset="0"/>
+   <stop stop-color="#00ff04" offset="1"/>
+  </linearGradient>
+  <linearGradient y2="0.00781" x2="0.77344" y1="0.98438" x1="0.53906" id="svg_7">
+   <stop stop-color="#00ffb2" offset="0"/>
+   <stop stop-color="#00ff04" offset="1"/>
+  </linearGradient>
+  <linearGradient y2="0.00781" x2="0.77344" y1="0.98438" x1="0.53906" id="svg_8">
+   <stop stop-color="#00e9ff" offset="0"/>
+   <stop stop-color="#00bbff" offset="1"/>
+  </linearGradient>
+  <linearGradient y2="0.00781" x2="0.77344" y1="0.98438" x1="0.53906" id="svg_9">
+   <stop stop-color="#04ff00" offset="0"/>
+   <stop stop-color="#94ff00" offset="1"/>
+  </linearGradient>
+  <linearGradient y2="0.95703" x2="0.64063" y1="0.06641" x1="0.41406" id="svg_11">
+   <stop stop-color="#04ff00" offset="0"/>
+   <stop stop-color="#94ff00" offset="1"/>
+  </linearGradient>
+  <linearGradient y2="0.00781" x2="0.77344" y1="0.98438" x1="0.53906" id="svg_14">
+   <stop stop-color="#dbdbdb" offset="0"/>
+   <stop stop-color="#ffffff" offset="1"/>
+  </linearGradient>
+ </defs>
+ <g>
+  <title>Layer 1</title>
+  <path id="svg_4" d="m6.4021,240.00002c0,-129.05962 104.5383,-233.59792 233.5979,-233.59792c129.05963,0 233.5979,104.53828 233.5979,233.59792c0,129.05962 -104.53827,233.59789 -233.5979,233.59789c-129.0596,0 -233.5979,-104.53827 -233.5979,-233.59789z" stroke-linecap="null" stroke-linejoin="null" stroke-width="5" stroke="#000000" fill="url(#svg_14)"/>
+  <rect id="svg_2" height="0" width="1" y="233" x="564" stroke-width="5" stroke="#000000" fill="#FF0000"/>
+  <rect id="svg_3" height="1" width="0" y="78" x="105" stroke-width="5" stroke="#000000" fill="#FF0000"/>
+  <path id="svg_18" d="m150,110l-40,-20l-40,50l20,50l30,10l40,-30l0,-40l-10,-20z" opacity="0.95" stroke-linecap="null" stroke-linejoin="null" stroke-width="5" stroke="#000000" fill="none"/>
+  <path transform="rotate(-30 309.9999999999999,160.00000000000006) " id="svg_19" d="m240.49037,155.13782l8.1776,-19.44872l0,-58.34615l8.17761,-19.44872l32.71042,-9.72436l32.71039,0l24.53281,9.72436l24.53281,19.44872l8.17761,29.17307l0,29.17308l0,19.44872l-8.17761,38.89743l-8.17758,58.34616l-8.17761,19.44873l-49.06561,0l-24.53281,-19.44873l-24.53281,-68.07051l-16.35521,-29.17308z" opacity="0.95" stroke-linecap="null" stroke-linejoin="null" stroke-width="5" stroke="#000000" fill="url(#svg_14)"/>
+  <path id="svg_20" d="m370,280l-90,-10l-20,-40l-20,50l0,50l0,20l60,30l70,-10l30,-80l-30,-10z" opacity="0.95" stroke-linecap="null" stroke-linejoin="null" stroke-width="5" stroke="#000000" fill="url(#svg_14)"/>
+  <path id="svg_21" d="m160,190l0,20l20,0l10,-30l-20,0l-10,10z" opacity="0.95" stroke-linecap="null" stroke-linejoin="null" stroke-width="5" stroke="#000000" fill="url(#svg_14)"/>
+  <path id="svg_22" d="m110,330l-30,0l30,10l0,-10z" opacity="0.95" stroke-linecap="null" stroke-linejoin="null" stroke-width="5" stroke="#000000" fill="url(#svg_14)"/>
+  <path id="svg_23" d="m130,360l0,20l20,0l0,-10l-20,-10z" opacity="0.95" stroke-linecap="null" stroke-linejoin="null" stroke-width="5" stroke="#000000" fill="url(#svg_14)"/>
+ </g>
+</svg>
