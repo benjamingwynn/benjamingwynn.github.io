@@ -1,150 +1,149 @@
 <svg width="480" height="480" xmlns="http://www.w3.org/2000/svg">
  <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
  <defs>
-  <linearGradient id="svg_5" x1="0" y1="0" x2="1" y2="1">
-   <stop offset="0" stop-color="#00ffb2"/>
-   <stop offset="1" stop-color="#00ff04"/>
+  <linearGradient y2="1" x2="1" y1="0" x1="0" id="svg_5">
+   <stop stop-color="#00ffb2" offset="0"/>
+   <stop stop-color="#00ff04" offset="1"/>
   </linearGradient>
-  <linearGradient id="svg_6" x1="0.51172" y1="0" x2="1" y2="1">
-   <stop offset="0" stop-color="#00ffb2"/>
-   <stop offset="1" stop-color="#00ff04"/>
+  <linearGradient y2="1" x2="1" y1="0" x1="0.51172" id="svg_6">
+   <stop stop-color="#00ffb2" offset="0"/>
+   <stop stop-color="#00ff04" offset="1"/>
   </linearGradient>
-  <linearGradient id="svg_7" x1="0.53906" y1="0.98438" x2="0.77344" y2="0.00781">
-   <stop offset="0" stop-color="#00ffb2"/>
-   <stop offset="1" stop-color="#00ff04"/>
+  <linearGradient y2="0.00781" x2="0.77344" y1="0.98438" x1="0.53906" id="svg_7">
+   <stop stop-color="#00ffb2" offset="0"/>
+   <stop stop-color="#00ff04" offset="1"/>
   </linearGradient>
-  <linearGradient id="svg_8" x1="0.53906" y1="0.98438" x2="0.77344" y2="0.00781">
-   <stop offset="0" stop-color="#00e9ff"/>
-   <stop offset="1" stop-color="#00bbff"/>
+  <linearGradient y2="0.00781" x2="0.77344" y1="0.98438" x1="0.53906" id="svg_8">
+   <stop stop-color="#00e9ff" offset="0"/>
+   <stop stop-color="#00bbff" offset="1"/>
   </linearGradient>
-  <linearGradient id="svg_9" x1="0.53906" y1="0.98438" x2="0.77344" y2="0.00781">
-   <stop offset="0" stop-color="#04ff00"/>
-   <stop offset="1" stop-color="#94ff00"/>
+  <linearGradient y2="0.00781" x2="0.77344" y1="0.98438" x1="0.53906" id="svg_9">
+   <stop stop-color="#04ff00" offset="0"/>
+   <stop stop-color="#94ff00" offset="1"/>
   </linearGradient>
-  <linearGradient id="svg_11" x1="0.41406" y1="0.06641" x2="0.64063" y2="0.95703">
-   <stop offset="0" stop-color="#04ff00"/>
-   <stop offset="1" stop-color="#94ff00"/>
+  <linearGradient y2="0.95703" x2="0.64063" y1="0.06641" x1="0.41406" id="svg_11">
+   <stop stop-color="#04ff00" offset="0"/>
+   <stop stop-color="#94ff00" offset="1"/>
   </linearGradient>
-  <linearGradient id="svg_14" x1="0.53906" y1="0.98438" x2="0.77344" y2="0.00781">
-   <stop offset="0" stop-color="#dbdbdb"/>
-   <stop offset="1" stop-color="#ffffff"/>
+  <linearGradient y2="0.00781" x2="0.77344" y1="0.98438" x1="0.53906" id="svg_14">
+   <stop stop-color="#dbdbdb" offset="0"/>
+   <stop stop-color="#ffffff" offset="1"/>
   </linearGradient>
-  <linearGradient id="svg_24" x1="0.53906" y1="0.98438" x2="0.26172" y2="0.01563">
-   <stop offset="0" stop-color="#a05000"/>
-   <stop offset="1" stop-color="#e29b00"/>
+  <linearGradient y2="0.01563" x2="0.26172" y1="0.98438" x1="0.53906" id="svg_24">
+   <stop stop-color="#a05000" offset="0"/>
+   <stop stop-color="#e29b00" offset="1"/>
   </linearGradient>
-  <linearGradient id="svg_25" x1="0.53906" y1="0.98438" x2="0.26172" y2="0.01563">
-   <stop offset="0" stop-color="#8e8e8e"/>
-   <stop offset="1" stop-color="#666666"/>
+  <linearGradient y2="0.01563" x2="0.26172" y1="0.98438" x1="0.53906" id="svg_25">
+   <stop stop-color="#8e8e8e" offset="0"/>
+   <stop stop-color="#666666" offset="1"/>
   </linearGradient>
-  <linearGradient id="svg_26" x1="0.53906" y1="0.98438" x2="0.26172" y2="0.01563">
-   <stop offset="0" stop-color="#aa3a0d"/>
-   <stop offset="1" stop-color="#d13b2e"/>
+  <linearGradient y2="0.01563" x2="0.26172" y1="0.98438" x1="0.53906" id="svg_26">
+   <stop stop-color="#aa3a0d" offset="0"/>
+   <stop stop-color="#d13b2e" offset="1"/>
   </linearGradient>
-  <linearGradient id="svg_27" x1="0.53906" y1="0.98438" x2="0.26172" y2="0.01563">
-   <stop offset="0" stop-color="#aa3a0d"/>
-   <stop offset="1" stop-color="#d13b2e"/>
+  <linearGradient y2="0.01563" x2="0.26172" y1="0.98438" x1="0.53906" id="svg_27">
+   <stop stop-color="#aa3a0d" offset="0"/>
+   <stop stop-color="#d13b2e" offset="1"/>
   </linearGradient>
-  <linearGradient id="svg_31" x1="0.53906" y1="0.98438" x2="0.26172" y2="0.01563">
-   <stop offset="0" stop-color="#8c5d24"/>
-   <stop offset="1" stop-color="#ce812f"/>
+  <linearGradient y2="0.01563" x2="0.26172" y1="0.98438" x1="0.53906" id="svg_31">
+   <stop stop-color="#8c5d24" offset="0"/>
+   <stop stop-color="#ce812f" offset="1"/>
   </linearGradient>
-  <linearGradient id="svg_32" x1="0.53906" y1="0.98438" x2="0.26172" y2="0.01563">
-   <stop offset="0" stop-color="#8c5d24"/>
-   <stop offset="1" stop-color="#ce812f"/>
+  <linearGradient y2="0.01563" x2="0.26172" y1="0.98438" x1="0.53906" id="svg_32">
+   <stop stop-color="#8c5d24" offset="0"/>
+   <stop stop-color="#ce812f" offset="1"/>
   </linearGradient>
-  <linearGradient id="svg_34" x1="0.53906" y1="0.98438" x2="0.26172" y2="0.01563">
-   <stop offset="0" stop-color="#8c5d24"/>
-   <stop offset="1" stop-color="#ce812f"/>
+  <linearGradient y2="0.01563" x2="0.26172" y1="0.98438" x1="0.53906" id="svg_34">
+   <stop stop-color="#8c5d24" offset="0"/>
+   <stop stop-color="#ce812f" offset="1"/>
   </linearGradient>
-  <linearGradient id="svg_35" x1="0.53906" y1="0.98438" x2="0.26172" y2="0.01563">
-   <stop offset="0" stop-color="#8c5d24"/>
-   <stop offset="1" stop-color="#ce812f"/>
+  <linearGradient y2="0.01563" x2="0.26172" y1="0.98438" x1="0.53906" id="svg_35">
+   <stop stop-color="#8c5d24" offset="0"/>
+   <stop stop-color="#ce812f" offset="1"/>
   </linearGradient>
-  <linearGradient y2="1" x2="1" y1="0" x1="0" id="svg_37">
-   <stop stop-color="#54220b" offset="0"/>
-   <stop stop-color="#4c2313" offset="1"/>
+  <linearGradient id="svg_37" x1="0" y1="0" x2="1" y2="1">
+   <stop offset="0" stop-color="#54220b"/>
+   <stop offset="1" stop-color="#4c2313"/>
   </linearGradient>
-  <linearGradient y2="1" x2="1" y1="0" x1="0" id="svg_38">
-   <stop stop-color="#54220b" offset="0"/>
-   <stop stop-color="#4c2313" offset="1"/>
+  <linearGradient id="svg_38" x1="0" y1="0" x2="1" y2="1">
+   <stop offset="0" stop-color="#54220b"/>
+   <stop offset="1" stop-color="#4c2313"/>
   </linearGradient>
-  <radialGradient r="0.5" cy="0.5" cx="0.5" id="svg_40">
-   <stop stop-color="#ff0000" offset="0"/>
-   <stop stop-color="#ffff00" offset="1"/>
-  </radialGradient>
-  <linearGradient id="svg_58" x1="0.53906" y1="0.98438" x2="0.26172" y2="0.01172">
-   <stop offset="0" stop-color="#2066bc"/>
-   <stop offset="1" stop-color="#23abea"/>
-  </linearGradient>
-  <radialGradient r="0.5" cy="0.5" cx="0.5" id="svg_66">
-   <stop stop-color="#0050ff" offset="0"/>
-   <stop stop-color="#0090ff" offset="1"/>
-  </radialGradient>
-  <radialGradient r="0.5" cy="0.5" cx="0.5" id="svg_68">
-   <stop stop-color="#0050ff" offset="0"/>
-   <stop stop-color="#007fff" offset="1"/>
-  </radialGradient>
-  <radialGradient r="0.5" cy="0.5" cx="0.5" id="svg_69">
-   <stop stop-color="#0050ff" offset="0"/>
-   <stop stop-color="#007fff" offset="1"/>
-  </radialGradient>
-  <radialGradient r="0.5" cy="0.5" cx="0.5" id="svg_70">
-   <stop stop-color="#009dff" offset="0"/>
-   <stop stop-color="#007fff" offset="1"/>
-  </radialGradient>
-  <linearGradient id="svg_76" x1="0" y1="0" x2="1" y2="1">
+  <radialGradient id="svg_40" cx="0.5" cy="0.5" r="0.5">
    <stop offset="0" stop-color="#ff0000"/>
    <stop offset="1" stop-color="#ffff00"/>
+  </radialGradient>
+  <linearGradient y2="0.01172" x2="0.26172" y1="0.98438" x1="0.53906" id="svg_58">
+   <stop stop-color="#2066bc" offset="0"/>
+   <stop stop-color="#23abea" offset="1"/>
   </linearGradient>
-  <linearGradient id="svg_77" x1="0.53906" y1="0.98438" x2="0.9375" y2="0">
-   <stop offset="0" stop-color="#fcc335"/>
-   <stop offset="1" stop-color="#e8b022"/>
+  <radialGradient id="svg_66" cx="0.5" cy="0.5" r="0.5">
+   <stop offset="0" stop-color="#0050ff"/>
+   <stop offset="1" stop-color="#0090ff"/>
+  </radialGradient>
+  <radialGradient id="svg_68" cx="0.5" cy="0.5" r="0.5">
+   <stop offset="0" stop-color="#0050ff"/>
+   <stop offset="1" stop-color="#007fff"/>
+  </radialGradient>
+  <radialGradient id="svg_69" cx="0.5" cy="0.5" r="0.5">
+   <stop offset="0" stop-color="#0050ff"/>
+   <stop offset="1" stop-color="#007fff"/>
+  </radialGradient>
+  <radialGradient id="svg_70" cx="0.5" cy="0.5" r="0.5">
+   <stop offset="0" stop-color="#009dff"/>
+   <stop offset="1" stop-color="#007fff"/>
+  </radialGradient>
+  <linearGradient y2="1" x2="1" y1="0" x1="0" id="svg_76">
+   <stop stop-color="#ff0000" offset="0"/>
+   <stop stop-color="#ffff00" offset="1"/>
   </linearGradient>
-  <linearGradient id="svg_78" x1="0.30859" y1="0.98829" x2="0.9375" y2="0">
-   <stop offset="0" stop-color="#fcc335"/>
-   <stop offset="1" stop-color="#e59022"/>
+  <linearGradient y2="0" x2="0.9375" y1="0.98438" x1="0.53906" id="svg_77">
+   <stop stop-color="#fcc335" offset="0"/>
+   <stop stop-color="#e8b022" offset="1"/>
   </linearGradient>
-  <linearGradient id="svg_79" x1="0" y1="0" x2="1" y2="1">
-   <stop offset="0" stop-color="#ff8c00"/>
-   <stop offset="1" stop-color="#ffff00"/>
+  <linearGradient y2="0" x2="0.9375" y1="0.98829" x1="0.30859" id="svg_78">
+   <stop stop-color="#fcc335" offset="0"/>
+   <stop stop-color="#e59022" offset="1"/>
   </linearGradient>
-  <linearGradient id="svg_80" x1="0" y1="0" x2="1" y2="1">
-   <stop offset="0" stop-color="#ff6e00"/>
-   <stop offset="1" stop-color="#ffff00"/>
+  <linearGradient y2="1" x2="1" y1="0" x1="0" id="svg_79">
+   <stop stop-color="#ff8c00" offset="0"/>
+   <stop stop-color="#ffff00" offset="1"/>
   </linearGradient>
-  <linearGradient id="svg_81" x1="0" y1="0" x2="1" y2="1">
-   <stop offset="0" stop-color="#ff6e00"/>
-   <stop offset="1" stop-color="#ff5400"/>
+  <linearGradient y2="1" x2="1" y1="0" x1="0" id="svg_80">
+   <stop stop-color="#ff6e00" offset="0"/>
+   <stop stop-color="#ffff00" offset="1"/>
   </linearGradient>
-  <linearGradient id="svg_82" x1="0.30859" y1="0.98829" x2="0.9375" y2="0">
-   <stop offset="0" stop-color="#3695f9"/>
-   <stop offset="1" stop-color="#223ee2"/>
+  <linearGradient y2="1" x2="1" y1="0" x1="0" id="svg_81">
+   <stop stop-color="#ff6e00" offset="0"/>
+   <stop stop-color="#ff5400" offset="1"/>
   </linearGradient>
-  <linearGradient y2="1" x2="1" y1="0" x1="0" id="svg_87">
-   <stop stop-color="#0055ff" offset="0"/>
-   <stop stop-color="#00a1ff" offset="1"/>
+  <linearGradient y2="0" x2="0.9375" y1="0.98829" x1="0.30859" id="svg_82">
+   <stop stop-color="#3695f9" offset="0"/>
+   <stop stop-color="#223ee2" offset="1"/>
   </linearGradient>
-  <linearGradient y2="1" x2="1" y1="0" x1="0" id="svg_88">
-   <stop stop-color="#0037ff" offset="0"/>
-   <stop stop-color="#00bbff" offset="1"/>
+  <linearGradient id="svg_87" x1="0" y1="0" x2="1" y2="1">
+   <stop offset="0" stop-color="#0055ff"/>
+   <stop offset="1" stop-color="#00a1ff"/>
   </linearGradient>
-  <linearGradient y2="1" x2="1" y1="0" x1="0" id="svg_89">
-   <stop stop-color="#007fff" offset="0"/>
-   <stop stop-color="#00bbff" offset="1"/>
+  <linearGradient id="svg_88" x1="0" y1="0" x2="1" y2="1">
+   <stop offset="0" stop-color="#0037ff"/>
+   <stop offset="1" stop-color="#00bbff"/>
   </linearGradient>
-  <linearGradient y2="1" x2="1" y1="0" x1="0" id="svg_90">
-   <stop stop-color="#0061ff" offset="0"/>
-   <stop stop-color="#00a9ff" offset="1"/>
+  <linearGradient id="svg_89" x1="0" y1="0" x2="1" y2="1">
+   <stop offset="0" stop-color="#007fff"/>
+   <stop offset="1" stop-color="#00bbff"/>
+  </linearGradient>
+  <linearGradient id="svg_90" x1="0" y1="0" x2="1" y2="1">
+   <stop offset="0" stop-color="#0061ff"/>
+   <stop offset="1" stop-color="#00a9ff"/>
   </linearGradient>
  </defs>
  <g>
   <title>Layer 1</title>
-  <path fill="url(#svg_82)" stroke="#000000" stroke-width="5" stroke-linejoin="null" stroke-linecap="null" d="m6.4021,240.00003c0,-129.05963 104.5383,-233.59793 233.5979,-233.59793c129.05963,0 233.5979,104.53827 233.5979,233.59793c0,129.0596 -104.53827,233.59787 -233.5979,233.59787c-129.0596,0 -233.5979,-104.53827 -233.5979,-233.59787z" id="svg_4"/>
-  <rect fill="#FF0000" stroke="#000000" stroke-width="5" x="564" y="233" width="1" height="0" id="svg_2"/>
-  <rect fill="#FF0000" stroke="#000000" stroke-width="5" x="105" y="78" width="0" height="1" id="svg_3"/>
-  <ellipse rx="30" id="svg_60" cy="110" cx="230" opacity="0.7" stroke-linecap="null" stroke-linejoin="null" stroke-width="5" stroke="#000000" fill="url(#svg_58)"/>
-  <ellipse id="svg_61" cy="130" cx="240" opacity="0.7" stroke-linecap="null" stroke-linejoin="null" stroke-width="5" stroke="#000000" fill="url(#svg_58)"/>
-  <path transform="rotate(10 365.00000000000057,230.0000000000002) " id="svg_91" d="m270,235.71428l30,22.85716l30,11.42856l40,0l30,-11.42856l50,-11.42859l10,-22.85715l0,-22.85713l0,-11.42857l-40,0l-50,0l-40,0l-40,0l-20,22.85715l0,22.85713z" stroke-linecap="null" stroke-linejoin="null" stroke-width="5" stroke="#000000" fill="url(#svg_82)"/>
+  <path id="svg_4" d="m6.4021,240.00003c0,-129.05963 104.5383,-233.59793 233.5979,-233.59793c129.05963,0 233.5979,104.53827 233.5979,233.59793c0,129.0596 -104.53827,233.59787 -233.5979,233.59787c-129.0596,0 -233.5979,-104.53827 -233.5979,-233.59787z" stroke-linecap="null" stroke-linejoin="null" stroke-width="5" stroke="#000000" fill="url(#svg_82)"/>
+  <rect id="svg_2" height="0" width="1" y="233" x="564" stroke-width="5" stroke="#000000" fill="#FF0000"/>
+  <rect id="svg_3" height="1" width="0" y="78" x="105" stroke-width="5" stroke="#000000" fill="#FF0000"/>
+  <ellipse fill="url(#svg_58)" stroke="#000000" stroke-width="5" stroke-linejoin="null" stroke-linecap="null" opacity="0.7" cx="230" cy="110" id="svg_60" rx="30"/>
+  <ellipse fill="url(#svg_58)" stroke="#000000" stroke-width="5" stroke-linejoin="null" stroke-linecap="null" opacity="0.7" cx="240" cy="130" id="svg_61"/>
  </g>
 </svg>
