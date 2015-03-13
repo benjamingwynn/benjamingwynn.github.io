@@ -1,47 +1,54 @@
-<svg width="480" height="480" xmlns="http://www.w3.org/2000/svg">
+<svg width="480" height="480" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
  <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
  <defs>
-  <linearGradient y2="1" x2="1" y1="0" x1="0" id="svg_5">
-   <stop stop-color="#00ffb2" offset="0"/>
-   <stop stop-color="#00ff04" offset="1"/>
+  <linearGradient id="svg_5" x1="0" y1="0" x2="1" y2="1">
+   <stop offset="0" stop-color="#00ffb2"/>
+   <stop offset="1" stop-color="#00ff04"/>
   </linearGradient>
-  <linearGradient y2="1" x2="1" y1="0" x1="0.51172" id="svg_6">
-   <stop stop-color="#00ffb2" offset="0"/>
-   <stop stop-color="#00ff04" offset="1"/>
+  <linearGradient id="svg_6" x1="0.51172" y1="0" x2="1" y2="1">
+   <stop offset="0" stop-color="#00ffb2"/>
+   <stop offset="1" stop-color="#00ff04"/>
   </linearGradient>
-  <linearGradient y2="0.00781" x2="0.77344" y1="0.98438" x1="0.53906" id="svg_7">
-   <stop stop-color="#00ffb2" offset="0"/>
-   <stop stop-color="#00ff04" offset="1"/>
+  <linearGradient id="svg_7" x1="0.53906" y1="0.98438" x2="0.77344" y2="0.00781">
+   <stop offset="0" stop-color="#00ffb2"/>
+   <stop offset="1" stop-color="#00ff04"/>
   </linearGradient>
-  <linearGradient y2="0.00781" x2="0.77344" y1="0.98438" x1="0.53906" id="svg_8">
-   <stop stop-color="#00e9ff" offset="0"/>
-   <stop stop-color="#00bbff" offset="1"/>
+  <linearGradient id="svg_8" x1="0.53906" y1="0.98438" x2="0.77344" y2="0.00781">
+   <stop offset="0" stop-color="#00e9ff"/>
+   <stop offset="1" stop-color="#00bbff"/>
   </linearGradient>
-  <linearGradient y2="0.00781" x2="0.77344" y1="0.98438" x1="0.53906" id="svg_9">
-   <stop stop-color="#04ff00" offset="0"/>
-   <stop stop-color="#94ff00" offset="1"/>
+  <linearGradient id="svg_9" x1="0.53906" y1="0.98438" x2="0.77344" y2="0.00781">
+   <stop offset="0" stop-color="#04ff00"/>
+   <stop offset="1" stop-color="#94ff00"/>
   </linearGradient>
-  <linearGradient y2="0.95703" x2="0.64063" y1="0.06641" x1="0.41406" id="svg_11">
-   <stop stop-color="#04ff00" offset="0"/>
-   <stop stop-color="#94ff00" offset="1"/>
+  <linearGradient id="svg_11" x1="0.41406" y1="0.06641" x2="0.64063" y2="0.95703">
+   <stop offset="0" stop-color="#04ff00"/>
+   <stop offset="1" stop-color="#94ff00"/>
   </linearGradient>
-  <radialGradient id="svg_12" cx="0.5" cy="0.5" r="0.5">
-   <stop offset="0" stop-color="#ff0000"/>
-   <stop offset="1" stop-color="#ff9000"/>
+  <radialGradient r="0.5" cy="0.5" cx="0.5" id="svg_12">
+   <stop stop-color="#ff0000" offset="0"/>
+   <stop stop-color="#ff9000" offset="1"/>
   </radialGradient>
-  <radialGradient id="svg_13" cx="0.5" cy="0.5" r="0.5">
-   <stop offset="0" stop-color="#ffc700"/>
-   <stop offset="1" stop-color="#ff9000"/>
+  <radialGradient r="0.5" cy="0.5" cx="0.5" id="svg_13">
+   <stop stop-color="#ffc700" offset="0"/>
+   <stop stop-color="#ff9000" offset="1"/>
   </radialGradient>
-  <radialGradient id="svg_14" cx="0.5" cy="0.5" r="0.5">
-   <stop offset="0" stop-color="#ffff00"/>
-   <stop offset="1" stop-color="#ff9000"/>
+  <radialGradient r="0.5" cy="0.5" cx="0.5" id="svg_14">
+   <stop stop-color="#ffff00" offset="0"/>
+   <stop stop-color="#ff9000" offset="1"/>
+  </radialGradient>
+  <filter height="200%" width="200%" y="-50%" x="-50%" id="svg_4_blur">
+   <feGaussianBlur stdDeviation="9.9" in="SourceGraphic"/>
+  </filter>
+  <radialGradient r="0.5" cy="0.5" cx="0.5" id="svg_1">
+   <stop stop-color="#ffff00" offset="0"/>
+   <stop stop-opacity="0.99219" stop-color="#ff5400" offset="1"/>
   </radialGradient>
  </defs>
  <g>
   <title>Layer 1</title>
-  <path id="svg_4" d="m6.4021,240.00002c0,-129.05962 104.5383,-233.59792 233.5979,-233.59792c129.05963,0 233.5979,104.53828 233.5979,233.59792c0,129.05962 -104.53827,233.59789 -233.5979,233.59789c-129.0596,0 -233.5979,-104.53827 -233.5979,-233.59789z" stroke-linecap="null" stroke-linejoin="null" stroke-width="5" stroke="#000000" fill="url(#svg_14)"/>
-  <rect id="svg_2" height="0" width="1" y="233" x="564" stroke-width="5" stroke="#000000" fill="#FF0000"/>
-  <rect id="svg_3" height="1" width="0" y="78" x="105" stroke-width="5" stroke="#000000" fill="#FF0000"/>
+  <path stroke="#e88b00" filter="url(#svg_4_blur)" stroke-dasharray="2,2" fill="url(#svg_1)" stroke-width="0" stroke-linejoin="null" stroke-linecap="null" d="m22.90204,239.99994c0,-119.94395 97.15395,-217.0979 217.0979,-217.0979c119.94397,0 217.09802,97.15395 217.09802,217.0979c0,119.94394 -97.15405,217.09802 -217.09802,217.09802c-119.94395,0 -217.0979,-97.15408 -217.0979,-217.09802z" id="svg_4"/>
+  <rect fill="#FF0000" stroke="#000000" stroke-width="5" x="564" y="233" width="1" height="0" id="svg_2"/>
+  <rect fill="#FF0000" stroke="#000000" stroke-width="5" x="105" y="78" width="0" height="1" id="svg_3"/>
  </g>
 </svg>

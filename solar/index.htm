@@ -4,7 +4,9 @@
 	<script type="text/javascript" src="game.js"></script>
 	<script type="text/javascript" src="jquery.js"></script>
 	<script type="text/javascript" src="particlebox.js"></script>
-	<title>The Solar System</title>
+	<script type="text/javascript" src="jquery.mousewheel.min.js"></script>
+	
+	<title>The Solar System v2</title>
 	<style>
 		* {
 			margin: 0;
@@ -25,22 +27,76 @@
 			background: #111;
 		}
 		
-		canvas {
+		#backgroundCanvas {
 			top: 0;
 			position: fixed;
 			z-index: -1;
 		}
 		
+		#gameCanvas {
+			top: 0;
+			position: fixed;
+			z-index: 1;
+		}
+		
 		#images * {
 			display: none;
+		}
+		
+		footer {
+			z-index: 2;
+			position: fixed;
+			bottom: 0;
+			background-color: rgba(0, 0, 0, 0.5);
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+			margin: 20px;
+			padding: 15px;
+		}
+		
+		footer * {
+			font-family: 'Roboto Condensed', sans-serif;
+			color: white;
+		}
+		
+		#paused {
+			z-index: 3;
+			position: fixed;
+			bottom: 0;
+			right: 0;
+			background-color: rgba(0, 0, 0, 0.5);
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+			margin: 20px;
+			padding: 15px;
+			display: none;
+		}
+
+		#paused * {
+			font-family: 'Roboto Condensed', sans-serif;
+			color: white;
+			text-align: center;
 		}
 	</style>
 </head>
 <body>
+	<footer>
+		<h1>The Solar System</h1>
+		<p>A model of our Solar System written in HTML5 Canvas.</p>
+		<p>Click & drag to pan, scroll to zoom. Press SPACE to pause planet orbits, press ENTER to reset.</p>
+		<br>
+		<p>Created by Benjamin Gwynn</p>
+	</footer>
+	
+	<div id="paused">
+		<h1>Paused</h1>
+		<p>Press SPACE to resume</p>
+	</div>
+	
 	<canvas id="backgroundCanvas"></canvas>
 	<canvas id="gameCanvas"></canvas>
+	
 	<div id="images">
 		<img id="sun" src="vectors/sun.svg">
+		
 		<img id="mercury" src="vectors/mercury.svg">
 		<img id="venus" src="vectors/venus.svg">
 		<img id="earth" src="vectors/earth.svg">
@@ -52,6 +108,8 @@
 		
 		<img id="moon" src="vectors/earthsmoon.svg">
 		<img id="moon2" src="vectors/genericmoon.svg">
+		
+		<img id="overlay" src="vectors/overlay.svg">
 	</div>
 </body>
 <script>
@@ -73,13 +131,13 @@
 	var refresh_rate = 60;
 	
 	// Set up particle box
-	particlebox.control('draw_amount', 10);
+	particlebox.control('draw_amount', 200);
 	particlebox.control('max_x_velocity', 0.05);
 	particlebox.control('max_y_velocity', 0.05);
 	particlebox.control('min_x_velocity', -1);
 	particlebox.control('min_y_velocity', -1);
-	particlebox.control('z_depth', 20);
-	particlebox.control('size_multiplier', 0.1);
+	particlebox.control('z_depth', 2);
+	particlebox.control('size_multiplier', 0.21);
 	particlebox.control('colour_base_r', 200);
 	particlebox.control('colour_base_g', 200);
 	particlebox.control('colour_base_b', 200);
@@ -109,15 +167,141 @@
 	}
 	
 	function clearCanvas() {
-		context.clearRect(0, 0, canvas.width, canvas.height);
+		var p1 = context.transformedPoint(0,0);
+		var p2 = context.transformedPoint(canvas.width,canvas.height);
+		context.clearRect(p1.x,p1.y,p2.x-p1.x,p2.y-p1.y);
 	}
 	
 	window.addEventListener("resize", function(){
-		// Recalculate the size of the canvas:
-		canvas.width  = window.innerWidth;
-		canvas.height = window.innerHeight;
+		location.reload();
 	});
+
+	var paused = false;
 	
-	setInterval(drawFrame, 1000 / refresh_rate);
-	setInterval(updateGame, 1);
+	window.onkeydown = function(event) {
+		// Space
+		if (event.keyCode == 32) {
+			paused = !paused;
+			if (!paused) {
+				$('#paused').fadeOut('fast');
+			} else {
+				$('#paused').fadeIn('fast');
+			}
+		}
+		
+		// Enter
+		if (event.keyCode == 13) {
+			location.reload();
+		}
+	}
+	
+	// http://phrogz.net/tmp/canvas_zoom_to_cursor.html
+	window.onload = function() {
+		trackTransforms(context);
+		drawFrame();
+		
+		var lastX=canvas.width/2, lastY=canvas.height/2;
+		var dragStart,dragged;
+		canvas.addEventListener('mousedown',function(evt){
+			document.body.style.mozUserSelect = document.body.style.webkitUserSelect = document.body.style.userSelect = 'none';
+			lastX = evt.offsetX || (evt.pageX - canvas.offsetLeft);
+			lastY = evt.offsetY || (evt.pageY - canvas.offsetTop);
+			dragStart = context.transformedPoint(lastX,lastY);
+			dragged = false;
+		},false);
+		canvas.addEventListener('mousemove',function(evt){
+			lastX = evt.offsetX || (evt.pageX - canvas.offsetLeft);
+			lastY = evt.offsetY || (evt.pageY - canvas.offsetTop);
+			dragged = true;
+			if (dragStart){
+				var pt = context.transformedPoint(lastX,lastY);
+				context.translate(pt.x-dragStart.x,pt.y-dragStart.y);
+				drawFrame();
+			}
+		},false);
+		canvas.addEventListener('mouseup',function(evt){
+			dragStart = null;
+			if (!dragged) zoom(evt.shiftKey ? -1 : 1 );
+		},false);
+	
+		var scaleFactor = 1.1;
+		var zoom = function(clicks){
+			var pt = context.transformedPoint(lastX,lastY);
+			context.translate(pt.x,pt.y);
+			var factor = Math.pow(scaleFactor,clicks);
+			context.scale(factor,factor);
+			context.translate(-pt.x,-pt.y);
+			drawFrame();
+		}
+	
+		var handleScroll = function(evt){
+			var delta = evt.wheelDelta ? evt.wheelDelta/40 : evt.detail ? -evt.detail : 0;
+			if (delta) zoom(delta);
+			return evt.preventDefault() && false;
+		};
+		
+		canvas.addEventListener('DOMMouseScroll',handleScroll,false);
+		canvas.addEventListener('mousewheel',handleScroll,false);
+		
+		setInterval(drawFrame, 1000 / refresh_rate);
+		setInterval(updateGame, 1);
+	};
+	
+	// Adds context.getTransform() - returns an SVGMatrix
+	// Adds context.transformedPoint(x,y) - returns an SVGPoint
+	function trackTransforms(context){
+		var svg = document.createElementNS("http://www.w3.org/2000/svg",'svg');
+		var xform = svg.createSVGMatrix();
+		context.getTransform = function(){ return xform; };
+		
+		var savedTransforms = [];
+		var save = context.save;
+		context.save = function(){
+			savedTransforms.push(xform.translate(0,0));
+			return save.call(context);
+		};
+		var restore = context.restore;
+		context.restore = function(){
+			xform = savedTransforms.pop();
+			return restore.call(context);
+		};
+	
+		var scale = context.scale;
+		context.scale = function(sx,sy){
+			xform = xform.scaleNonUniform(sx,sy);
+			return scale.call(context,sx,sy);
+		};
+		var rotate = context.rotate;
+		context.rotate = function(radians){
+			xform = xform.rotate(radians*180/Math.PI);
+			return rotate.call(context,radians);
+		};
+		var translate = context.translate;
+		context.translate = function(dx,dy){
+			xform = xform.translate(dx,dy);
+			return translate.call(context,dx,dy);
+		};
+		var transform = context.transform;
+		context.transform = function(a,b,c,d,e,f){
+			var m2 = svg.createSVGMatrix();
+			m2.a=a; m2.b=b; m2.c=c; m2.d=d; m2.e=e; m2.f=f;
+			xform = xform.multiply(m2);
+			return transform.call(context,a,b,c,d,e,f);
+		};
+		var setTransform = context.setTransform;
+		context.setTransform = function(a,b,c,d,e,f){
+			xform.a = a;
+			xform.b = b;
+			xform.c = c;
+			xform.d = d;
+			xform.e = e;
+			xform.f = f;
+			return setTransform.call(context,a,b,c,d,e,f);
+		};
+		var pt  = svg.createSVGPoint();
+		context.transformedPoint = function(x,y){
+			pt.x=x; pt.y=y;
+			return pt.matrixTransform(xform.inverse());
+		}
+	}
 </script>
