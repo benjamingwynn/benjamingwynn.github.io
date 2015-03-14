@@ -1,156 +1,80 @@
-body {
-	background-image: url('http://iliketowastemytime.com/system/files/distant-nebula-wallpaper-hd.jpg?download=1');
-	background-position: center;
-	background-attachment: fixed;
+html,body {
+	height:100%;
 }
 
-#wrapper * {
+* {
 	display: none;
+	font-family: 'Roboto Condensed';
+	padding: 0;
+	margin: 0;
+	color: white;
 }
 
-.background {
-	position: fixed;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	width: 100%;
-	height: 100%;
-}
-
-#background1 {
-	z-index: -2;
-	background-image: url('http://iliketowastemytime.com/system/files/distant-nebula-wallpaper-hd.jpg?download=1');
+body {
+	background: #111;
 	background-position: center;
 	background-attachment: fixed;
-
-}
-
-#typewriter {
-	color: white;
-	text-align: left;
-	background: black;
-	border-color: #111;
-	border-style: solid;
-	font-family: 'Ubuntu Mono', sans-serif !important;
-	font-weight: 100 !important;
-	position: fixed;
-	width: 500px;
-	z-index: 99;
+	overflow-x: hidden;
 }
 
 h1 {
-	color: #111;
-	text-align: center;
-	font-family: 'Droid Sans Mono';
-	font-size: 40px;
-	font-weight: 300;
-}
-
-h2 {
-	color: #222;
-	text-align: center;
-	font-family: 'Ubuntu Mono';
-	font-weight: 100;
-}
-
-p {
-	margin: 10px;
-	color: #333;
-	text-align: center;
-	font-family: 'Ubuntu Mono', sans-serif;
-	font-weight: 100;
+	text-transform: uppercase;
+	font-size: 140px;
 }
 
 header {
 	top: 0;
 	position: relative;
-	display: table;
 	width: 100%;
-	/* background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.0)); */
-	padding-top: 100px;
-	padding-bottom: 100px;
-}
+	padding: 200px 10px 200px 0;
+	text-transform: uppercase;
 
-header * {
-	color: white;
-	text-align: center;
-	z-index: 10;
-	position: relative;
-	line-height: 1;
-	padding: 0;
-	margin: 0;
-}
-
-header h1 {
-	font-size: 140px;
-	font-family: 'Source Code Pro';
-}
-
-.content * {
-	text-align: left;
-}
-
-.content {
-	max-width: 750px;
-	margin-top: 25px;
-	margin-bottom: 25px;
-	background-color: rgba(240, 240, 240, 0.8);
-	border-color: #464646;
-	border-style: dashed;
-}
-
-.content h1, h2, p {
-	padding-left: 12px;
-	padding-right: 12px;
-}
-
-.content h1 {
-	font-size: 30px !important;
-	font-family: 'Droid Sans Mono' !important;
-}
-
-	.content h1::before {
-		content: '> ';
-	}
-
-	.content a::before {
-		content: '> ';
-	}
-
-.archived {
-	border-color: #464646 darkred #464646 #464646 !important;
+	background-image: url('solar/vectors/earthsmoon.svg');
+	background-position: right;
+	background-repeat: no-repeat;
+	background-size: 500px;
 }
 
 .stuff {
-	max-width: 800px;
-	margin-top: 40px;
-	margin-bottom: 40px;
-	padding-left: 40px;
-	padding-right: 40px;
-	background-color: rgba(230, 230, 230, 0.6);
-	border-color: #464646;
-	border-style: solid;
+	width: 100%;
+	height: 100%;
+	
+	display: -webkit-box;           /* OLD - iOS 6-, Safari 3.1-6 */
+	display: -moz-box;              /* OLD - Firefox 19- (doesn't work very well) */
+	display: -ms-flexbox;           /* TWEENER - IE 10 */
+	display: -webkit-flex;          /* NEW - Chrome */
+	display: flex;                  /* NEW, Spec - Opera 12.1, Firefox 20+ */
+	
+	background-position: left;
+	background-repeat: no-repeat;
+	border-left: 1px red dashed;
 }
+	
+	.stuff #desc {
+		width: 40%;
+		text-align: center;
+		padding: 10px;
+	}
 
-.stuff h1 {
-	font-family: 'Source Code Pro';
-	text-transform: uppercase;
-	font-size: 50px;
-	margin-bottom: 20px !important;
-}
+	.stuff #list { /* main */
+		position: relative;
+		top: 50%; 
+		transform: translateY(-50%);
+		-webkit-transform: translateY(-50%);
 
-button {
-	text-align: center;
-	margin: 20px;
-	padding: 14px;
-	color: silver;
-	border-color: #444;
-	border-style: solid;
-	background: rgba(30, 30, 30, 0.8);
-	text-transform: uppercase;
-	font-family: 'Droid Sans Mono';
-}
+		width: 60%;
+	}
+	
+		.stuff #list #content {
+			background-color: rgba(0, 0, 0, 0.5);
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+			margin: 20px;
+			padding: 15px;
+		}
+		
+		.stuff #list #content h1 {
+			font-size: 48px;
+		}
 
 .indent {
 	height: 100%;
