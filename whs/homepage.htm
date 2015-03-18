@@ -1,159 +1,261 @@
 <!--
-	If you're here, you probably have some idea of how computers work.
-	
-	To clarify, this is a joke. The real Whitchurch High School web domain is at http://whitchurchhs.com.
-	
-	My school did not register the .co.uk domain, so I thought it'd be funny to register the .co.uk domain for
-	those who'd type the wrong URL in.
-	
-	It is very funny.
-	
-	This is not illegal in any way. This is not hacking. I simply got the .co.uk domain before my school did.
-	If you want to shout at me anyway, go ahead, because I will laugh at you.
-	
-	Lots of Love,
-	- Benjamin :)
+	Your website was shit.
+	I made it better.
+						- Benjamin
 -->
 
 <!DOCTYPE html>
-
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Whitchurch High School</title>
-<link href="http://www.whitchurchhs.com/style2.css" rel="stylesheet" type="text/css" media="screen" />
+	<title>Whitchurch High School</title>
+	<script type="text/javascript" src="../common/js/vendor/jquery.js"></script>
+	<style>
+/* Animations */
 
-<script type="http://www.whitchurchhs.com/text/javascript" src="http://www.whitchurchhs.com/Homepage_Images/js/stscode.js"></script>
-
-<!-- <script type="text/javascript" src="Scripts/snowstorm.js"></script> -->
-
-<link rel="shortcut icon" href="http://www.whitchurchhs.com/images/favicon.ico" >
-<script type="text/javascript">
-function MM_preloadImages() { //v3.0
-  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
-    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
-    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
-}
-function MM_swapImgRestore() { //v3.0
-  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
-}
-function MM_findObj(n, d) { //v4.01
-  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
-    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
-  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
-  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
-  if(!x && d.getElementById) x=d.getElementById(n); return x;
+@keyframes sshow {
+0% {  background-image: url('life.png'), url('http://i1.walesonline.co.uk/incoming/article3311284.ece/alternates/s615/gwyn-morris001.jpg'); }
+10% { background-image: url('life.png'), url('Unknown.png'); }
+20% { background-image: url('life.png'), url('http://i1.walesonline.co.uk/incoming/article8408477.ece/alternates/s615/CS62789022JPG.jpg'); }
+30% { background-image: url('life.png'), url('http://livingmags.co.uk/wp-content/uploads/2013/08/School-Uniform.jpeg'); }
+40% { background-image: url('life.png'), url('http://newsimg.bbc.co.uk/media/images/41530000/jpg/_41530226_cantoniandemo_203.jpg'); }
+50% { background-image: url('life.png'), url('http://www.thedrum.com/uploads/news/tmp/103031/snoopdogg.jpg'); }
+60% { background-image: url('life.png'), url('http://i2.kym-cdn.com/photos/images/facebook/000/632/652/6ca.jpg'); }
+70% { background-image: url('life.png'), url('http://i2.kym-cdn.com/photos/images/facebook/000/138/246/tumblr_lltzgnHi5F1qzib3wo1_400.jpg'); }
+80% { background-image: url('life.png'), url('http://www.cardiff14-19.com/picvieworiginal.asp?Image_ID=206&language='); }
+90% { background-image: url('life.png'), url('http://www.cardiffbachoir.org.uk/images/whichchurchhigh.jpg'); }
+100% { background-image: url('life.png'), url('http://i1.walesonline.co.uk/incoming/article3311284.ece/alternates/s615/gwyn-morris001.jpg'); }
 }
 
-function MM_swapImage() { //v3.0
-  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
-   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+@-o-keyframes sshow {
+0% {  background-image: url('life.png'), url('http://i1.walesonline.co.uk/incoming/article3311284.ece/alternates/s615/gwyn-morris001.jpg'); }
+10% { background-image: url('life.png'), url('Unknown.png'); }
+20% { background-image: url('life.png'), url('http://i1.walesonline.co.uk/incoming/article8408477.ece/alternates/s615/CS62789022JPG.jpg'); }
+30% { background-image: url('life.png'), url('http://livingmags.co.uk/wp-content/uploads/2013/08/School-Uniform.jpeg'); }
+40% { background-image: url('life.png'), url('http://newsimg.bbc.co.uk/media/images/41530000/jpg/_41530226_cantoniandemo_203.jpg'); }
+50% { background-image: url('life.png'), url('http://images4.mtv.com/uri/mgid:uma:video:mtv.com:691837?width=476&height=268&crop=true&quality=1'); }
+60% { background-image: url('life.png'), url('http://i2.kym-cdn.com/photos/images/facebook/000/632/652/6ca.jpg'); }
+70% { background-image: url('life.png'), url('http://i2.kym-cdn.com/photos/images/facebook/000/138/246/tumblr_lltzgnHi5F1qzib3wo1_400.jpg'); }
+80% { background-image: url('life.png'), url('http://www.cardiff14-19.com/picvieworiginal.asp?Image_ID=206&language='); }
+90% { background-image: url('life.png'), url('http://www.cardiffbachoir.org.uk/images/whichchurchhigh.jpg'); }
+100% { background-image: url('life.png'), url('http://i1.walesonline.co.uk/incoming/article3311284.ece/alternates/s615/gwyn-morris001.jpg'); }
 }
-</script>
 
-<!-- it begins -->
-<style>
-	* {
-		font-family: 'Comic Sans MS' !important;
-	}
-	
-	body {
-		background: none !important;
-	}
+@-webkit-keyframes sshow {
+0% {  background-image: url('life.png'), url('http://i1.walesonline.co.uk/incoming/article3311284.ece/alternates/s615/gwyn-morris001.jpg'); }
+10% { background-image: url('life.png'), url('Unknown.png'); }
+20% { background-image: url('life.png'), url('http://i1.walesonline.co.uk/incoming/article8408477.ece/alternates/s615/CS62789022JPG.jpg'); }
+30% { background-image: url('life.png'), url('http://livingmags.co.uk/wp-content/uploads/2013/08/School-Uniform.jpeg'); }
+40% { background-image: url('life.png'), url('http://newsimg.bbc.co.uk/media/images/41530000/jpg/_41530226_cantoniandemo_203.jpg'); }
+50% { background-image: url('life.png'), url('http://images4.mtv.com/uri/mgid:uma:video:mtv.com:691837?width=476&height=268&crop=true&quality=1'); }
+60% { background-image: url('life.png'), url('http://i2.kym-cdn.com/photos/images/facebook/000/632/652/6ca.jpg'); }
+70% { background-image: url('life.png'), url('http://i2.kym-cdn.com/photos/images/facebook/000/138/246/tumblr_lltzgnHi5F1qzib3wo1_400.jpg'); }
+80% { background-image: url('life.png'), url('http://www.cardiff14-19.com/picvieworiginal.asp?Image_ID=206&language='); }
+90% { background-image: url('life.png'), url('http://www.cardiffbachoir.org.uk/images/whichchurchhigh.jpg'); }
+100% { background-image: url('life.png'), url('http://i1.walesonline.co.uk/incoming/article3311284.ece/alternates/s615/gwyn-morris001.jpg'); }
+}
 
-	#wrapper {
-		background: none !important;
-	}
-
-	canvas {
-		top: 0;
-		position: fixed;
-		z-index: -1;
-	}
-	
-	#footer-wrapper {
-background: none !important;
-	}
-</style>
-</head>
-
-<body onload="MM_preloadImages('http://www.whitchurchhs.com/School_News/images/FACE_02.jpg','http://www.whitchurchhs.com/School_News/images/Year11Success_02.jpg','http://www.whitchurchhs.com/School_News/images/SchoolsGeologyChallenge_02.jpg','http://www.whitchurchhs.com/School_News/images/GeologistsVentureForth_02.jpg')">
-	<audio autoplay="autoplay" nocontrols><source src="music.mp3"></audio>
+@-moz-keyframes sshow {
+0% {  background-image: url('life.png'), url('http://i1.walesonline.co.uk/incoming/article3311284.ece/alternates/s615/gwyn-morris001.jpg'); }
+10% { background-image: url('life.png'), url('Unknown.png'); }
+20% { background-image: url('life.png'), url('http://i1.walesonline.co.uk/incoming/article8408477.ece/alternates/s615/CS62789022JPG.jpg'); }
+30% { background-image: url('life.png'), url('http://livingmags.co.uk/wp-content/uploads/2013/08/School-Uniform.jpeg'); }
+40% { background-image: url('life.png'), url('http://newsimg.bbc.co.uk/media/images/41530000/jpg/_41530226_cantoniandemo_203.jpg'); }
+50% { background-image: url('life.png'), url('http://images4.mtv.com/uri/mgid:uma:video:mtv.com:691837?width=476&height=268&crop=true&quality=1'); }
+60% { background-image: url('life.png'), url('http://i2.kym-cdn.com/photos/images/facebook/000/632/652/6ca.jpg'); }
+70% { background-image: url('life.png'), url('http://i2.kym-cdn.com/photos/images/facebook/000/138/246/tumblr_lltzgnHi5F1qzib3wo1_400.jpg'); }
+80% { background-image: url('life.png'), url('http://www.cardiff14-19.com/picvieworiginal.asp?Image_ID=206&language='); }
+90% { background-image: url('life.png'), url('http://www.cardiffbachoir.org.uk/images/whichchurchhigh.jpg'); }
+100% { background-image: url('life.png'), url('http://i1.walesonline.co.uk/incoming/article3311284.ece/alternates/s615/gwyn-morris001.jpg'); }
+}
 		
-	<img id="sorry" src="Unknown.png" style="display: none">
-	<canvas width='0px', height='0px', id="rotate"></canvas>
-	
-	<div id="wrapper">
-	<div id="header-wrapper">
-	<center><diV id="header2" style="width: 960px; background-image:url('snooper.gif')"><h1 style="font-size: 100px; color:blue">WHITCHURCH HIGH SKOOL</h1></div></center>
-	</div>
-	<!-- end #header -->
-	<div id="menu">
-    	<script language="javascript" src="http://www.whitchurchhs.com/images/mtop.js"></script>
-	  <script language="javascript">draw_buttons("http://www.whitchurchhs.com/images","",-1);</script>
-    </div>
-	<!-- end #menu -->
-	<div id="page">
-	<div id="page-bgtop">
-	<div id="page-bgbtm">
-	  <div id="sidebar">
-		  	<center>
-			  		<h1>sample text</h1>
-					  <img src="etho.gif">
-						<img src="snoop.gif">
-<img src="wut.gif">
-			</center>
-</div>
-	  <div id="content">
-      <div class="post">
-			  <div class="entry">
-			    <p style="text-align: left"><strong>Croeso / Welcome</strong> We are a forward looking <del>innovative</del> school in which well proven, traditional values are allied to the best of modern teaching methods, including the extensive use of (insecure) ICT. We aim to provide the very best learning environment and opportunities, inside and outside of the classroom, to allow each individual student to thrive and succeed. Unfortunately, we are aiming too high.</p>
-<p>Honestly, we're not that great, sure we won an award or two, but most schools actually educate thier kids rather than spend the entire school budget on internet filters and sport. Seriously.</p>
-<h5 style="text-align: right"><strong>Mr Will Sheppy -  Head Teacher</strong></h5>
-		    </div>
-	    </div>
-        <div class="post">
-		      <h3>Latest News and Events</h3>
-			      <p>Events and stuff man.</p>
-			      <p>* Hacker known as 4chan strikes again.</p>
-				<p>* I'm uncreative and don't know what to type here.</p>
-				<p>* Mr Dawkins is still the illuminati.</p>
-        </div>
-        <br>
-        <h1>NO BULLYING</h1>
-		<img src="rip.gif">
-		<p>if someone kills you, then plz tell the teacher. thx.</p>
-	  </div>
-      </div>
-	  </div>
-		<div style="clear: both;"></div>
-	</div>
-</div>
-<div id="footer-wrapper">
-	<div id="footer"></div>
-</div>
+		
+		/* Styling CSS */
+		
+		* {
+			font-family: 'Comic Sans MS', 'Comic Sans';
+			padding: 0;
+			margin: 0;
+			cursor: url('cursor.cur'), url('cursor.png'), wait;
+		}
+		
+		body {
+			background-color: rgba(99, 155, 206, 1);
+		}
+
+		header, section, footer, aside, nav, article {
+			display: block;
+		}
+		
+		header, section, footer, nav ul {
+			margin: 0 auto;
+			width: 969px;
+		}
+		
+		header {
+			height: 443px;
+			background-image: url('life.png'), none;
+			background-position: bottom right, center center;
+			background-repeat: no-repeat, repeat;
+			background-size: auto, cover;
+			
+			-webkit-animation: sshow 2s linear 0s infinite;
+			-moz-animation: sshow 2s linear 0s infinite;
+			  -o-animation: sshow 2s linear 0s infinite;
+				 animation: sshow 2s linear 0s infinite;
+		}
+		
+			header h1 {
+				color: white;
+				text-align: left;
+				font-size: 32px;
+				padding: 10px;
+				background: rgba(99, 155, 206, 0.5);
+
+				/* Outline */
+				text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
+			}
+
+			header h2 {
+				color: white;
+				text-align: right;
+				font-size: 12px;
+				padding: 10px;
+				float: right;
+			
+				text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
+			}
+			
+		nav {
+			left: 0;
+			width: 100%;
+		}
+		
+			nav ul {
+				list-style: none;
+			}
+				
+				nav ul li {
+					float: left;
+				}
+					
+					nav ul li a {
+						text-decoration: none;
+						display: block;
+						width: 88px;
+						font-size: 10px;
+						line-height: 32px;
+						text-align: center;
+						color: white;
+						border: 1px #000 solid;
+						box-sizing: border-box;
+						
+						background: -webkit-linear-gradient(gray, #1e1d1f); /* For Safari 5.1 to 6.0 */
+						background: -o-linear-gradient(gray, #1e1d1f); /* For Opera 11.1 to 12.0 */
+						background: -moz-linear-gradient(gray, #1e1d1f); /* For Firefox 3.6 to 15 */
+						background: linear-gradient(gray, #1e1d1f); /* Standard syntax */
+					}
+
+						nav ul li a:hover {
+							background: -webkit-linear-gradient(silver, gray); /* For Safari 5.1 to 6.0 */
+							background: -o-linear-gradient(silver, gray); /* For Opera 11.1 to 12.0 */
+							background: -moz-linear-gradient(silver, gray); /* For Firefox 3.6 to 15 */
+							background: linear-gradient(silver, gray); /* Standard syntax */
+						}
+						
+		section {
+			background: rgba(156, 185, 232, 1);
+			
+			display: -webkit-box;           /* OLD - iOS 6-, Safari 3.1-6 */
+			display: -moz-box;              /* OLD - Firefox 19- (doesn't work very well) */
+			display: -ms-flexbox;           /* TWEENER - IE 10 */
+			display: -webkit-flex;          /* NEW - Chrome */
+			display: flex;                  /* NEW, Spec - Opera 12.1, Firefox 20+ */
+		}
+			
+			section aside {
+				width: 100%;
+				margin: 0 10px 0 0;
+				background: #d8edf1;
+				float: left;
+			}
+			
+				section aside h1 {
+					width: 64px;
+					margin: 10px auto;
+					padding: 30px;
+					color: black;
+					border: 1px #000 solid;
+					text-align: center;
+				}
+
+			section article {
+				margin: 0 0 0 10px;
+				background: white;
+			}
+			
+				section article p {
+					padding: 20px;
+				}
+				
+		footer {
+			background: rgba(156, 185, 232, 1);
+			padding: 10px 0 10px 0;
+		}
+		
+			footer h1 {
+				font-size: 20px;
+				text-align: center;
+				color: yellow;
+				
+				/* Outline */
+				text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
+			}
+			
+			
+			footer p {
+				font-family: Menlo, Consolas, Monaco, "Lucida Console", monospace;
+				color: white;
+				text-align: center;
+			}
+	</style>
+</head>
+<body>
+	<audio autoplay loop nocontrols><source src="music.mp3"></audio>
+	<header>
+		<h2>Foundation School 2k11</h2>
+		<h1>Whitchurch High School</h1>
+	</header>
+	<nav>
+		<ul>
+		<li><a href="http://ctrlq.org/maps/where/">Home</a></li>
+		<li><a href="http://xenxier.com/mlgit">Pupils</a></li>
+		<li><a href="http://www.yell.com/s/childrens+homes-cardiff.html">Parents</a></li>
+		<li><a href="http://uk.ratemyteachers.com/whitchurch-high-school/23954-s">Staff</a></li>
+		<li><a href="http://en.wikipedia.org/wiki/Welsh_nationalism">Governors</a></li>
+		<li><a href="http://www.whitchurchhs.com/Departments/Physical_Education/PE.htm">Departments</a></li>
+		<li><a href="http://dogecoin.com">Prospectus</a></li>
+		<li><a href="http://www.emailthepresident.com">Admissions</a></li>
+		<li><a href="http://korea-dpr.com">Partner Primaries</a></li>
+		<li><a href="http://earth.google.com">International</a></li>
+		<li><a href="http://www.ukcrimestats.com/Constituency/66120">Community</a></li>
+		</ul>
+	</nav>
+	<section>
+		<article>
+			<p><strong>Croeso / Welcome</strong> We are a forward looking <del>innovative</del> school in which well proven, traditional values are allied to the best of modern teaching methods, including the extensive use of (insecure) ICT. We aim to provide the very best learning environment and opportunities, inside and outside of the classroom, to allow each individual student to thrive and succeed. Unfortunately, we are aiming too high.</p>
+			<p>Honestly, we're not that great, sure we won an award or two, but most schools actually educate thier kids rather than spend the entire school budget on internet filters and sport. Seriously, are we even a school at this point, or are we just a gym with bad Wifi.</p>
+			<p style="text-align: right"><strong>Mr Will Sheppy -  Head Teacher</strong></p>
+		</article>
+		<aside>
+			<h1 style="background:yellow">Mr. Dawkins is illuminai?</h1>
+			<h1 style="background:red">Learning is inportat</h1>
+			<h1 style="background:green">Caring is sharing!!</h1>
+		</aside>
+	</section>
+	<footer>
+		<h1>Whitchurch High School Official Website.</h1>
+		<p class="glitch">Website design by REDACTED</p>
+		<center><img src="snoop.gif"></center>
+	</footer>
+	<script type="text/javascript" src="http://rawgit.com/benjamingwynn/glitch.js/master/glitch.js"></script>
+	<script>distort_objects_one_at_a_time=false; distort_chance=4; glitch();</script>
 </body>
-
-<script>
-	// create canvas and rotate with swagger
-	var r = 0;
-	var c = document.getElementById("rotate");
-	var ctx = c.getContext("2d");
-	var img = document.getElementById("sorry");
-
-	c.width  = window.innerWidth;
-	c.height = window.innerHeight;
-
-	window.addEventListener("resize", function(){
-		c.width  = window.innerWidth;
-		c.height = window.innerHeight;
-	});
-
-	setInterval(function() {
-		ctx.clearRect ( 0 , 0 , c.width, c.height );
-		ctx.translate(c.width /2, c.height /2);
-		ctx.rotate(Math.PI / 180);
-		ctx.translate(-c.width /2, -c.height/2);
-		ctx.drawImage(img, c.width / 2 - img.width / 2, c.height / 2 - img.height / 2);
-	}, 1000 / 120);
-</script>
-</html>
