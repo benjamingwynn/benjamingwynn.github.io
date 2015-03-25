@@ -4,35 +4,81 @@ html,body {
 
 * {
 	display: none;
-	font-family: 'Roboto Condensed';
+	font-family: 'RedAlert';
 	padding: 0;
 	margin: 0;
 	color: white;
 }
 
 body {
-	background: #111;
-	background-position: center;
-	background-attachment: fixed;
 	overflow-x: hidden;
+	
+	background-color: #375523;
+	
+	animation-name: bg;
+	animation-duration: 60s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: infinite;
+
+	-webkit-animation-name: bg;
+	-webkit-animation-duration: 60s;
+	-webkit-animation-timing-function: ease-in-out;
+	-webkit-animation-iteration-count: infinite;
+		
+	-moz-animation-name: bg;
+	-moz-animation-duration: 60s;
+	-moz-animation-timing-function: ease-in-out;
+	-moz-animation-iteration-count: infinite;
+		
+	-o-animation-name: bg;
+	-o-animation-duration: 60s;
+	-o-animation-timing-function: ease-in-out;
+	-o-animation-iteration-count: infinite;
 }
 
 h1 {
 	text-transform: uppercase;
 	font-size: 140px;
+	font-weight: 100;
+}
+
+h2 {
+	font-weight: 100;
 }
 
 header {
 	top: 0;
 	position: relative;
 	width: 100%;
-	padding: 200px 10px 200px 0;
+	padding: 200px 0 400px 0;
+	
+	text-align: center;
 	text-transform: uppercase;
 
-	background-image: url('solar/vectors/earthsmoon.svg');
-	background-position: right;
+	background-image: url('background/1.png');
 	background-repeat: no-repeat;
-	background-size: 500px;
+	background-size: cover;
+	background-origin: bottom center;
+	
+	animation-name: sshow;
+	animation-duration: 60s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: infinite;
+
+	-webkit-animation-name: sshow;
+	-webkit-animation-duration: 60s;
+	-webkit-animation-timing-function: ease-in-out;
+	-webkit-animation-iteration-count: infinite;
+		
+	-moz-animation-name: sshow;
+	-moz-animation-duration: 60s;
+	-moz-animation-timing-function: ease-in-out;
+	-moz-animation-iteration-count: infinite;
+		
+	-o-animation-name: sshow;
+	-o-animation-duration: 60s;
+	-o-animation-timing-function: ease-in-out;
+	-o-animation-iteration-count: infinite;
 }
 
 .stuff {
@@ -47,15 +93,17 @@ header {
 	
 	background-position: left;
 	background-repeat: no-repeat;
-	border-left: 1px red dashed;
 }
 	
 	.stuff #desc {
-		width: 40%;
-		text-align: center;
+		width: 30%;
+		text-align: right;
 		padding: 10px;
-
 	}
+	
+		.stuff #desc h1 {
+			font-size: 70px;
+		}
 
 	.stuff #list { /* main */
 		position: relative;
@@ -63,7 +111,7 @@ header {
 		transform: translateY(-50%);
 		-webkit-transform: translateY(-50%);
 
-		width: 60%;
+		width: 70%;
 	}
 	
 		.stuff #list #content {
@@ -87,3 +135,11 @@ header {
 	width: 50%;
 	float: left;
 }
+
+footer {
+	padding: 30px;
+}
+
+	footer * {
+		text-align: center;
+	}
