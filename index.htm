@@ -1,141 +1,26 @@
 <!DOCTYPE html>
 <head>
-	<title>Xenxier</title>
+	<!-- jQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	
-	<!-- Vendor CSS -->
+	<!-- Markdot -->
+	<script src="markdot/markdot.js"></script>
+	<script>markdot.markdot("xenxier.txt", "body");</script>
+	
+	<!-- CSS -->
 	<link href='common/css/vendor/animate.css' rel='stylesheet' type='text/css'>
-	
-	<!-- Vendor JS-->
-	<script type="text/javascript" src="common/js/vendor/jquery.js"></script>
-	
-	<!-- Page CSS -->
 	<link href='animation.css' rel='stylesheet' type='text/css'>
 	<link href='index.css' rel='stylesheet' type='text/css'>
-	
-	<!-- Load Fonts -->
 	<link href='common/font/vendor/RedAlert.css' rel='stylesheet' type='text/css'>
+
+	<!-- Non-markdot JS -->
+	<script type="text/javascript" src="common/js/xenxier/animate-all-the-things.js"></script>
+	<script type="text/javascript" src="index.js"></script>
 </head>
 <body>
-	<div id="wrapper">
-		<header class="noanimate">
-			<h1>xenxier</h1>
-			<h2>javascriptless</h2>
-		</header>
-		
-		<div class="stuff">
-			<div id="desc">
-				<h1>HTML5 STUFF</h1>
-			</div>
-			
-			<div id="list">
-				<div id="content">
-					<h1>The Solar System</h1>
-					<p>A complete recreation of our solar system in HTML5. Planet sizes, distances and orbit speeds are all accurate and can be used to show how the different planets rotate around our solar system. The project uses JSON to manage all the data of the planets, and SVG's to display them. The simulation is scalable and interactive.</p>
-					<br>
-					<p><a href="solar">CLICK HERE TO OPEN</a></p>
-				</div>
-				
-				<div id="content">
-					<h1>CLICK IT</h1>
-					<p>This is a glorified click tester, featuring beautiful particles and a pretty colour-cycling background. I also made this my first published Android app. I also have to thank <span class="glitch">grnt</span> for complaining about an online click tester he was using and giving me the idea to create this.</p>
-					<br>
-					<p><a href="clickit/index.htm">CLICK HERE TO OPEN</a></p>
-					<p><a href="https://play.google.com/store/apps/details?id=xenxier.android.game.tapit">GET THE FREE ANDROID APP</a></p>
-				</div>
-				
-				<div id="content">
-					<h1>Pong</h1>
-					<p>A pong game I coded in a very small space of time using the particles from particlebox after <span class="glitch">[REDACTED]</span> asked if I could make a pong game. This game is two player, controlled with UP, DOWN and W, S.</p>
-					<br>
-					<p><a href="pong/index.htm">CLICK HERE TO OPEN</a></p>
-				</div>
-				
-				<div id="content">
-					<h1>thisfeed</h1>
-					<p>Stalk any user on Twitter through beautiful HTML5. thisfeed works using PHP and can work with anybodies Twitter handle as long as their tweets aren't protected. Simply replace the /?user=iamxenxier argument at the end of the URL with some other Twitter handle, for example; http://gwynn.tk/thisfeed/?user=Dinnerbone. As with most of my projects, thisfeed is open source and available on GitHub.</p>
-					<br>
-					<p><del><a href="http://gwynn.tk/thisfeed/index.htm">CLICK HERE TO OPEN</a></del> - Down right now. Sorry about that.</p>
-					<p><a href="https://github.com/benjamingwynn/thisfeed">GET THE SOURCE CODE</a></p>
-				</div>
-				
-				<div id="content">
-					<h1>The Computing Game</h1>
-					<p>A very unfair quiz game made for my computing homework. This version of the game has 6 simple questions relating to networking. However, it takes quick reactions and skill to play.</p>
-					<br>
-					<p><a href="computing/index.htm">CLICK HERE TO OPEN</a></p>
-				</div>
-				
-				<div id="content">
-					<h1>Fortune Snow Globe</h1>
-					<p>A snow globe for Christmas. Displays particles floating from the bottom of the screen to the top of the screen, then being moved to the top of the screen and falling back down to create a snow effect without needing to create/destroy particles.</p>
-					<br>
-					<p>The code from this project was later used to create CLICK IT, PONG and eventually Particlebox.</p> 
-					<br>
-					<p><a href="snow/index.htm">CLICK HERE TO OPEN</a></p>
-					<p><a href="snow/justsnow.htm">CLICK TO OPEN JUST THE SNOW</a></p>
-				</div>
-			</div>
-		</div>
-
-		<div class="stuff">
-			<div id="desc">
-				<h1>Java</h1>
-			</div>
-			
-			<div id="list">
-				<div id="content">
-					<h1>ServerMagic</h1>
-					<p>An open source Java application to download, start, stop, maintain, backup and configure any number of Minecraft servers from a single JSON file. ServerMagic has some amazing features and works with any vanilla/modded server. This is by far one of my favourite projects.</p>
-					<br>
-					<p><a href="https://github.com/benjamingwynn/mc-servermagic/releases">GET THE JAR FILE</a></p>
-					<p><a href="https://github.com/benjamingwynn/mc-servermagic">GET THE SOURCE CODE</a></p>
-				</div>
-					
-					<div id="content">
-					<h1>XenLauncher</h1>
-					<p>A modded Minecraft Launcher I never finished. The code for this is 'meh' at best, I was working on recoding the entire thing but never got around to finishing it.</p>
-					<br>
-					<p><a href="https://github.com/benjamingwynn/xenlauncher">GET THE SOURCE CODE</a></p>
-				</div>
-			</div>
-		</div>
-				
-		<div class="stuff">
-			<div id="desc">
-				<h1>WEB APIs</h1>
-			</div>
-			
-			<div id="list">
-				<div id="content">
-					<h1>glitch.js</h1>
-					<p>An API for creating a <span class="glitch">glitch like effect</span> on objects on a web page. The effect is fully customizable and free to use on any website.</p>
-					<br>
-					<p><a href="http://benjamingwynn.github.io/glitch.js/">CLICK HERE TO VIEW THE SITE</a></p>
-				</div>
-				
-				<div id="content">
-					<h1>animateallthethings.js</h1>
-					<p>Add smooth animation to your website with a simple, single javascript file.</p>
-					<br>
-					<p><a href="https://raw.githubusercontent.com/benjamingwynn/benjamingwynn.github.io/master/common/js/xenxier/animate-all-the-things.js">GET THE SOURCE CODE</a></p>
-				</div>
-			</div>
-		</div>
-		
-		<footer>
-			<p class="noanimate">A website designed and coded by Me, Benjamin Gwynn in HTML5. If you have any questions or buisness proposals, please <a href="mailto:xenxier@xenxier.com">contact me.</a></p>
-			<p>Awesome 8-bit backgrounds created by <a href="http://www.reddit.com/user/BloodyMarvellous">/u/BloodyMarvellous</a> on reddit.</p>
-		</footer>
-	</div>
+	<h2>xenxier.com is currently a work in progress</h2>
+	<noscript>
+		<h1>Javascript is disabled.</h1>
+		<p>Javascript is required to use this webpage. Please enable it in your browser to continue.</p>
+	</noscript>
 </body>
-
-<!-- My Common JS -->
-<script type="text/javascript" src="http://rawgit.com/benjamingwynn/glitch.js/master/glitch.js"></script>
-<script type="text/javascript" src="common/js/xenxier/common.js"></script>
-<script type="text/javascript" src="common/js/xenxier/animate-all-the-things.js"></script>
-
-<!-- Page has loaded, load our JS for the page -->
-<script type="text/javascript" src="index.js"></script>
-
-<!-- Load Scripts -->
-<script type="text/javascript"></script>

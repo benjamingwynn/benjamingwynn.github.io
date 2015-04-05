@@ -1,6 +1,3 @@
-// Load glitch.js
-distort_objects_one_at_a_time=false; distort_chance=8; glitch();
-
 // On scroll:
 $(window).scroll(function() {
 	animationEvent();
@@ -18,14 +15,15 @@ var rand = [
 	"i make things on the internet",
 	"error 404 - tagline not found",
 	"password is a bad password",
-	"i am not benjamin"
+	"hello, i am benjamin",
+	"i make your browser do awesome things",
+	"[redacted]",
+	"I'm using motion controls!"
 ]
 
 // Set random subheading
-$("header h2").text(rand[Math.floor(rng(0, rand.length))]);
-
 window.onload = function() {
+	$("header h2").text(rand[Math.floor(Math.random() * rand.length)]);
 	allow_animation = true
-	$('*').show();
 	animationEvent();
 }

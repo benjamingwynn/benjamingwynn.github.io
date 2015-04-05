@@ -1,9 +1,9 @@
-html,body {
-	height:100%;
+html, body {
+	height: 100%;
+	overflow-x: hidden;
 }
 
 * {
-	display: none;
 	font-family: 'RedAlert';
 	padding: 0;
 	margin: 0;
@@ -11,7 +11,7 @@ html,body {
 }
 
 body {
-	overflow-x: hidden;
+	/* Animation */
 	
 	background-color: #375523;
 	
@@ -42,7 +42,7 @@ body {
 
 h1 {
 	text-transform: uppercase;
-	font-size: 140px;
+	font-size: 6rem;
 	font-weight: 100;
 }
 
@@ -51,18 +51,16 @@ h2 {
 }
 
 header {
-	top: 0;
-	position: relative;
-	width: 100%;
-	padding: 200px 0 400px 0;
+	padding: 20rem;
 	
 	text-align: center;
 	text-transform: uppercase;
-
+	
+	/* Animation */
 	background-image: url('background/1.png');
 	background-repeat: no-repeat;
 	background-size: cover;
-	background-origin: bottom center;
+	background-position: bottom;
 	
 	animation-name: sshow;
 	animation-duration: 60s;

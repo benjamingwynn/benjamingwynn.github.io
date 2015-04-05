@@ -1,0 +1,20 @@
+Mark*dot*
+Making the web *simple* for writers, and *powerful* for designers.
+
+Simple
+The project is based off the concept that anybody should be able to edit a webpage's content with minimum training, and the idea that they shouldn't have to worry about breaking the sites design.
+
+Powerful
+Markdot renders a full HTML5 page, which allows web designers to do anything they normally could with CSS and Javascript.
+
+Smart
+Markdot is smart enough to automatically format a document with the correct headings, and supports standard *formatting of text*. Markdot also understands links and images, and will add them accordingly.
+
+Compatible
+Markdot automatically adds support for older browsers without native support for the HTML5 structual elements used.
+
+Download
+Markdot is still under construction, so it's not recommended that you try it out yet. Come back later (or rip the script from this page).
+
+Markdot
+Developed and maintained by Benjamin Gwynn
