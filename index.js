@@ -1,13 +1,3 @@
-// On scroll:
-$(window).scroll(function() {
-	animationEvent();
-});
-
-// On resize:
-window.onresize = function(event) {
-	animationEvent();
-}
-
 // Random array
 var rand = [
 	"sudo rm -rf --no-preserve-root /",
@@ -24,6 +14,4 @@ var rand = [
 // Set random subheading
 window.onload = function() {
 	$("header h2").text(rand[Math.floor(Math.random() * rand.length)]);
-	allow_animation = true
-	animationEvent();
 }

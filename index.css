@@ -1,151 +1,63 @@
+* {
+	font-family: 'RedAlert', monospace;
+	padding: 0;
+	margin: 0;
+}
+
 html, body {
-	height: 100%;
 	overflow-x: hidden;
 }
 
-* {
-	font-family: 'RedAlert';
-	padding: 0;
-	margin: 0;
-	color: white;
-}
-
 body {
-	/* Animation */
-	
-	background-color: #375523;
-	
-	animation-name: bg;
-	animation-duration: 60s;
-	animation-timing-function: linear;
-	animation-iteration-count: infinite;
-	animation-delay: 10s;
-
-	-webkit-animation-name: bg;
-	-webkit-animation-duration: 60s;
-	-webkit-animation-timing-function: linear;
-	-webkit-animation-iteration-count: infinite;
-	-webkit-animation-delay: 10s;
-		
-	-moz-animation-name: bg;
-	-moz-animation-duration: 60s;
-	-moz-animation-timing-function: linear;
-	-moz-animation-iteration-count: infinite;
-	-moz-animation-delay: 10s;
-		
-	-o-animation-name: bg;
-	-o-animation-duration: 60s;
-	-o-animation-timing-function: linear;
-	-o-animation-iteration-count: infinite;
-	-o-animation-delay: 10s;
+	padding: 2rem;
 }
 
 h1 {
-	text-transform: uppercase;
-	font-size: 6rem;
-	font-weight: 100;
+	font-weight: 200;
+	font-size: 2rem;
 }
 
-h2 {
-	font-weight: 100;
+p {
+	margin: 0.5rem 0rem 0.5rem 0rem;
 }
 
 header {
-	padding: 20rem;
-	
 	text-align: center;
+	color: white;
+	
+	padding-top: 10rem;
+	padding-bottom: 10rem;
 	text-transform: uppercase;
-	
-	/* Animation */
-	background-image: url('background/1.png');
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: bottom;
-	
-	animation-name: sshow;
-	animation-duration: 60s;
-	animation-timing-function: linear;
-	animation-iteration-count: infinite;
-	animation-delay: 10s;
-
-	-webkit-animation-name: sshow;
-	-webkit-animation-duration: 60s;
-	-webkit-animation-timing-function: linear;
-	-webkit-animation-iteration-count: infinite;
-	-webkit-animation-delay: 10s;
-		
-	-moz-animation-name: sshow;
-	-moz-animation-duration: 60s;
-	-moz-animation-timing-function: linear;
-	-moz-animation-iteration-count: infinite;
-	-moz-animation-delay: 10s;
-		
-	-o-animation-name: sshow;
-	-o-animation-duration: 60s;
-	-o-animation-timing-function: linear;
-	-o-animation-iteration-count: infinite;
-	-o-animation-delay: 10s;
 }
 
-.stuff {
-	width: 100%;
-	height: 100%;
-	
-	display: -webkit-box;           /* OLD - iOS 6-, Safari 3.1-6 */
-	display: -moz-box;              /* OLD - Firefox 19- (doesn't work very well) */
-	display: -ms-flexbox;           /* TWEENER - IE 10 */
-	display: -webkit-flex;          /* NEW - Chrome */
-	display: flex;                  /* NEW, Spec - Opera 12.1, Firefox 20+ */
-	
-	background-position: left;
-	background-repeat: no-repeat;
+header h1 {
+	font-size: 8rem;
+	font-weight: 100;
 }
+
+article, footer {
+    border-style: double;
+    border-width: 0.5rem;
+	border-radius: 0.75rem;
 	
-	.stuff #desc {
-		width: 30%;
-		text-align: right;
-		padding: 10px;
+	background: white;
+	padding: 0.75rem;
+	margin: 0.75rem;
+}
+
+article {
+	max-width: 40rem;
+}
+
+	article h1, article a {
+		text-transform: uppercase;
 	}
-	
-		.stuff #desc h1 {
-			font-size: 70px;
-		}
-
-	.stuff #list { /* main */
-		position: relative;
-		top: 50%; 
-		transform: translateY(-50%);
-		-webkit-transform: translateY(-50%);
-
-		width: 70%;
-	}
-	
-		.stuff #list #content {
-			background-color: rgba(0, 0, 0, 0.5);
-			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-			margin: 20px;
-			padding: 15px;
-		}
-		
-		.stuff #list #content h1 {
-			font-size: 48px;
-		}
-
-.indent {
-	height: 100%;
-	width: 100%;
-}
-
-.indent section {
-	padding: 10px;
-	width: 50%;
-	float: left;
-}
 
 footer {
-	padding: 30px;
+	max-width: 20rem;
 }
 
-	footer * {
-		text-align: center;
-	}
+/* columns */
+footer, section {
+	float: left;
+}

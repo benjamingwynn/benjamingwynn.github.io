@@ -8,6 +8,9 @@ var markdot = {
 	version: "0.1.0-dev",
 
 	markdot: function(file, target) {
+		// Reset
+		markdot.md = "";
+		
 		// Test jQuery
 		if (typeof(jQuery) === "undefined") {
 			console.error("Markdot failed to load as jQuery is missing.");
@@ -250,7 +253,12 @@ var markdot = {
 	},
 	
 	isValidHyperlink: function(string) {
-		return (string.search("http://") > -1);
+		if((string.search("http://") > -1)
+		|| (string.search("https://") > -1)
+		|| (string.search("ftp://") > -1)
+		|| (string.search("mailto:") > -1)) {
+			return true;
+		}
 	},
 	
 	isImageLink: function(hyperlink) {

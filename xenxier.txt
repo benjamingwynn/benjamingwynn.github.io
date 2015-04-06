@@ -1,29 +1,29 @@
 Xenxier
 I broke my Javascript :(
 
-HTML5
-HTML5: The Solar System
+The Solar System
 
 A complete recreation of our solar system in HTML5. Planet sizes, distances and orbit speeds are all accurate and can be used to show how the different planets rotate around our solar system. The project uses JSON to manage all the data of the planets, and SVG's to display them. The simulation is scalable and interactive.
 
 Click here to open http://xenxier.com/solar/
 
-HTML5: CLICK IT
+CLICK IT
 This is a glorified click tester, featuring beautiful particles and a pretty colour cycling background. I also made this my first published Android app. I also have to thank *grnt* for complaining about an online click tester he was using and giving me the idea to create this.
 
 Click here to open http://xenxier.com/clickit/
 Get the free Android App https://play.google.com/store/apps/details?id=xenxier.android.game.tapit/
 
-HTML5: Pong
+Pong
 A pong game I coded in a very small space of time using the particles from particlebox after [REDACTED] asked if I could make a pong game. This game is two player, controlled with UP, DOWN and W, S.
 
 Click here to open http://xenxier.com/pong/
 				
-HTML5: thisfeed
+thisfeed
 > Stalk any user on Twitter through beautiful HTML5. thisfeed works using PHP and can work with anybodies Twitter handle as long as their tweets aren't protected. Simply replace the /?user=iamxenxier argument at the end of the URL with some other Twitter handle, for example; http://gwynn.tk/thisfeed/?user=Dinnerbone. As with most of my projects, thisfeed is open source and available on GitHub.
 
 Click here to open http://gwynn.tk/thisfeed/index.htm/
 Get the source code https://github.com/benjamingwynn/thisfeed/
 
-Footer
-Footer text
+I am Xenxier
+http://xenxier.com/common/images/xenxier.jpg
+I am Benjamin Gwynn. I spend my time learning stuff, then waste that knowledge on making stupid little projects.

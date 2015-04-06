@@ -7,6 +7,7 @@
 	margin: 0;
 }
 
+
 html, body {
 	overflow-x: hidden;
 }
@@ -47,7 +48,7 @@ header {
 	}
 
 section {
-	width: 50rem;
+	max-width: 50rem;
 	margin: auto;
 }
 
@@ -61,5 +62,5 @@ footer {
 	
 	margin: auto;
 	padding: 1rem;
-    width: 40rem;
+    max-width: 40rem;
 }
