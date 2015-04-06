@@ -59,7 +59,7 @@ var markdot = {
 		$("noscript").remove();
 
 		// The first line of a markdot file is the title of the document (stripped of formatting)
-		$("head").append("<title>" + markdot.md[0].replace(/\W/g, '') + "</title>");
+		$("head").append("<title>" + markdot.md[0].replace(/[^a-zA-Z0-9 ]/g, "") + "</title>");
 
 		// Build
 		if (target === "body") {
