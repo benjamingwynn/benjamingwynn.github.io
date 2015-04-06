@@ -14,16 +14,23 @@ Click here to open http://xenxier.com/clickit/
 Get the free Android App https://play.google.com/store/apps/details?id=xenxier.android.game.tapit/
 
 Pong
-A pong game I coded in a very small space of time using the particles from particlebox after [REDACTED] asked if I could make a pong game. This game is two player, controlled with UP, DOWN and W, S.
+A pong game I coded in a very small space of time using the particles from particlebox after *[REDACTED]* asked if I could make a pong game. This game is two player, controlled with UP, DOWN and W, S.
 
 Click here to open http://xenxier.com/pong/
-				
+
+Markdot
+Markdot is a Javascript script which interprets a text file and converts it to HTML5 on-the-fly. It is fully HTML5 compliant and uses the standard structual elements from HTML, namely <article>, <section>, <header> and <footer>. This entire page was created using Markdot and is all editable via a single text file. If you want to learn more, check out the example I made.
+
+Click here to open the example page http://xenxier.com/markdot/
+
 thisfeed
 > Stalk any user on Twitter through beautiful HTML5. thisfeed works using PHP and can work with anybodies Twitter handle as long as their tweets aren't protected. Simply replace the /?user=iamxenxier argument at the end of the URL with some other Twitter handle, for example; http://gwynn.tk/thisfeed/?user=Dinnerbone. As with most of my projects, thisfeed is open source and available on GitHub.
 
-Click here to open http://gwynn.tk/thisfeed/index.htm/
+~Click here to open~ down right now, sorry about that.
 Get the source code https://github.com/benjamingwynn/thisfeed/
 
-I am Xenxier
+Hi
+I'm Benjamin Gwynn
 http://xenxier.com/common/images/xenxier.jpg
-I am Benjamin Gwynn. I spend my time learning stuff, then waste that knowledge on making stupid little projects.
+Hi there, welcome to my website. I spend my time learning stuff, then waste that knowledge on making stupid little projects. This entire website and everything it links to was coded in HTML5, so it should all be pretty awesome. If you wish to contact me, then you may do so via the link below. The amazing background images I used for the cool CSS3 effect were made by /u/BloodyMarvellous on reddit.
+Contact me mailto:xenxier@xenxier.com

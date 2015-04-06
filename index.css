@@ -22,12 +22,13 @@ p {
 }
 
 header {
-	text-align: center;
+	text-align: left;
 	color: white;
 	
 	padding-top: 10rem;
 	padding-bottom: 10rem;
 	text-transform: uppercase;
+	margin: 0.75rem;
 }
 
 header h1 {
@@ -49,13 +50,36 @@ article {
 	max-width: 40rem;
 }
 
-	article h1, article a {
+	article h1, a {
 		text-transform: uppercase;
 	}
 
 footer {
-	max-width: 20rem;
+	max-width: 390px; /*Image size */
+	text-align: center;
 }
+
+	footer h1 {
+		font-size: 4rem;
+	}
+
+	footer h2 {
+		font-size: 2rem;
+	}
+	
+	footer h5 {
+		font-size: 1rem;
+		margin-top: 1rem;
+	}
+	
+	footer img {
+	    border-style: solid;
+	    border-width: 0.2rem;
+		border-radius: 0.75rem;
+    	box-sizing: border-box;
+	    display: block;
+	    margin: 2rem auto 2rem auto;
+	}
 
 /* columns */
 footer, section {

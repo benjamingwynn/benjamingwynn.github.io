@@ -199,7 +199,7 @@ var markdot = {
 			return markdot.getLine(linenumber).slice(4);
 		} else {
 			// Parse
-			return markdot.linkParse(markdot.parseTag(markdot.parseTag(markdot.parseTag(markdot.getLine(linenumber), "*", "strong", linenumber), "-", "del", linenumber), "_", "em", linenumber));
+			return markdot.linkParse(markdot.parseTag(markdot.parseTag(markdot.parseTag(markdot.getLine(linenumber), "*", "strong", linenumber), "~", "del", linenumber), "_", "em", linenumber));
 		}
 	},
 	
