@@ -8,27 +8,19 @@ body {
 	
 	animation-name: sshow;
 	animation-duration: 60s;
-	animation-timing-function: linear;
 	animation-iteration-count: infinite;
-	animation-delay: 10s;
 
 	-webkit-animation-name: sshow;
 	-webkit-animation-duration: 60s;
-	-webkit-animation-timing-function: linear;
 	-webkit-animation-iteration-count: infinite;
-	-webkit-animation-delay: 10s;
 		
 	-moz-animation-name: sshow;
 	-moz-animation-duration: 60s;
-	-moz-animation-timing-function: linear;
 	-moz-animation-iteration-count: infinite;
-	-moz-animation-delay: 10s;
 		
 	-o-animation-name: sshow;
 	-o-animation-duration: 60s;
-	-o-animation-timing-function: linear;
 	-o-animation-iteration-count: infinite;
-	-o-animation-delay: 10s;
 }
 
 @keyframes sshow {
