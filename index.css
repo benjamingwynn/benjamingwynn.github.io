@@ -46,8 +46,12 @@ article, footer {
 	margin: 0.75rem;
 }
 
-article {
-	max-width: 40rem;
+section {
+	width: 100%;
+	/* Override in compatible browsers */
+    width: -moz-calc(100% - 390px - 4rem);
+    width: -webkit-calc(100% - 390px - 4rem);
+    width: calc(100% - 390px - 4rem);
 }
 
 	article h1, a {
@@ -55,7 +59,7 @@ article {
 	}
 
 footer {
-	max-width: 390px; /*Image size */
+	width: 390px; /* Image size */
 	text-align: center;
 }
 
@@ -84,4 +88,14 @@ footer {
 /* columns */
 footer, section {
 	float: left;
+}
+
+/* Mobile Device Rules */
+@media only screen and (max-device-width: 480px) {
+	section {
+		width: 100%;
+	}
+	footer {
+		width: 100%;
+	}
 }
