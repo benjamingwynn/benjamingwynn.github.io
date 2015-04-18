@@ -8,10 +8,6 @@ html, body {
 	overflow-x: hidden;
 }
 
-body {
-	padding: 2rem;
-}
-
 h1 {
 	font-weight: 200;
 	font-size: 2rem;
@@ -22,7 +18,7 @@ p {
 }
 
 header {
-	text-align: left;
+	text-align: center;
 	color: white;
 	
 	padding-top: 10rem;
@@ -32,26 +28,27 @@ header {
 }
 
 header h1 {
-	font-size: 8rem;
+	font-size: 4rem;
+	font-weight: 100;
+}
+
+header h2 {
+	font-size: 1.5rem;
 	font-weight: 100;
 }
 
 article, footer {
+	width: 90%;
+	
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 1rem;
+	
     border-style: double;
     border-width: 0.5rem;
-	border-radius: 0.75rem;
 	
 	background: white;
-	padding: 0.75rem;
-	margin: 0.75rem;
-}
-
-section {
-	width: 100%;
-	/* Override in compatible browsers */
-    width: -moz-calc(100% - 390px - 4rem);
-    width: -webkit-calc(100% - 390px - 4rem);
-    width: calc(100% - 390px - 4rem);
+	padding: 0.5rem;
 }
 
 	article h1, a {
@@ -59,7 +56,6 @@ section {
 	}
 
 footer {
-	width: 390px; /* Image size */
 	text-align: center;
 }
 
@@ -77,6 +73,7 @@ footer {
 	}
 	
 	footer img {
+		width: 195px;
 	    border-style: solid;
 	    border-width: 0.2rem;
 		border-radius: 0.75rem;
@@ -85,17 +82,35 @@ footer {
 	    margin: 2rem auto 2rem auto;
 	}
 
-/* columns */
-footer, section {
-	float: left;
-}
-
-/* Mobile Device Rules */
-@media only screen and (max-device-width: 480px) {
-	section {
-		width: 100%;
+/* Override for CSS3 compatible desktop browsers. Mobile devices and older browers will not use this CSS */
+@media (min-width: 800px) {
+	body {
+		padding: 2rem;
 	}
-	footer {
-		width: 100%;
+	
+	header h1 {
+		font-size: 8rem;
+	}
+	
+	header h2 {
+		font-size: 2rem;
+	}
+	
+	article, footer {
+		border-radius: 0.75rem;
+	}
+	
+	section {
+	    width: -moz-calc(100% - 390px - 2rem);
+	    width: -webkit-calc(100% - 390px - 2rem);
+	    width: calc(100% - 390px - 2rem);
+	}
+	
+	footer, footer img {
+		width: 390px; /* Image size */
+	}
+	
+	footer, section {
+		float: left;
 	}
 }
