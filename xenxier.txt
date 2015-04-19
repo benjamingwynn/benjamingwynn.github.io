@@ -29,6 +29,11 @@ thisfeed
 ~Click here to open~ down right now, sorry about that.
 Get the source code https://github.com/benjamingwynn/thisfeed/
 
+Particlebox
+This website was originally created with particlebox & glitch.js, but was removed in favour of performance, specifically on mobile. If you want to see the older website you can do so here. Please note that the links on the site do not work, and the site is intended to be used to show off particlebox.
+
+Click to open the particlebox example https://rawgit.com/benjamingwynn/benjamingwynn.github.io/9fcb87c47f0a5ad8a1cfe268d411339cdde2a41a/index.htm
+
 Hi
 I'm Benjamin Gwynn
 http://xenxier.com/common/images/xenxier.jpg
