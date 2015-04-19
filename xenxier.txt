@@ -26,7 +26,7 @@ Click here to open the example page http://xenxier.com/markdot/
 thisfeed
 > Stalk any user on Twitter through beautiful HTML5. thisfeed works using PHP and can work with anybodies Twitter handle as long as their tweets aren't protected. Simply replace the /?user=iamxenxier argument at the end of the URL with some other Twitter handle, for example; http://gwynn.tk/thisfeed/?user=Dinnerbone. As with most of my projects, thisfeed is open source and available on GitHub.
 
-~Click here to open~ down right now, sorry about that.
+Click here to open http://gwynn.tk/thisfeed
 Get the source code https://github.com/benjamingwynn/thisfeed/
 
 Particlebox
