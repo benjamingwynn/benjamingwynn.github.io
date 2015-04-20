@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<head>
+	<title>Xenxier's Particlebox</title>
+	
+	<!-- Vendor CSS -->
+	<link href='normalize.css' rel='stylesheet' type='text/css'>
+	<link href='foundation.min.css' rel='stylesheet' type='text/css'>
+	
+	<!-- Vendor JS-->
+	<script src="jquery.js"></script>
+	<script src="foundation.min.js"></script>
+	<script src="foundation.slider.js"></script>
+	
+	<!-- Page CSS -->
+	<link href='index.css' rel='stylesheet' type='text/css'>
+</head>
+<body>
+	<canvas id="backgroundCanvas"></canvas>
+	<button id="hideshowbutton" onclick="hideshow()">Hide/Show Settings</button>
+	<div id="wrapper">
+		<header>
+			<h1>Particlebox</h1>
+		</header>
+		<section></section>
+	</div>
+</body>
+
+<!-- My Common JS -->
+<script type="text/javascript" src="particlebox_presets.js"></script>
+<script type="text/javascript" src="particlebox.js"></script>
+
+<!-- Page scripting -->
+<script type="text/javascript">
+	// Add slider code
+	function addSlider(title, id, start, end, step) {
+		$("section").append("<h1>" + title + "</h1>");
+		$("section").append("<div id='" + id + "' class='range-slider' data-slider data-options='start: " + start + "; end: " + end + "; step: " + step + ";'><span class='range-slider-handle' role='slider' tabindex='0'></span><span class='range-slider-active-segment'></span><input type='hidden'></div>");
+	}
+
+	// Used by particlebox, still...
+	function rng(min, max) {
+		return Math.random() * (max - min) + min;
+	}
+
+	// Hide show button function
+	function hideshow() {
+		if ($('#wrapper').css('display') == "none") {
+			// The site is hidden, the button was pressed, show the site.
+			$('#wrapper').fadeIn("slow");
+		} else {
+			// The site is visible, the button was pressed, hide the site.
+			$('#wrapper').fadeOut("slow");
+		}
+	}
+	
+	// Add the sliders:
+	addSlider("Particle Count", "draw_amount", 1, 512, 1);
+	addSlider("Depth", "z_depth", 2, 128, 1);
+	addSlider("Size", "size_multiplier", 1, 16, 1);
+	addSlider("Particle Red", "colour_base_r", 0, 255, 1);
+	addSlider("Particle Green", "colour_base_g", 0, 255, 1);
+	addSlider("Particle Blue", "colour_base_b", 0, 255, 1);
+	addSlider("Colour Depth", "colour_depth", -8, 8, 1);
+	addSlider("Spawn Location", "spawn_location", 0, 4, 1);
+	addSlider("Slowmo", "refresh_rate", 60, 3200, 1);
+	addSlider("Maximum Horizontal Velocity", "max_x_velocity", -64, 64, 1);
+	addSlider("Maximum Vertical Velocity", "max_y_velocity", -64, 64, 1);
+	addSlider("Minimum Horizontal Velocity", "min_x_velocity", -1, 1, 0.01);
+	addSlider("Minimum Vertical Velocity", "min_y_velocity", -1, 1, 0.01);
+	addSlider("Air Resistance", "air_resistance", 0, 1, 0.01);
+	addSlider("Particle Mass", "gravity", 0, 10, 0.01);
+	addSlider("Background Red", "bg_r", 0, 255, 1);
+	addSlider("Background Green", "bg_g", 0, 255, 1);
+	addSlider("Background Blue", "bg_b", 0, 255, 1);
+	
+	// Canvas setup
+	var canvas = document.getElementsByTagName("canvas")[0];
+	canvas.width  = window.innerWidth;
+	canvas.height = window.innerHeight;
+
+	var context = canvas.getContext("2d");
+	// Load Foundation (we use this for our particlebox sliders)
+	$(document).foundation();
+	
+	// Move sliders into correct place from preset
+	particlebox_presets.inksplash();
+	
+	// Create particlebox objects from config
+	particlebox.create();
+	
+	$("header").append("<h2>Version " + particlebox.version + " | Created by Xenxier</h2>");
+	
+	// On change of slider fire the particlebox.parseslider function
+	$('[data-slider]').on('change.fndtn.slider', function(event) {
+		particlebox.parseslider(event.target);
+	});
+	
+	// Draw every refresh
+	setInterval(function() {
+		particlebox.draw();
+	}, 1000 / particlebox.config.refresh_rate);
+</script>

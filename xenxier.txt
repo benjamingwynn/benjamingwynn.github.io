@@ -1,6 +1,11 @@
 Xenxier
 This is the subheader!
 
+Particlebox
+Particlebox is an experiment to try and create amazing looking particles in HTML5 canvas using only squares. Particlebox was originally a part of my website, but I've recently decided to clean it up and give it its own page below. Particlebox can be ran on mobile devices, but be warned that a lot of particles *will* put stress on your browser.
+
+Click here to open http://xenxier.com/particlebox
+
 The Solar System
 
 A complete recreation of our solar system in HTML5. Planet sizes, distances and orbit speeds are all accurate and can be used to show how the different planets rotate around our solar system. The project uses JSON to manage all the data of the planets, and SVG's to display them. The simulation is scalable and interactive.
@@ -28,11 +33,6 @@ thisfeed
 
 Click here to open http://gwynn.tk/thisfeed
 Get the source code https://github.com/benjamingwynn/thisfeed/
-
-Particlebox
-This website was originally created with particlebox & glitch.js, but was removed in favour of performance, specifically on mobile. If you want to see the older website you can do so here. Please note that the links on the site do not work, and the site is intended to be used to show off particlebox.
-
-Click to open the particlebox example https://rawgit.com/benjamingwynn/benjamingwynn.github.io/9fcb87c47f0a5ad8a1cfe268d411339cdde2a41a/index.htm
 
 Hi
 I'm Benjamin Gwynn

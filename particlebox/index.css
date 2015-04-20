@@ -1,0 +1,73 @@
+/* Import fonts from Google */
+@import url(http://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300);
+
+*, button {
+	font-family: 'Roboto Slab', serif;
+	padding: 0;
+	margin: 0;
+}
+
+canvas {
+	position: fixed;
+	z-index: -1;
+}
+
+#wrapper {
+    display: flex;
+	width: 100%;
+}
+
+header {
+	width: 60%;
+}
+
+header h1 {
+	color: white;
+    position: fixed;
+    top: 50%;
+	-webkit-transform: translateY(-100%);
+	-ms-transform: translateY(-100%);
+	transform: translateY(-100%);
+	
+	font-size: 5rem;
+	font-weight: 300;
+}
+
+header h2 {
+	color: white;
+    position: fixed;
+    top: 50%;
+	-webkit-transform: translateY(2.5rem);
+	-ms-transform: translateY(2.5rem);
+	transform: translateY(2.5rem);
+
+	font-size: 2rem;
+	font-weight: 100;
+}
+
+section {
+	float: right;
+	width: 40%;
+	background: rgba(0, 0, 0, 0.8);
+	box-shadow: black 0 0 10rem;
+	padding: 0 1.5rem 0 1.5rem;
+}
+
+section h1 {
+	color: white;
+	font-weight: 300;
+	font-size: 2rem;
+}
+
+button {
+	font-family: 'Roboto Slab', serif;
+	position: fixed;
+	bottom: 1rem;
+	left: 1rem;
+	padding: 0.5rem;
+	background: rgba(0, 0, 0, 0.8);
+	box-shadow: black 0 0 2rem;
+	border-color: white;
+	border-style: solid;
+	color: white;
+}
