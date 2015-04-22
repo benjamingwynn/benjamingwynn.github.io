@@ -338,7 +338,7 @@ var markdot = {
 	},
 	
 	getLine: function(linenumber) {
-		if (typeOf(linenumber) === "undefined") {
+		if (typeof(linenumber) === "undefined") {
 			console.warn("No linenumber given!");
 			return "";
 		} else if (linenumber >= markdot.md.length || linenumber < 0) {
