@@ -338,6 +338,14 @@ var markdot = {
 	},
 	
 	getLine: function(linenumber) {
+		if (typeOf(linenumber) === "undefined") {
+			console.warn("No linenumber given!");
+			return "";
+		} else if (linenumber >= markdot.md.length || linenumber < 0) {
+			console.warn("Asked for a line number that doesn't exist.");
+			return "";
+		}
+		
 		// Get the line and trim it
 		var line = markdot.md[linenumber - 1].trim();
 		
