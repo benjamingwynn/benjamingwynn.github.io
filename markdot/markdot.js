@@ -69,7 +69,7 @@ var markdot = {
 			$(target).append(content[0]);
 			$(target).append(markdot.buildFooter(content[1]));
 		} else {
-			$(target).append(markdot.buildContent(0)[0]);
+			$(target).append(markdot.buildContent(0)[0], true);
 		}
 		
 		// Log time
@@ -103,15 +103,19 @@ var markdot = {
 		return ["<header>" + header + "</header>", i + 1];
 	},
 	
-	buildContent: function(startline) {
+	buildContent: function(startline, gotolastline) {
 		var build = new String("<section>");
 		var currenthead = new String(Math.random());
 		var lastline = 0;
 		
-		// Find the last empty line
-		for (var i = startline; i < markdot.md.length + 1; i++) {
-			if (markdot.parseLine(i) === "") {
-				lastline = i;
+		if (gotolastline) {
+			lastline = markdot.md.length + 1;
+		} else {
+			// Find the last empty line
+			for (var i = startline; i < markdot.md.length + 1; i++) {
+				if (markdot.parseLine(i) === "") {
+					lastline = i;
+				}
 			}
 		}
 		
