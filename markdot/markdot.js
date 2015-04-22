@@ -7,7 +7,7 @@ var markdot = {
 	md: new String(),
 	version: "0.1.0-dev",
 
-	markdot: function(file, target) {
+	markdot: function(file, element) {
 		// Reset
 		markdot.md = "";
 		
@@ -47,7 +47,7 @@ var markdot = {
 			if (typeof(target) === "undefined") {
 				markdot.buildPage("body");
 			} else {
-				markdot.buildPage(target);
+				markdot.buildPage(element);
 			}
 		});
 	},
@@ -69,7 +69,7 @@ var markdot = {
 			$(target).append(content[0]);
 			$(target).append(markdot.buildFooter(content[1]));
 		} else {
-			markdot.buildContent(0);
+			$(target).append(markdot.buildContent(0));
 		}
 		
 		// Log time
