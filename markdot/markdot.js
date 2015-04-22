@@ -44,7 +44,7 @@ var markdot = {
 	
 		// When the document is ready to be manipulated
 		$(document).ready(function() {
-			if (typeof(target) === "undefined") {
+			if (typeof(element) === "undefined") {
 				markdot.buildPage("body");
 			} else {
 				markdot.buildPage(element);
