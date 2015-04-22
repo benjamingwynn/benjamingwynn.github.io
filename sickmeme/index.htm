@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<head>
+	<title>nice meme</title>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<style>
+		* {
+			/* font-family: 'Comic Sans MS'; */
+			font-family: "System", monospace;
+			margin: 0 auto;
+			cursor: url('cursor.png'), help;
+			color: silver;
+		}
+		
+		html {
+			width: 100%;
+			height: 100%;
+		}
+		
+		body {
+			width: 100%;
+			height: 100%;
+		}
+		
+		canvas {
+			top: 0;
+			position: fixed;
+			z-index: -1;
+		}
+		
+		main {
+			background-color: darkblue;
+			border-color: white;
+			border-style: solid;	
+			
+			padding: 20px;
+			width: 50%;
+			height: 50%;
+			overflow: auto;
+			margin: auto;
+			position: absolute;
+			top: 0; left: 0; bottom: 0; right: 0;
+		}
+		
+		h1 {
+			margin-top: 10px;
+			margin-bottom: 20px;
+			padding: 5px;
+			text-align: center;
+			background: silver;
+			color: darkblue;
+		}
+		
+		p {
+			font-size: 80%;
+		}
+	</style>
+</head>
+<body>
+	<audio id="audio" nocontrols autoplay loop>
+	  <source src="music.mp3" type="audio/mpeg">
+	</audio>
+	
+	<img id="sorry" src="sorry.jpg" style="display: none"></img>
+	<canvas width='0px', height='0px', id="rotate"></canvas>
+	
+	<main>
+		<h1>[NICE MEME]</h1>
+		<p id="error"></p>
+		<br>
+		<p id="cont"></p>
+		<br>
+		<p id="code"></p>
+	</main>
+</body>
+
+<script>
+	// create canvas and rotate with swagger
+	var r = 0;
+	var c = document.getElementById("rotate");
+	var ctx = c.getContext("2d");
+	var img = document.getElementById("sorry");
+	
+	c.width  = window.innerWidth;
+	c.height = window.innerHeight;
+	
+	window.addEventListener("resize", function(){
+		c.width  = window.innerWidth;
+		c.height = window.innerHeight;
+	});
+	
+	setInterval(function() {
+		ctx.clearRect ( 0 , 0 , c.width, c.height );
+		ctx.translate(c.width /2, c.height /2);
+		ctx.rotate(-Math.PI / 180);
+		ctx.translate(-c.width /2, -c.height/2);
+		ctx.drawImage(img, c.width / 2 - img.width / 2, c.height / 2 - img.height / 2);
+	}, 1);
+	
+	// Random array
+	var error = [
+		"An error has occurred. Your meme is just too dank 4 me.",
+		"A eror haz 0ccurrd. u cant spe11",
+		"An error has occurred. It might have something to do with computers.",
+		"An error has occurred. It's your fault. You suck.",
+		"An error has occurred. Fell very bad.",
+		"An error has occurred. That meme was too MLG.",
+		"An error has occurred. You're clearly too MLG and clicked too fast.",
+		"An error has occurred. Some shit broke.",
+		"An error has occurred. I don't even.",
+		"An error has occurred. Get. Wrecked. Nerd.",
+		"An error has occurred. Have fun fixing that shit.",
+	]
+	
+	var cont = [
+		"Sacrifice your first born child to continue.",
+		"Kill yourself to continue.",
+		"'Turn it off and on again' to continue.",
+		"Give a lot of money via Paypal to xenxier@xenxier.com to continue.",
+		"Donate a kidney to continue.",
+		"Adopt an elephant to continue.",
+		"Stop doing whatever it is you're doing to continue.",
+		"Take a long hard think about what you just did to continue.",
+		"Ignore this instruction to continue.",
+		"Undo to continue.",
+		"Leave to continue.",
+		"Turn it off to continue.",
+		"Continue to continue.",
+		"Win a card game to continue."
+	]
+
+	// Set random subheading
+	window.onload = function() {
+		$("#error").text(error[Math.floor(Math.random() * error.length)]);
+		$("#cont").text(cont[Math.floor(Math.random() * cont.length)]);
+		$("#code").text("ERROR #" + Math.random().toString(36).slice(2).toUpperCase());
+	}
+</script>
