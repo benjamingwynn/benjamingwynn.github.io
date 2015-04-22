@@ -69,7 +69,7 @@ var markdot = {
 			$(target).append(content[0]);
 			$(target).append(markdot.buildFooter(content[1]));
 		} else {
-			$(target).append(markdot.buildContent(0));
+			$(target).append(markdot.buildContent(0)[0]);
 		}
 		
 		// Log time
