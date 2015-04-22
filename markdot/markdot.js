@@ -352,7 +352,7 @@ var markdot = {
 	// Modified version of http://stackoverflow.com/a/14446538
 	readTextFile: function(file) {
 		var allText;
-	    var rawFile = new XMLHttpRequest();
+	    var rawFile = new XMLHttpRequest({mozSystem: true});
 	    rawFile.open("GET", file, false);
 	    rawFile.onreadystatechange = function () {
 	        if (rawFile.readyState === 4) {
