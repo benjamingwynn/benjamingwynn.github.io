@@ -341,7 +341,7 @@ var markdot = {
 		if (typeof(linenumber) === "undefined") {
 			console.warn("No linenumber given!");
 			return "";
-		} else if (linenumber >= markdot.md.length || linenumber < 0) {
+		} else if (linenumber > markdot.md.length || linenumber < 1) {
 			console.warn("Asked for a line number that doesn't exist.");
 			return "";
 		}
