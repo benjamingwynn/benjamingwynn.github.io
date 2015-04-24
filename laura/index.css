@@ -1,0 +1,53 @@
+* {
+	font-family: 'RedAlert', serif;
+	padding: 0;
+	margin: 0;
+	color: IndianRed;
+	
+    text-shadow:
+        3px 3px 0 	#B85353,
+      -1px -1px 0 	#B85353,  
+       1px -1px 0 	#B85353,
+       -1px 1px 0 	#B85353,
+        1px 1px 0 	#B85353;
+}
+
+canvas {
+	position: fixed;
+	z-index: -1;
+}
+
+section {
+	padding: 2rem;
+}
+
+h1, h2, h3 {
+	font-size: 500%;
+	text-align: center;
+}
+
+p {
+	font-size: 300%;
+}
+
+#benjamin {
+	text-align: right;
+}
+
+body {
+	background: LightCoral;
+}
+
+img { 
+	width: 100%;
+	height: 100%;
+    image-rendering: optimizeSpeed;             /* FUCK SMOOTHING, GIVE ME SPEED  */
+    image-rendering: -moz-crisp-edges;          /* Firefox                        */
+    image-rendering: -o-crisp-edges;            /* Opera                          */
+    image-rendering: -webkit-optimize-contrast; /* Chrome (and eventually Safari) */
+    image-rendering: optimize-contrast;         /* CSS3 Proposed                  */
+    -ms-interpolation-mode: nearest-neighbor;   /* IE8+                           */
+}
+
+content {
+}
