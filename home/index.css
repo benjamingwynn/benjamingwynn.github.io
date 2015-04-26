@@ -1,0 +1,50 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,100);
+@import url(https://rawgit.com/daneden/animate.css/master/animate.css);
+
+* {
+	margin: 0;
+	padding: 0;
+	font-family: "Roboto", sans-serif;
+}
+
+body {
+	background: slategray;
+}
+
+header {
+	background: rgba(0, 0, 0, 0.75);
+	box-shadow: 0 0 0.5rem black;
+	padding: 6rem;
+	text-transform: lowercase;
+}
+
+header h1 {
+	font-size: 10rem;
+	color: white;
+	font-weight: 100;
+	text-align: center;
+}
+
+header h2 {
+	font-size: 2rem;
+	color: snow;
+	font-weight: 100;
+	text-align: center;
+}
+
+main {
+	display: none;
+	/* display: flex; */
+}
+
+main div {
+	width: 50%;
+}
+
+section {
+	display: block;
+	margin: 2rem;
+	padding: 1rem;
+	background: rgba(0, 0, 0, 0.75);
+	box-shadow: 0 0 0.5rem black;
+}
