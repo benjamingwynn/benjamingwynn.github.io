@@ -1,0 +1,99 @@
+/* Import fonts from Google */
+@import url(http://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300);
+@import url(http://fonts.googleapis.com/css?family=Oswald:400,300,700);
+
+* {
+	font-family: 'Oswald', serif;
+	padding: 0;
+	margin: 0;
+	color: rgba(230, 40, 130, 1);
+}
+
+
+html, body {
+	overflow-x: hidden;
+	width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-transform: uppercase;
+}
+
+p {
+	color: DimGray;
+	font-weight: 300;
+	font-size: 1.2rem;
+}
+
+header {
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN4ptG0CQAFywJD4dhFbwAAAABJRU5ErkJggg==), url("kenan2.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+	background-size: cover;
+	
+	/* box-shadow: 0 0 10px black; */
+	margin-bottom: 0.75rem;
+	padding: 5rem;
+}
+
+	header * {
+		color: white;
+	}
+
+	header h1 {
+		font-size: 15rem;
+		font-weight: 300;
+		line-height: 20rem;
+		text-align: left;
+	}
+
+	header h2 {
+		font-size: 3rem;
+		font-weight: 100;
+		text-align: right;
+	}
+
+main {
+	float: left;
+	width: 70%;
+}
+
+section {
+	margin: 1rem;
+}
+
+section h1 {
+	font-size: 6rem;
+}
+
+section h2 {
+	margin-top: 1rem;
+}
+
+aside {
+	float: left;
+	width: 30%;
+	background: white;
+	border-left-style: dashed;
+    box-sizing: border-box;
+	padding: 1rem;
+	text-align: center;
+}
+
+aside h1 {
+	font-size: 2rem;
+}
+
+aside img {
+	text-align: center;
+	margin: 1rem;
+	box-shadow: 0 0 1rem rgba(80, 80, 80, 0.8);
+}
+
+footer * {
+	font-weight: 100;
+	font-size: 1rem;
+	text-transform: uppercase;
+	color: darkgray;
+	text-align: left;
+}

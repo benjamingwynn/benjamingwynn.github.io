@@ -11,7 +11,7 @@ var allow_animation = false;
 var animation = "fadeInUp";
 
 // Animate what?
-var animateObjects = ["#wrapper *"];
+var animateObjects = ["body *"];
 
 // This is broken :(
 var doAnimateOnScrollUp = false;
