@@ -17,6 +17,7 @@ html, body {
 
 h1, h2, h3, h4, h5, h6 {
 	text-transform: uppercase;
+	font-weight: 300;
 }
 
 p {
@@ -82,6 +83,7 @@ aside {
 
 aside h1 {
 	font-size: 2rem;
+	font-weight: 400;
 }
 
 aside img {
@@ -90,10 +92,15 @@ aside img {
 	box-shadow: 0 0 1rem rgba(80, 80, 80, 0.8);
 }
 
+footer {
+    display: block;
+}
+
 footer * {
+    width: 100%;
 	font-weight: 100;
 	font-size: 1rem;
 	text-transform: uppercase;
 	color: darkgray;
-	text-align: left;
+	text-align: center;
 }
