@@ -5,20 +5,33 @@
 	
 	<!-- CSS -->
 	<link href='kenan.css' rel='stylesheet' type='text/css'>
+    <link href='https://rawgit.com/IanLunn/Hover/master/css/hover-min.css' rel='stylesheet' type='text/css'>
 	<link href='../common/css/vendor/animate.css' rel='stylesheet' type='text/css'>
 	
 	<!-- JS -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script src="../common/js/xenxier/animate-all-the-things.js"></script>
 	<script>animateObjects=["main h1,main h2,main h3,main h4,main h5,main h6,main p,header h1,header h2,header h3,header h4,header h5,header h6,header p, aside"];allow_animation=true;$(document).ready(function(){animationEvent()});$(window).scroll(function(){animationEvent()})</script>
 </head>
 <body>
-    <audio autoplay loop hidden=true>
+    <!--<audio autoplay loop hidden=true>
         <source src="totallylegitnonpiratedmusic.mp3">
-    </audio>
+    </audio>-->
 	<header class="animated fadeInDown">
 		<h1>Vote<br>Kenan</h1>
 		<h2>He must be good, his website is pink</h2>
+    <nav>
+        <ul>
+            <li><a href="">Home</a></li>
+            <li><a href="">About</a></li>
+            <li><a href="">Gallery</a></li>
+            <li><a href="">Contact</a></li>
+        </ul>
+        <script>$("nav ul li").addClass("hvr-underline-from-center")</script>
+    </nav>
 	</header>
 	<main>
 		<section>

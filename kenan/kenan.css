@@ -33,7 +33,6 @@ header {
 	background-size: cover;
 	
 	/* box-shadow: 0 0 10px black; */
-	margin-bottom: 0.75rem;
 	padding: 5rem;
 }
 
@@ -90,6 +89,34 @@ aside img {
 	text-align: center;
 	margin: 1rem;
 	box-shadow: 0 0 1rem rgba(80, 80, 80, 0.8);
+}
+
+nav {
+    margin-top: 5rem;
+}
+
+nav ul {
+}
+
+nav ul li {
+    text-align: center;
+    list-style: none;
+    font-size: 2rem;
+    width: 25%;
+    float: left;
+    background: rgba(230, 40, 130, 0.5);
+    text-transform: uppercase;
+}
+
+nav ul li:before {
+    background: white !important;
+}
+
+nav ul li a {
+    padding: 0.5rem;
+    color: white;
+    display: block;
+    text-decoration: none;
 }
 
 footer {
