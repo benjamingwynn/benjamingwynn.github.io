@@ -1,4 +1,5 @@
-/* Import fonts from Google */
+/* kenan.css - (C) Benjamin Gwynn 2015 - http://xenxier.com */
+
 @import url(http://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300);
 @import url(http://fonts.googleapis.com/css?family=Oswald:400,300,700);
 
@@ -6,7 +7,8 @@
 	font-family: 'Oswald', serif;
 	padding: 0;
 	margin: 0;
-	color: rgba(230, 40, 130, 1);
+	/* color: rgba(230, 40, 130, 1); */
+    color: white;
 }
 
 
@@ -21,13 +23,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 p {
-	color: DimGray;
+	/* color: DimGray; */
 	font-weight: 300;
 	font-size: 1.2rem;
 }
 
 header {
-	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN4ptG0CQAFywJD4dhFbwAAAABJRU5ErkJggg==), url("kenan2.jpg");
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN4ptG0CQAFywJD4dhFbwAAAABJRU5ErkJggg==), url("kenan1.jpg");
     background-repeat: no-repeat;
     background-position: center;
 	background-size: cover;
@@ -54,48 +56,62 @@ header {
 	}
 
 main {
-	float: left;
-	width: 70%;
+    background-repeat: no-repeat;
+    background-position: center;
+	background-size: cover;
+    border-top: dashed;
+    padding-bottom: 5rem;
 }
 
-section {
-	margin: 1rem;
+        main h1 {
+            font-size: 15rem;
+        }
+
+        main section {
+            width: 80%;
+            margin: 0 auto 0 auto;
+        }
+
+            main section h1 {
+                font-size: 5rem;
+            }
+
+#home {   
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN4ptG0CQAFywJD4dhFbwAAAABJRU5ErkJggg==), url("kenan2.jpg");
 }
 
-section h1 {
-	font-size: 6rem;
+#about {   
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN4ptG0CQAFywJD4dhFbwAAAABJRU5ErkJggg==), url("kenan3.jpg");
 }
 
-section h2 {
-	margin-top: 1rem;
+#gallery {   
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN4ptG0CQAFywJD4dhFbwAAAABJRU5ErkJggg==), url("kenan4.jpg");
 }
 
-aside {
-	float: left;
-	width: 30%;
-	background: white;
-	border-left-style: dashed;
-    box-sizing: border-box;
-	padding: 1rem;
+#contact {   
+	background: rgba(230, 40, 130, 1);
+}
+
+/* Footer */
+
+footer {
+    border-top: dashed;
+    background: rgba(230, 40, 130, 1);;
+}
+
+footer * {
+    width: 100%;
+	font-weight: 100;
+	font-size: 1rem;
+	text-transform: uppercase;
+	color: white;
 	text-align: center;
 }
 
-aside h1 {
-	font-size: 2rem;
-	font-weight: 400;
-}
-
-aside img {
-	text-align: center;
-	margin: 1rem;
-	box-shadow: 0 0 1rem rgba(80, 80, 80, 0.8);
-}
+/* NAV STUFF */
 
 nav {
     margin-top: 5rem;
-}
-
-nav ul {
 }
 
 nav ul li {
@@ -117,17 +133,4 @@ nav ul li a {
     color: white;
     display: block;
     text-decoration: none;
-}
-
-footer {
-    display: block;
-}
-
-footer * {
-    width: 100%;
-	font-weight: 100;
-	font-size: 1rem;
-	text-transform: uppercase;
-	color: darkgray;
-	text-align: center;
 }

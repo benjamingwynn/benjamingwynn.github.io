@@ -13,46 +13,59 @@
       <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://rawgit.com/cferdinandi/smooth-scroll/master/dist/js/smooth-scroll.min.js"></script>
 	<script src="../common/js/xenxier/animate-all-the-things.js"></script>
 	<script>animateObjects=["main h1,main h2,main h3,main h4,main h5,main h6,main p,header h1,header h2,header h3,header h4,header h5,header h6,header p, aside"];allow_animation=true;$(document).ready(function(){animationEvent()});$(window).scroll(function(){animationEvent()})</script>
 </head>
 <body>
-    <!--<audio autoplay loop hidden=true>
+    <audio autoplay loop hidden=true>
         <source src="totallylegitnonpiratedmusic.mp3">
-    </audio>-->
+    </audio>
 	<header class="animated fadeInDown">
 		<h1>Vote<br>Kenan</h1>
 		<h2>He must be good, his website is pink</h2>
-    <nav>
-        <ul>
-            <li><a href="">Home</a></li>
-            <li><a href="">About</a></li>
-            <li><a href="">Gallery</a></li>
-            <li><a href="">Contact</a></li>
-        </ul>
-        <script>$("nav ul li").addClass("hvr-underline-from-center")</script>
-    </nav>
+        <nav>
+            <ul>
+                <li><a data-scroll href="#home">Home</a></li>
+                <li><a data-scroll href="#about">About</a></li>
+                <li><a data-scroll href="#gallery">Gallery</a></li>
+                <li><a data-scroll href="#contact">Contact</a></li>
+            </ul>
+            <script>$("nav ul li").addClass("hvr-underline-from-center")</script>
+        </nav>
 	</header>
-	<main>
-		<section>
-			<h1>Why Kenan?</h1>
-			<p>Kenan offers 95% more swag than others running for head boy. He is a pretty cool guy and deserves to be head boy just because of how god damn cool he is.</p>
-		</section>
-		<section>
-			<h1>Who is Kenan?</h1>
-			<p>Kenan is a guy, but not just any guy, he's running for head boy because he cares about you and what this school is. He will bring this school back to it's former glory - but put you <strong>first</strong>.</p>
-		</section>
-		<section>
-			<h1>How do I vote?</h1>
-			<p>Simply go into form and vote for Kenan. All other candidates don't have anywhere near as much awesome.</p>
-		</section>
+	<main id="home">
+        <h1>Home</h1>
+        <section>
+            <h1>i think this is a title</h1>
+            <p>Placeholder for placeholder text.</p>
+        </section>
 	</main>
-	<aside>
-		<h1>Kenan Buckley</h1>
-		<img src="kenan1.jpg">
-		<p>Kenan was born October 20, 1971, at the Los Altos Hospital in Long Beach, California, the second of three sons. Named after his stepfather, Calvin Cordozar Buckley, Sr. (December 10, 1948 – November 9, 1985, Los Angeles), his mother is Beverly Buckley (née Tate; born April 27, 1951, McComb, Mississippi). His father, Vernall Varnado (born December 13, 1949, Magnolia, Mississippi), was a Vietnam veteran, singer, and mail carrier who was said to be frequently absent from his life. As a boy, his parents nicknamed him "Snoopy" because of his appearance, but they usually addressed him as Kenan at home. His mother and stepfather divorced in 1975.</p>
-	</aside>
+	<main id="about">
+        <h1>About</h1>
+        <section>
+            <h1>Kenan Buckley</h1>
+            <p>Kenan was born October 20, 1971, at the Los Altos Hospital in Long Beach, California, the second of three sons. Named after his stepfather, Calvin Cordozar Buckley, Sr. (December 10, 1948 – November 9, 1985, Los Angeles), his mother is Beverly Buckley (née Tate; born April 27, 1951, McComb, Mississippi). His father, Vernall Varnado (born December 13, 1949, Magnolia, Mississippi), was a Vietnam veteran, singer, and mail carrier who was said to be frequently absent from his life. As a boy, his parents nicknamed him "Snoopy" because of his appearance, but they usually addressed him as Kenan at home. His mother and stepfather divorced in 1975.</p>
+        </section>
+	</main>
+	<main id="gallery">
+        <h1>Gallery</h1>
+        <section>
+            <h1>Placeholder</h1>
+            <p>Something will go here eventually.</p>
+        </section>
+	</main>
+	<main id="contact">
+        <h1>Contact</h1>
+        <section>
+            <h1>Placeholder</h1>
+            <p>Something will go here eventually.</p>
+        </section>
+	</main>
 	<footer>
 		<br><h1>(C) Kenan Buckley 2015. Designed and Coded by <a href="http://xenxier.com">Benjamin Gwynn</a></h1><br>
 	</footer>
 </body>
+<script>
+    smoothScroll.init();
+</script>
