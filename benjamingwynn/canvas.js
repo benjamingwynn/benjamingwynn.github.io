@@ -5,7 +5,7 @@ var cursor = {x: 0, y: 0};
 $("section").height($(window).height());
 
 // Track mouse movement
-$(window).mousemove(function(event) {
+$(window).mousemove(function (event) {
     cursor.x = event.pageX;
     cursor.y = event.pageY;
 });
@@ -57,7 +57,27 @@ function drawCanvas(canvas_number) {
             prettyMovingTriangleDraw(ctx, w, 48, "#33c4e5");
             prettyMovingTriangleDraw(ctx, w, 32, "#3389e5");
             break;
-        case 1:
+        case 1: // About Us
+            var size = 128;
+            var pad = 16;
+            var x = 0, y = 0, ix = 0, iy = 0;
+            while (x < w) {
+                ix++;
+                while (y < h) {
+                    iy++;
+                    ctx.fillStyle = 'rgb(' + (200 + (ix * 5)) + ',' + (200 + (ix * 5)) + ',' + (200 + (ix * 5)) + ')';
+                    if ($(window).scrollTop() - $(canvas[2]).offset().top > 0) {
+                        ctx.fillRect(x - (($(window).scrollTop() - $(canvas[2]).offset().top) * 0.1), y - (cursor.x * 0.05), size, size);
+                    } else {
+                        ctx.fillRect(x + (($(window).scrollTop() - $(canvas[2]).offset().top) * 0.1), y - (cursor.x * 0.05), size, size);
+                    }
+                    y += size + pad;
+                }
+                x += size + pad;
+                y = 0;
+            }
+            break;
+        case 2:
             ctx.fillStyle = "#444";
             drawTextArray(ctx, 99, [
                 "<!DOCTYPE html>",
