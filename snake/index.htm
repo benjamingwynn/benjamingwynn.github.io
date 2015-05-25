@@ -5,17 +5,13 @@
     <!-- jQuery -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     
-    <!-- jQuery UI -->
-	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
-    
     <!-- Keydrown  -->
 	<script src="https://rawgit.com/jeremyckahn/keydrown/master/dist/keydrown.min.js"></script>
     
     <!-- Font -->
 	<link href='http://xenxier.com/common/font/vendor/RedAlert.css' rel='stylesheet' type='text/css'>
     
-    <!-- Snake -->
+    <!-- Style -->
 	<title>Xenxier's Snake</title>
 	<style>
 		* {
@@ -103,18 +99,18 @@
             if ((!(typeof(snake[0]) === "undefined")) || (!(typeof(snake[0].parts[0]) === "undefined"))) {
                 for (var p = 0; p < snake.length; p++) { // Player #
                     for (var i = 0; i < snake[p].parts.length; i++) { // Snake Part #
-                        // Loop through events
-                        for (var e = 0; e < snake[p].events.length; e++) {
+                        // Loop through movementevents
+                        for (var e = 0; e < snake[p].movementevents.length; e++) {
                             // If this snake part is at the event's position
-                            if (Math.ceil(snake[p].events[e].px) == Math.ceil(snake[p].parts[i].position.x) && snake[p].events[e].py == snake[p].parts[i].position.y) {
+                            if (Math.ceil(snake[p].movementevents[e].px) == Math.ceil(snake[p].parts[i].position.x) && snake[p].movementevents[e].py == snake[p].parts[i].position.y) {
                                 // Change it's velocity
-                                snake[p].parts[i].velocity.x = snake[p].events[e].vx;
-                                snake[p].parts[i].velocity.y = snake[p].events[e].vy;
+                                snake[p].parts[i].velocity.x = snake[p].movementevents[e].vx;
+                                snake[p].parts[i].velocity.y = snake[p].movementevents[e].vy;
 
                                 // If this is the last part, remove this event
                                 if (i == snake[p].parts.length - 1) {
                                     //console.log("Event removed!");
-                                    snake[p].events[e] = {};
+                                    snake[p].movementevents[e] = {};
                                 }
                             }
                         }
@@ -127,7 +123,7 @@
                             snake[p].parts[0].position.y + snake[p].parts[0].size.y > c.height
                         ) {
                             if (rules.wallsKillSnakes) {
-                                event.killPlayer(p, "a wall");
+                                gameevent.killPlayer(p, "a wall");
                             }
                         }
                         
@@ -146,15 +142,15 @@
                                                 if (rules.playerVsPlayer) {
                                                     if (i != 0) {
                                                         if (rules.pvpStealPoints) {
-                                                            event.newSnakeParts(p2, snake[p].parts.length);
+                                                            gameevent.newSnakeParts(p2, snake[p].parts.length);
                                                         } else {
-                                                            event.newSnakeParts(p2, config.globalKillReward);
+                                                            gameevent.newSnakeParts(p2, config.globalKillReward);
                                                         }
-                                                        event.killPlayer(p, "player #" + (p2 + 1));
+                                                        gameevent.killPlayer(p, "player #" + (p2 + 1));
                                                     }
                                                 } else {
-                                                    event.killPlayer(p, "another player");
-                                                    event.killPlayer(p2, "another player");
+                                                    gameevent.killPlayer(p, "another player");
+                                                    gameevent.killPlayer(p2, "another player");
                                                 }
                                                 // exit for loop by setting values
                                                 i2 = snake[p].parts.length;
@@ -193,26 +189,56 @@
             }
             
             if (alive[0]) {
-                ctx.font="20px RedAlert";
                 ctx.fillStyle = "#FFF";
-                ctx.fillText("Player 1", 10, 20);
-                
-                ctx.font="100px RedAlert";
+            } else {
+                ctx.fillStyle = "#333";
+            }
+            
+            ctx.font="20px RedAlert";
+            ctx.textAlign = "left"
+            ctx.fillText("Player 1", 10, 20);
+
+            ctx.font="100px RedAlert";
+            if ((!(rules.showNegativeHighScores)) && ((snake[0].score - config.globalLength) * 10) < 0) {
+                ctx.fillText("0", 20, 90);
+            } else {
+                ctx.fillText((snake[0].score - config.globalLength) * 10, 20, 90);
+            }
+
+            ctx.font="40px RedAlert";
+            if ((snake[0].parts.length - config.globalLength - 1) * 10 < 0) {
+                ctx.fillText("0", 20, 120)
+            } else {
+                ctx.fillText((snake[0].parts.length - config.globalLength - 1) * 10, 20, 120);
+            }
+            
+            if (alive[1]) {
                 ctx.fillStyle = "#FFF";
-                if ((!(rules.showNegativeHighScores)) && ((snake[0].score - config.globalLength) * 10) < 0) {
-                    ctx.fillText("0", 20, 90);
-                } else {
-                    ctx.fillText((snake[0].score - config.globalLength) * 10, 20, 90);
-                }
-                
-                ctx.font="40px RedAlert";
-                ctx.fillStyle = "#FFF";
-                ctx.fillText((snake[0].parts.length - config.globalLength - 1) * 10, 20, 120)
+            } else {
+                ctx.fillStyle = "#333";
+            }
+            
+            ctx.font="20px RedAlert";
+            ctx.textAlign = "right"
+            ctx.fillText("Player 2", c.width - 10, 20);
+
+            ctx.font="100px RedAlert";
+            if ((!(rules.showNegativeHighScores)) && ((snake[1].score - config.globalLength) * 10) < 0) {
+                ctx.fillText("0", c.width - 20, 90);
+            } else {
+                ctx.fillText((snake[1].score - config.globalLength) * 10, c.width - 20, 90);
+            }
+
+            ctx.font="40px RedAlert";
+            if ((snake[1].parts.length - config.globalLength - 1) * 10 < 0) {
+                ctx.fillText("0", c.width - 20, 120)
+            } else {
+                ctx.fillText((snake[1].parts.length - config.globalLength - 1) * 10, c.width - 20, 120);
             }
         }
     }
     
-    var event = {
+    var gameevent = {
         newPlayer: function(player, x, y) {
             console.log("Creating player " + player);
             
@@ -250,8 +276,8 @@
                     break;
             }
             
-            // Add empty events array
-            base.events = [];
+            // Add empty movementevents array
+            base.movementevents = [];
             
             // Reset score
             if (rules.respawnResetsHighScore) {
@@ -268,7 +294,7 @@
             snake[player] = base;
             
             // Add parts
-            event.newSnakeParts(player, config.globalLength);
+            gameevent.newSnakeParts(player, config.globalLength);
         },
         
         killPlayer: function(player, cause) {
@@ -281,7 +307,7 @@
         newSnakeParts: function(player, amount) {
             console.log("Adding " + amount + " parts to player #" + player);
             for (var i = 0; i < amount; i++) {
-                event.newSnakePart(player);
+                gameevent.newSnakePart(player);
             }
         },
         
@@ -327,7 +353,7 @@
         moveSnake: function(player, direction) {
             // If the player doesn't exist, create that player:
             if (typeof(snake[player]) === "undefined" || typeof(snake[player].parts[0]) === "undefined") {
-                event.newPlayer(player, 100 * (player + 1), 100 * (player + 1))
+                gameevent.newPlayer(player, 100 * (player + 1), 100 * (player + 1))
                 return;
             }
             
@@ -349,10 +375,10 @@
                     } else if (snake[player].parts[0].velocity.y > 0) { // Down
                         // Killing player
                         if (rules.snakesKillSelves) {
-                            event.killPlayer(player, "themselves going backwards");
+                            gameevent.killPlayer(player, "themselves going backwards");
                         }
                     } else {
-                        // Set the event where the first snake part is
+                        // Set the gameevent where the first snake part is
                         newevent.px = Math.ceil(snake[player].parts[0].position.x);
                         newevent.py = Math.ceil(snake[player].parts[0].position.y);
                     }
@@ -369,7 +395,7 @@
                     if (snake[player].parts[0].velocity.y < 0) { // Up
                         // Killing player
                         if (rules.snakesKillSelvesGoingBack) {
-                            event.killPlayer(player, "themselves going backwards");
+                            gameevent.killPlayer(player, "themselves going backwards");
                         }
                     } else if (snake[player].parts[0].velocity.y > 0) { // Down
                         // nothing
@@ -390,12 +416,12 @@
                     if (snake[player].parts[0].velocity.x > 0) { // right
                         // Killing player
                         if (rules.snakesKillSelvesGoingBack) {
-                            event.killPlayer(player, "themselves going backwards");
+                            gameevent.killPlayer(player, "themselves going backwards");
                         }
                     } else if (snake[player].parts[0].velocity.x < 0) { // left
                         // nothing
                     } else {
-                        // Set the event where the first snake part is
+                        // Set the gameevent where the first snake part is
                         newevent.px = Math.ceil(snake[player].parts[0].position.x);
                         newevent.py = Math.ceil(snake[player].parts[0].position.y);
                     }
@@ -413,7 +439,7 @@
                     } else if (snake[player].parts[0].velocity.x < 0) { // left
                         // Killing player
                         if (rules.snakesKillSelvesGoingBack) {
-                            event.killPlayer(player, "themselves going backwards");
+                            gameevent.killPlayer(player, "themselves going backwards");
                         }
                     } else {
                         // Set the event where the first snake part is
@@ -431,7 +457,7 @@
             }
 
             // Save event
-            snake[player].events[snake[player].events.length] = newevent;
+            snake[player].movementevents[snake[player].movementevents.length] = newevent;
         }
     }
     
@@ -442,23 +468,23 @@
 	
     $(window).load(function() {
         // Register key binds
-        kd[controls[0].up].press(function() { event.moveSnake(0, "up")});
-        kd[controls[0].down].press(function() { event.moveSnake(0, "down")});
-        kd[controls[0].left].press(function() { event.moveSnake(0, "left")});
-        kd[controls[0].right].press(function() { event.moveSnake(0, "right")});
+        kd[controls[0].up].press(function() { gameevent.moveSnake(0, "up")});
+        kd[controls[0].down].press(function() { gameevent.moveSnake(0, "down")});
+        kd[controls[0].left].press(function() { gameevent.moveSnake(0, "left")});
+        kd[controls[0].right].press(function() { gameevent.moveSnake(0, "right")});
 
-        kd[controls[1].up].press(function() { event.moveSnake(1, "up")});
-        kd[controls[1].down].press(function() { event.moveSnake(1, "down")});
-        kd[controls[1].left].press(function() { event.moveSnake(1, "left")});
-        kd[controls[1].right].press(function() { event.moveSnake(1, "right")});
+        kd[controls[1].up].press(function() { gameevent.moveSnake(1, "up")});
+        kd[controls[1].down].press(function() { gameevent.moveSnake(1, "down")});
+        kd[controls[1].left].press(function() { gameevent.moveSnake(1, "left")});
+        kd[controls[1].right].press(function() { gameevent.moveSnake(1, "right")});
 
         // Player 1 up
         //kd.DOWN.down(function() {
-        //    event.moveSnake(0, "up");
+        //    gameevent.moveSnake(0, "up");
         //});
 
-        event.newPlayer(0, 100, 100);
-        event.newPlayer(1, 200, 200);
+        gameevent.newPlayer(0, 100, 100);
+        gameevent.newPlayer(1, 200, 200);
 
         kd.SPACE.press(function() {
             rules.gamePaused = !(rules.gamePaused);
@@ -482,5 +508,10 @@
                     update.snakeSpeed();
                 }
         }, config.gloablSpeed);
+    });
+    
+    $( window ).resize(function() {
+        // temp fix
+        location.reload();
     });
 </script>
