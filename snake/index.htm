@@ -58,7 +58,8 @@
         globalLength: 5,
         globalColourDecrement: 5,
         globalRespawnCost: 1,
-        globalKillReward: 1
+        globalKillReward: 1,
+        globalTimeout: 30
     }
     
     var controls = [
@@ -102,7 +103,7 @@
                         // Loop through movementevents
                         for (var e = 0; e < snake[p].movementevents.length; e++) {
                             // If this snake part is at the event's position
-                            if (Math.ceil(snake[p].movementevents[e].px) == Math.ceil(snake[p].parts[i].position.x) && snake[p].movementevents[e].py == snake[p].parts[i].position.y) {
+                            if (Math.ceil(snake[p].movementevents[e].px) == Math.ceil(snake[p].parts[i].position.x) && Math.ceil(snake[p].movementevents[e].py) == Math.ceil(snake[p].parts[i].position.y)) {
                                 // Change it's velocity
                                 snake[p].parts[i].velocity.x = snake[p].movementevents[e].vx;
                                 snake[p].parts[i].velocity.y = snake[p].movementevents[e].vy;
@@ -279,6 +280,9 @@
             // Add empty movementevents array
             base.movementevents = [];
             
+            // Add timeout
+            base.timeout = 0;
+            
             // Reset score
             if (rules.respawnResetsHighScore) {
                 base.score = 0;
@@ -300,6 +304,7 @@
         killPlayer: function(player, cause) {
             if (rules.snakesCanDie) {
                 snake[player].parts = [];
+                snake[player].movementevents = [];
                 console.warn("Player #" + (player + 1) + " was killed by " + cause + ".");
             }
         },
@@ -357,6 +362,13 @@
                 return;
             }
             
+            // If the player can't move due to timeout
+            if (snake[player].timeout > 0) {
+                return;
+            } else {
+                snake[player].timeout = config.globalTimeout;
+            }
+            
             // Create a new event:
             var newevent = {};
 
@@ -372,11 +384,13 @@
                     // else:    Create event
                     if (snake[player].parts[0].velocity.y < 0) { // Up
                         // nothing
+                        return;
                     } else if (snake[player].parts[0].velocity.y > 0) { // Down
                         // Killing player
                         if (rules.snakesKillSelves) {
                             gameevent.killPlayer(player, "themselves going backwards");
                         }
+                        return;
                     } else {
                         // Set the gameevent where the first snake part is
                         newevent.px = Math.ceil(snake[player].parts[0].position.x);
@@ -397,8 +411,10 @@
                         if (rules.snakesKillSelvesGoingBack) {
                             gameevent.killPlayer(player, "themselves going backwards");
                         }
+                        return;
                     } else if (snake[player].parts[0].velocity.y > 0) { // Down
                         // nothing
+                        return;
                     } else {
                         // Set the event where the first snake part is
                         newevent.px = Math.ceil(snake[player].parts[0].position.x);
@@ -418,8 +434,10 @@
                         if (rules.snakesKillSelvesGoingBack) {
                             gameevent.killPlayer(player, "themselves going backwards");
                         }
+                        return;
                     } else if (snake[player].parts[0].velocity.x < 0) { // left
                         // nothing
+                        return;
                     } else {
                         // Set the gameevent where the first snake part is
                         newevent.px = Math.ceil(snake[player].parts[0].position.x);
@@ -436,11 +454,13 @@
                     // Right:   Do nothing
                     if (snake[player].parts[0].velocity.x > 0) { // right
                         // nothing
+                        return;
                     } else if (snake[player].parts[0].velocity.x < 0) { // left
                         // Killing player
                         if (rules.snakesKillSelvesGoingBack) {
                             gameevent.killPlayer(player, "themselves going backwards");
                         }
+                        return;
                     } else {
                         // Set the event where the first snake part is
                         newevent.px = Math.ceil(snake[player].parts[0].position.x);
@@ -455,7 +475,11 @@
                     console.error(direction + " is an unknown direction. Cannot move snake! Use either 'down', 'up', 'left' or 'right' as the second argument - with the first being a player number.");
                     return;
             }
-
+            
+            // TEMPFIX: Override first snake part to fix bug where the head seperates from body
+            snake[player].parts[0].velocity.x = newevent.vx;
+            snake[player].parts[0].velocity.y = newevent.vy;
+            
             // Save event
             snake[player].movementevents[snake[player].movementevents.length] = newevent;
         }
@@ -508,6 +532,15 @@
                     update.snakeSpeed();
                 }
         }, config.gloablSpeed);
+        
+        
+        setInterval(function() {
+            for (var p = 0; p < snake.length; p++) { // Player #
+                if (snake[p].timeout > 0) {
+                    snake[p].timeout--;
+                }
+            }
+        }, 1);
     });
     
     $( window ).resize(function() {
