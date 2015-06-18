@@ -18,9 +18,9 @@
 	<script>animateObjects=["main h1,main h2,main h3,main h4,main h5,main h6,main p,header h1,header h2,header h3,header h4,header h5,header h6,header p, aside"];allow_animation=true;$(document).ready(function(){animationEvent()});$(window).scroll(function(){animationEvent()})</script>
 </head>
 <body>
-    <audio autoplay loop hidden=true>
+    <!-- <audio autoplay loop hidden=true>
         <source src="totallylegitnonpiratedmusic.mp3">
-    </audio>
+    </audio> -->
 	<header class="animated fadeInDown">
 		<h1>Vote<br>Kenan</h1>
 		<h2>He must be good, his website is pink</h2>
@@ -28,7 +28,7 @@
             <ul>
                 <li><a data-scroll href="#home">Home</a></li>
                 <li><a data-scroll href="#about">About</a></li>
-                <li><a data-scroll href="#gallery">Gallery</a></li>
+                <li><a data-scroll href="#speech">Speech</a></li>
                 <li><a data-scroll href="#contact">Contact</a></li>
             </ul>
             <script>$("nav ul li").addClass("hvr-underline-from-center")</script>
@@ -48,18 +48,21 @@
             <p>Kenan was born October 20, 1971, at the Los Altos Hospital in Long Beach, California, the second of three sons. Named after his stepfather, Calvin Cordozar Buckley, Sr. (December 10, 1948 – November 9, 1985, Los Angeles), his mother is Beverly Buckley (née Tate; born April 27, 1951, McComb, Mississippi). His father, Vernall Varnado (born December 13, 1949, Magnolia, Mississippi), was a Vietnam veteran, singer, and mail carrier who was said to be frequently absent from his life. As a boy, his parents nicknamed him "Snoopy" because of his appearance, but they usually addressed him as Kenan at home. His mother and stepfather divorced in 1975.</p>
         </section>
 	</main>
-	<main id="gallery">
-        <h1>Gallery</h1>
+	<main id="speech">
+        <h1>Speech</h1>
         <section>
-            <h1>Placeholder</h1>
-            <p>Something will go here eventually.</p>
+            <p>Kenan hasn't given his speech yet. Come back soon to watch the video here!</p>
         </section>
 	</main>
 	<main id="contact">
         <h1>Contact</h1>
         <section>
-            <h1>Placeholder</h1>
-            <p>Something will go here eventually.</p>
+			<h1>Contact Kenan</h1>
+			<p>Use the form below to send a message to Kenan, or just <a href="MAILTO:KenanB@email.com">email him directly</a> at KenanB@email.com</p>
+			<form action="MAILTO:KenanB@email.com" method="post" enctype="text/plain">
+				<textarea id="msg" type="text" name="content"></textarea>
+				<input id="snd" type="submit" value="Send">
+			</form>
         </section>
 	</main>
 	<footer>

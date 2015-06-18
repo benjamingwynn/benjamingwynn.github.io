@@ -76,21 +76,65 @@ main {
                 font-size: 5rem;
             }
 
-#home {   
+#home {
 	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN4ptG0CQAFywJD4dhFbwAAAABJRU5ErkJggg==), url("kenan2.jpg");
 }
 
-#about {   
+#about {
 	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN4ptG0CQAFywJD4dhFbwAAAABJRU5ErkJggg==), url("kenan3.jpg");
 }
 
-#gallery {   
+#speech {
 	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN4ptG0CQAFywJD4dhFbwAAAABJRU5ErkJggg==), url("kenan4.jpg");
 }
 
-#contact {   
+	#speech  section {
+		background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN4ptG0CQAFywJD4dhFbwAAAABJRU5ErkJggg==);
+		border-style: solid;
+		border-color: white;
+		width: 80% !important;
+		margin: 1rem auto 1rem auto;
+		padding: 2rem 4rem 2rem 4rem;
+	}
+	
+	#speech section p {
+		font-size: 2rem;
+		text-align: center;
+	}
+
+#contact {
 	background: rgba(230, 40, 130, 1);
 }
+
+	#contact form {
+		margin-top: 1rem;
+		margin-bottom: 0;
+	}
+
+		#contact form  * {
+			padding: 1rem;
+			color: dimgray;
+			font-weight: 300;
+			background-color: white;
+			border-color: pink;
+			display: block;
+		}
+		
+		#msg {
+			width: 100%;
+			height: 5rem;
+			font-size: 1rem;
+		}
+		
+		#snd {
+			text-transform: uppercase;
+			margin: 1rem auto 0 auto;
+			text-align: center;
+			width: 50%;
+			font-size: 2rem;
+			border-style: solid;
+			background: none;
+		}
 
 /* Footer */
 
