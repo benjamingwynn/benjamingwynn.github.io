@@ -116,7 +116,6 @@ main {
 
 #speech {
 	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN4ptG0CQAFywJD4dhFbwAAAABJRU5ErkJggg==), url("kenan4.jpg");
-	z-index: 9;
 }
 
 	#speech  section {
