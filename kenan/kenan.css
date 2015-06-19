@@ -15,6 +15,7 @@
 html, body {
 	overflow-x: hidden;
 	width: 100%;
+	background: rgba(230, 40, 130, 1);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -81,6 +82,34 @@ main {
 }
 
 #about {
+	/* background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN4ptG0CQAFywJD4dhFbwAAAABJRU5ErkJggg==), url("kenan3.jpg"); 
+	background-image: url("mlg.png");*/
+	background: none;
+	padding-bottom: 0;
+}
+
+	#about * {
+		text-transform: lowercase;
+		font-family: "Comic Sans MS";
+		color: yellow;
+		text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	}
+	
+	canvas {
+		position: absolute;
+		z-index: 0;
+		background-image: url("mlg.png");
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: cover;
+	}
+	
+	#mlgcrap {
+		text-align: center;
+		width: 100%;
+	}
+	
+#policies {
 	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN4ptG0CQAFywJD4dhFbwAAAABJRU5ErkJggg==), url("kenan3.jpg");
 }
 
@@ -162,7 +191,7 @@ nav ul li {
     text-align: center;
     list-style: none;
     font-size: 2rem;
-    width: 25%;
+    width: 20%;
     float: left;
     background: rgba(230, 40, 130, 0.5);
     text-transform: uppercase;

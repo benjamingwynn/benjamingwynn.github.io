@@ -7,6 +7,7 @@
 	<link href='kenan.css' rel='stylesheet' type='text/css'>
     <link href='https://rawgit.com/IanLunn/Hover/master/css/hover-min.css' rel='stylesheet' type='text/css'>
 	<link href='../common/css/vendor/animate.css' rel='stylesheet' type='text/css'>
+	<link href='jquery.bxslider.css' rel='stylesheet' type='text/css'>
 	
 	<!-- JS -->
     <!--[if lt IE 9]>
@@ -15,7 +16,8 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://rawgit.com/cferdinandi/smooth-scroll/master/dist/js/smooth-scroll.min.js"></script>
 	<script src="../common/js/xenxier/animate-all-the-things.js"></script>
-	<script>animateObjects=["main h1,main h2,main h3,main h4,main h5,main h6,main p,header h1,header h2,header h3,header h4,header h5,header h6,header p, aside"];allow_animation=true;$(document).ready(function(){animationEvent()});$(window).scroll(function(){animationEvent()})</script>
+	<script src="jquery.bxslider.min.js"></script>
+	<script>animateObjects=["main h1,main h2,main h3,main h4,main h5,main h6,main p,header h1,header h2,header h3,header h4,header h5,header h6,header p, aside, canvas, img, form"];allow_animation=true;$(document).ready(function(){animationEvent()});$(window).scroll(function(){animationEvent()})</script>
 </head>
 <body>
     <!-- <audio autoplay loop hidden=true>
@@ -27,6 +29,7 @@
         <nav>
             <ul>
                 <li><a data-scroll href="#home">Home</a></li>
+                <li><a data-scroll href="#policies">Policies</a></li>
                 <li><a data-scroll href="#about">About</a></li>
                 <li><a data-scroll href="#speech">Speech</a></li>
                 <li><a data-scroll href="#contact">Contact</a></li>
@@ -37,16 +40,55 @@
 	<main id="home">
         <h1>Home</h1>
         <section>
-            <h1>i think this is a title</h1>
-            <p>Placeholder for placeholder text.</p>
+            <h1>Posters</h1>
+            <p>The current posters for Kenan are below.</p>
+			<br>
+			<ul class="bxslider">
+				<li><img src="placeholder.jpg" title="Some Words"></li>
+				<li><img src="placeholder.jpg" title="Some More Words"></li>
+				<li><img src="placeholder.jpg" title="Even More Words"></li>
+			</ul>
+			<script>
+				$('.bxslider').bxSlider({
+					mode: 'fade',
+					captions: true
+				});
+			</script>
+        </section>
+	</main>
+	<main id="policies">
+        <h1>Policies</h1>
+        <section>
+            <h1>Coming Soon</h1>
+            <p>Policies will be here once Kenan has made his speech. Stay tuned.</p>
         </section>
 	</main>
 	<main id="about">
+		<canvas width='0px' height='0px' id="rotate"></canvas>
         <h1>About</h1>
         <section>
             <h1>Kenan Buckley</h1>
             <p>Kenan was born October 20, 1971, at the Los Altos Hospital in Long Beach, California, the second of three sons. Named after his stepfather, Calvin Cordozar Buckley, Sr. (December 10, 1948 – November 9, 1985, Los Angeles), his mother is Beverly Buckley (née Tate; born April 27, 1951, McComb, Mississippi). His father, Vernall Varnado (born December 13, 1949, Magnolia, Mississippi), was a Vietnam veteran, singer, and mail carrier who was said to be frequently absent from his life. As a boy, his parents nicknamed him "Snoopy" because of his appearance, but they usually addressed him as Kenan at home. His mother and stepfather divorced in 1975.</p>
         </section>
+		<section id="mlgcrap">
+			<img src="../grnt/snoop.gif">
+			<img src="../grnt/snoop.gif">
+			<img src="../grnt/snoop.gif">
+			<img src="../grnt/snoop.gif">
+			<img src="../grnt/snoop.gif">
+			<img src="../grnt/snoop.gif">
+			<img src="../grnt/snoop.gif">
+			<br>
+			<img src="../grnt/boom.gif">
+			<img src="../grnt/boom.gif">
+			<img src="../grnt/superweed.gif">
+			<img src="../grnt/fantastic.gif">
+			<img src="../grnt/superweed.gif">
+			<img src="../grnt/boom.gif">
+			<img src="../grnt/boom.gif">
+			<br>
+			<p>420 blaze it</p>
+		</section>
 	</main>
 	<main id="speech">
         <h1>Speech</h1>
@@ -69,6 +111,33 @@
 		<br><h1>(C) Kenan Buckley 2015. Designed and Coded by <a href="http://xenxier.com">Benjamin Gwynn</a></h1><br>
 	</footer>
 </body>
+
+<!-- init JS -->
 <script>
     smoothScroll.init();
+</script>
+
+<!-- Canvas Stuff -->
+<img style="display:none" id="rotateimg" src="mlg.png"> <!-- for canvas -->
+<script>
+	var r = 0;
+	var c = document.getElementById("rotate");
+	var ctx = c.getContext("2d");
+	var img = document.getElementById("rotateimg");
+	
+	c.width  = window.innerWidth;
+	c.height = window.innerHeight;
+	
+	window.addEventListener("resize", function(){
+		c.width  = window.innerWidth;
+		c.height = window.innerHeight;
+	});
+	
+	setInterval(function() {
+		ctx.clearRect ( 0 , 0 , c.width, c.height );
+		ctx.translate(c.width /2, c.height /2);
+		ctx.rotate(Math.PI / 180);
+		ctx.translate(-c.width /2, -c.height/2);
+		ctx.drawImage(img, c.width / 2 - img.width / 2, c.height / 2 - img.height / 2);
+	}, 1000 / 120);
 </script>
