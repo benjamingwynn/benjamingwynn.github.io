@@ -82,9 +82,8 @@ main {
 }
 
 #about {
-	/* background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN4ptG0CQAFywJD4dhFbwAAAABJRU5ErkJggg==), url("kenan3.jpg"); 
-	background-image: url("mlg.png");*/
-	background: none;
+	/* background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN4ptG0CQAFywJD4dhFbwAAAABJRU5ErkJggg==), url("kenan3.jpg"); */
+	background-image: url("mlg.png");
 	padding-bottom: 0;
 }
 
@@ -93,15 +92,6 @@ main {
 		font-family: "Comic Sans MS";
 		color: yellow;
 		text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-	}
-	
-	canvas {
-		position: absolute;
-		z-index: 0;
-		background-image: url("mlg.png");
-		background-repeat: no-repeat;
-		background-position: center;
-		background-size: cover;
 	}
 	
 	#mlgcrap {
@@ -206,4 +196,14 @@ nav ul li a {
     color: white;
     display: block;
     text-decoration: none;
+}
+
+/* Slider overrides */
+.bxslider  li {
+	background: rgba(220, 30, 120, 1);
+}
+
+.bxslider  *{
+	margin-left: auto;
+	margin-right: auto;
 }

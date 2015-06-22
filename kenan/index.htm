@@ -17,7 +17,7 @@
     <script src="https://rawgit.com/cferdinandi/smooth-scroll/master/dist/js/smooth-scroll.min.js"></script>
 	<script src="../common/js/xenxier/animate-all-the-things.js"></script>
 	<script src="jquery.bxslider.min.js"></script>
-	<script>animateObjects=["main h1,main h2,main h3,main h4,main h5,main h6,main p,header h1,header h2,header h3,header h4,header h5,header h6,header p, aside, img, form"];allow_animation=true;$(document).ready(function(){animationEvent()});$(window).scroll(function(){animationEvent()})</script>
+	<script>animateObjects=["main h1,main h2,main h3,main h4,main h5,main h6,main p,header h1,header h2,header h3,header h4,header h5,header h6,header p, aside, form"];allow_animation=true;$(document).ready(function(){animationEvent()});$(window).scroll(function(){animationEvent()})</script>
 </head>
 <body>
     <audio autoplay loop hidden=true>
@@ -44,13 +44,16 @@
             <p>The current posters for Kenan are below.</p>
 			<br>
 			<ul class="bxslider">
-				<li><img src="placeholder.jpg" title="Some Words"></li>
-				<li><img src="placeholder.jpg" title="Some More Words"></li>
-				<li><img src="placeholder.jpg" title="Even More Words"></li>
+				<li><img src="poster1.jpg"></li>
+				<li><img src="poster2.jpg"></li>
+				<li><img src="poster3.jpg"></li>
+				<li><img src="poster4.jpg"></li>
+				<li><img src="poster5.jpg"></li>
 			</ul>
 			<script>
 				$('.bxslider').bxSlider({
 					mode: 'fade',
+					adaptiveHeight: true,
 					captions: true
 				});
 			</script>
@@ -64,7 +67,6 @@
         </section>
 	</main>
 	<main id="about">
-		<canvas width='0px' height='0px' id="rotate"></canvas>
         <h1>About</h1>
         <section>
             <h1>Kenan Buckley</h1>
@@ -117,8 +119,8 @@
     smoothScroll.init();
 </script>
 
-<!-- Canvas Stuff -->
-<img style="display:none" id="rotateimg" src="mlg.png"> <!-- for canvas -->
+<!-- Canvas Stuff
+<img style="display:none" id="rotateimg" src="mlg.png">
 <script>
 	var r = 0;
 	var c = document.getElementById("rotate");
@@ -142,4 +144,4 @@
 		ctx.translate(-c.width /2, -c.height/2);
 		ctx.drawImage(img, c.width / 2 - img.width / 2, c.height / 2 - img.height / 2);
 	}, 2);
-</script>
+</script>-->
