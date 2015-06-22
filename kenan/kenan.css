@@ -199,6 +199,7 @@ nav ul li a {
 }
 
 /* Slider overrides */
+
 .bxslider  li {
 	background: rgba(220, 30, 120, 1);
 }
@@ -206,4 +207,24 @@ nav ul li a {
 .bxslider  *{
 	margin-left: auto;
 	margin-right: auto;
+}
+
+/* Jump to top stuff */
+#totop {
+	text-decoration: none;
+	display: none;
+	position: fixed;
+	width: auto;
+	background: rgba(220, 30, 120, 1);
+	color: white;
+	text-align: center;
+	bottom: 2rem;
+	right: 2rem;
+	padding: 1rem;
+	font-size: 1rem;
+	z-index: 9;
+	border-color: white;
+	border-style: solid;
+	width: 1.5rem;
+	height: 1.5rem;
 }

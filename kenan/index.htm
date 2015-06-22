@@ -20,6 +20,16 @@
 	<script>animateObjects=["main h1,main h2,main h3,main h4,main h5,main h6,main p,header h1,header h2,header h3,header h4,header h5,header h6,header p, aside, form"];allow_animation=true;$(document).ready(function(){animationEvent()});$(window).scroll(function(){animationEvent()})</script>
 </head>
 <body>
+	<a data-scroll href="#totop" class="hvr-grow" id="totop">↑</a>
+	<script>
+		$(window).scroll(function() {
+			if ($(window).scrollTop() > 0) {
+				$("#totop").fadeIn();
+			} else {
+				$("#totop").fadeOut();
+			}
+		});
+	</script>
     <audio autoplay loop hidden=true>
         <source src="totallylegitnonpiratedmusic.mp3">
     </audio>
