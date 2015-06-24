@@ -116,6 +116,11 @@ main {
 		padding: 2rem 4rem 2rem 4rem;
 	}
 	
+	#speech section iframe {
+		display: block;
+		margin: 1rem auto;
+	}
+	
 	#speech section p {
 		font-size: 2rem;
 		text-align: center;
