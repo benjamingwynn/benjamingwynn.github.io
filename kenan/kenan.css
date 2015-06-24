@@ -164,17 +164,26 @@ main {
 
 footer {
     border-top: dashed;
-    background: rgba(230, 40, 130, 1);;
-}
-
-footer * {
-    width: 100%;
-	font-weight: 100;
-	font-size: 1rem;
-	text-transform: uppercase;
-	color: white;
+    background: rgba(230, 40, 130, 1);
 	text-align: center;
 }
+
+	footer * {
+		width: 100%;
+		font-weight: 100;
+		font-size: 1rem;
+		text-transform: uppercase;
+		color: white;
+		text-align: center;
+	}
+
+	footer img {
+		width: auto;
+		height: auto;
+		display: block;
+		margin: auto;
+		text-align: center;
+	}
 
 /* NAV STUFF */
 
