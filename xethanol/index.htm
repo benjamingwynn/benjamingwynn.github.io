@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+		<title>Xethanol</title>
+		
+		<!-- CDN CSS -->
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<link href="http://fonts.googleapis.com/css?family=Oswald:400,700,300" rel="stylesheet" type="text/css">
+	
+		<!-- Our CSS -->
+		<link href="index.css" rel="stylesheet" type="text/css">
+		
+		<!-- IE 8 Support: [if lt IE 9]>
+			<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif] -->
+	</head>
+	<body>
+		<header>
+			<h1>Xethanol</h1>
+			<h2>Drink <strong>whatever</strong> it tells you to.</h2>
+		</header>
+		<main>
+		</main>
+		<p class="well"></p>
+		<a class="btn btn-default" href="javascript:location.reload();">ANOTHER!</a>
+		<footer><span>Created by Xenxier</span></footer>
+	</body>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script>
+		var drinks = [
+			["Jagermeister", "SpringGreen"],
+			["Smirnoff", "Crimson"],
+			["Sourz", "green"],
+			["WKD", "DarkTurquoise"],
+			["Cola", "Sienna"],
+			["Lemonade", "Gold"]
+		];
+		
+		function generateDrinks() {
+			var total = 0;
+			var parts = [];
+			
+			while (total < 1) {
+				if ((1 - total) < 0.10) {
+					parts[parts.length - 1][1] += 1 - total;
+					total += 1 - total;
+					break;
+				}
+			
+				if (parts.length == drinks.length) {
+					parts[parts.length - 1][1] += 1 - total;
+					total += 1 - total;
+					break;
+				}
+				
+				// Get a drink which hasn't be got
+				var drink;
+				var find = true;
+				while (find) {
+					find = false;
+					
+					drink = drinks[Math.floor(Math.random() * drinks.length)];
+					
+					for (var i = 0; i < parts.length; i++) {
+						if (parts[i][0] == drink) {
+							// if we already have this drink, get a new drink
+							find = true;
+						}
+					}
+				}
+				
+				var rand = Math.random() + 0.25;
+				
+				if (rand > 1) {
+					rand = 1;
+				}
+				
+				if (total > 0) {
+					var size = rand * total;
+				} else {
+					var size = rand;
+				}
+				
+				total += size;
+				parts[parts.length] = [drink, size];
+			}
+			
+			if (total > 1) {
+				parts[parts.length - 1][1] -= total - 1;
+				total -= total - 1;
+			}
+			
+			return [parts, total];
+		}
+		
+		var drnk = generateDrinks()[0];
+		var css = "";
+		var total = 0;
+		//for (var i = 0; i < drnk.length; i++) {
+		//}
+		var i = drnk.length;
+		while(i--) {
+			$("main").append("<div style='height:" + (drnk[i][1] * 100) + "%; background-color: " + drnk[i][0][1] + ";'>" + drnk[i][0][0] + "</div>");
+			$("p").append("<span style='color:" + drnk[i][0][1] + "'>~" + Math.round(drnk[i][1] * 100) + "% " + drnk[i][0][0] + " (" + drnk[i][1] * 100 + "%)</span> ");
+		}
+	</script>
+</html>

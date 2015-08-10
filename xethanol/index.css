@@ -1,0 +1,42 @@
+h1 {
+	font-size: 5em;
+}
+
+* {
+	text-align: center;
+}
+
+main {
+	border-right: thick #333 solid;
+	border-left: thick #333 solid;
+	border-bottom: thick #333 solid;
+	width: 10em;
+	height: 15em;
+	margin: 5em auto;
+	padding-top: 2em;
+	font-weight: bold;
+}
+
+main > div {
+	color: white;
+	text-shadow: 1px 1px 1px black;
+}
+
+p {
+	margin: auto;
+	max-width: 30em;
+}
+
+p > span {
+	display: block;
+}
+
+footer {
+	margin-top: 6em;
+}
+		
+footer > span {
+	padding: 1em 5em;
+	color: grey;
+	border-top: solid grey thin;
+}
