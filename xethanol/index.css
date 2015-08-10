@@ -17,9 +17,13 @@ main {
 	font-weight: bold;
 }
 
-main > div {
-	color: white;
-	text-shadow: 1px 1px 1px black;
+main > a > div {
+	color: white !important;
+	text-shadow: 1px 1px 1px black !important;
+}
+
+a:hover {
+	text-decoration: none;
 }
 
 p {
