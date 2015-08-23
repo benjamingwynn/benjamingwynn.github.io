@@ -10,6 +10,7 @@
 		<!-- CDN CSS -->
 		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link href="http://fonts.googleapis.com/css?family=Oswald:400,700,300" rel="stylesheet" type="text/css">
+		<link href="https://rawgit.com/daneden/animate.css/master/animate.css" rel="stylesheet" type="text/css">
 	
 		<!-- Our CSS -->
 		<link href="index.css" rel="stylesheet" type="text/css">
@@ -126,7 +127,11 @@
 		function pageReload() {
 			$("p").html("");
 			$("main>a").html("");
-			pageLoad();
+			$('main').addClass('animated shake');
+			$('main').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+				pageLoad();
+				$('main').removeClass('animated shake');
+			});
 		}
 		
 		pageLoad();
