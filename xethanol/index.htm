@@ -125,10 +125,10 @@
 		}
 		
 		function pageReload() {
-			$("p").html("");
-			$("main>a").html("");
 			$('main').addClass('animated shake');
 			$('main').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+				$("p").html("");
+				$("main>a").html("");
 				pageLoad();
 				$('main').removeClass('animated shake');
 			});
