@@ -24,9 +24,9 @@
 			<h1>Xethanol</h1>
 			<h2>Drink <strong>whatever</strong> it tells you to.</h2>
 		</header>
-		<main><a href="javascript:pageLoad();"></a></main>
+		<main><a href="javascript:pageReload();"></a></main>
 		<p class="well"></p>
-		<a class="btn btn-default" href="javascript:location.reload();">ANOTHER!</a>
+		<a class="btn btn-default" href="javascript:pageReload();">ANOTHER!</a>
 		<footer><span>Created by Xenxier</span></footer>
 	</body>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -121,6 +121,12 @@
 				$("main>a").append("<div style='height:" + (drnk[i][1] * 100) + "%; background-color: " + drnk[i][0][1] + ";'>" + drnk[i][0][0] + "</div>");
 				$("p").append("<span style='color:" + drnk[i][0][1] + "'>~" + Math.round(drnk[i][1] * 100) + "% " + drnk[i][0][0] + " (" + drnk[i][1] * 100 + "%)</span> ");
 			}
+		}
+		
+		function pageReload() {
+			$("p").html("");
+			$("main>a").html("");
+			pageLoad();
 		}
 		
 		pageLoad();
