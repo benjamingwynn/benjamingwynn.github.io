@@ -125,12 +125,14 @@
 		}
 		
 		function pageReload() {
-			$('main').addClass('animated shake');
+			var animation = "wobble";
+			
+			$('main').addClass('animated ' + animation);
 			$('main').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
 				$("p").html("");
 				$("main>a").html("");
 				pageLoad();
-				$('main').removeClass('animated shake');
+				$('main').removeClass('animated ' + animation);
 			});
 		}
 		
