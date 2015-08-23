@@ -22,7 +22,7 @@ main > a > div {
 	text-shadow: 1px 1px 1px black !important;
 }
 
-a, a:active, a:hover, a:focus {
+*, *:active, *:hover, *:focus {
 	text-decoration: none !important;
 }
 
