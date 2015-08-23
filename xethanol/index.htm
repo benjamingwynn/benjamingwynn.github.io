@@ -106,7 +106,8 @@
 			if (alwaysMix) {
 				if (parts.length == 1) {
 					parts[1] = [drinks[Math.floor(Math.random() * drinks.length)], 0.75];
-					if (parts[1][0] == ["Smirnoff", "Crimson"]) {
+					if (parts[1][0][0] == "Smirnoff") {
+						console.warn("Got two Smirnoff's :C");
 						parts[1][0] = ["Cola", "Sienna"];	
 					}
 					parts[0] = [["Smirnoff", "Crimson"], 0.25]; // VODKAAAAAAA
