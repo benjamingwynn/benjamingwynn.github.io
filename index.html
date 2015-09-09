@@ -1,26 +1,174 @@
 <!DOCTYPE html>
-<head>
-	<!-- jQuery -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>Xenxier</title>
 	
-	<!-- CSS -->
-	<link href='index.css' rel='stylesheet' type='text/css'>
-	<link href='common/font/vendor/RedAlert.css' rel='stylesheet' type='text/css'>
-	<style>
-		footer{display:none}
-	</style>
+		<link href="xenxier.css" rel='stylesheet' type='text/css'>
+		<link href='common/font/vendor/RedAlert.css' rel='stylesheet' type='text/css'>
+		<link href='common/css/vendor/animate.css' rel='stylesheet' type='text/css'>
+
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	</head>
+	<body id="index">
+		<div class="bg">
+			<div id="pb"></div>
+			<div id="solar"></div>
+		</div>
 	
-	<script>
-		var rand = ["SlateGray", "DimGray", "DodgerBlue", "LightSlateGray", "LightSkyBlue", "LightSeaGreen", "LightCoral",
-		"LightSteelBlue", "RoyalBlue", "SlateBlue", "SteelBlue", "YellowGreen"]
+		<div class="preload">
+			<img src="background/1.jpg">
+			<img src="background/2.jpg">
+			<img src="background/3.jpg">
+			<img src="background/4.jpg">
+			<img src="background/5.jpg">
+			<img src="background/6.jpg">
+			<img src="background/7.jpg">
+			<img src="background/8.jpg">
+			<img src="background/9.jpg">
+			<img src="background/1-small.jpg">
+			<img src="background/2-small.jpg">
+			<img src="background/3-small.jpg">
+			<img src="background/4-small.jpg">
+			<img src="background/5-small.jpg">
+			<img src="background/6-small.jpg">
+			<img src="background/7-small.jpg">
+			<img src="background/8-small.jpg">
+			<img src="background/9-small.jpg">
+		</div>
 		
-		window.onload = function() {
-			$("body").css("background",  rand[Math.floor(Math.random() * rand.length)]);
-		}
-	</script>
-</head>
-<body style="background-color:black">
-	<header>
-		<h1>Xenxier.com</h1>
-	</header>
-</body>
+		<nav>
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand">Xenxier</a>
+				</div>
+
+				<div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<!-- <li id="homepage" class="active"><a>Homepage <span class="sr-only">(current)</span></a></li> -->
+						<li id="pb"><a>Particlebox 3</a></li>
+						<li id="solar"><a>Solar System</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		<header>
+			<h1>Xenxier</h1>
+			<h2>Not enough water</h2>
+		</header>
+		
+		<main id="homepage">
+			<article>
+				<h1>Woo! Updates!</h1>
+				<ul class="tags"><li>Much Wow</li><li>Very Tag</li><li>Such Website</li></ul>
+				<p>Ohai. I updated Xenxier.com to look prettier and display better on mobile thanks to Bootstrap 3. The CSS for the website is now coded in LESS, so that's handy for future updates. News will appear here regarding this site. Right now I've only got Particlebox and the Solar System model up in the links, but everything else is on <a href="http://github.com/benjamingwynn">my Github</a>.</p>
+				<p>- Benjamin (Xenxier)</p>
+			</article>
+		</main>
+		
+		<main id="solar">
+			<h1>Solar System</h1>
+			<h2>A small experiment to show the solar system in HTML5 canvas.</h2>
+			<a href="solar">Open Solar System</a>
+		</main>
+		
+		<main id="pb">
+			<h1>Particlebox</h1>
+			<h2>Yo dawg I heard you like particles.</h2>
+			<a href="particlebox">Open Particlebox</a>
+		</main>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<script>
+			$("nav .navbar-brand").click(function() {
+				/* $("nav .navbar-nav li").removeClass("active");
+				$("nav .navbar-nav #homepage").addClass("active");
+				$("main").fadeOut("slow"); */
+				switchPage("homepage");
+			});
+		
+			$("nav .navbar-nav li a").click(function() {
+				/* $("nav .navbar-nav li").removeClass("active");
+				$(this).parent().addClass("active");
+				$("main").fadeOut("slow");
+				$("main#" + $(this).parent()[0].id).fadeIn("slow"); */
+				switchPage($(this).parent()[0].id);
+			});
+			
+			function switchPage(pageid) {
+				const animationIn = "fadeInDown";
+				const animationOut = "fadeOut";
+				
+				if ($("main#" + pageid).css("display") == "none") {
+					// Set active's
+					$("nav .navbar-nav li").removeClass("active");
+					$("nav .navbar-nav #" + pageid).addClass("active");
+					
+					// Find old id
+					var oldid = "main#";
+					$("main").each(function() {
+						if ($(this).css("display") != "none") {
+							oldid += this.id;
+						}
+					});
+					
+					// Animate this out:
+					$(oldid).addClass("animated " + animationOut);
+					
+					// Fire this when it's animation is done:
+					$(oldid).one("webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend", function() {
+						// Hide old page
+						$(oldid).hide();
+						$(oldid).removeClass("animated " + animationOut);
+						
+						// Show new page
+						$("main#" + pageid).show();
+						$("main#" + pageid).addClass("animated " + animationIn);
+					});
+					
+					// When page finishes animating
+					$("main#" + pageid).one("webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend", function() {
+						$("main#" + pageid).removeClass("animated " + animationIn);
+						
+						// bring in the background
+						$(".bg *").fadeOut("slow");
+						$(".bg #" + pageid).fadeIn("slow");
+					});
+				} else {
+					console.warn("Nope. That page is already being displayed, or doesn't exist.");
+				}
+			}
+			
+			var rand = [
+				"sudo rm -rf --no-preserve-root /",
+				"home of particles and stuff",
+				"i make things on the internet",
+				"[redacted]",
+				"I'm using motion controls!",
+				"10/10 - not enough water",
+				"free beer",
+				"linux master race"
+			]
+
+			window.onload = function() {
+				$("header h2").text(rand[Math.floor(Math.random() * rand.length)]);
+			}
+			
+			console.warn("I know. The LESS is horrible right now. I'll clean it up later.");
+		</script>
+	</body>
+</html>

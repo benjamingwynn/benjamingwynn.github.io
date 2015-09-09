@@ -1,0 +1,78 @@
+body#index {
+	.anim();
+	animation-name: bg-animation-small;
+	-o-animation-name: bg-animation-small;
+	-moz-animation-name: bg-animation-small;
+	-webkit-animation-name: bg-animation-small;
+	background-image: url('background/4-small.jpg');
+
+	background-size: 100%;
+	background-repeat: repeat;
+	background-position: bottom;
+	
+	header {
+		.anim();
+	}
+
+	header {
+		padding: 16em 0;
+		position: relative;
+		
+		* {
+			font-weight: 800;
+			text-align: center;
+			color: white;
+			text-shadow: 0 1px 8px rgba(0, 0, 0, 0.75);
+			text-transform: uppercase;
+			padding: 0;
+			margin: 0;
+			
+			z-index: 2;
+			position: relative;
+		}
+	
+		h1 {
+			font-size: 9em;
+		}
+		
+		// Animation
+		background-repeat: repeat-x;
+		background-size: contain;
+		background-position: top;
+		
+		// Fix background on small screens
+		@media only screen and (max-width:1441px) {
+			background-size: cover;
+			background-position: bottom;
+    	}
+	}
+	
+	main#solar, main#pb {
+		.box();
+		
+		text-align: center;
+		
+		* {
+			text-align: center;
+		}
+		
+		h1 {
+			font-weight: 800;
+			text-transform: uppercase;
+			font-size: 4em;
+		}
+		
+		h2 {
+			margin-bottom: 1em;
+		}
+		
+		> a {
+			text-decoration: none;
+			padding: 0.5em;
+			border: solid #111 3px;
+			border-radius: 0.25em;
+			color: #111;
+			font-size: 1.5em;
+		}
+	}
+}

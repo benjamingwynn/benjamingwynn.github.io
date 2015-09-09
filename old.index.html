@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<head>
+	<!-- jQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	
+	<!-- CSS -->
+	<link href='index.css' rel='stylesheet' type='text/css'>
+	<link href='common/font/vendor/RedAlert.css' rel='stylesheet' type='text/css'>
+	<style>
+		footer{display:none}
+	</style>
+	
+	<script>
+		var rand = ["SlateGray", "DimGray", "DodgerBlue", "LightSlateGray", "LightSkyBlue", "LightSeaGreen", "LightCoral",
+		"LightSteelBlue", "RoyalBlue", "SlateBlue", "SteelBlue", "YellowGreen"]
+		
+		window.onload = function() {
+			$("body").css("background",  rand[Math.floor(Math.random() * rand.length)]);
+		}
+	</script>
+</head>
+<body style="background-color:black">
+	<header>
+		<h1>Xenxier.com</h1>
+	</header>
+</body>
