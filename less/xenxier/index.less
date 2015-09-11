@@ -1,4 +1,22 @@
-body#index {
+.box() {
+	border-radius: 0.75em;
+	background: white;
+	border-style: double;
+	border-width: 0.5em;
+	padding: 2em;
+}
+
+* {
+	font-family: 'RedAlert', monospace;
+}
+
+html, body {
+	overflow-x: hidden;
+}
+
+body {
+	padding-top: 50px;
+	
 	.anim();
 	animation-name: bg-animation-small;
 	-o-animation-name: bg-animation-small;
@@ -10,11 +28,82 @@ body#index {
 	background-repeat: repeat;
 	background-position: bottom;
 	
-	header {
-		.anim();
+	nav {
+		.navbar();
+		.navbar-fixed-top();
+		.navbar-inverse();
+	
+		* {
+			font-weight: 800;
+			text-transform: uppercase;
+		}
+	
+		.navbar-brand {
+			font-size: 1.9em;
+		}
+	}
+	
+	#notfound {
+		.alert();
+		.alert-warning();
+		margin: 0;
+		border-radius: 0;
+		padding-left: 30px;
+		font-size: 1.2em;
+		display: none;
+	}
+
+	main {
+		.container();
+		display: none;
+		z-index: 2;
+		position: relative;
+	
+		article {
+			.box();
+	
+			h1 {
+				font-weight: 800;
+				text-transform: uppercase;
+				font-size: 4em;
+				margin: 0;
+			}
+	
+			p {
+				margin-top: 1.5em;
+				font-size: 1.25em;
+				font-weight: 600;
+			}
+	
+			.tags {
+				padding: 0;
+	
+				li {
+					.label();
+					.label-default();
+					margin-right: 0.5em;
+					display: inline;
+					list-style-type: none;
+					font-size: 1.2em;
+				}
+			}
+		}
+	}
+
+	main#homepage {
+		display: block;
+	}
+
+	.preload {
+		display: none;
+	}
+
+	a {
+		cursor: pointer;
 	}
 
 	header {
+		.anim();
 		padding: 16em 0;
 		position: relative;
 		
@@ -73,6 +162,30 @@ body#index {
 			border-radius: 0.25em;
 			color: #111;
 			font-size: 1.5em;
+		}
+	}
+	
+	.bg {
+		div {
+			display: none;
+			z-index: 1;
+			position: fixed;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			width: 100%;
+			height: 100%;
+		}
+	
+		#pb {
+			background-color: rgb(18, 18, 34);
+		}
+	
+		#solar {
+			background-position: center;
+			background-size: cover;
+			background-image: url("background/space.jpg");
 		}
 	}
 }

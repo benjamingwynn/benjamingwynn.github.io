@@ -64,11 +64,17 @@
 				</div>
 			</div>
 		</nav>
+		
+		<div id="notfound"><strong>Oh noes! [404]</strong> That page wasn't found, try selecting a new page using the links above.</div>
 
 		<header>
 			<h1>Xenxier</h1>
-			<h2>Not enough water</h2>
+			<h2></h2>
 		</header>
+		
+		<noscript>
+			<h1>Please enable Javascript.</h1>
+		</noscript>
 		
 		<main id="homepage">
 			<article>
@@ -168,7 +174,16 @@
 				$("header h2").text(rand[Math.floor(Math.random() * rand.length)]);
 			}
 			
-			console.warn("I know. The LESS is horrible right now. I'll clean it up later.");
+			if (window.location.hash == "#404") {
+				$("#notfound").fadeIn('slow');
+			}
+			
+			$(window).scroll(function() {
+				if ($("#notfound").css("display") != "none") {
+					$("#notfound").hide();
+					window.scrollTo(0, 0);
+				}
+			});
 		</script>
 	</body>
 </html>
