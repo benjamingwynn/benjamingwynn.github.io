@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script>
+		function codeParse() {
+			$(".coderow").remove();
+
+			var lines = $("#codein").val().split(/\n/);
+			for (var i = 0; i < lines.length; i++) {
+				var parsed = lines[i].replace(/^\s+|\s+$/gm,'').replace('\t','');
+
+				// dim name as type
+				// 0   1    2  3
+				if (isHere(lines[i], "Dim")) {
+					addToTable(parsed.split(" ")[1], parsed.split(" ")[3], "Local");
+				}
+
+				// public x as type
+				if (isHere(lines[i], "Public")) {
+					if (parsed.split(" ")[1] != "Sub") {
+						if (parsed.split(" ")[1] != "Function") {
+							addToTable(parsed.split(" ")[1], parsed.split(" ")[3], "Public");
+						}
+					}
+				}
+
+				// private x as type
+				if (isHere(lines[i], "Private")) {
+					if (parsed.split(" ")[1] != "Sub") {
+						if (parsed.split(" ")[1] != "Function") {
+							addToTable(parsed.split(" ")[1], parsed.split(" ")[3], "Private");
+						}
+					}
+				}
+			}
+		}
+
+		function isHere(tarstr, what) {
+			return (tarstr.split(what).join("") != tarstr);
+		}
+
+		function addToTable(name, type, scope) {
+			if (typeof(type) === "undefined") {
+				$("table").append("<tr class='coderow'><td>" + name + "</td><td>Variant</td><td>" + scope + "</td><td>" + $("#origin").val() + "</td></tr>")
+			} else {
+				$("table").append("<tr class='coderow'><td>" + name + "</td><td>" + type + "</td><td>" + scope + "</td><td>" + $("#origin").val() + "</td></tr>")
+			}
+		}
+	</script>
+	<style>
+		table {
+			width: 100%;
+		}
+
+		table, tr {
+			border: thin silver solid;
+		}
+
+		* {
+			font-family: sans-serif;
+		}
+
+		textarea {
+			width: 100%;
+			height: 600px;
+			margin: 24px 0;
+		}
+
+		button {
+			margin: 24px 0;
+		}
+	</style>
+</head>
+<body>
+	<label style="margin-right:10px">Module/Form Name</label><input id="origin" placeholder="Origin">
+	<textarea id="codein"></textarea>
+	<button onclick="codeParse()">get vars</button>
+	<table>
+		<tr style="font-weight: bold">
+			<td>Name</td>
+			<td>Type</td>
+			<td>Scope</td>
+			<td>Origin</td>
+			<td>Purpose</td>
+		</tr>
+	</table>
+</body>
