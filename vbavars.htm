@@ -33,6 +33,11 @@
 						}
 					}
 				}
+
+				// const ABCG as boolean = true
+				if (isHere(lines[i], "Const")) {
+					addToTable(parsed.split(" ")[1], parsed.split(" ")[3], "Constant");
+				}
 			}
 		}
 
