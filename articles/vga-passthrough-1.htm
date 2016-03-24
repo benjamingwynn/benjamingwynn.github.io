@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>Xenxier</title>
+
+		<link href="../font/vendor/RedAlert.css" rel="stylesheet" type="text/css">
+
+		<link href="../css/style.css" rel="stylesheet" type="text/css">
+	</head>
+
+	<body>
+		<style>
+			#load-overlay {
+				display: table;
+				position: fixed;
+				overflow: hidden;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				width: 100%;
+				height: 100%;
+				z-index: 1000;
+				background: rgba(0,0,0,0.5);
+			}
+
+			#load {
+				display: table-cell;
+				vertical-align: middle;
+				text-align: center;
+			}
+
+			#load > div {
+				display: inline-block;
+				background: white;
+				width: 160px;
+				box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+				text-align: center;
+				text-transform: uppercase;
+				font-weight: bold;
+
+				border-style: double;
+				border-width: 0.5em;
+				border-color: black;
+			}
+
+			#load > div > p {
+				color: black;
+				padding: 0.5em;
+			}
+
+			#load > div > img {
+				width: 100%;
+			}
+		</style>
+
+		<div id="load-overlay">
+			<div id="load">
+				<div>
+					<img draggable=false src="http://i.imgur.com/tf9PvNb.gif">
+					<p>loading</p>
+				</div>
+			</div>
+		</div>
+
+		<header>
+			<logo><span>x</span></logo>
+			<h2>xenxier.com</h2>
+		</header>
+
+		<main>
+			<article>
+				<h1>HOW TO: A detailed guide to VGA Passthrough (with UEFI &amp; Virt-Manager)</h1>
+
+
+				<p>Firstly, be aware that this task takes a great deal of time, patience and
+				<strong>D E T E R M I N A T I O N</strong>, as well as a keen attitude to learning.
+				<strong>You will also need previous knowledge using Linux and Windows. This is
+				not for the light of heart.</strong></p>
+
+
+				<p>Secondly, I will be writing this guide for Arch Linux, as it is the Linux
+				distribution I use and am most familiar with. You may be able to roughly
+				follow this guide on other Linux distributions if you substitute steps
+				specifically for Arch with the steps needed for your OS, but this won’t be
+				covered in this guide.</p>
+
+
+				<p>Thirdly, before reading this guide I strongly suggest you become familiar
+				with Arch Linux, including its package manager, pacman, as well as building
+				from the AUR. It may also be helpful to fully read through the additional
+				resources listed below.</p>
+
+
+				<p>This was written as part of the ‘just-do-it’ challenge put forth by
+				@Atomic_Charge.</p>
+
+
+				<h3><a id="Additional_ResourcesReferences_10"></a>Additional
+				Resources/References</h3>
+
+
+				<p>These following resources were very helpful in writing this how-to, and I
+				stongly:</p>
+
+
+				<p><a href=
+				"https://wiki.archlinux.org/index.php/PCI_passthrough_via_OVMF">https://wiki.archlinux.org/index.php/PCI_passthrough_via_OVMF</a>
+				<a href="http://vfio.blogspot.co.uk/">http://vfio.blogspot.co.uk/</a> <a href=
+				"https://tekwiki.beylix.co.uk/index.php/GTA_V_on_Linux_(Skylake_Build_%2B_Hardware_VM_Passthrough)">
+				https://tekwiki.beylix.co.uk/index.php/GTA_V_on_Linux_(Skylake_Build_%2B_Hardware_VM_Passthrough)</a>
+				<a href=
+				"https://wiki.archlinux.org/index.php/QEMU">https://wiki.archlinux.org/index.php/QEMU</a>
+				<a href=
+				"https://bbs.archlinux.org/viewtopic.php?id=162768">https://bbs.archlinux.org/viewtopic.php?id=162768</a></p>
+
+
+				<h3><a id="Credit_20"></a>Credit</h3>
+
+
+				<p>All credit goes to the authors of the additional resources above, I simply
+				compiled the information into a neat single document. I have to also name-drop
+				@wendell for indirectly introducing me to the concept of VGA passthrough with
+				his <a href="https://www.youtube.com/watch?v=16dbAUrtMX4">indroductory video
+				on the TekLinux channel</a>.</p>
+
+				<hr>
+
+
+				<h2><a id="Step_1_Requirements_26"></a>Step 1: Requirements</h2>
+
+
+				<p>You will need a CPU and Motherboard that both support VT-X (or AMD-V for
+				AMD platforms) and VT-D (or AMD-Vi for AMD platforms), and booting into UEFI.
+				You will also need a Graphics Card for the Windows Guest that is capable of
+				UEFI boot <strong>(Windows 8, 8.1 or 10 - the Windows 7 installer does not
+				boot from UEFI without additional workarounds)</strong>, as well as a Graphics
+				Card for the Linux Host, if your CPU supports it.</p>
+
+
+				<p>You must also ensure to physically configure your graphics cards correctly
+				when you are building your computer, generally, the graphics card you wish to
+				use for your Linux Host must be in the top-most x16 PCIe slot, and the
+				graphics card you wish to use for your Windows Guest must be in any other PCIe
+				slot under it, preferably in a slot which is wired directly to the CPU and not
+				via your chipset, check your UEFI settings or motherboard manufacturer’s
+				manual for more information on this. This generally means that you cannot run
+				VGA passthrough on a laptop, even with both integrated graphics and dedicated
+				graphics.</p>
+
+
+				<p><strong>It is strongly recommended that you use an AMD/ATI Graphics Card
+				for the Windows Guest, as NVIDIA have put barriers in place to stop non-Quadro
+				cards from being ran in a virtual machine.</strong>
+				</p>
+
+
+				<p>However, it is still possible to run a consumer NVIDIA card using this
+				method, but it requires a work around that has not been tested by myself.</p>
+
+				<hr>
+
+
+				<h2><a id="Step_2_UEFI_Settings_Configuration_38"></a>Step 2: UEFI Settings
+				Configuration</h2>
+
+
+				<p>In most consumer motherboards, the settings for VT-D and VT-X (or their AMD
+				counterparts) are disabled by default. In order to use VGA passthrough, we
+				must turn these on.</p>
+
+
+				<p>This various from motherboard to motherboard. The setting may also be
+				called IOMMU, PCI Passthrough or Virtualization Technologies. If you cannot
+				find it and your motherboard is not listed above, please leave a comment.</p>
+
+
+				<p>If you are on a chipset/motherboard with integrated graphics, search your
+				UEFI settings for a setting to boot using the integrated graphics.</p>
+
+				<hr>
+
+
+				<h2><a id="Step_3_Install_Arch_48"></a>Step 3: Install Arch</h2>
+
+
+				<p>There are many tutorials on installing Arch Linux on the internet, follow
+				one of those tutorials. However, ensure you boot Arch using an EFI loader,
+				such as systemd-boot. <strong>I will be using systemd-boot for this
+				‘tutorial’, so if you’re following letter for letter then I strongly suggest
+				using systemd-boot too.</strong></p>
+
+
+				<p>After installing Arch and systemd-boot, reboot into the system and ensure
+				everything is working.</p>
+
+				<hr>
+
+
+				<h2><a id="Step_4_VFIO_Kernel_arguably_optional_56"></a>Step 4: VFIO Kernel
+				(arguably optional)</h2>
+
+
+				<p>In the Arch User Repository there is a kernel which includes patches for
+				GPU passthrough. Many of these patches are not needed when using UEFI to boot
+				our virtual guest (which we will be doing), but some of them are.</p>
+
+
+				<p>You will need to compile the kernel manually, however, this is made
+				significantly easier thanks to Arch Linux’s build system.</p>
+
+
+				<p><strong>If you don’t wish to use the VFIO kernel, regardless of it’s
+				potential fixes, skip to step 5.</strong>
+				</p>
+
+
+				<h3><a id="Create_and_Build_the_Kernel_64"></a>Create and Build the
+				Kernel</h3>
+
+
+				<p>Set up and enter a new build environment in our home folder to build our
+				kernel in. <strong>You will need to do this as a normal user, makepkg will not
+				run as root.</strong></p>
+
+
+				<code>mkdir -p ~/build &amp;&amp; cd ~/build</code>
+
+
+				<p>Get the packages we need for building the kernel using pacman:</p>
+
+
+				<p><code>sudo pacman -S base-devel wget</code>
+				</p>
+
+
+				<p>Get the kernel source code from the AUR:</p>
+
+
+				<p><code>wget
+				https://aur.archlinux.org/cgit/aur.git/snapshot/linux-vfio.tar.gz</code>
+				</p>
+
+
+				<p>Extract the files using tar:</p>
+
+
+				<p><code>tar -xvf linux-vfio.tar.gz &amp;&amp; cd linux-vfio</code>
+				</p>
+
+
+				<p>Build and install the kernel:</p>
+
+
+				<p><code>makepkg -sri</code>
+				</p>
+
+
+				<p>The above command will compile and install the kernel to /boot. Compiling
+				the kernel can take a while on slower processors (and even faster ones!), so
+				patience is required.</p>
+
+
+				<h3><a id="Create_a_new_RAMDISK_88"></a>Create a new RAMDISK</h3>
+
+
+				<p>First, let’s set up mkinitcpio to use the VFIO stuff. We must modify the
+				Linux ramdisk to load our VFIO modules, modify the mkinitcpio file using your
+				favourite editor as root, for example:</p>
+
+
+				<p><code>sudo nano /etc/mkinitcpio.conf</code>
+				</p>
+
+
+				<p>Next, add the vfio, vfio_iommu_type1, vfio_pci vfio_virqfd and pcistub
+				modules under the modules section. We will be using these modules later:</p>
+
+
+				<p><code>MODULES="vfio vfio_iommu_type1 vfio_pci vfio_virqfd pci-stub"</code>
+				</p>
+
+
+				<p>Exit the editor (use CTRL+X if using nano) and save. By default, the
+				ramdisk created by makepkg uses the default settings, not the settings we
+				specified earlier. To use the settings we created, just run mkinitcpio as root
+				on the VFIO kernel:</p>
+
+
+				<p><code>sudo mkinitcpio -p linux-vfio</code>
+				</p>
+
+
+				<h3><a id="Using_a_NVIDIA_Graphics_Card_on_your_Linux_Host_103"></a>Using a
+				NVIDIA Graphics Card on your Linux Host</h3>
+
+
+				<p><strong>If you are not planning to use a NVIDIA card for the Linux Host, or
+				you are using the opensource nouveau driver, you may safely skip this
+				step.</strong>
+				</p>
+
+
+				<p>If you wish to use a NVIDIA Graphics card for your Linux Host and you wish
+				to use NVIDIA’s proprietary drivers, you will need to use DKMS because you are
+				using a third-party kernel. Do the following command to install nvidia-dkms
+				and uninstall the current drivers:</p>
+
+
+				<p><code>sudo pacman -R nvidia &amp;&amp; sudo pacman -S nvidia-dkms</code>
+				</p>
+
+
+				<h3><a id="Add_the_new_Kernel_to_the_Bootloader_111"></a>Add the new Kernel to
+				the Bootloader</h3>
+
+
+				<p>After the kernel is created, we need to tell our bootloader where the new
+				kernel and initramfs file, along with our other kernel arguments.</p>
+
+
+				<p>Assuming you are familiar with systemd-loader, create a new entry as you
+				usually would.</p>
+
+
+				<p>Alternatively, assuming you have successfully installed the kernel, you are
+				using systemd-boot, and that you are currently using the mainstream Linux
+				kernel, you can create a new automatically entry using the behemoth command I
+				put together below:</p>
+
+
+				<p><code>echo 'title Linux VFIO' &gt; /tmp/linux-vfio-test.conf; echo 'linux
+				/vmlinuz-linux-vfio' &gt;&gt; /tmp/linux-vfio-test.conf; echo 'initrd
+				/initramfs-linux-vfio.img' &gt;&gt; /tmp/linux-vfio-test.conf; (printf
+				'options' &amp;&amp; cat /proc/cmdline | awk '{first = $1; $1 = ""; print $0,
+				first; }') &gt;&gt; /tmp/linux-vfio-test.conf; sudo cp
+				/tmp/linux-vfio-test.conf /boot/loader/entries/linux-vfio.conf;</code>
+				</p>
+
+
+				<p>This will create a bootloader entry called Linux VFIO and point to the
+				correct files, and copy your current boot parameters to the new entry. If you
+				don’t wish to use this command, or it fails, simply write your own entry as
+				per the systemd-boot documentation, pointing the kernel and ramdisk to their
+				VFIO equivalents.</p>
+
+
+				<p>Then set this to our default entry by doing:</p>
+
+
+				<p><code>sudo nano /boot/loader/loader.conf</code>
+				</p>
+
+
+				<p>…and changing the default flag to linux-vfio (or whatever you called the
+				entry file), your /boot/loader/loader.conf file should now look something like
+				this:</p>
+
+				<pre><code>timeout 1
+			default linux-vfio
+			</code></pre>
+
+				<p>Reboot your system and use the following command to verify you are booted
+				into the VFIO kernel:</p>
+
+
+				<p><code>uname -a | grep -i --color=force 'vfio'</code>
+				</p>
+
+
+				<p>If there is no output, then you are not booted into the VFIO kernel. If it
+				outputs a string similar to:</p>
+
+
+				<p><code>Linux guppy 4.4.3-1-vfio #1 SMP PREEMPT Tue Mar 8 17:59:23 GMT 2016
+				x86_64 GNU/Linux</code>
+				</p>
+
+
+				<p>Then you have successfully booted into your new VFIO kernel!</p>
+
+				<hr>
+
+
+				<h2><a id="Step_5_Boot_with_IOMMU_146"></a>Step 5: Boot with IOMMU.</h2>
+
+
+				<p>IOMMU is needed to use VT-D, or AMD-Vt, which are needed for VGA
+				passthrough. To boot with IOMMU enabled, you must add a boot parameter to your
+				kernel when starting Linux.</p>
+
+
+				<p>If you are using an AMD system, add amd_iommu=on, likewise, if you are
+				using an Intel system, add intel_iommu=on to your boot parameters.</p>
+
+
+				<p>If you are using systemd-boot as suggested, you can modify your boot
+				parameters by modifying your boot entry file, if you installed the VFIO kernel
+				above, this would be /boot/loader/entries/linux-vfio.conf.</p>
+
+
+				<p><code>sudo nano /boot/loader/entries/linux-vfio.conf</code>
+				</p>
+
+
+				<p>If using systemd-boot, add this to the end of your options line, for
+				example:</p>
+
+				<pre><code>options ........ intel_iommu=on
+			</code></pre>
+
+				<p>Or alternatively on an AMD system:</p>
+
+				<pre><code>options ........ amd_iommu=on
+			</code></pre>
+
+				<p>Then reboot your system after saving your changes. After rebooting, check
+				if your parameter was recognised by doing:</p>
+
+
+				<p><code>cat /proc/cmdline | grep 'iommu=on' --color=force</code>
+				</p>
+
+
+				<p>If it outputs, then you’ve successfully passed the IOMMU flag to your Linux
+				kernel, but to ensure that it is working, do:</p>
+
+
+				<p><code>dmesg | grep -i 'iommu: adding device'</code>
+				</p>
+
+
+				<p>If this outputs too, then you’re good to go! Otherwise ensure that you
+				enabled VT-D and VT-X (or their AMD equivalents) in your UEFI settings. You
+				can use dmesg to diagnose this further, looking for IOMMU related
+				messages.</p>
+
+				<hr>
+
+
+				<h2><a id="Step_6_Configuring_our_Graphics_Card_176"></a>Step 6: Configuring
+				our Graphics Card</h2>
+
+
+				<p>As previously mentioned, we’re going to need to use our second graphics
+				card for our guest operating system. In this example I will be using an AMD R9
+				390.</p>
+
+
+				<p>There are three possible methods to do this…</p>
+
+
+				<h3><a id="Blacklisting_182"></a>Blacklisting</h3>
+
+
+				<p>The easy way to isolate the graphics card from the system is to simply not
+				load its driver, forcing it to be free and available for libvirt. To get
+				started, create a new file /etc/modprobe.d as root:</p>
+
+
+				<p><code>sudo nano /etc/modprobe.d/blacklist.conf</code>
+				</p>
+
+
+				<p>If you plan to use an AMD card for your Windows Guest, enter:</p>
+
+				<pre><code>blacklist radeon
+			blacklist fglrx
+			blacklist amdgpu
+			</code></pre>
+
+				<p>Otherwise, if you plan to use a NVIDIA card for your Windows Guest,
+				enter:</p>
+
+				<pre><code>blacklist nvidia
+			blacklist nouveau
+			</code></pre>
+
+				<p>Lastly, save the file, reboot, and skip to step 7.</p>
+
+
+				<h3><a id="VFIOPCI_201"></a>VFIO-PCI</h3>
+
+
+				<p><strong>You will need to be using the VFIO kernel above to use this
+				method</strong>. Or, you must have rebuilt your RAMDISK manually with the
+				‘vfio vfio_iommu_type1 vfio_pci vfio_virqfd’ modules.</p>
+
+
+				<p>Alternatively, if we are going to be using two AMD cards or two NVIDIA
+				cards, one for the guest and one for the host, we must use this way.</p>
+
+
+				<p>You should also use this way if you have problems with HDMI audio being
+				automatically grabbed by snd_hda_intel, or if you have issues with PCI reset
+				after shutting down the VM.</p>
+
+
+				<p>Let’s get the PCI ID’s first:</p>
+
+
+				<blockquote>
+					<p>Print the ID’s and addresses of your graphics cards:</p>
+
+
+					<p><code>sudo lspci -vnn | grep --color=always -i 'amd\|nvidia'</code>
+					</p>
+
+
+					<p>On my system, with an AMD R9 390 for the Guest and a NVIDIA GTX 660 for
+					the host, this command outputs:</p>
+
+					<pre>
+					<code>01:00.0 VGA compatible controller [0300]: NVIDIA Corporation GK106 [GeForce GTX 660] [10de:11c0] (rev a1) (prog-if 00 [VGA controller])
+			  Subsystem: NVIDIA Corporation Device [10de:0995]
+			  Kernel driver in use: nvidia
+			  Kernel modules: nouveau, nvidia
+			01:00.1 Audio device [0403]: NVIDIA Corporation GK106 HDMI Audio Controller [10de:0e0b] (rev a1)
+			  Subsystem: NVIDIA Corporation Device [10de:0995]
+			0a:00.0 VGA compatible controller [0300]: Advanced Micro Devices, Inc. [AMD/ATI] Hawaii PRO [Radeon R9 290] [1002:67b1] (rev 80) (prog-if 00 [VGA controller])
+			0a:00.1 Audio device [0403]: Advanced Micro Devices, Inc. [AMD/ATI] Device [1002:aac8]
+			</code></pre>
+
+					<p>There are two main parts of each ID, the first part is the address
+					<code>0a:00.0</code> and the last part is the ID <code>1002:67b1</code>.</p>
+
+
+					<p>We will need to use the ID’s (the last alphanumeric ID in square
+					brackets). Because I want to use my AMD card, I will write down 1002:67b1 and
+					1002:aac8.</p>
+				</blockquote>
+
+
+				<p>We’re going to be assigning our Graphics Card a ‘fake’ driver using
+				VFIO-PCI. To do this, simply replace the device ID’s in the command below with
+				the device ID’s you just got.Create a new file in modprobe.d, we’re going to
+				call it vfio.conf:</p>
+
+
+				<p><code>sudo nano /etc/modprobe.d/vfio.conf</code>
+				</p>
+
+
+				<p>And enter the graphics cards to be grabbed by vfio-pci by using a comma to
+				separate each ID:</p>
+
+				<pre><code>options vfio-pci ids=AAAA:aaaa,BBBB:bbbb
+			</code></pre>
+
+				<p>So I would type:</p>
+
+				<pre><code>options vfio-pci ids=1002:67b1,1002:aac8
+			</code></pre>
+
+				<p>After you’ve done this command, save the file, reboot and check the card is
+				using the vfio-pci using the following command:</p>
+
+
+				<p><code>lspci -v | grep 'vfio-pci' -B 9</code>
+				</p>
+
+
+				<p>If it outputs the graphics card and sound subsystem then you can move onto
+				the next step!</p>
+
+
+				<h3><a id="Using_PCIStub_248"></a>Using PCI-Stub</h3>
+
+
+				<p><strong>You will need to be using the VFIO kernel above to use this
+				method</strong>. Or, you must have rebuilt your RAMDISK manually with the
+				‘pci-stub’.</p>
+
+
+				<p>There is little point in using PCI-Stub over VFIO-PCI, except if you have
+				problems with VFIO-PCI. We’re going to need the same ID’s we needed using
+				VFIO-PCI:</p>
+
+
+				<blockquote>
+					<p>Print the ID’s and addresses of your graphics cards:</p>
+
+
+					<p><code>sudo lspci -vnn | grep --color=always -i 'amd\|nvidia'</code>
+					</p>
+
+
+					<p>On my system, with an AMD R9 390 for the Guest and a NVIDIA GTX 660 for
+					the host, this command outputs:</p>
+
+					<pre>
+					<code>01:00.0 VGA compatible controller [0300]: NVIDIA Corporation GK106 [GeForce GTX 660] [10de:11c0] (rev a1) (prog-if 00 [VGA controller])
+			  Subsystem: NVIDIA Corporation Device [10de:0995]
+			  Kernel driver in use: nvidia
+			  Kernel modules: nouveau, nvidia
+			01:00.1 Audio device [0403]: NVIDIA Corporation GK106 HDMI Audio Controller [10de:0e0b] (rev a1)
+			  Subsystem: NVIDIA Corporation Device [10de:0995]
+			0a:00.0 VGA compatible controller [0300]: Advanced Micro Devices, Inc. [AMD/ATI] Hawaii PRO [Radeon R9 290] [1002:67b1] (rev 80) (prog-if 00 [VGA controller])
+			0a:00.1 Audio device [0403]: Advanced Micro Devices, Inc. [AMD/ATI] Device [1002:aac8]
+			</code></pre>
+
+					<p>There are two main parts of each ID, the first part is the address
+					<code>0a:00.0</code> and the last part is the ID <code>1002:67b1</code>.</p>
+
+
+					<p>We will need to use the ID’s (the last alphanumeric ID in square
+					brackets). Because I want to use my AMD card, I will write down 1002:67b1 and
+					1002:aac8.</p>
+				</blockquote>
+
+
+				<p>Next, we need to tell our kernel to use PCI-STUB on these two devices, to
+				do so, modify your bootloader file again:</p>
+
+
+				<p><code>sudo nano /boot/loader/entries/linux-vfio.conf</code>
+				</p>
+
+
+				<p>And append this to the end of the options line, separating each value by a
+				comma:</p>
+
+				<pre><code>pci-stub.ids=XXXX:xxxx,YYYY:yyyy
+			</code></pre>
+
+				<p>So I would type:</p>
+
+				<pre><code>pci-stub.ids=1002:67b1,1002:aac8
+			</code></pre>
+
+				<p>After you’ve done this command, save the file, reboot your system and check
+				whether or not the card is using the vfio-pci using the following command:</p>
+
+
+				<p><code>lspci -v | grep 'pci-stub' -B 9</code>
+				</p>
+
+
+				<p>If it outputs the graphics card and sound subsystem then you can move onto
+				the next step!</p>
+
+
+				<h2><a id="Step_7_Install_and_Configure_Virtualisation_Software_291"></a>Step
+				7: Install and Configure Virtualisation Software</h2>
+
+
+				<p>###Installing Packages</p>
+
+
+				<p>We will need a lot of software to start running a Windows Guest on our
+				Linux Install, this neat little command will grab all the packages we need
+				from pacman:</p>
+
+
+				<p><code>sudo pacman -S qemu virt-manager libvirt firewalld virt-install
+				rpmextract dnsmasq</code>
+				</p>
+
+
+				<p>You may notice that we are installing firewalld, even though we may not
+				need it. Libvirt seems to use firewalld for it’s NAT networking, even when
+				it’s disabled. I am including it here as it seems to be an unlisted
+				requirement.</p>
+
+
+				<p>dnsmasq is another requirement for networking, and rpmextract is needed to
+				install the UEFI binaries.</p>
+
+
+				<h3><a id="Enable_Services_303"></a>Enable Services</h3>
+
+
+				<p>To use libvirt, and virt-manager, enable and the logging service libvirt
+				using systemctl:</p>
+
+
+				<p><code>sudo systemctl enable libvirtd</code> <code>sudo systemctl enable
+				virtlogd.socket</code></p>
+
+
+				<h3><a id="Download_Install_and_Configure_UEFI_Files_310"></a>Download,
+				Install and Configure UEFI Files</h3>
+
+
+				<p>Next, we must install and the UEFI binaries, run the following commands to
+				do so:</p>
+
+
+				<p><code># Create a temporary directory</code> <code>mkdir -p
+				/tmp/efi</code></p>
+
+
+				<p><code># Enter that directory</code> <code>cd /tmp/efi</code></p>
+
+
+				<p><code># Get the RPM</code> <code>wget
+				https://www.kraxel.org/repos/jenkins/edk2/edk2.git-ovmf-x64-0-20160311.b1594.gf6326d1.noarch.rpm</code></p>
+
+
+				<p><code># Extract the RPM</code> <code>rpmextract.sh
+				edk2.git-ovmf-x64-0-20160311.b1594.gf6326d1.noarch.rpm</code></p>
+
+
+				<p><code># Remove the RPM now that we’ve extracted it</code> <code>rm
+				edk2.git-ovmf-x64-0-20160311.b1594.gf6326d1.noarch.rpm</code></p>
+
+
+				<p><code># Copy everything from this folder to root</code> <code>sudo cp -R .
+				/</code></p>
+
+
+				<p>Now that we’ve installed them, we need to tell libvirt where our EFI
+				binaries are, to do so, we must append a parameter to /etc/libvirt/qemu.conf
+				using nano:</p>
+
+
+				<p><code>sudo nano /etc/libvirt/qemu.conf</code>
+				</p>
+
+
+				<p>And add the following to the end of the file:</p>
+
+				<pre><code>nvram = [
+				 "/usr/share/edk2.git/ovmf-x64/OVMF_CODE-pure-efi.fd:/usr/share/edk2.git/ovmf-x64/OVMF_VARS-pure-efi.fd",
+			]
+			</code></pre>
+
+				<h3><a id="Setting_Permissions_342"></a>Setting Permissions</h3>
+
+
+				<p>You will also need to ensure that your user is able to access libvirt
+				properly, to do this, create a new udev rule in /etc/udev:</p>
+
+
+				<p><code>sudo nano /etc/udev/rules/10-qemu-hw-users.rules</code>
+				</p>
+
+
+				<p>With the following contents, replacing YOUR_USERNAME with the username you
+				will primarily use the system as:</p>
+
+				<pre><code>KERNEL=="sda[3-6]", OWNER="YOUR_USERNAME", GROUP="YOUR_USERNAME"
+			KERNEL=="vfio", SUBSYSTEM=="vfio", OWNER="YOUR_USERNAME", GROUP="YOUR_USERNAME"
+			</code></pre>
+
+				<p>Finally, save and reboot.</p>
+
+
+				<h2><a id="Step_8_Creating_the_Virtual_Machine_355"></a>Step 8: Creating the
+				Virtual Machine</h2>
+
+
+				<p>The majority of this step is simply a paraphrased version of this article:
+				<a href=
+				"http://vfio.blogspot.co.uk/2015/05/vfio-gpu-how-to-series-part-4-our-first.html">
+				http://vfio.blogspot.co.uk/2015/05/vfio-gpu-how-to-series-part-4-our-first.html</a>,
+				however I’ve decided to include this step anyway.</p>
+
+
+				<p>Before we start to create a VM, we must make sure we have a Windows install
+				ISO or some other means to install Windows, and that we have done all of the
+				previous steps correctly. Once you are ready, start up virt-manager/Virtual
+				Machine Manager, which you can find in your app drawer. If you are still
+				struggling to find it, start it from the command line with
+				<code>virt-manager</code>. You might need to enter your password to start
+				virt-manager.</p>
+
+
+				<p><img alt="Virt-manager main" src="http://i.imgur.com/kXTImtC.png">
+				</p>
+
+
+				<p>Go to File -&gt; New Virtual Machine and select the method to install, I’ve
+				chosen “Local install media” because I plan to use an ISO…</p>
+
+
+				<p><img alt="Virt-install Step 1" src="http://i.imgur.com/U58hNKK.png">
+				</p>
+
+
+				<p>Select your ISO and select the OS manually if it detects it as ‘Unknown’,
+				which it seems to do for Windows 10 ISO’s.</p>
+
+
+				<p><img alt="Virt-install Step 2" src="http://i.imgur.com/wosJh4g.png">
+				</p>
+
+
+				<p>Click next on this screen after configuring the amount of memory allocated,
+				do not worry about the CPU count as we will be changing this later anyway.</p>
+
+
+				<p><img alt="Virt-install Step 3" src="http://i.imgur.com/rbNn0M7.png">
+				</p>
+
+
+				<p>Select whether you would like to use existing storage, or create a new
+				virtual disk image. I am going to be using a spare partition on my SSD here.
+				You can use pre-existing images or create a new one using the option here.</p>
+
+
+				<p>According to vfio.blogspot and the Arch Linux Wiki, using a physical disk
+				partition should be done for optimal disk performance, although it is not
+				necessary.</p>
+
+
+				<p><img alt="Virt-install Step 4" src="http://i.imgur.com/2NwXHCg.png">
+				</p>
+
+
+				<p><strong>Important: Ensure that ‘Customize Configuration Before Install’ is
+				selected, and click finish.</strong>
+				</p>
+
+
+				<p><img alt="Virt-install Step 5" src="http://i.imgur.com/7UnJUjh.png">
+				</p>
+
+
+				<p>You may be asked to start the virtual network, click yes.</p>
+
+
+				<p><img alt="Virtual Network Not Active" src="http://i.imgur.com/ZBdXphR.png">
+				</p>
+
+
+				<p>You will then have a selection of options to select from to configure your
+				VM, first, select your chipset and your firmware.</p>
+
+
+				<p><strong>We are going to be using UEFI and the i440FX chipset. Do not use
+				BIOS.</strong>
+				</p>
+
+
+				<p>If UEFI does not show up, ensure you did the previous step correctly, and
+				make sure you modified the libvirt config as shown.</p>
+
+
+				<p>You can also chose Q35 as the chipset here, which is supposedly supposed to
+				bring better support for VGA passthrough and improved performance - but I
+				couldn’t get the AMD drivers to install on it without either crashing the
+				guest or the host.</p>
+
+
+				<p>If you’re up to the challenge of trying to get Q35 to work anyway, try it
+				and post your results.</p>
+
+
+				<p>You can also give the system a title here. Don’t forget to hit ‘Apply’ once
+				you’ve changed any of these values.</p>
+
+
+				<p><img alt="Customize Configuration Main" src=
+				"http://i.imgur.com/cHAJGZZ.png">
+				</p>
+
+
+				<p>Next, go to the CPU pane, expand ‘Topology’ and uncheck ‘Copy host CPU
+				configuration’, then set your CPU’s topology to your real CPU’s topology:</p>
+
+
+				<p>Sockets is the number of physical CPU’s you have, usually one except in
+				dual CPU systems. Cores is the number of cores per CPU you have. Threads is
+				the number of threads per core you have, on hyperthreaded systems this is 2,
+				otherwise it is 1.</p>
+
+
+				<p>Then, assign the number of cores you want your VM to have in the ‘Current
+				Allocation’ field, I am going to assign 8/12 cores for my virtual machine.</p>
+
+
+				<p><strong>You’ll also want to enter ‘host-passthrough’ as your CPU model. You
+				will need to type this manually in most versions of virt-manager.</strong>
+				</p>
+
+
+				<p>I personally couldn’t get the AMD Graphics Drivers to work with ‘Copy host
+				CPU configuration’ checked.</p>
+
+
+				<p><img alt="CPU Setup" src="http://i.imgur.com/C5JJ7he.png">
+				</p>
+
+
+				<p>Remember to hit apply to save your changes.</p>
+
+
+				<p>Next, go to “IDE Disk 1”, click “Advanced options” and change the “Disk
+				bus” field to SATA using the dropdown. Remember to hit apply.</p>
+
+
+				<p><img alt="SDA4 Sata" src="http://i.imgur.com/oYK6mlF.png">
+				</p>
+
+
+				<p>Then, do the same for IDE CDROM 1, and click apply.</p>
+
+
+				<p><img alt="CDROM Sata" src="http://i.imgur.com/M6Ay4js.png">
+				</p>
+
+
+				<p>Next, delete the following by right clicking on them and selecting ‘Remove
+				Hardware’:</p>
+
+
+				<ul>
+					<li>Tablet</li>
+
+
+					<li>Display Spic</li>
+
+
+					<li>Sound: ich6</li>
+
+
+					<li>Console</li>
+
+
+					<li>Channel Spice</li>
+
+
+					<li>Video QXL</li>
+
+
+					<li>USB Redirector 1</li>
+
+
+					<li>USB Redirector 2</li>
+				</ul>
+
+
+				<p>Your hardware tree on the left should now look like this:</p>
+
+
+				<p><img alt="New Hardware Tree" src="http://i.imgur.com/UgS6w6a.png">
+				</p>
+
+
+				<p>Next, I am going to modify my NIC to use “virtio” as the device model. This
+				allows our VM to have 10 gigabit networking to our host.</p>
+
+
+				<p><img alt="VirtIO Network" src="http://i.imgur.com/XJ4hmmg.png">
+				</p>
+
+
+				<p>Click apply to save your changes.</p>
+
+
+				<p>Now, use the Add Hardware button to add your Graphics Card and it’s HDMI
+				Audio component, which you can find under PCI Host Device.</p>
+
+
+				<p><img alt="Adding ATI Card" src="http://i.imgur.com/OfgoLDx.png"> <img alt=
+				"Adding ATI Audio" src="http://i.imgur.com/OzarrtT.png"></p>
+
+
+				<p>You can also add other hardware here, such as a mouse and keyboard under
+				USB Host Device, which you will need for controlling the installation of
+				Windows.</p>
+
+
+				<p><img alt="Adding Keyboard" src="http://i.imgur.com/diLQMKo.png"> <img alt=
+				"Adding Mouse" src="http://i.imgur.com/tqIpHQQ.png"></p>
+
+
+				<p>Next, we need to add the disk which has the drivers for the NIC we
+				installed onto the virtual machine, use the following link to get these
+				drivers:</p>
+
+
+				<p>
+				<code>https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.113-1/virtio-win-0.1.113.iso</code>
+				</p>
+
+
+				<p>Download these drivers, then add goto “Add Hardware” once again, click
+				“Storage”, click “Select or create custom storage” and then click “Browse
+				Local” to open a file browser with which you can point to the ISO you just
+				downloaded. You’ll then need to change “Device type” to “CDROM device”, and
+				change “Bus type” to “SATA”. Before clicking “Finish”, your screen should look
+				something like this:</p>
+
+
+				<p><img alt="VFIO Driver CDROM" src="http://i.imgur.com/ULtlgsd.png">
+				</p>
+
+
+				<p>Lastly, click the “Finish” to add the ISO as a Disk so you can install
+				network hardware, then click “Begin Installation” in the top right corner of
+				the main window.</p>
+
+
+				<p>If you did everything right, you should see video output from your graphics
+				card!</p>
+
+
+				<p>Install Windows like on any other machine. It should be fairly
+				straightforward. After doing so, you may notice you have no network
+				connectivity, to fix this, go into Device Manager on the VM and update the
+				driver of the network card to the one on the CD you added. Just tell device
+				manager to search the entire CD drive for a driver.</p>
+
+
+				<p>Then, navigate to AMD or NVIDIA’s website and install your driver.</p>
+
+
+				<p><strong>Hopefully, you will now have a fully hardware accelerated Windows
+				Virtual Machine!</strong>
+				</p>
+
+
+				<h2><a id="Step_10_Additional_Steps_477"></a>Step 10: Additional Steps</h2>
+
+
+				<p>I highly recommend either installing <a href=
+				"http://synergy-project.org/">Synergy</a> or <a href=
+				"http://www.tightvnc.com/">TightVNC</a> to easily control your guest machine
+				after you’ve finished installing Windows.</p>
+
+
+				<p>You can also install Steam and use Steam in-home streaming like I am doing,
+				although you will need a dummy VGA adapter to enable video acceleration. I
+				recommend using an 82 Ohm resistor on a displayport to VGA adapter and
+				shorting the RED pin to then ground pin with it. This will allow you to do
+				1080p@60Hz with CRU, and 1440p@40Hz with CRU.</p>
+			</article>
+		</main>
+
+		<footer>
+			Created with ❤ by Benjamin Gwynn
+			<a href="mailto:xenxier@xenxier.com">Contact Me</a>
+			<br>
+			All external linked or embedded content is property of it's respective copyright owner.
+		</footer>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="../index.js"></script>
+	</body>
+</html>

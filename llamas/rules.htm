@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>Drama Llamas</title>
+
+		<link href="../font/vendor/Munro.css" rel="stylesheet" type="text/css">
+
+		<style>
+			body, html, * {
+				padding: 0;
+				margin: 0;
+				font-family: 'Munro', monospace;
+				color: #111;
+				-webkit-font-smoothing: none;
+				font-smoothing: none;
+			}
+			
+			header #grass {
+				background-image: url('assets/images/scalable/grass.svg');
+				background-position: bottom;
+				background-repeat: repeat-x;
+				background-size: 200%;
+				
+				width: 100%;
+				height: 7.6em;
+			}
+
+			header #logo-container {
+				width: 10em;
+				height: 10em;
+				margin: 1em auto;
+				padding: 2em;
+				
+				cursor: pointer;
+				
+				position: relative;
+			}
+
+			header #logo-container img {
+				height: 100%;
+				position: relative;
+				bottom: 0px;
+				z-index: 10;
+			}
+
+			header #text-container {
+				text-align: center;
+				text-transform: uppercase;
+				margin: 1em 0;
+			}
+
+			.rainbow {
+				background-image: -webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
+				background-image: gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
+				color: transparent;
+				-webkit-background-clip: text;
+				background-clip: text;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header>
+			<div id="sky">
+				<div onclick="jump()" id="logo-container">
+					<img src="assets/images/fixed/logo.png" draggable=false>
+				</div>
+				
+			<div id="grass"></div>
+			</div>
+
+			<div id="text-container">
+				<h1 class="rainbow">Drama Llamas</h1>
+				<h2 class="rainbow">Teamspeak Rules</h2>
+			</div>
+		</header>
+<main>
+	<section>
+		<h1></h1>
+	</section>
+</main>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+
+	<script>
+		window.llamaJumpMax = 45;
+		window.llamaFalling = false;
+
+		function jump() {
+			if ($("#logo-container img").css('bottom') == '0px') $("#logo-container img").css('bottom', '1px');
+		}
+
+		setInterval(function() {
+			var llamaJump = parseInt($("#logo-container img").css('bottom').split('px').join(''));
+
+			if (llamaJump != 0) {
+
+				if (window.llamaFalling) llamaJump--;
+				if (!window.llamaFalling) llamaJump++;
+				if (llamaJump == window.llamaJumpMax) window.llamaFalling = true;
+				if (llamaJump == 0) window.llamaFalling = false;
+			}
+
+			$("#logo-container img").css('bottom', llamaJump + 'px');
+		}, 1);
+	</script>
+	</body>
+</html>

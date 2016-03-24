@@ -1,191 +1,43 @@
-.box() {
-	border-radius: 0.75em;
-	background: white;
-	border-style: double;
-	border-width: 0.5em;
-	padding: 2em;
-}
-
-* {
-	font-family: 'RedAlert', monospace;
-}
-
-html, body {
-	overflow-x: hidden;
-}
-
-body {
-	padding-top: 50px;
+body#index {
+	@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,300);
+	@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300);
 	
-	.anim();
-	animation-name: bg-animation-small;
-	-o-animation-name: bg-animation-small;
-	-moz-animation-name: bg-animation-small;
-	-webkit-animation-name: bg-animation-small;
-	background-image: url('background/4-small.jpg');
-
-	background-size: 100%;
-	background-repeat: repeat;
-	background-position: bottom;
-	
-	nav {
-		.navbar();
-		.navbar-fixed-top();
-		.navbar-inverse();
-	
-		* {
-			font-weight: 800;
-			text-transform: uppercase;
-		}
-	
-		.navbar-brand {
-			font-size: 1.9em;
-		}
+	* {
+		font-family: 'Roboto Condensed';
 	}
 	
-	#notfound {
-		.alert();
-		.alert-warning();
+	h1 {
+		font-weight: bold;
+	}
+	
+	h2, h3, h4, h5, h6 {
+		font-weight: lighter;
+	}
+	
+	canvas {
+		position: absolute;
+		top: 0;
+		left: 0;
 		margin: 0;
-		border-radius: 0;
-		padding-left: 30px;
-		font-size: 1.2em;
-		display: none;
+		padding: 0;
 	}
-
-	main {
-		.container();
-		display: none;
-		z-index: 2;
-		position: relative;
 	
-		article {
-			.box();
-	
-			h1 {
-				font-weight: 800;
-				text-transform: uppercase;
-				font-size: 4em;
-				margin: 0;
-			}
-	
-			p {
-				margin-top: 1.5em;
-				font-size: 1.25em;
-				font-weight: 600;
-			}
-	
-			.tags {
-				padding: 0;
-	
-				li {
-					.label();
-					.label-default();
-					margin-right: 0.5em;
-					display: inline;
-					list-style-type: none;
-					font-size: 1.2em;
-				}
-			}
-		}
-	}
-
-	main#homepage {
-		display: block;
-	}
-
-	.preload {
-		display: none;
-	}
-
-	a {
-		cursor: pointer;
-	}
-
-	header {
-		.anim();
-		padding: 16em 0;
-		position: relative;
+	section#jumbo {
+		.container-fluid;
 		
-		* {
-			font-weight: 800;
-			text-align: center;
-			color: white;
-			text-shadow: 0 1px 8px rgba(0, 0, 0, 0.75);
-			text-transform: uppercase;
-			padding: 0;
-			margin: 0;
+		content {
+			.container;
+			display: block;
 			
-			z-index: 2;
-			position: relative;
-		}
-	
-		h1 {
-			font-size: 9em;
-		}
-		
-		// Animation
-		background-repeat: repeat-x;
-		background-size: contain;
-		background-position: top;
-		
-		// Fix background on small screens
-		@media only screen and (max-width:1441px) {
-			background-size: cover;
-			background-position: bottom;
-    	}
-	}
-	
-	main#solar, main#pb {
-		.box();
-		
-		text-align: center;
-		
-		* {
-			text-align: center;
-		}
-		
-		h1 {
-			font-weight: 800;
-			text-transform: uppercase;
-			font-size: 4em;
-		}
-		
-		h2 {
-			margin-bottom: 1em;
-		}
-		
-		> a {
-			text-decoration: none;
-			padding: 0.5em;
-			border: solid #111 3px;
-			border-radius: 0.25em;
-			color: #111;
-			font-size: 1.5em;
-		}
-	}
-	
-	.bg {
-		div {
-			display: none;
-			z-index: 1;
-			position: fixed;
-			top: 0;
-			bottom: 0;
-			left: 0;
-			right: 0;
-			width: 100%;
-			height: 100%;
-		}
-	
-		#pb {
-			background-color: rgb(18, 18, 34);
-		}
-	
-		#solar {
-			background-position: center;
-			background-size: cover;
-			background-image: url("background/space.jpg");
+			txt {
+				padding-top: 10%;
+				padding-bottom: 10%;
+				.make-xs-column(9);
+			}
+
+			aside {
+				.make-xs-column(3);
+			}
 		}
 	}
 }

@@ -1,0 +1,14 @@
+@font-face {
+	font-family: 'Munro';
+	src: url('Munro.woff') format('woff'), url('Munro.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'MunroSmall';
+	src: url('MunroSmall.woff') format('woff'), url('MunroSmall.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'MunroNarrow';
+	src: url('MunroNarrow.woff') format('woff'), url('MunroNarrow.ttf') format('truetype');
+}

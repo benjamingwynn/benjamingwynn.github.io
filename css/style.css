@@ -1,0 +1,206 @@
+@import url(http://weloveiconfonts.com/api/?family=typicons);
+
+			body, html, * {
+				padding: 0;
+				margin: 0;
+				font-family: 'RedAlert', monospace;
+				color: #111;
+				-webkit-font-smoothing: none;
+				font-smoothing: none;
+			}
+
+			h1, h2, h3, h4, h5, h6 {
+				font-weight: bold;
+				text-transform: uppercase;
+			}
+
+			header {
+				margin: 0;
+				padding: 8em 0;
+
+				background-repeat: repeat-x;
+				background-size: cover;
+				background-position: top;
+
+				text-align: center;
+				text-transform: uppercase;
+
+				cursor: default;
+				user-select: none;
+				-webkit-user-select: none;
+			}
+
+			/* After a certain size, scale the background differently */
+			@media screen and (min-width: 45em) {
+				header {
+					background-size: contain;
+				}
+			}
+
+			header logo {
+				font-size: 6em;
+				display: table;
+				width: 1.2em;
+				height: 1.2em;
+				margin: auto;
+				border: solid white thick;
+				text-transform: lowercase;
+				margin-bottom: 0.1em;
+
+				background: rgba(255,255,255,0.2);
+
+				box-shadow: 0 1px 8px rgba(0, 0, 0, 0.75);
+			}
+
+
+			/* Logo scaling */
+			@media screen and (min-width: 35em) {
+				header logo {
+					font-size: 12em;
+				}
+			}
+
+			header logo span {
+				font-weight: bold;
+				display: table-cell;
+				vertical-align: middle;
+				color: white;
+				text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+			}
+
+			header h2 {
+				font-size: 1.6em;
+				color: white;
+
+				text-shadow: 0 1px 8px rgba(0, 0, 0, 0.75);
+			}
+
+			main {}
+
+
+			/* After a certain size, add some padding to main */
+			@media screen and (min-width: 35em) {
+				main {
+					padding: 5%;
+					padding-bottom: 0;
+				}
+
+				main article {
+					margin-bottom: 2.5% !important;
+				}
+			}
+
+			main article {
+				background: white;
+				display: block;
+				padding: 5%;
+				border-style: double;
+				border-width: 0.5em;
+				border-radius: 0.75em;
+			}
+
+			main article h1 {
+				font-size: 1.87em;
+				margin-bottom: 0.3em;
+
+				display: inline-block;
+				width: 70%;
+				/*margin-top: 0.5em;*/
+				vertical-align: top;
+			}
+
+			/*main article:after {
+				content: '(';
+				font-family: 'Typicons', sans-serif;
+				float: right;
+				font-weight: normal;
+				text-align: right;
+				font-size: 2em;
+				margin-top: -1em;
+				color: silver;
+			}*/
+
+			main article p, main article code {
+				margin-bottom: 1em;
+			}
+
+			main article code {
+				display: block;
+				overflow: auto;
+				background: #222;
+				color: white;
+				padding: 0.6em;
+				border-style: double;
+				border-color: silver;
+			}
+
+			main article code span {
+				color: white;
+				display: block;
+				font-family: monospace;
+				overflow-wrap: break-word;
+			}
+			
+			main article .tag {
+				display: inline-block;
+				width: 18%;
+				padding: 0.5em 2%;
+				overflow: hidden;
+				overflow-wrap: break-word;
+				text-align: center;
+				background: whitesmoke;
+				border: thin silver solid;
+				color: grey;
+				border-radius: 0.2em;
+				text-transform: lowercase;
+				cursor: pointer;
+			}
+
+
+			/* After a certain size, rearrange tags and move to a fixed padding */
+			@media screen and (min-width: 50em) {
+				main article {
+					padding: 2em;
+					max-width: 60em;
+					margin: auto;
+				}
+
+				main article h1 {
+					width: 100%;
+				}
+
+				main article .tag {
+					width: auto;
+					border: none;
+					padding: 0;
+					background: none;
+					border-radius: 0;
+					margin: 0.1em 0 0.9em 0;
+					border-bottom: dashed thin grey;
+				}
+
+				main article .tag:before {
+					content: '> ';
+				}
+			}
+
+			main article .tag:hover {
+				box-shadow: 0 0 2px rgba(0,0,0,0.6);
+			}
+
+			main article .tag:active, main article .tag.active {
+				background: #CBF4FF;
+			}
+
+			footer {
+				color: white;
+				text-align: center;
+				margin: 5%;
+				border-top: solid white thin;
+				padding-top: 1em;
+			}
+
+			footer a {
+				display: block;
+				color: white;
+			}

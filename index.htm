@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>Xenxier</title>
+
+		<link href="font/vendor/RedAlert.css" rel="stylesheet" type="text/css">
+
+		<link href="css/style.css" rel="stylesheet" type="text/css">
+	</head>
+
+	<body>
+		<style>
+			#load-overlay {
+				display: table;
+				position: fixed;
+				overflow: hidden;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				width: 100%;
+				height: 100%;
+				z-index: 1000;
+				background: rgba(0,0,0,0.5);
+			}
+
+			#load {
+				display: table-cell;
+				vertical-align: middle;
+				text-align: center;
+			}
+
+			#load > div {
+				display: inline-block;
+				background: white;
+				width: 160px;
+				box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+				text-align: center;
+				text-transform: uppercase;
+				font-weight: bold;
+
+				border-style: double;
+				border-width: 0.5em;
+				border-color: black;
+			}
+
+			#load > div > p {
+				color: black;
+				padding: 0.5em;
+			}
+
+			#load > div > img {
+				width: 100%;
+			}
+		</style>
+
+		<div id="load-overlay">
+			<div id="load">
+				<div>
+					<img draggable=false src="http://i.imgur.com/tf9PvNb.gif">
+					<p>loading</p>
+				</div>
+			</div>
+		</div>
+
+		<header>
+			<logo><span>x</span></logo>
+			<h2>xenxier.com</h2>
+		</header>
+
+		<main>
+			<article id="vga-passthrough-1">
+				<h1>HOW TOY: A detailed guide to VGA Passthrough (with UEFI & Virt-Manager)</h1>
+
+				<span class="tag">Linux</span>
+				<!--<span class="date">24/03/2016</span>-->
+
+				<p>I've created a neat little tutrorial for VGA passthrough! Click the link below to read more about it!</p>
+				<p>
+					<a href="articles/vga-passthrough-1.htm">Read full article</a>
+				</p>
+			</article>
+
+			<article id="web-frameworks">
+				<h1>Web Frameworks</h1>
+				<span class="tag">web dev</span>
+				<p>After looking closely at <a href="http://getbootstrap.com">Bootstrap</a>, <a href="http://purecss.io/">PureCSS</a> and various other Frameworks, I decided that if I was going to show off my web development skill with my website, a framework wasn't the way to go, neither a massive monolithic framework, nor a rather neat minimalistic one would satisfy me.</p>
+
+				<p><strong>But why?</strong> Simple. I don't need the massive amount of features which Bootstrap offers, and everything that something like PureCSS offers I can do myself with just a few simmple <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Using_media_queries">media queries</a>, which is just what these frameworks do anyway.</p>
+
+				<p><strong>But isn't that a bunch of unnessesary code?</strong> Suprisingly, no, this entire page is only <script>document.write((document.getElementsByTagName("html")[0].innerHTML.split("\n").length + 1).toString())</script> lines long (<script>document.write((document.getElementsByTagName("html")[0].innerHTML.length + 1).toString())</script> characters!), including styling, Javascript and articles. Which may seem like a lot, but the <a href="http://getbootstrap.com">Bootstrap 3 homepage</a> is over 500 lines long (as of 28/02/2016), <strong>not</strong> including CSS or Javascript librarys.</p>
+
+				<p><strong>So, how do you ditch web frameworks?</strong> Simple, as I hinted earlier, get <a href="https://developers.google.com/web/fundamentals/design-and-ui/responsive/fundamentals/use-media-queries?hl=en">familiar with media queries</a>, and design your website around <strong>mobile first</strong>, then simply increase your target screen size until everything looks too big and/or bunched up together and add a media query, adjusting padding, widths or positioning where needed. Take a look at this snippit of code from the styling I used for the logo if you still don't understand:</p>
+
+				<code>
+					header logo {
+						font-size: 6em;
+					}
+
+					@media screen and (min-width: 35em) {
+						header logo {
+							font-size: 12em;
+						}
+					}
+				</code>
+
+				<p>This doubles the logo in the header (the big X at the top) once the width of the browser becomes or exceeds 35<a href="http://www.sitepoint.com/power-em-units-css/">em</a> wide. I've used em's here partially because <a href="http://blog.cloudfour.com/the-ems-have-it-proportional-media-queries-ftw/">some older browsers don't scale properly with pixels</a>, but mainly because I just like using em's. <a href="http://stackoverflow.com/a/22262489">There are also some other cool reasons to use em's, as this stack overflow user pointed out</a></p>
+
+				<p><strong>Wait, so Web Frameworks are useless?</strong> Not at all! In fact, web frameworks are great for larger projects which require stuff like prebuilt grids, menus and <a href="http://getbootstrap.com/components/#glyphicons">icons</a>, where you don't have time to program every page to look perfect on every screen size. But, for those larger projects, I'd highly suggest using <a href="http://lesscss.org/">LESS</a> or <a href="http://sass-lang.com/">SASS</a> to build your own code alongside or on top of the preexisting framework.</p>
+			</article>
+		</main>
+
+		<footer>
+			Created with ❤ by Benjamin Gwynn
+			<a href="mailto:xenxier@xenxier.com">Contact Me</a>
+			<br>
+			All external linked or embedded content is property of it's respective copyright owner.
+		</footer>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+		<script>
+			// On click of a tag
+			$(".tag").click(function() {
+				if ($(".tag").length > 1) {
+					var targetTag = $(this).text().toLowerCase();
+
+					if ($(this).hasClass('active')) {
+
+						$('.tag').removeClass('active');
+						$("article").fadeTo('fast', 1);
+
+					} else {
+						$("article").each(function() {
+							if ($(this).children(".tag").text().toLowerCase() == targetTag) {
+								$(this).children(".tag").addClass('active');
+								$(this).fadeTo('fast', 1);
+							} else {
+								$(this).children(".tag").removeClass('active');
+								$(this).fadeTo('fast', 0.1);
+							}
+						});
+					}
+				}
+			});
+		</script>
+
+		<script>
+			String.prototype.replaceAll = function(x, y) {
+				return this.toString().split(x).join(y);
+			}
+
+			$("code").each(function(){
+				// innerhtml to text
+				$(this).text(
+					this.innerHTML
+						.replaceAll('&lt;', '<')
+						.replaceAll('&gt;', '>')
+						.replaceAll('&quot;', '\'')
+						.replaceAll('&amp;', '&')
+				);
+
+				// Correctly indent code
+				var baseTabCount = 0;
+				var stringsplit = this.innerHTML.split("\n");
+				this.innerHTML = "";
+
+				for (var i = 1; i < stringsplit.length - 1; i++) {
+					if (stringsplit[i].trim() != "") {
+
+						var chars = stringsplit[i].split("");
+
+						var thisTabCount = 0;
+						var finishedTabs = false;
+
+						for (var x = 0; x < chars.length; x++) {
+							if ((chars[x] == " " || chars[x] == "\t") && !finishedTabs) {
+								thisTabCount++;
+							} else {
+								finishedTabs = true;
+								if (baseTabCount == 0) baseTabCount = thisTabCount;
+							}
+						}
+
+						var tabCount = 0;
+
+						if (thisTabCount > baseTabCount) {
+							for (var tabs = 0; tabs < thisTabCount - baseTabCount; tabs++) {
+								tabCount++;
+							}
+						}
+
+						this.innerHTML += "<span style='margin-left:" + tabCount + "em'>" + stringsplit[i] + "</span><!--<br>-->";
+					} else {
+						this.innerHTML += "<br>"
+					}
+				}
+			});
+		</script>
+
+		<script>
+			/*
+				A very complicated script.
+			*/
+
+			var lipsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+
+			$("p").each(function() {
+				if ($(this).text().toLowerCase().startsWith("lipsum")) $(this).text(lipsum);
+			});
+		</script>
+
+		<script>
+			// Load background:
+
+			var bg = Math.round(new Date().getHours() / (24 / 7) + 1);
+			$("header").css('background-image', 'url("background/' + bg + '.jpg")');
+			$("body").css('background-image', 'url("background/' + bg + '-small.jpg")');
+		</script>
+
+		<script>
+			// Once everything has loaded:
+			$( document ).ready(function() {
+				$("#load-overlay").fadeOut('slow');
+			});
+		</script>
+	</body>
+</html>
