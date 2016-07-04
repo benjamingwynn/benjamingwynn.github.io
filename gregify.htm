@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<head>
+	<title>Gregify</title>
+	<style>
+		body {
+			width: 100%;
+			height: 100%;
+			background: whitesmoke;
+			overflow-x: hidden;
+		}
+		
+		main {
+			text-align: center;
+			max-width: 65em;
+			margin: auto;
+			background: white;
+			box-shadow: silver 0 0 1em;
+			padding: 1em;
+		}
+		
+		textarea {
+			width: 100%;
+			height: 28em;
+		}
+		
+		button {
+			margin-top: 1em;
+			font-size: 2em;
+			display: inline-block;
+		}
+		
+		#gregifynow {
+		}
+		
+		footer {
+			text-align: center;
+			color: silver;
+			margin-top: 1em;
+		}
+	</style>
+</head>
+<body>
+	<main>
+		<h1>Gregify</h1>
+		<textarea id="lyrics"></textarea>
+		<button type="button" id="gregifynow">Gregify</button>
+		<button type="button" id="clear">Clear</button>
+	</main>
+	
+	<footer>Made by that <a href="http://xenxier.com">Xenxier</a> guy</footer>
+	
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script type="text/javascript" src="http://dev.bigbrainmaths.com/worksheet_editor/jstoolbox.dev.js"></script>
+	
+	<script>
+		const NAME = 'Greg';
+	
+		$('#gregifynow').click(function() {
+			var l = '\n' + $('#lyrics').val() + '\n';
+			var pronouns = 'i me she he you that they my'.split(' ');
+			for (var i = 0; i < pronouns.length; i++) {
+				pronoun = pronouns[i];
+				
+				l = l.replaceAll('\n' + pronoun + ' ',						'\n' + NAME + ' ');
+				l = l.replaceAll('\n' + pronoun.toProperCase() + ' ',	'\n' + NAME + ' ');
+				l = l.replaceAll('\n' + pronoun.toUpperCase() + ' ',	'\n' + NAME + ' ');
+				
+				l = l.replaceAll(' ' + pronoun + ' ', 						' ' + NAME + ' ');
+				l = l.replaceAll(' ' + pronoun.toProperCase() + ' ',	' ' + NAME + ' ');
+				l = l.replaceAll(' ' + pronoun.toUpperCase() + ' ',	' ' + NAME + ' ');
+				
+				l = l.replaceAll(' ' + pronoun + '\n',						NAME + '\n');
+				l = l.replaceAll(' ' + pronoun.toProperCase() + '\n', NAME + '\n');
+				l = l.replaceAll(' ' + pronoun.toUpperCase() + '\n',	NAME + '\n');
+			}
+			$('#lyrics').val(l.trim());
+		});
+		
+		$('#clear').click(function() {
+			$('#lyrics').val('');
+		});
+	</script>
+</body>
