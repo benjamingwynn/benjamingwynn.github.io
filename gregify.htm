@@ -74,6 +74,35 @@
 				l = l.replaceAll(' ' + pronoun.toProperCase() + '\n', NAME + '\n');
 				l = l.replaceAll(' ' + pronoun.toUpperCase() + '\n',	NAME + '\n');
 			}
+			
+			// I've
+			var ive = "I've";
+			l = l.replaceAll('\n' + ive					+ ' ', '\n' + NAME + '\'s ');
+			l = l.replaceAll('\n' + ive.toProperCase()+ ' ', '\n' + NAME + '\'s ');
+			l = l.replaceAll('\n' + ive.toUpperCase()	+ ' ', '\n' + NAME + '\'s ');
+			
+			l = l.replaceAll(' ' + ive						+ ' ', '\n' + NAME + '\'s ');
+			l = l.replaceAll(' ' + ive.toProperCase()	+ ' ', '\n' + NAME + '\'s ');
+			l = l.replaceAll(' ' + ive.toUpperCase()	+ ' ', '\n' + NAME + '\'s ');
+			
+			l = l.replaceAll(' ' + ive						+ '\n', '\n' + NAME + '\'s ');
+			l = l.replaceAll(' ' + ive.toProperCase()	+ '\n', '\n' + NAME + '\'s ');
+			l = l.replaceAll(' ' + ive.toUpperCase()	+ '\n', '\n' + NAME + '\'s ');
+			
+			// I'm
+			var im = "I'm";
+			l = l.replaceAll('\n' + im					+ ' ', '\n' + NAME + '\'s ');
+			l = l.replaceAll('\n' + im.toProperCase()+ ' ', '\n' + NAME + '\'s ');
+			l = l.replaceAll('\n' + im.toUpperCase()	+ ' ', '\n' + NAME + '\'s ');
+			
+			l = l.replaceAll(' ' + im						+ ' ', '\n' + NAME + '\'s ');
+			l = l.replaceAll(' ' + im.toProperCase()	+ ' ', '\n' + NAME + '\'s ');
+			l = l.replaceAll(' ' + im.toUpperCase()	+ ' ', '\n' + NAME + '\'s ');
+			
+			l = l.replaceAll(' ' + im						+ '\n', '\n' + NAME + '\'s ');
+			l = l.replaceAll(' ' + im.toProperCase()	+ '\n', '\n' + NAME + '\'s ');
+			l = l.replaceAll(' ' + im.toUpperCase()	+ '\n', '\n' + NAME + '\'s ');
+			
 			$('#lyrics').val(l.trim());
 		});
 		
