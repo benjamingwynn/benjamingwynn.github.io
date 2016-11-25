@@ -1,0 +1,124 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<title>Camera</title>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+		<script src='filesaver.js'></script>
+		<style>
+			* {
+				font-family: sans-serif;
+				padding: 0;
+				margin: 0;
+			}
+			
+			body {
+				background: black;
+				width: 100%;
+				height: 100%;
+			}
+			
+			main {
+				height: calc(100% - 3em);
+				width: 100%;
+			}
+			
+			video {
+				width: 100%;
+				height: 100%;
+			}
+			
+			canvas {
+				display: none;
+			}
+			
+			footer {
+				display: flex;
+				color: #666;
+				flex-wrap: nowrap;
+				vertical-align: middle;
+				align-items: center;
+				height: 3em;
+				background: #111;
+				padding: 0 0.5em;
+			}
+			
+			footer * {
+				width: 100%;
+			}
+			
+			footer *:last-child {
+				text-align: right;
+				color: #333;
+			}
+			
+			#error {
+				display: none;
+				color: white;
+				background-color: firebrick;
+				width: 100%;
+				padding: 1em 0.5em;
+			}
+			
+			#flash {
+				width: 100%;
+				height: 100%;
+				background: white;
+				display: none;
+				position: fixed;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="error">Your browser doesn't support camera access.</div>
+		<div id="flash"></div>
+		<canvas id="canvas"></canvas>
+		
+		<main>
+			<video id="video" autoplay></video>
+		</main>
+		
+		<footer>
+			<span>Created with &hearts; by Benjamin for Laura</span>
+			<span>&copy; Benjamin Gwynn, 2016</span>
+		</footer>
+		
+		<script>
+			var video = document.getElementById('video');
+			
+			function die() {
+				document.getElementById('error').style.display = 'block';
+			}	
+
+			// legacy
+			navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+			
+			if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+				navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+					video.src = window.URL.createObjectURL(stream);
+					video.play();
+				});
+				
+			} else {
+				die();
+			}
+			
+			var canvas = document.getElementById('canvas');
+			var context = canvas.getContext('2d');
+//
+//			// Trigger photo take
+			video.addEventListener("click", function() {
+				$('#flash').show().fadeOut('slow');
+				canvas.width = video.videoWidth;
+				canvas.height = video.videoHeight;
+				context.drawImage(video, 0, 0, canvas.width, canvas.height);
+				canvas.toBlob(function(blob) {
+					saveAs(blob, 'photo_' + Date.now());
+				});
+			});
+		</script>
+	</body>
+</html>
