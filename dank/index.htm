@@ -24,7 +24,7 @@
 				flex-wrap: nowrap;
 				align-items: center;
 
-				animation-name: dankbg;
+				animation-name: dank;
 				animation-duration: 0.1s;
 				animation-direction: alternate;
 				animation-iteration-count: infinite;
@@ -33,39 +33,26 @@
 			h1 {
 				display: flex;
 				font-size: 33vw;
-				color: white;
+				color: inherit;
 				margin: auto;
 				text-align: center;
 				font-weight: 100;
 				text-transform: uppercase;
-
-				animation-name: danktext;
-				animation-duration: 0.1s;
-				animation-direction: alternate;
-				animation-iteration-count: infinite;
 			}
 
 			p {
 				color: white;
 			}
 
-			@keyframes danktext {
+			@keyframes dank {
 				from {
+					background: hotpink;
 					color: white;
 				}
 
 				to {
-					color: hotpink;
-				}
-			}
-
-			@keyframes dankbg {
-				from {
-					background: hotpink;
-				}
-
-				to {
 					background: white;
+					color: hotpink;
 				}
 			}
 			
@@ -74,10 +61,11 @@
 			}
 		</style>
 	</head>
-	<body>
-	<audio nocontrols autoplay>
-		<source src="shit.mp3" type="audio/mpeg">
-	</audio>
+	<body onclick='function () { document.getElementsByTagName("audio")[0].play() }'>
+		<audio nocontrols autoplay loop>
+			<source src="shit.mp3" type="audio/mpeg">
+		</audio>
+		
 		<h1>dank&trade;</h1>
 		<p>bee movie is shit</p>
 	</body>
