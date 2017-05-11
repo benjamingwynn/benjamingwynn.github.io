@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>Password Generator</title>
+		<style>
+			#passform, #passform * {
+				display: flex;
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+			}
+		
+			#passform {
+				flex-flow: column nowrap;
+				padding: 1em;
+			}
+			
+			#passform h1 {
+				font-size: 1.3em;
+			}
+			
+			#passform h2 {
+				font-size: 1.2em;
+			}
+			
+			#passform a {
+				display: inline;
+			}
+			
+			#passform h1,
+			#passform h2,
+			#passform h3,
+			#passform h4,
+			#passform h5,
+			#passform h6,
+			#passform p {
+				margin-bottom: 1ex;
+				display: inline;
+			}
+			
+			#passform #result {
+				flex-flow: row nowrap;
+				background: #ddd;
+				padding: 0.5em 1em;
+			}
+			
+			#passform #passout {
+				background: transparent;
+				flex: 100% 1 1;
+				font-family: monospace;
+				resize: none;
+				text-align: center;
+				font-size: 1.5em;
+				border: none;
+				outline: none;
+			}
+			
+			#passform #settings {
+				flex-flow: row nowrap;
+				font-family: sans-serif;
+			}
+			
+			#passform #passranges,
+			#passform #options {
+				flex: 50% 1 1;
+				padding: 1em;
+			}
+			
+			#passform #options {
+				flex-flow: column nowrap;
+			}
+			
+			#passform #passranges {
+				flex-flow: row wrap;
+			}
+			
+			#passform #passranges label,
+			#passform #passranges input {
+				margin: auto;
+			}
+			
+			#passform #passranges label {
+				flex: calc(100% - 1em) 0 0;
+			}
+			
+			#passform #passranges input {
+				flex: 1em 0 0;
+			}
+			
+			#passform .slider {
+				display: flex;
+				flex-flow: row nowrap;
+			}
+			
+			#passform .slider input[type="range"] {
+				flex: 100% 0 1;
+			}
+			
+			#passform .slider .echo {
+				padding: 0em 1em;
+				margin: auto;
+			}
+			
+			#passform #passgen {
+				margin: auto auto 0 auto;
+				justify-content: center;
+				padding: 0.4em;
+			}
+			
+			#passform #passcopy {
+				margin: auto;
+				background: none;
+				padding: 0.5em;
+				border: solid thin #666;
+				color: #222;
+			}
+			
+			/* load stuff */
+			
+			#passform.load {
+				cursor: wait;
+			}
+			
+			#passform.load #options::after {
+				content: "Generating password...";
+				margin: auto auto 0 auto;
+			}
+			
+			#passform.load #passgen {
+				display: none;
+			}
+			
+			#passform #top {
+				background: #eee;
+				padding-bottom: 1em;
+			}
+		</style>
+	</head>
+	<body>
+		<form id="passform">
+			<div id="top">
+				<div id="settings">
+					
+					<div id="options">
+						<h1>Xenxier's Password Generator</h1>
+						
+						<p>This page creates truly random passwords using <a href="https://random.org">random.org</a>. It uses no dependancies, but requires a modern browser (ES6 compatible).</p>
+						
+						<div class="slider">
+							<input id="passlength" type="range" value="16" min="6" max="64" step="1" />
+							<span id="passlengthecho" class="echo">16</span>
+						</div>
+						
+						<button id="passgen" type="button">Generate Password</button>
+					</div>
+					
+					<div id="passranges">
+						<h2>Password Contains</h2>
+						
+						<label for="range_lcase">Lowercase</label>
+						<input id="range_lcase" type="checkbox" data-min="97" data-max="122" checked />
+						
+						<label for="range_ucase">Upper Case</label>
+						<input id="range_ucase" type="checkbox" data-min="65" data-max="90" checked />
+						
+						<label for="range_num">Numbers</label>
+						<input id="range_num" type="checkbox" data-min="48" data-max="57" checked />
+						
+						<label for="range_s1">Specials 1</label>
+						<input id="range_s1" type="checkbox" data-min="33" data-max="47" />
+						
+						<label for="range_s2">Specials 2</label>
+						<input id="range_s2" type="checkbox" data-min="59" data-max="64" />
+						
+						<label for="range_s3">Specials 3</label>
+						<input id="range_s3" type="checkbox" data-min="91" data-max="96" />
+					</div>
+				</div>
+			</div>
+			
+			<div id="result">
+				<textarea id="passout">Click Generate Password to create a password</textarea>
+				<button id="passcopy" type="button">Copy</button>
+			</div>
+			
+			
+		</form>
+	</body>
+	
+	<script>
+		const $passform = document.getElementById("passform")
+			, $passgen = document.getElementById("passgen")
+			, $passout = document.getElementById("passout")
+			, $passlength = document.getElementById("passlength")
+			, $passlengthecho = document.getElementById("passlengthecho")
+			, $passcopy = document.getElementById("passcopy")
+			, $passranges = document.getElementById("passranges")
+			
+		$passlength.addEventListener("change", () => {
+			$passlengthecho.innerHTML = $passlength.value
+		})
+		
+		$passlengthecho.innerHTML = $passlength.value
+	
+		$passcopy.addEventListener("click", () => {
+			$passout.select()
+			document.execCommand("copy")
+		})
+	
+		$passgen.addEventListener("click", () => {
+			$passform.classList.add("load")
+		
+			const $$inputs = $passranges.querySelectorAll("input")
+				, usedRanges = []
+			
+			for (inputIndex = 0; inputIndex < $$inputs.length; inputIndex += 1) {
+				const $input = $$inputs[inputIndex]
+				
+				if ($input.checked) {
+					usedRanges.push($input.dataset)
+				}
+			}
+				
+			if (usedRanges.length === 0) {
+				// TODO: dont use alerts
+				alert("Please select at least one range to use for the password.")
+				$passform.classList.remove("load")
+			} else {
+				generateRuledPassword(usedRanges, (error, output) => {
+					$passform.classList.remove("load")
+				
+					if (error) throw error
+					
+					console.info("output", output)
+						
+					$passout.value = output
+					
+					$passout.select()
+				})
+			}
+		})
+	
+		function get (url, callback) {
+			function reqListener () {
+				console.log(this.responseText)
+			}
+
+			var oReq = new XMLHttpRequest()
+			
+			oReq.addEventListener("load", () => callback(null, oReq.responseText))
+			oReq.addEventListener("error", (event) => callback(event));
+			
+			oReq.open("GET", url)
+			oReq.send()
+		}
+		
+		function generateRuledPassword (ranges, callback) {
+			const nRanges = ranges.length
+			const finished = []
+			
+			generateRandoms(48, 47 + nRanges, (indexError, indexes) => {
+				if (indexError) {
+					callback(indexError)
+					return
+				}
+				
+				console.info("indexes", indexes)
+			
+				ranges.forEach((range) => {
+					if (!range.min || !range.max) {
+						callback("Invalid range.")
+					}
+					
+					generateRandoms(range.min, range.max, (error, randomsInRange) => {
+						if (error) {
+							callback(error)
+							return
+						}
+						
+						finished.push(randomsInRange)
+						finish()
+					})
+				})
+				
+				function finish () {
+					if (nRanges === finished.length) {
+						let output = ""
+						
+						indexes.split("").forEach((index, n) => {
+							output += finished[index][n]
+						})
+						
+						callback(null, output)
+					}
+				}
+			})
+		}
+			
+		function generateRandoms (minAscii = 33, maxAscii = 126, callback) {
+			const nCharacters = parseInt($passlength.value, 10)
+				, randomUrl = `https://www.random.org/integers/?num=${nCharacters}&min=${minAscii}&max=${maxAscii}&col=1&base=10&format=plain&rnd=new`
+			
+			// special condition for when not asking for a random set of numbers but the same character n times
+			if (minAscii === maxAscii) {
+				let output = ""
+				
+				while (output.length < nCharacters) {
+					output += String.fromCharCode(minAscii)
+				}
+				
+				callback(null, output)
+				
+				return
+			}
+			
+			get(randomUrl, (error, response) => {
+				if (error) {
+					callback(error)
+					return
+				}
+				
+				// split into an array
+				const characterCodes = response.trim().split("\n")
+				
+				let output = ""
+				
+				// convert each character code to an ascii character
+				characterCodes.forEach((characterCode) => {
+					const character = String.fromCharCode(characterCode)
+				
+					output += character
+				})
+				
+				callback(null, output)
+			})
+		}
+	</script>
+</html>
