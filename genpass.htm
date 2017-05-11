@@ -2,6 +2,7 @@
 <html lang="en">
 	<head>
 		<title>Password Generator</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<style>
 			#passform, #passform * {
 				display: flex;
@@ -133,6 +134,28 @@
 			#passform #top {
 				background: #eee;
 				padding-bottom: 1em;
+			}
+			
+			@media screen and (max-width: 480px) {
+				body {
+					background:red 
+				}
+				
+				#passform .slider {
+				}
+				
+				#passform #settings {
+					flex-flow: column nowrap;
+				}
+			
+				#passform #passranges,
+				#passform #options {
+					flex: auto;
+				}
+				
+				#passform #passgen {
+				margin-top: 1em;
+				}
 			}
 		</style>
 	</head>
