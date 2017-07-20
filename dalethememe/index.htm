@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+	<head>
+		<title>w h o   c a n   s a y   w h e r e   d a l e   w e n t</title>
+		
+		<link href="https://fonts.googleapis.com/css?family=Crimson+Text" rel="stylesheet">
+
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				font-family: Crimson Text;
+				user-select: none;
+				cursor: default;
+			}
+			
+			html, body {
+				background: black;
+				overflow: hidden;
+			}
+			
+			body {
+				display: flex;
+				height: 100vh;
+				animation: whocansay 30s;
+			}
+			
+			@keyframes whocansay {
+				from {
+					transform: scale(9);
+				}
+				
+				to {
+					transform: scale(1);
+				}
+			}
+			
+			.pic {
+				height: 100%;
+				margin: auto;
+				animation: pic 3s infinite alternate;
+			}
+			
+			@keyframes pic {
+				from {
+					box-shadow: 0 0 10em #222;
+				}
+				
+				to {
+					box-shadow: none;
+				}
+			}
+			
+			.mid {
+				z-index: 1;
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				display: flex;
+				font-size: 10vh;
+				justify-content: center;
+				align-content: center;
+				align-items: center;
+			}
+			
+			.mid > * {
+				display: flex;
+				margin: auto 0;
+			}
+			
+			.tear {
+				padding-bottom: 0.89em;
+				color: #2196f3;
+				text-shadow: 0 0 2px black;
+				animation: tears 2s;
+				animation-iteration-count: infinite;
+			}
+			
+			.tear.left {
+			}
+			
+			.tear.right {
+				padding-top: 0.15em;
+				padding-left: 0.1em;
+				animation-delay: 0.3s;
+			}
+			
+			@keyframes tears {
+				0% {
+					opacity: 0;
+					transform: none;
+				}
+				
+				30% {
+					opacity: 1;
+					transform: none;
+				}
+				
+				100% {
+					opacity: 0;
+					transform: translateY(1em);
+				}
+			}
+			
+			.rip {
+				color: white;
+				position: fixed;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				text-align: center;
+				margin-bottom: 1em;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<audio autoplay nocontrols loop id="audio">
+			<source src="memes.mp3">
+		</audio>
+		
+		<div class="rip">
+			<h1>RIP Dale</h1>
+			<h2>2015 - 2016</h2>
+			<h3>"We didn't like him anyway."</h3>
+		</div>
+		<img class="pic" src="dale.jpg" />
+		<div class="mid">
+			<span class="tear left">💧&#xFE0E;</span>
+			<span class="tear right">💧&#xFE0E;</span>
+		</div>
+	</body>
+	
+	<script>
+		document.addEventListener("click", function () {
+			document.getElementById('audio').play()
+		})
+	</script>
+</html>
