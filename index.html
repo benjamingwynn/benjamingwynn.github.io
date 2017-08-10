@@ -1,232 +1,488 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>Xenxier</title>
+		<title>Benjamin Gwynn</title>
 
-		<link href="font/vendor/RedAlert.css" rel="stylesheet" type="text/css">
-
-		<link href="css/style.css" rel="stylesheet" type="text/css">
-	</head>
-
-	<body>
 		<style>
-			#load-overlay {
-				display: table;
-				position: fixed;
+			@import url('https://fonts.googleapis.com/css?family=Zilla+Slab+Highlight:400,700');
+			@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400|Source+Sans+Pro:200,300,400');
+
+			@font-face {
+				font-family: "Noto Emoji";
+				src: url("NotoEmoji-Regular.ttf");
+			}
+
+			* {
+				box-sizing: border-box;
+			}
+
+			html, body {
+				margin: 0;
+				overflow-x: hidden;
+			}
+
+			body {
 				overflow: hidden;
-				top: 0;
-				bottom: 0;
-				left: 0;
-				right: 0;
+			}
+
+			div {
+				margin: 0 auto;
 				width: 100%;
-				height: 100%;
-				z-index: 1000;
-				background: rgba(0,0,0,0.5);
+				display: flex;
+				flex-flow: column nowrap;
+				max-width: 1066px;
 			}
 
-			#load {
-				display: table-cell;
-				vertical-align: middle;
-				text-align: center;
-			}
-
-			#load > div {
-				display: inline-block;
-				background: white;
-				width: 160px;
-				box-shadow: 0 30px 80px rgba(0,0,0,0.6);
-				text-align: center;
+			h1, h2, h3, h4, h5, h6 {
+				margin: 0.5ex 0;
+				font-size: 2em;
+				font-family: "Source Sans Pro";
 				text-transform: uppercase;
-				font-weight: bold;
-
-				border-style: double;
-				border-width: 0.5em;
-				border-color: black;
+				font-weight: 300;
 			}
 
-			#load > div > p {
+			h2 {
+				font-size: 1.4em;
+			}
+
+			h6 {
+				text-transform: none;
+			}
+
+			p, ul {
+				font-size: 1em;
+				margin: 1ex 0;
+				font-family: "Roboto";
+				font-weight: 300;
+			}
+
+			.header {
+				/* everything here will scale perfectly across devices since its linked to vh */
+				font-size: 5vh;
+
+				background: whitesmoke;
+				padding: 0;
+				background-position: center;
+				background-size: cover;
+				height: 15em;
+				justify-content: center;
+				display: flex;
+				flex-flow: column nowrap;;
+			}
+
+			.header__logo {
+				font-size: 8em;
+				margin: auto;
+				width: 1em;
+				display: block;
+			}
+
+			.header__text {
+				text-align: center;
+				margin: 0;
+			}
+
+			.header__text--primary {
+				font-weight: 300;
 				color: black;
-				padding: 0.5em;
+				font-size: 1em;
 			}
 
-			#load > div > img {
-				width: 100%;
+			.header__text--secondary {
+				font-weight: 300;
+				font-size: 0.5em;
+				margin-bottom: auto;
+			}
+
+			.services__text {
+				padding: 1.5em;
+			}
+
+			.intro {
+				padding: 1.5em;
+				justify-content: center;
+			}
+
+			.intro__pic {
+				font-size: 10em;
+				background: url(./me.png);
+				background-size: contain;
+				transition: all 0.3s;
+				border: solid #555 0.1rem;
+				width: 1em;
+				height: 1em;
+				flex: 1em 0 0;
+				border-radius: 50%;
+				margin: 1rem auto;
+			}
+
+			.button {
+				font-size: 0.8em;
+				text-decoration: none;
+				display: table;
+				text-align: center;
+				font-family: "Roboto";
+				font-weight: 300;
+				width: auto;
+				padding: 1.2em 2em;
+				margin: 1em 0;
+				justify-content: center;
+				border-radius: 0.0em;
+				background: #1976D2;
+				color: white;
+				box-shadow: rgba(0, 0, 0, 0.35) 0 0.1em 0.3em;
+				cursor: pointer;
+				outline: none;
+				transition: all 0.3s;
+				font-weight: bold;
+				text-transform: uppercase;
+				border-radius: .2em;
+				user-select: none;
+			}
+
+			.button:focus {
+				border-radius: 2em;
+			}
+
+			.button:hover {
+				transform: scale(1.05);
+			}
+
+			.button--contact {
+				
+			}
+
+			.button--center {
+				margin: auto;
+			}
+
+			.footer {
+				margin-top: 2em;
+				background: #ddd;
+				padding: 1em;
+				font-size: .85em;
+			}
+			
+			.emoji {
+				font-family: "Noto Emoji";
+			}
+
+			.service__icon {
+				display: none;
+			}
+
+			.service {
+				padding: 0 1em;
+			}
+
+			.contact {
+				padding: 0 1em;
+			}
+
+			@media (min-width: 22em) {
+				.service {
+					flex-flow: row nowrap;
+					align-items: center;
+				}
+
+				.service__icon {
+					display: block;
+					font-size: 3em;
+					margin-left: .2em;
+				}
+			}
+
+			@media (min-width: 25em) {
+				.service {
+					flex-flow: column-reverse nowrap;
+					margin-bottom: 1.5em;
+					align-items: center;
+					justify-items: flex-start;
+				}
+
+				.service__icon {
+					font-size: 6em;
+					margin-left: 0;
+				}
+
+				.service__text {
+					text-align: center;
+				}
+			}
+
+			@media (min-width: 30em) {
+				.services {
+					flex-flow: row wrap;
+				}
+
+				.service {
+					margin: auto;
+					flex: 50% 0;
+				}
+
+				.service__icon {
+					flex: 100% 0 0;
+				}
+
+				.service__text > h2 {
+					height: 3em;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+				}
+
+				.service__text {
+					flex: 15em 0 0;
+				}
+
+				.intro {
+					flex-flow: row nowrap;
+				}
+
+				.intro__pic {
+					margin-left: 0.2em;
+				}
+			}
+
+			@media (min-width: 40em) {
+				.service {
+					flex: 33.33% 0;
+				}
+
+				.intro__text {
+					max-width: 30em;
+					margin-left: 0;
+				}
+
+				.intro__pic {
+					margin-right: 0;
+				}
 			}
 		</style>
 
-		<div id="load-overlay">
-			<div id="load">
-				<div>
-					<img draggable=false src="http://i.imgur.com/tf9PvNb.gif">
-					<p>loading</p>
-				</div>
+		<!-- animations -->
+		<style>
+			.header__logo {
+/* 				animation: logoin 0.5s; */
+			}
+
+			.logo * {
+				transform-origin: center;
+				animation-fill-mode: both;
+			}
+
+			.logo__hex {
+				animation: logoin 0.6s;
+			}
+
+			.logo__main {
+				animation: logobitin 0.8s;
+			}
+
+			.logo__sep, .logo__bridge {
+				animation: logobitin .8s;
+			}
+
+			.header__text {
+				animation: htextin 0.4s;
+				animation-delay: .2s;
+				animation-fill-mode: both;
+			}
+
+			body > *:not(.header) {
+				animation: restin 0.4s;
+				animation-delay: .5s;
+				animation-fill-mode: both;
+			}
+
+			@keyframes logoin {
+				from {
+					transform: scale(1.1);
+					opacity: 0;
+				}
+
+				to {
+					transform: none;
+					opacity: 1;
+				}
+			}
+
+			@keyframes logobitin {
+				from {
+					transform: scale(.9);
+					opacity: 0;
+				}
+
+				to {
+					transform: none;
+					opacity: 1;
+				}
+			}
+
+			@keyframes morelogoin {
+				from {
+					opacity: 0;
+				}
+
+				to {
+					opacity: 1;
+				}
+			}
+
+			@keyframes htextin {
+				from {
+					transform: translateY(-1em);
+					opacity: 0;
+				}
+
+				to {
+					transform: none;
+					opacity: 1;
+				}
+			}
+
+
+			@keyframes restin {
+				from {
+					transform: translateY(1em);
+					opacity: 0;
+				}
+
+				to {
+					transform: none;
+					opacity: 1;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="header">
+			<svg class="header__logo logo" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
+				<g>
+					<path class="logo__main" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" d="M114.7,48.5L64.8,20.3L26,43.5 v42.9l39,22.4V78.5c-4-2.6-9-5.2-15-7.8c0-5.2,0-10.4,0-15.6c19,10.2,37,20.4,54,30.6c0-14.5,0-43.7,0-43.7"/>
+					<line class="logo__sep" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="74" y1="116" x2="74" y2="68"/>
+					<path class="logo__bridge" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" d="M83,111V86.3 c8,4.2,13.7,8.4,20.6,12.5"/>
+					<polygon class="logo__hex" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" points="14,35.5 64,6.7 114,35.5 114,93 64,121.8 14,93"/>
+				</g>
+			</svg>
+
+			<h1 class="header__text header__text--primary">Gwynn Design</h1>
+			<h2 class="header__text header__text--secondary">full stack web consultancy</h2>
+		</header>
+
+		<div class="intro">
+			<div class="intro__text">
+				<h1>About</h1>
+				<p>I am Benjamin Gwynn. I design and develop bespoke websites for businesses and individuals. My services range from tweaking Wordpress sites to bespoke JS application development.</p>
+				<p>I work in Cardiff with a number of freelance professionals to provide full stack affordable, bespoke solutions.</p>
+			</div>
+			<div class="intro__pic"></div>
+		</div>
+
+		<div class="services">
+				<div class="services__text">
+				<h1>Services</h1>
+				<p>My consultancy is truly full-stack, from the design to maintainance. We handle everything so you don't have to.</p>
+			</div>
+
+			<div class="service">
+				<span class="service__text">
+					<h2>Website Design</h2>
+					<p>My team and I will assist your users in recognising your brand. We are experts in designing user-friendly, mobile-first, brand reinforcing interfaces.</p>
+				</span>
+				<span class="service__icon emoji">🎨&#xFE0E;</span>
+			</div>
+
+			<div class="service">
+				<span class="service__text">
+					<h2>Website Development</h2>
+					<p>A fast, fluid website keeps users coming back, that is why my team and I develop fast websites quickly, meeting the progressive web app standard and scoring high results on Pagespeed and Lighthouse.</p>
+				</span>
+				<span class="service__icon emoji">🔧&#xFE0E;</span>
+			</div>
+
+			<div class="service">
+				<span class="service__text">
+					<h2>CMS solutions</h2>
+					<p>Your website needs to have content, and you need to manage that content. Whether your existing website is using Wordpress or you need a bespoke CMS solution, we can help.</p>
+				</span>
+				<span class="service__icon emoji">✏️&#xFE0E;</span>
+			</div>
+
+			<div class="service">
+				<span class="service__text">
+					<h2>Search Engine Optimisation</h2>
+					<p>Rank higher in organic search results. See more visitors, get more customers, earn more revenue.</p>
+				</span>
+				<span class="service__icon emoji">🔍&#xFE0E;</span>
+			</div>
+
+			<div class="service">
+				<span class="service__text">
+					<h2>Client JS development</h2>
+					<p>My team and I have buil mutiple bespoke Javascript applications in a variaty of frameworks, including React; jQuery and Angular.js.</p>
+				</span>
+				<span class="service__icon emoji">📜&#xFE0E;</span>
+			</div>
+
+			<div class="service">
+				<span class="service__text">
+					<h2>Pay-per-click Ads</h2>
+					<p>Landing page design and campaign management for Google Adwords.</p>
+				</span>
+				<span class="service__icon emoji">🔎&#xFE0E;</span>
+			</div>
+
+			<div class="service">
+				<span class="service__text">
+					<h2>Server Side Solutions</h2>
+					<p>Every modern website must have a reliable backend to support its customer base. Whether it's in Javascript with node.js or PHP with nginx, me and my team can maintain and develop long-term, reliable solutions.</p>
+				</span>
+				<span class="service__icon emoji">💻&#xFE0E;</span>
+			</div>
+
+			<div class="service">
+				<span class="service__text">
+					<h2>Server Maintainance &amp; Deployment</h2>
+					<p>With <noscript>over 5</noscript><script>document.currentScript.outerHTML=new Date().getYear()-111</script> years running Linux servers, we can assist or fully handle the deployment and maintainance of your web servers.</p>
+				</span>
+				<span class="service__icon emoji">🔨&#xFE0E;</span>
+			</div>
+
+			<div class="service">
+				<span class="service__text">
+					<h2>iOS + Android Apps</h2>
+					<p>Using React Native, we create affordable native applications to compliment your online presence.</p>
+				</span>
+				<span class="service__icon emoji">📲&#xFE0E;</span>
 			</div>
 		</div>
 
-		<header>
-			<logo><span>x</span></logo>
-			<h2>xenxier.com</h2>
-		</header>
+		<div class="contact">
+			<h1>Contact Me</h1>
+			<p>Let's get started.</p>
+			<p>Drop me an email at contact@gwynn.design, or use the contact button below and I'll get back to you as soon as possible.</p>
 
-		<main>
-			<article id="vga-passthrough-1">
-				<h1>HOW TO: A detailed guide to VGA Passthrough (with UEFI & Virt-Manager)</h1>
+			<a class="button" href="mailto:contact@gwynn.design">Contact Me</a>
+		</div>
 
-				<span class="tag">Linux</span>
-				<!--<span class="date">24/03/2016</span>-->
-
-				<p>I've created a neat little tutrorial for VGA passthrough! Click the link below to read more about it!</p>
-				<p>
-					<a href="articles/vga-passthrough-1.htm">Read full article</a>
+		<footer class="footer">
+			<div>
+				<h6 class="footer__copyright">Benjamin Gwynn Design</h6>
+				<p class="footer__addr">
+					Morgan Studios,<br />
+					54a Bute Street,<br />
+					Cardiff Bay<br />
+					CF14 5AF
 				</p>
-			</article>
-
-			<article id="web-frameworks">
-				<h1>Web Frameworks</h1>
-				<span class="tag">web dev</span>
-				<p>After looking closely at <a href="http://getbootstrap.com">Bootstrap</a>, <a href="http://purecss.io/">PureCSS</a> and various other Frameworks, I decided that if I was going to show off my web development skill with my website, a framework wasn't the way to go, neither a massive monolithic framework, nor a rather neat minimalistic one would satisfy me.</p>
-
-				<p><strong>But why?</strong> Simple. I don't need the massive amount of features which Bootstrap offers, and everything that something like PureCSS offers I can do myself with just a few simmple <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Using_media_queries">media queries</a>, which is just what these frameworks do anyway.</p>
-
-				<p><strong>But isn't that a bunch of unnessesary code?</strong> Suprisingly, no, this entire page is only <script>document.write((document.getElementsByTagName("html")[0].innerHTML.split("\n").length + 1).toString())</script> lines long (<script>document.write((document.getElementsByTagName("html")[0].innerHTML.length + 1).toString())</script> characters!), including styling, Javascript and articles. Which may seem like a lot, but the <a href="http://getbootstrap.com">Bootstrap 3 homepage</a> is over 500 lines long (as of 28/02/2016), <strong>not</strong> including CSS or Javascript librarys.</p>
-
-				<p><strong>So, how do you ditch web frameworks?</strong> Simple, as I hinted earlier, get <a href="https://developers.google.com/web/fundamentals/design-and-ui/responsive/fundamentals/use-media-queries?hl=en">familiar with media queries</a>, and design your website around <strong>mobile first</strong>, then simply increase your target screen size until everything looks too big and/or bunched up together and add a media query, adjusting padding, widths or positioning where needed. Take a look at this snippit of code from the styling I used for the logo if you still don't understand:</p>
-
-				<code>
-					header logo {
-						font-size: 6em;
-					}
-
-					@media screen and (min-width: 35em) {
-						header logo {
-							font-size: 12em;
-						}
-					}
-				</code>
-
-				<p>This doubles the logo in the header (the big X at the top) once the width of the browser becomes or exceeds 35<a href="http://www.sitepoint.com/power-em-units-css/">em</a> wide. I've used em's here partially because <a href="http://blog.cloudfour.com/the-ems-have-it-proportional-media-queries-ftw/">some older browsers don't scale properly with pixels</a>, but mainly because I just like using em's. <a href="http://stackoverflow.com/a/22262489">There are also some other cool reasons to use em's, as this stack overflow user pointed out</a></p>
-
-				<p><strong>Wait, so Web Frameworks are useless?</strong> Not at all! In fact, web frameworks are great for larger projects which require stuff like prebuilt grids, menus and <a href="http://getbootstrap.com/components/#glyphicons">icons</a>, where you don't have time to program every page to look perfect on every screen size. But, for those larger projects, I'd highly suggest using <a href="http://lesscss.org/">LESS</a> or <a href="http://sass-lang.com/">SASS</a> to build your own code alongside or on top of the preexisting framework.</p>
-			</article>
-		</main>
-
-		<footer>
-			Created with ❤ by Benjamin Gwynn
-			<a href="mailto:xenxier@xenxier.com">Contact Me</a>
-			<br>
-			All external linked or embedded content is property of it's respective copyright owner.
+				<p class="footer__copyright">&copy; Benjamin Gwynn, <noscript>2017</noscript><script>document.currentScript.outerHTML=new Date().getFullYear()</script>.</p>
+			</div>
 		</footer>
-
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
-		<script>
-			// On click of a tag
-			$(".tag").click(function() {
-				if ($(".tag").length > 1) {
-					var targetTag = $(this).text().toLowerCase();
-
-					if ($(this).hasClass('active')) {
-
-						$('.tag').removeClass('active');
-						$("article").fadeTo('fast', 1);
-
-					} else {
-						$("article").each(function() {
-							if ($(this).children(".tag").text().toLowerCase() == targetTag) {
-								$(this).children(".tag").addClass('active');
-								$(this).fadeTo('fast', 1);
-							} else {
-								$(this).children(".tag").removeClass('active');
-								$(this).fadeTo('fast', 0.1);
-							}
-						});
-					}
-				}
-			});
-		</script>
-
-		<script>
-			String.prototype.replaceAll = function(x, y) {
-				return this.toString().split(x).join(y);
-			}
-
-			$("code").each(function(){
-				// innerhtml to text
-				$(this).text(
-					this.innerHTML
-						.replaceAll('&lt;', '<')
-						.replaceAll('&gt;', '>')
-						.replaceAll('&quot;', '\'')
-						.replaceAll('&amp;', '&')
-				);
-
-				// Correctly indent code
-				var baseTabCount = 0;
-				var stringsplit = this.innerHTML.split("\n");
-				this.innerHTML = "";
-
-				for (var i = 1; i < stringsplit.length - 1; i++) {
-					if (stringsplit[i].trim() != "") {
-
-						var chars = stringsplit[i].split("");
-
-						var thisTabCount = 0;
-						var finishedTabs = false;
-
-						for (var x = 0; x < chars.length; x++) {
-							if ((chars[x] == " " || chars[x] == "\t") && !finishedTabs) {
-								thisTabCount++;
-							} else {
-								finishedTabs = true;
-								if (baseTabCount == 0) baseTabCount = thisTabCount;
-							}
-						}
-
-						var tabCount = 0;
-
-						if (thisTabCount > baseTabCount) {
-							for (var tabs = 0; tabs < thisTabCount - baseTabCount; tabs++) {
-								tabCount++;
-							}
-						}
-
-						this.innerHTML += "<span style='margin-left:" + tabCount + "em'>" + stringsplit[i] + "</span><!--<br>-->";
-					} else {
-						this.innerHTML += "<br>"
-					}
-				}
-			});
-		</script>
-
-		<script>
-			/*
-				A very complicated script.
-			*/
-
-			var lipsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
-
-			$("p").each(function() {
-				if ($(this).text().toLowerCase().startsWith("lipsum")) $(this).text(lipsum);
-			});
-		</script>
-
-		<script>
-			// Load background:
-
-			var bg = Math.round(new Date().getHours() / (24 / 7) + 1);
-			$("header").css('background-image', 'url("background/' + bg + '.jpg")');
-			$("body").css('background-image', 'url("background/' + bg + '-small.jpg")');
-		</script>
-
-		<script>
-			// Once everything has loaded:
-			$( document ).ready(function() {
-				$("#load-overlay").fadeOut('slow');
-			});
-		</script>
 	</body>
+	<script>console.log("                                    .:shy/.                                     \n                                `.+ymdo/+hmho-`                                 \n                             `:sdmy/.`    `/smms/`                              \n                          ./ymds:`           `-ohmh+.`                          \n                      `-odmy+-`                  ./smds:`                       \n                   ./ymds:`           ./+-`         `-ohmho-`                   \n               `-ohdh+-`           .+ydyoyhs/.`        `./smds:`                \n           `./ydds:. `         `:ohho:`   ./sdho-`         `:ohmh+-`            \n        `-ohdh+-`           ./shyo-`        ``-+yhs/.`        `-/ydds:`         \n     .:yddy/.`           -+yhs/.                `./shho:`         `:shdy+-      \n `-ohdho-`           `:ohho:`                       `-+yhs/.`        `-+ydds:.  \nyddy/.`           ./shy+-`                             `./shyo:`        `.:shdy.\nMs`           `-+yhs/.`                                    `-+yhy+.`        `+M-\nMs         `-ohhs:.`                                          `./shyo:`      /M-\nMs       :shy+-`                                                  `:+ydy/.`  /M-\nMs       ym.`                                                        .Myoyho:+M-\nMs       ym                                                          `Mo `-+ydM-\nMs       ym                 .                                        `M+     /M-\nMs       ym                `myo-`                                    `M+     /M-\nMs       ym                `Mh+yhs/-`                                `M+     /M-\nMs       ym                `Mo `.:oyys:.                             `M+     /M-\nMs       ym                `Mo     `-/shy+-`                         `M+     /M-\nMs       ym                `Mo         .:oyys:.`                     `M+     /M-\nMs       ym                `Mo            `./shh+:`                  `M+     /M-\nMs       ym                `mh+-.`            +Msyys/.`              `M+     /M-\nMs       ym                 .:+yyyo:.`        +M.`./shyo:`           `M+     /M-\nMs       ym                    ``-+yhy+-`     +M.    `-oyhs/.`       `M+     /M-\nMs       ym                         .:shh.    +M.       `-/shy+-`    `M+     /M-\nMs       ym                            +M.    +M.           `:oyhs:. `M+     /M-\nMs       ym                            /M.    +M.    ``        `-+yhs+M+     /M-\nMs       ym/.`                         /M.    +M.    :h+-`         ./sd+     /M-\nMs       .:shyo:.`                     /M.    +M.    +Msyhs/.`        ``     /M-\nMs`         `-oyhs/.`                  /M.    +M.    +M.`./yhy/.`            +M-\nhdho-.          ./shy+-`               /M.    +M.    +M.    `:shy+-`     `-/ydd.\n`./sdds/.`         `-ohhs:.`           /M.    +M.    +M.       `:ohy+-.:ohdh+-` \n    `-ohdh+-`          ./yhy+-`        /M.    +M.    +M.          `+mNmds:`     \n       `./ydhs:.`         `-ohhs:.`    /M.    +M.    +M.       `-ohdh+-`        \n           `-ohmh+-`         `.+ydy+-` /M.    +M.    +M.    ./ydds:.            \n              `./ydds:.`         `-ohhoyM.    +M.    +M.`-+hmh+-`               \n                  `:oddy+.`         `.+ym.    +M.    +Mydmy:.                   \n                      .+ymds:`          `     +M.`-ohmho-`                      \n                         `:oddy/.`            +Mydmy/.`                         \n                             -+hmdo-`      -+hmds-`                             \n                                `:sdmy/.:smmy/.`                                \n                                   `-+hNdo:`                                    ", "© Benjamin Gwynn Design", new Date().getFullYear())</script>
 </html>
