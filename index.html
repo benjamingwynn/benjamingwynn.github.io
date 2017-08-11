@@ -7,31 +7,39 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 		<!-- Icons -->
+		
+		<link rel="icon" sizes="490x490" href="logo490.png">
+		<link rel="icon" sizes="310x310" href="logo310.png">
+		<link rel="icon" sizes="192x192" href="logo192.png">
+		<link rel="icon" sizes="152x152" href="logo152.png">
+		<link rel="icon" sizes="120x120" href="logo120.png">
+		<link rel="icon" sizes="76x76" href="logo76.png">
+		<link rel="icon" sizes="48x48" href="logo48.png">
+		<link rel="icon" sizes="32x32" href="logo32.png">
+		<link rel="icon" sizes="16x16" href="logo16.png">
 
-		<link rel="icon" sizes="490x490" href="icon490.png">
-		<link rel="icon" sizes="310x310" href="icon310.png">
-		<link rel="icon" sizes="192x192" href="icon192.png">
+		<link rel="apple-touch-startup-image" href="logo192.png">
+		<link rel="apple-touch-icon" href="logo192.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="logo152.png">
+		<link rel="apple-touch-icon-precomposed" href="logo152.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="logo120.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="logo76.png">
 
-		<link rel="icon" sizes="152x152" href="icon152.png">
-		<link rel="icon" sizes="120x120" href="icon120.png">
-		<link rel="icon" sizes="76x76" href="icon76.png">
-
-		<link rel="apple-touch-startup-image" href="icon192.png">
-		<link rel="apple-touch-icon" href="icon192.png">
-		<link rel="apple-touch-icon" sizes="152x152" href="icon152.png">
-		<link rel="apple-touch-icon" sizes="120x120" href="icon120.png">
-		<link rel="apple-touch-icon" sizes="76x76" href="icon76.png">
-
+		<link rel="mask-icon" href="logo.svg" color="#ff0000">
+<!--		<link rel="shortcut icon" href="logo.ico" >-->
+		
 		<meta name="msapplication-square310x310logo" content="icon310.png">
 		<meta name="msapplication-square150x150logo" content="icon150.png">
+		<meta name="msapplication-TileImage" content="icon144.png">
 		<meta name="msapplication-square70x70logo" content="icon70.png">
-
+		
 		<!-- Compatibility -->
 
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 		<meta name="theme-color" content="#000000">
+		<meta name="msapplication-TileColor" content="#000000">
 		<meta name="msapplication-navbutton-color" content="#000000">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -77,16 +85,43 @@
 				margin: 0;
 				overflow-x: hidden;
 			}
+			
+			a {
+				color: inherit;
+				text-decoration: none;
+			}
+			
+			a[target="_blank"] {
+			}
+			
+			a[target="_blank"]::after {
+				content: "🡥";
+				margin-left: 0.25rem;
+				margin-right: 0.05rem;
+				opacity: 0.5;
+				border-right: solid thin;
+				border-top: solid thin;
+				padding: 0.1em 0.2em 0em 0em;
+				position: relative;
+				top: -0.3em;
+				font-size: 0.5em;
+				user-select: none;
+			}
 
 			body {
 				overflow: hidden;
 			}
-
+			
 			div {
-				margin: 0 auto;
-				width: 100%;
 				display: flex;
 				flex-flow: column nowrap;
+			}
+
+			section {
+				display: flex;
+				flex-flow: column nowrap;
+				margin: 0 auto;
+				width: 100%;
 				max-width: 1066px;
 			}
 
@@ -159,6 +194,10 @@
 				padding: 1.5em;
 				justify-content: center;
 			}
+			
+			.intro__text {
+				margin-right: auto;
+			}
 
 			.intro__pic {
 				font-size: 10em;
@@ -185,15 +224,15 @@
 				margin: 1em 0;
 				justify-content: center;
 				border-radius: 0.0em;
-				background: #1976D2;
-				color: white;
+				background: whitesmoke;
+				color: #333;
 				box-shadow: rgba(0, 0, 0, 0.35) 0 0.1em 0.3em;
 				cursor: pointer;
 				outline: none;
 				transition: all 0.3s;
 				font-weight: bold;
 				text-transform: uppercase;
-				border-radius: .2em;
+				border-radius: .1em;
 				user-select: none;
 			}
 
@@ -215,7 +254,8 @@
 
 			.footer {
 				margin-top: 2em;
-				background: #ddd;
+				background: #222;
+				color: #ddd;
 				padding: 1em;
 				font-size: .85em;
 			}
@@ -226,6 +266,7 @@
 
 			.service__icon {
 				display: none;
+				color: #333;
 			}
 
 			.service {
@@ -233,7 +274,7 @@
 			}
 
 			.contact {
-				padding: 0 1em;
+				padding: 0 1.5em;
 			}
 
 			@media (min-width: 22em) {
@@ -398,7 +439,6 @@
 				}
 			}
 
-
 			@keyframes restin {
 				from {
 					transform: translateY(1em);
@@ -428,19 +468,19 @@
 			<h2 class="header__text header__text--secondary">full stack web consultancy</h2>
 		</header>
 
-		<div class="intro">
+		<section class="intro">
 			<div class="intro__text">
 				<h1>About Me</h1>
 				<p>I am a freelance web developer based in Cardiff Bay. I design and develop bespoke websites for businesses and individuals.</p>
 				<p>I work with a number of freelance professionals to provide affordable and bespoke "full stack" solutions.</p>
 			</div>
 			<div class="intro__pic"></div>
-		</div>
+		</section>
 
-		<div class="services">
-				<div class="services__text">
+		<section class="services">
+			<div class="services__text">
 				<h1>Services</h1>
-				<p>My consultancy is truly full-stack, from the design to maintainance. We handle everything so you don't have to.</p>
+				<p>My consultancy is truly full-stack, from the design to maintainance. We handle everything so you can focus on your business.</p>
 			</div>
 
 			<div class="service">
@@ -514,15 +554,15 @@
 				</span>
 				<span class="service__icon emoji">📲&#xFE0E;</span>
 			</div>
-		</div>
+		</section>
 
-		<div class="contact">
+		<section class="contact">
 			<h1>Contact Me</h1>
 			<p>Let's get started.</p>
 			<p>Drop me an email at contact@gwynn.design, or use the contact button below and I'll get back to you as soon as possible.</p>
 
 			<a class="button" href="mailto:contact@gwynn.design">Contact Me</a>
-		</div>
+		</section>
 
 		<footer class="footer">
 			<div>
@@ -533,6 +573,7 @@
 					Cardiff Bay<br />
 					CF10 5AF
 				</p>
+				<p><a href="https://www.linkedin.com/in/benjamin-gwynn-643374149" target="_blank">LinkedIn</a> | <a href="https://twitter.com/benjamingwynn" target="_blank">Twitter</a> | <a href="https://benjamingwynn.tumblr.com" target="_blank">Tumblr</a></p>
 				<p class="footer__copyright">&copy; Benjamin Gwynn, <noscript>2017</noscript><script>document.currentScript.outerHTML=new Date().getFullYear()</script>.</p>
 			</div>
 		</footer>
