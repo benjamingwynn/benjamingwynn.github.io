@@ -145,7 +145,7 @@ p, ul {
 
 .intro__pic {
 	display: none;
-	background: url(./me.png);
+	background: url(./me.jpg);
 	background-size: cover;
 	transition: all 0.3s;
 	border: solid #555 0.1rem;
@@ -346,15 +346,15 @@ p, ul {
 }
 
 label[for="ps_bbm"] {
-	background-image: url(maths.jpg);
+	background-image: url(./maths.jpg);
 }
 
 label[for="ps_ctop"] {
-	background-image: url(tanker.png);
+	background-image: url(./tanker.jpg);
 }
 
 label[for="ps_capital"] {
-	background-image: url(lawyers.png);
+	background-image: url(./lawyers.jpg);
 }
 
 .footer__credit {
