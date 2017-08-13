@@ -208,11 +208,12 @@ p, ul {
 }
 
 .footer {
-	margin-top: 2em;
-	background: #222;
-	color: #ddd;
+	margin-top: 4em;
+	background: whitesmoke;
+	color: #111;
 	padding: 1em;
 	font-size: .85em;
+	padding-bottom: 3em;
 }
 
 .emoji {
