@@ -67,393 +67,24 @@
 
 		<!-- heads up, this website is flat for now -->
 		<meta tag=”nositelinkssearchbox”/>
-
-		<style>
-			@import url('https://fonts.googleapis.com/css?family=Zilla+Slab+Highlight:400,700');
-			@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400|Source+Sans+Pro:200,300,400');
-
-			@font-face {
-				font-family: "Noto Emoji";
-				src: url("NotoEmoji-Regular.ttf");
-			}
-
-			* {
-				box-sizing: border-box;
-			}
-
-			html, body {
-				margin: 0;
-				overflow-x: hidden;
-			}
-			
-			a {
-				color: inherit;
-				text-decoration: none;
-			}
-			
-			a[target="_blank"] {
-			}
-			
-			a[target="_blank"]::after {
-				content: "🡥";
-				margin-left: 0.25rem;
-				margin-right: 0.05rem;
-				opacity: 0.5;
-				border-right: solid thin;
-				border-top: solid thin;
-				padding: 0.1em 0.2em 0em 0em;
-				position: relative;
-				top: -0.3em;
-				font-size: 0.5em;
-				user-select: none;
-			}
-
-			body {
-				overflow: hidden;
-			}
-			
-			div {
-				display: flex;
-				flex-flow: column nowrap;
-			}
-
-			section {
-				display: flex;
-				flex-flow: column nowrap;
-				margin: 0 auto;
-				width: 100%;
-				max-width: 1066px;
-			}
-
-			h1, h2, h3, h4, h5, h6 {
-				margin: 0.5ex 0;
-				font-size: 2em;
-				font-family: "Source Sans Pro";
-				text-transform: uppercase;
-				font-weight: 300;
-			}
-
-			h2 {
-				font-size: 1.4em;
-			}
-
-			h6 {
-				text-transform: none;
-			}
-
-			p, ul {
-				font-size: 1em;
-				margin: 1ex 0;
-				font-family: "Roboto";
-				font-weight: 300;
-			}
-
-			.header {
-				/* everything here will scale perfectly across devices since its linked to vh */
-				font-size: 5vh;
-
-				background: whitesmoke;
-				padding: 0;
-				background-position: center;
-				background-size: cover;
-				height: 15em;
-				justify-content: center;
-				display: flex;
-				flex-flow: column nowrap;;
-			}
-
-			.header__logo {
-				font-size: 8em;
-				margin: auto;
-				width: 1em;
-				display: block;
-			}
-
-			.header__text {
-				text-align: center;
-				margin: 0;
-			}
-
-			.header__text--primary {
-				font-weight: 300;
-				color: black;
-				font-size: 1em;
-			}
-
-			.header__text--secondary {
-				font-weight: 300;
-				font-size: 0.5em;
-				margin-bottom: auto;
-			}
-
-			.services__text {
-				padding: 1.5em;
-			}
-
-			.intro {
-				padding: 1.5em;
-				justify-content: center;
-			}
-			
-			.intro__text {
-				margin-right: auto;
-			}
-
-			.intro__pic {
-				font-size: 10em;
-				background: url(./me.png);
-				background-size: contain;
-				transition: all 0.3s;
-				border: solid #555 0.1rem;
-				width: 1em;
-				height: 1em;
-				flex: 1em 0 0;
-				border-radius: 50%;
-				margin: 1rem auto;
-			}
-
-			.button {
-				font-size: 0.8em;
-				text-decoration: none;
-				display: table;
-				text-align: center;
-				font-family: "Roboto";
-				font-weight: 300;
-				width: auto;
-				padding: 1.2em 2em;
-				margin: 1em 0;
-				justify-content: center;
-				border-radius: 0.0em;
-				background: whitesmoke;
-				color: #333;
-				box-shadow: rgba(0, 0, 0, 0.35) 0 0.1em 0.3em;
-				cursor: pointer;
-				outline: none;
-				transition: all 0.3s;
-				font-weight: bold;
-				text-transform: uppercase;
-				border-radius: .1em;
-				user-select: none;
-			}
-
-			.button:focus {
-				border-radius: 2em;
-			}
-
-			.button:hover {
-				transform: scale(1.05);
-			}
-
-			.button--contact {
-				
-			}
-
-			.button--center {
-				margin: auto;
-			}
-
-			.footer {
-				margin-top: 2em;
-				background: #222;
-				color: #ddd;
-				padding: 1em;
-				font-size: .85em;
-			}
-			
-			.emoji {
-				font-family: "Noto Emoji";
-			}
-
-			.service__icon {
-				display: none;
-				color: #333;
-			}
-
-			.service {
-				padding: 0 1em;
-			}
-
-			.contact {
-				padding: 0 1.5em;
-			}
-
-			@media (min-width: 22em) {
-				.service {
-					flex-flow: row nowrap;
-					align-items: center;
-				}
-
-				.service__icon {
-					display: block;
-					font-size: 3em;
-					margin-left: .2em;
-				}
-			}
-
-			@media (min-width: 25em) {
-				.service {
-					flex-flow: column-reverse nowrap;
-					margin-bottom: 1.5em;
-					align-items: center;
-					justify-items: flex-start;
-				}
-
-				.service__icon {
-					font-size: 6em;
-					margin-left: 0;
-				}
-
-				.service__text {
-					text-align: center;
-				}
-			}
-
-			@media (min-width: 30em) {
-				.services {
-					flex-flow: row wrap;
-				}
-
-				.service {
-					margin: auto;
-					flex: 50% 0;
-				}
-
-				.service__icon {
-					flex: 100% 0 0;
-				}
-
-				.service__text > h2 {
-					height: 3em;
-					display: flex;
-					align-items: center;
-					justify-content: center;
-				}
-
-				.service__text {
-					flex: 15em 0 0;
-				}
-
-				.intro {
-					flex-flow: row nowrap;
-				}
-
-				.intro__pic {
-					margin-left: 0.2em;
-				}
-			}
-
-			@media (min-width: 40em) {
-				.service {
-					flex: 33.33% 0;
-				}
-
-				.intro__text {
-					max-width: 30em;
-					margin-left: 0;
-				}
-
-				.intro__pic {
-					margin-right: 0;
-				}
-			}
-		</style>
-
-		<!-- animations -->
-		<style>
-			.header__logo {
-/* 				animation: logoin 0.5s; */
-			}
-
-			.logo * {
-				transform-origin: center;
-				animation-fill-mode: both;
-			}
-
-			.logo__hex {
-				animation: logoin 0.6s;
-			}
-
-			.logo__main {
-				animation: logobitin 0.8s;
-			}
-
-			.logo__sep, .logo__bridge {
-				animation: logobitin .8s;
-			}
-
-			.header__text {
-				animation: htextin 0.4s;
-				animation-delay: .2s;
-				animation-fill-mode: both;
-			}
-
-			body > *:not(.header) {
-				animation: restin 0.4s;
-				animation-delay: .5s;
-				animation-fill-mode: both;
-			}
-
-			@keyframes logoin {
-				from {
-					transform: scale(1.1);
-					opacity: 0;
-				}
-
-				to {
-					transform: none;
-					opacity: 1;
-				}
-			}
-
-			@keyframes logobitin {
-				from {
-					transform: scale(.9);
-					opacity: 0;
-				}
-
-				to {
-					transform: none;
-					opacity: 1;
-				}
-			}
-
-			@keyframes morelogoin {
-				from {
-					opacity: 0;
-				}
-
-				to {
-					opacity: 1;
-				}
-			}
-
-			@keyframes htextin {
-				from {
-					transform: translateY(-1em);
-					opacity: 0;
-				}
-
-				to {
-					transform: none;
-					opacity: 1;
-				}
-			}
-
-			@keyframes restin {
-				from {
-					transform: translateY(1em);
-					opacity: 0;
-				}
-
-				to {
-					transform: none;
-					opacity: 1;
-				}
-			}
-		</style>
+		
+		<!-- Stylesheets -->
+		<link rel="stylesheet" href="index.css">
 	</head>
 
 	<body>
+		<script>
+			if (!!navigator.userAgent.split("Trident")[1] || !!navigator.userAgent.split("MSIE")[1]) {
+				window.internetExplorer = true
+				
+				document.write('<div id="fuckie" class="fuckie"><style>.fuckie {display: block;padding: 2em;background: royalblue;color: white;}.fuckie .button {line-height: 5;display: inline; margin-right: 32px;}</style><h1>Oh dear. Internet Explorer.</h1><p>Technology moves fast, and unfortunately it seems to have outpaced your browser, Internet Explorer. The developers of Internet Explorer, Microsoft have ended support for Internet Explorer since 2016, I will not be supporting it.</p><p>The contents of this website may appear distorted or strange since I have used modern technology to build it. To experience this site how it was designed, and to improve your browser and computers security, you may want to update your browser.</p><a class="button" href="https://www.microsoft.com/en-gb/windowsforbusiness/end-of-ie-support">Read More from Microsoft</a><a class="button" href="https://browser-update.org/update-browser.html">Update my Browser</a></div>')
+				
+				if (console && console.error) {
+					console.error("Stop using Internet Explorer.")
+				}
+			}
+		</script>
+		
 		<header class="header">
 			<svg class="header__logo logo" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
 				<g>
@@ -465,14 +96,15 @@
 			</svg>
 
 			<h1 class="header__text header__text--primary">Gwynn Design</h1>
-			<h2 class="header__text header__text--secondary">full stack web consultancy</h2>
+			<h2 class="header__text header__text--secondary">Full stack web design &amp; development</h2>
 		</header>
 
 		<section class="intro">
 			<div class="intro__text">
 				<h1>About Me</h1>
-				<p>I am a freelance web developer based in Cardiff Bay. I design and develop bespoke websites for businesses and individuals.</p>
-				<p>I work with a number of freelance professionals to provide affordable and bespoke "full stack" solutions.</p>
+				<h3>I design and develop bespoke websites for businesses and individuals.</h3>
+				<p>You're looking for a reliable expert that takes pride in his work, who has worked with clients of all shapes and sizes.</p>
+				<p>I am Benjamin Gwynn, a flexible freelance web developer and designer based in Cardiff Bay. I believe the web should be open and accessible to everyone - regardless of who they are or their budget. Whether you're looking for a modification to a Wordpress site or a complete overhaul of your website and it's infrastructure, I can help.</p>
 			</div>
 			<div class="intro__pic"></div>
 		</section>
@@ -480,88 +112,147 @@
 		<section class="services">
 			<div class="services__text">
 				<h1>Services</h1>
-				<p>My consultancy is truly full-stack, from the design to maintainance. We handle everything so you can focus on your business.</p>
+				<p>I provide many services for enhancing or creating your buisnesses online presence...</p>
 			</div>
 
 			<div class="service">
+				<span class="service__icon emoji">🎨&#xFE0E;</span>
 				<span class="service__text">
 					<h2>Website Design</h2>
-					<p>My team and I will assist your users in recognising your brand. We are experts in designing user-friendly, mobile-first, brand reinforcing interfaces.</p>
+					<p>Your websites design is how users will recognise you online. A good website needs to be clean and elegant while reinforcing your brand. I provide solutions from augmenting themes to designing entire sites.</p>
 				</span>
-				<span class="service__icon emoji">🎨&#xFE0E;</span>
 			</div>
 
 			<div class="service">
+				<span class="service__icon emoji">🔧&#xFE0E;</span>
 				<span class="service__text">
 					<h2>Website Development</h2>
-					<p>A fast, fluid website keeps users coming back, that is why my team and I develop fast websites quickly, meeting the progressive web app standard and scoring high results on Pagespeed and Lighthouse.</p>
+					<p>A fast, fluid website keeps users coming back, that's why all of my websites are tested using the latest performance tools and are tested across multiple devices and browsers.</p>
 				</span>
-				<span class="service__icon emoji">🔧&#xFE0E;</span>
 			</div>
 
 			<div class="service">
-				<span class="service__text">
-					<h2>CMS solutions</h2>
-					<p>Your website needs to have content, and you need to manage that content. Whether your existing website is using Wordpress or you need a bespoke CMS solution, we can help.</p>
-				</span>
 				<span class="service__icon emoji">✏️&#xFE0E;</span>
+				<span class="service__text">
+					<h2>eCommerce &amp; CMS</h2>
+					<p>Your website needs to have content, and you need to manage that content. Whether your existing website is using Wordpress or you need a bespoke CMS solution, I can help.</p>
+				</span>
 			</div>
 
 			<div class="service">
+				<span class="service__icon emoji">🔍&#xFE0E;</span>
 				<span class="service__text">
 					<h2>Search Engine Optimisation</h2>
 					<p>Rank higher in organic search results. See more visitors, get more customers, earn more revenue.</p>
 				</span>
-				<span class="service__icon emoji">🔍&#xFE0E;</span>
 			</div>
 
 			<div class="service">
+				<span class="service__icon emoji">📜&#xFE0E;</span>
 				<span class="service__text">
 					<h2>Client JS development</h2>
-					<p>My team and I have buil mutiple bespoke Javascript applications in a variaty of frameworks, including React; jQuery and Angular.js.</p>
+					<p>I have built mutiple bespoke Javascript applications in a variety of frameworks, and from the ground up. I can build what you need, whether it's a jQuery plug-in or a bespoke library.</p>
 				</span>
-				<span class="service__icon emoji">📜&#xFE0E;</span>
 			</div>
 
 			<div class="service">
-				<span class="service__text">
-					<h2>Pay-per-click Ads</h2>
-					<p>Landing page design and campaign management for Google Adwords.</p>
-				</span>
-				<span class="service__icon emoji">🔎&#xFE0E;</span>
-			</div>
-
-			<div class="service">
+				<span class="service__icon emoji">💻&#xFE0E;</span>
 				<span class="service__text">
 					<h2>Server Side Solutions</h2>
-					<p>Every modern website must have a reliable backend to support its customer base. Whether it's in Javascript with node.js or PHP with nginx, me and my team can maintain and develop long-term, reliable solutions.</p>
+					<p>Every modern website must have a reliable backend to support its user base, whether it's written in Javascript with node.js or PHP with nginx, I can develop long-term &amp; reliable solutions.</p>
 				</span>
-				<span class="service__icon emoji">💻&#xFE0E;</span>
 			</div>
 
 			<div class="service">
+				<span class="service__icon emoji">🔎&#xFE0E;</span>
+				<span class="service__text">
+					<h2>PPC Management</h2>
+					<p>Unleash the potential of Adwords and broadcast your image. I provide Landing page design and campaign management for Google Adwords.</p>
+				</span>
+			</div>
+
+			<div class="service">
+				<span class="service__icon emoji">🔨&#xFE0E;</span>
 				<span class="service__text">
 					<h2>Server Maintainance &amp; Deployment</h2>
-					<p>With <noscript>over 5</noscript><script>document.currentScript.outerHTML=new Date().getYear()-111</script> years running Linux servers, we can assist or fully handle the deployment and maintainance of your web servers.</p>
+					<p>With <noscript>over 5</noscript><script>document.currentScript.outerHTML=new Date().getYear()-111</script> years running Linux servers, I can assist or fully handle the deployment and maintainance of your web servers.</p>
 				</span>
-				<span class="service__icon emoji">🔨&#xFE0E;</span>
 			</div>
 
 			<div class="service">
+				<span class="service__icon emoji">📲&#xFE0E;</span>
 				<span class="service__text">
 					<h2>iOS + Android Apps</h2>
-					<p>Using React Native, we create affordable native applications to compliment your online presence.</p>
+					<p>I can create affordable native applications to compliment your online presence, so that your users are only one tap away.</p>
 				</span>
-				<span class="service__icon emoji">📲&#xFE0E;</span>
 			</div>
 		</section>
+		
+		<section class="break">
+			<h1 class="break__text">I design and build professional websites and bespoke components for real buisnesses.</h1>
+		</section>
+		
+		<form class="portfolio">
+			<input id="ps_bbm" class="portfolio__selection" name="portfolio__selection" type="checkbox" />
+			<label for="ps_bbm" class="portfolio__item">
+				<div class="portfolio__text">
+					<h1 class="portfolio__title">Big Brain Maths</h1>
+					<div class="portfolio__inner scrollable">
+						<h2>Interactive Worksheet System</h2>
+						
+						<p>Working with Lynton Black Media I designed and built the interactive worksheet system - a crucial part of the worlds most advanced math tuition platform.</p>
+						
+						<p>The interactive worksheet system consists of a bespoke editor and viewer. I lead the development of this project, working closely with the client and Lynton as I designed and built various components; including a unique object model, complex graphing tools, a self-marking system, a high-performance rendering engine, and many other unique libraries and components.</p>
+						
+						<p>The worksheet system was written entirely in ES5 Javascript, and is compatible with a range of older devices &amp; browsers, including the iPad 2 and Internet Explorer 11.</p>
+
+						<a class="button" href="https://www.bigbrainmaths.com" target="_blank">Big Brain Maths</a>
+						<a class="button" href="http://lyntonblack.net" target="_blank">Lynton Black Media</a>
+					</div>
+				</div>
+			</label>
+			
+			<input id="ps_capital" class="portfolio__selection" name="portfolio__selection" type="checkbox" />
+			<label for="ps_capital" class="portfolio__item">
+				<div class="portfolio__text">
+					<h1 class="portfolio__title">Capital Law</h1>
+					<div class="portfolio__inner scrollable">
+						<h2>Bespoke Components</h2>
+						
+						<p>Along with miscellaneous updates, I have built unique Javascript components for Capital Law's existing Wordpress site. This includes a script to aggregate <a target="_blank" href="https://eventbrite.co.uk/">Eventbrite</a> events using their API, as well as a script to intergrate <a target="_blank" href="https://home.passle.net/">Passle</a> into their website.</p>
+
+						<a class="button" href="http://capital-law.co.uk" target="_blank">Capital Law</a>
+					</div>
+				</div>
+			</label>
+			
+			<input id="ps_ctop" class="portfolio__selection" name="portfolio__selection" type="checkbox" />
+			<label for="ps_ctop" class="portfolio__item">
+				<div class="portfolio__text">
+					<h1 class="portfolio__title">CompareTheOilPrice</h1>
+					<div class="portfolio__inner scrollable">
+						<h2>Styling Programming</h2>
+						
+						<p>Working with Lynton Black Media, I wrote the styling programming for the CompareTheOilPrice website, a complex and beautifuly designed site with critical functionality. The styling was written in <a href="http://lesscss.org/" target="_blank">LESS</a>, an advanced CSS pre-processor.</p>
+
+						<a class="button" href="https://www.comparetheoilprice.com" target="_blank">CompareTheOilPrice</a>
+						<a class="button" href="http://lyntonblack.net" target="_blank">Lynton Black Media</a>
+					</div>
+				</div>
+			</label>
+		</form>
 
 		<section class="contact">
-			<h1>Contact Me</h1>
-			<p>Let's get started.</p>
-			<p>Drop me an email at contact@gwynn.design, or use the contact button below and I'll get back to you as soon as possible.</p>
+			<div>
+				<h1>Contact Me</h1>
+				<h2>say hello</h2>
+				<p>Drop me an email at <a href="mailto:contact@gwynn.design">contact@gwynn.design</a>, or use the contact buttons below and I'll get back to you as soon as possible.</p>
 
-			<a class="button" href="mailto:contact@gwynn.design">Contact Me</a>
+				<span>
+					<a class="button button--inline" href="mailto:contact@gwynn.design">Email</a>
+					<a class="button button--inline" href="https://t.me/xenxier" target="_blank">Telegram</a>
+				</span>
+			</div>
 		</section>
 
 		<footer class="footer">
@@ -573,10 +264,51 @@
 					Cardiff Bay<br />
 					CF10 5AF
 				</p>
-				<p><a href="https://www.linkedin.com/in/benjamin-gwynn-643374149" target="_blank">LinkedIn</a> | <a href="https://twitter.com/benjamingwynn" target="_blank">Twitter</a> | <a href="https://benjamingwynn.tumblr.com" target="_blank">Tumblr</a></p>
+				<p>Find more of me on...<br />
+					<a href="https://www.linkedin.com/in/benjamin-gwynn-643374149" target="_blank">LinkedIn</a> | <a href="https://twitter.com/benjamingwynn" target="_blank">Twitter</a> | <a href="https://benjamingwynn.tumblr.com" target="_blank">Tumblr</a> | <a href="https://github.com/benjamingwynn" target="_blank">GitHub</a> | <a href="https://t.me/xenxier" target="_blank">Telegram</a>
+				</p>
 				<p class="footer__copyright">&copy; Benjamin Gwynn, <noscript>2017</noscript><script>document.currentScript.outerHTML=new Date().getFullYear()</script>.</p>
 			</div>
+				
+			<ul class="footer__credit">
+				<li>
+					<a href="https://www.flickr.com/photos/29233640@N07/14855823919" target="_blank">“maths”</a>
+					by
+					<i>
+					<a href="https://www.flickr.com/people/29233640@N07/" target="_blank">Robert Couse-Baker</a>
+					</i>
+					is licensed under
+					<a href="https://creativecommons.org/licenses/by/2.0" target="_blank">
+					CC BY 2.0</a>
+				</li>
+				<li>
+					<a href="https://www.flickr.com/photos/28421567@N04/3210285323" target="_blank">“TANKER”</a>
+					by
+					<i>
+					<a href="https://www.flickr.com/people/28421567@N04/" target="_blank">bilbobagweed</a>
+					</i>
+					is licensed under
+					<a href="https://creativecommons.org/licenses/by/2.0" target="_blank">
+					CC BY 2.0</a>
+				</li>
+				<li>
+					<a href="https://www.flickr.com/photos/wrote/2228546085" target="_blank">“lawyers”</a>
+					by
+					<i>
+					<a href="https://www.flickr.com/people/wrote/" target="_blank">Wrote</a>
+					</i>
+					is licensed under
+					<a href="https://creativecommons.org/licenses/by/2.0" target="_blank">
+					CC BY 2.0</a>
+				</li>
+			</ul>
 		</footer>
 	</body>
-	<script>console.log("                                    .:shy/.                                     \n                                `.+ymdo/+hmho-`                                 \n                             `:sdmy/.`    `/smms/`                              \n                          ./ymds:`           `-ohmh+.`                          \n                      `-odmy+-`                  ./smds:`                       \n                   ./ymds:`           ./+-`         `-ohmho-`                   \n               `-ohdh+-`           .+ydyoyhs/.`        `./smds:`                \n           `./ydds:. `         `:ohho:`   ./sdho-`         `:ohmh+-`            \n        `-ohdh+-`           ./shyo-`        ``-+yhs/.`        `-/ydds:`         \n     .:yddy/.`           -+yhs/.                `./shho:`         `:shdy+-      \n `-ohdho-`           `:ohho:`                       `-+yhs/.`        `-+ydds:.  \nyddy/.`           ./shy+-`                             `./shyo:`        `.:shdy.\nMs`           `-+yhs/.`                                    `-+yhy+.`        `+M-\nMs         `-ohhs:.`                                          `./shyo:`      /M-\nMs       :shy+-`                                                  `:+ydy/.`  /M-\nMs       ym.`                                                        .Myoyho:+M-\nMs       ym                                                          `Mo `-+ydM-\nMs       ym                 .                                        `M+     /M-\nMs       ym                `myo-`                                    `M+     /M-\nMs       ym                `Mh+yhs/-`                                `M+     /M-\nMs       ym                `Mo `.:oyys:.                             `M+     /M-\nMs       ym                `Mo     `-/shy+-`                         `M+     /M-\nMs       ym                `Mo         .:oyys:.`                     `M+     /M-\nMs       ym                `Mo            `./shh+:`                  `M+     /M-\nMs       ym                `mh+-.`            +Msyys/.`              `M+     /M-\nMs       ym                 .:+yyyo:.`        +M.`./shyo:`           `M+     /M-\nMs       ym                    ``-+yhy+-`     +M.    `-oyhs/.`       `M+     /M-\nMs       ym                         .:shh.    +M.       `-/shy+-`    `M+     /M-\nMs       ym                            +M.    +M.           `:oyhs:. `M+     /M-\nMs       ym                            /M.    +M.    ``        `-+yhs+M+     /M-\nMs       ym/.`                         /M.    +M.    :h+-`         ./sd+     /M-\nMs       .:shyo:.`                     /M.    +M.    +Msyhs/.`        ``     /M-\nMs`         `-oyhs/.`                  /M.    +M.    +M.`./yhy/.`            +M-\nhdho-.          ./shy+-`               /M.    +M.    +M.    `:shy+-`     `-/ydd.\n`./sdds/.`         `-ohhs:.`           /M.    +M.    +M.       `:ohy+-.:ohdh+-` \n    `-ohdh+-`          ./yhy+-`        /M.    +M.    +M.          `+mNmds:`     \n       `./ydhs:.`         `-ohhs:.`    /M.    +M.    +M.       `-ohdh+-`        \n           `-ohmh+-`         `.+ydy+-` /M.    +M.    +M.    ./ydds:.            \n              `./ydds:.`         `-ohhoyM.    +M.    +M.`-+hmh+-`               \n                  `:oddy+.`         `.+ym.    +M.    +Mydmy:.                   \n                      .+ymds:`          `     +M.`-ohmho-`                      \n                         `:oddy/.`            +Mydmy/.`                         \n                             -+hmdo-`      -+hmds-`                             \n                                `:sdmy/.:smmy/.`                                \n                                   `-+hNdo:`                                    ", "© Benjamin Gwynn Design", new Date().getFullYear())</script>
+	<script>
+		(function () {
+			if (window.internetExplorer || !console || !console.log) return
+
+			console.log("                                    .:shy/.                                     \n                                `.+ymdo/+hmho-`                                 \n                             `:sdmy/.`    `/smms/`                              \n                          ./ymds:`           `-ohmh+.`                          \n                      `-odmy+-`                  ./smds:`                       \n                   ./ymds:`           ./+-`         `-ohmho-`                   \n               `-ohdh+-`           .+ydyoyhs/.`        `./smds:`                \n           `./ydds:. `         `:ohho:`   ./sdho-`         `:ohmh+-`            \n        `-ohdh+-`           ./shyo-`        ``-+yhs/.`        `-/ydds:`         \n     .:yddy/.`           -+yhs/.                `./shho:`         `:shdy+-      \n `-ohdho-`           `:ohho:`                       `-+yhs/.`        `-+ydds:.  \nyddy/.`           ./shy+-`                             `./shyo:`        `.:shdy.\nMs`           `-+yhs/.`                                    `-+yhy+.`        `+M-\nMs         `-ohhs:.`                                          `./shyo:`      /M-\nMs       :shy+-`                                                  `:+ydy/.`  /M-\nMs       ym.`                                                        .Myoyho:+M-\nMs       ym                                                          `Mo `-+ydM-\nMs       ym                 .                                        `M+     /M-\nMs       ym                `myo-`                                    `M+     /M-\nMs       ym                `Mh+yhs/-`                                `M+     /M-\nMs       ym                `Mo `.:oyys:.                             `M+     /M-\nMs       ym                `Mo     `-/shy+-`                         `M+     /M-\nMs       ym                `Mo         .:oyys:.`                     `M+     /M-\nMs       ym                `Mo            `./shh+:`                  `M+     /M-\nMs       ym                `mh+-.`            +Msyys/.`              `M+     /M-\nMs       ym                 .:+yyyo:.`        +M.`./shyo:`           `M+     /M-\nMs       ym                    ``-+yhy+-`     +M.    `-oyhs/.`       `M+     /M-\nMs       ym                         .:shh.    +M.       `-/shy+-`    `M+     /M-\nMs       ym                            +M.    +M.           `:oyhs:. `M+     /M-\nMs       ym                            /M.    +M.    ``        `-+yhs+M+     /M-\nMs       ym/.`                         /M.    +M.    :h+-`         ./sd+     /M-\nMs       .:shyo:.`                     /M.    +M.    +Msyhs/.`        ``     /M-\nMs`         `-oyhs/.`                  /M.    +M.    +M.`./yhy/.`            +M-\nhdho-.          ./shy+-`               /M.    +M.    +M.    `:shy+-`     `-/ydd.\n`./sdds/.`         `-ohhs:.`           /M.    +M.    +M.       `:ohy+-.:ohdh+-` \n    `-ohdh+-`          ./yhy+-`        /M.    +M.    +M.          `+mNmds:`     \n       `./ydhs:.`         `-ohhs:.`    /M.    +M.    +M.       `-ohdh+-`        \n           `-ohmh+-`         `.+ydy+-` /M.    +M.    +M.    ./ydds:.            \n              `./ydds:.`         `-ohhoyM.    +M.    +M.`-+hmh+-`               \n                  `:oddy+.`         `.+ym.    +M.    +Mydmy:.                   \n                      .+ymds:`          `     +M.`-ohmho-`                      \n                         `:oddy/.`            +Mydmy/.`                         \n                             -+hmdo-`      -+hmds-`                             \n                                `:sdmy/.:smmy/.`                                \n                                   `-+hNdo:`                                    ", "© Benjamin Gwynn Design", new Date().getFullYear())
+		}())
+	</script>
 </html>
