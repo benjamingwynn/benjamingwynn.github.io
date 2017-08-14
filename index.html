@@ -118,7 +118,6 @@
 		
 		<!-- Stylesheets -->
 		<link rel="stylesheet" href="index.css">
-		<link rel="stylesheet" href="index.css">
 	</head>
 
 	<body>
@@ -137,10 +136,17 @@
 		<header class="header">
 			<svg class="header__logo logo" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
 				<g>
-					<path class="logo__main" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" d="M114.7,48.5L64.8,20.3L26,43.5 v42.9l39,22.4V78.5c-4-2.6-9-5.2-15-7.8c0-5.2,0-10.4,0-15.6c19,10.2,37,20.4,54,30.6c0-14.5,0-43.7,0-43.7"/>
-					<line class="logo__sep" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="74" y1="116" x2="74" y2="68"/>
-					<path class="logo__bridge" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" d="M83,111V86.3 c8,4.2,13.7,8.4,20.6,12.5"/>
-					<polygon class="logo__hex" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" points="14,35.5 64,6.7 114,35.5 114,93 64,121.8 14,93"/>
+					<g class="logo__outer">
+						<polygon class="logo__hex logo__hex--fill" fill="none" stroke-miterlimit="10" points="14,35.5 64,6.7 114,35.5 114,93 64,121.8 14,93"/>
+						<path class="logo__bridge" fill="none" stroke-miterlimit="10" d="M83,111V86.3 c8,4.2,13.7,8.4,20.6,12.5"/>
+					</g>
+					
+					<g class="logo__inner">
+						<path class="logo__g" fill="none" stroke-miterlimit="10" d="M114.7,48.5L64.8,20.3L26,43.5 v42.9l39,22.4V78.5c-4-2.6-9-5.2-15-7.8c0-5.2,0-10.4,0-15.6c19,10.2,37,20.4,54,30.6c0-14.5,0-43.7,0-43.7"/>
+						<line class="logo__sep" fill="none" stroke-miterlimit="10" x1="74" y1="116" x2="74" y2="68"/>
+					</g>
+					
+					<polygon class="logo__hex logo__hex--line" fill="none" stroke-miterlimit="10" points="14,35.5 64,6.7 114,35.5 114,93 64,121.8 14,93"/>
 				</g>
 			</svg>
 
@@ -374,5 +380,16 @@
 			ga('create', 'UA-104469055-1', 'auto');
 			ga('send', 'pageview');
 		}
+	</script>
+	
+	<script>
+		setTimeout(function () {
+			var dates = [{"d": 21, "m": 11}], today = new Date (), todayD = today.getDate(), todayM = today.getMonth()
+			for (var i = 0; i < dates.length; i += 1) {
+				var date = dates[i]
+
+				if (date.d === todayD && date.m === todayM) document.body.classList.add("secret" + i)
+			}
+		}, 900)
 	</script>
 </html>

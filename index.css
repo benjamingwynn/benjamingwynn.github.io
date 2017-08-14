@@ -21,10 +21,10 @@ a {
 	border-bottom: dashed thin;
 }
 
-a[target="_blank"] {
+a[target="noopener"] {
 }
 
-a[target="_blank"]::after {
+a[target="noopener"]::after {
 	content: "⇱";
 	font-family: monospace;
 	margin-left: 0.35rem;
@@ -101,7 +101,8 @@ p, ul {
 	height: 15em;
 	justify-content: center;
 	display: flex;
-	flex-flow: column nowrap;;
+	flex-flow: column nowrap;
+	transition: all 0.3s;
 }
 
 .header__logo {
@@ -117,8 +118,7 @@ p, ul {
 }
 
 .header__text--primary {
-	font-weight: 300;
-	color: black;
+	font-weight: 300;	
 	font-size: 1em;
 }
 
@@ -213,7 +213,7 @@ p, ul {
 	color: #111;
 	padding: 1em;
 	font-size: .85em;
-	padding-bottom: 3em;
+	padding: 1.5em 1.5em 3em 1.5em;
 }
 
 .emoji {
@@ -363,7 +363,7 @@ label[for="ps_capital"] {
 	padding: 0;
 	margin: 0;
 	margin-top: 1em;
-	color: grey;
+	color: #575757;
 	text-align: right;
 }
 
@@ -379,26 +379,59 @@ label[for="ps_capital"] {
 	font-weight: bold;
 }
 
+/* logo style */
+
+.logo {
+/*	filter: drop-shadow(0 0 0.015em rgba(0,0,0,0.65));*/
+}
+
+.logo, .logo * {
+	animation-fill-mode: both;
+	transform-origin: center;
+	transition: all 0.3s;
+}
+
+.logo__outer, .logo__inner, .logo__hex--line {
+	animation-duration: 0.6s;
+}
+
+.logo__outer, .logo__hex--line {
+	animation-name: punchin;
+}
+
+.logo__inner {
+	animation-name: zoomin;
+}
+
+.logo__hex {
+	fill: none;
+	stroke: none;
+}
+
+.logo__hex--fill {
+	fill: white;
+}
+
+.logo__g, .logo__bridge {
+	fill: rgba(0, 0, 0, 0.10);
+}
+
+.logo__g, .logo__bridge, .logo__sep, .logo__hex--line {
+	stroke: #222;
+	stroke-width: 0.0065em;
+}
+
+.logo__g, .logo__bridge, .logo__sep {
+	animation-delay: 0.6s;
+	animation-duration: .3s;
+	animation-name: strokein;
+}
+
 /*
 	Animations
 */
 
-.logo * {
-	transform-origin: center;
-	animation-fill-mode: both;
-}
-
-.logo__hex {
-	animation: logoin 0.6s;
-}
-
-.logo__main {
-	animation: logobitin 0.8s;
-}
-
-.logo__sep, .logo__bridge {
-	animation: logobitin .8s;
-}
+/* animate in everything else */
 
 .header__text {
 	animation: htextin 0.4s;
@@ -412,7 +445,19 @@ body > *:not(.header) {
 	animation-fill-mode: both;
 }
 
-@keyframes logoin {
+/* kfs */
+
+@keyframes strokein {
+	from {
+		stroke-opacity: 0;
+	}
+
+	to {
+		stroke-opacity: 1;
+	}
+}
+
+@keyframes punchin {
 	from {
 		transform: scale(1.1);
 		opacity: 0;
@@ -424,24 +469,14 @@ body > *:not(.header) {
 	}
 }
 
-@keyframes logobitin {
+@keyframes zoomin {
 	from {
-		transform: scale(.9);
+		transform: scale(.69);
 		opacity: 0;
 	}
 
 	to {
 		transform: none;
-		opacity: 1;
-	}
-}
-
-@keyframes morelogoin {
-	from {
-		opacity: 0;
-	}
-
-	to {
 		opacity: 1;
 	}
 }
@@ -619,4 +654,43 @@ body > *:not(.header) {
 	html::-webkit-scrollbar-thumb:active {
 		background: #333;
 	}
+}
+
+body.secret0 .header {
+	background: crimson;
+	color: white;
+}
+
+body.secret0 .header {
+	background: crimson;
+	color: white;
+}
+
+body.secret0 .logo__hex--fill {
+	fill: #b02743;
+}
+
+body.secret0 .logo__hex--line {
+	stroke: white;
+	stroke-width: 0.0075em;
+}
+
+body.secret0 .logo__g,
+body.secret0 .logo__bridge,
+body.secret0 .logo__sep {
+	opacity: 0;
+}
+
+body.secret0 header::before {
+	content: "❤";
+	color: rgba(255, 255, 255, 0.1);
+	position: absolute;
+	left: 0;
+	right: 0;
+	display: block;
+	top: 1.05em;
+	margin: auto;
+	font-size: 17vh;
+	text-align: center;
+	transition: all 0.3s;
 }
