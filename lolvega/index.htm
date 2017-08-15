@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en-GB">
+	<head>
+		<title>Biggest joke EU</title>
+		<style>
+			@import url('https://fonts.googleapis.com/css?family=Bungee+Shade');
+
+			* {
+				padding: 0;
+				margin: 0;
+				user-select: none;
+			}
+			
+			html, body {
+				height: 100%;
+				width: 100%;
+				animation: scale 4.5s infinite cubic-bezier(0.70, 0.35, 0.70, 0.35);
+				overflow: hidden;
+				cursor: default;
+			}
+
+			@font-face {
+				font-family: "Comic Sans";
+				src: url("comic.ttf");
+			}
+			
+			@keyframes colours {
+				  0% { background: red; }
+				 10% { background: orange; }
+				 50% { background: yellow; }
+				 20% { background: lawngreen; }
+				 40% { background: darkgreen; }
+				 60% { background: purple; }
+				 70% { background: indigo; }
+				 80% { background: blue; }
+				 90% { background: violet; }
+				100% { background: indianred; }
+			}
+			
+			body {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-family: "Comic Sans", "Comic Sans MS", sans-serif;
+				text-align: center;
+				animation: colours 1s infinite;
+				color: white;
+			}
+			
+			h1, h2 {
+				text-shadow: 0 0 0.1em white;
+				display: inline-block;
+				padding: 0.2em;
+			}
+			
+			h2 {
+				font-size: 4vw;
+			}
+			
+			div {
+				display: flex;
+				flex-flow: column nowrap;
+			}
+			
+			h1 {
+				font-size: 13vw;
+				animation: spin 1s infinite cubic-bezier(0.44, 0.29, 0.26, 0.72);
+			}
+			
+			@keyframes spin {
+				from {
+					transform: rotate(0deg);
+				}
+					
+				to {
+					transform: rotate(360deg);
+				}
+			}
+			
+			@keyframes scale {
+				0% {
+					transform: scale(1);
+				}
+				
+				25% {
+					transform: scale(1.1);
+				}
+					
+				50% {
+					transform: scale(5);
+				}
+					
+				75% {
+					transform: scale(1.1);
+				}
+					
+				100% {
+					transform: scale(1);
+				}
+			}
+			
+			body > * {
+				position: absolute;
+			}
+			
+			canvas {
+				width: 100%;
+				height: 100%;
+			}
+		</style>
+	</head>
+	
+	<body onclick='document.getElementsByTagName("audio")[0].play()'>
+		<audio nocontrols autoplay loop>
+			<source src="bass.mp3" type="audio/mpeg">
+		</audio>
+		
+		<canvas></canvas>
+		<div>
+			<h1>&pound;548.99</h1>
+			<h2>Lowest Price of Vega 64 in the UK</h2>
+			<small>Overclockers UK - 16/08/2017</small>
+		</div>
+	</body>
+	
+	<script src="canvas_meme.js"></script>
+</html>
