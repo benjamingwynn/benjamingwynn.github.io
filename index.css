@@ -92,7 +92,7 @@ p, ul {
 
 .header {
 	/* everything here will scale perfectly across devices since its linked to vh */
-	font-size: 5vh;
+	font-size: 5vmin;
 
 	background: whitesmoke;
 	padding: 0;
