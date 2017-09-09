@@ -418,7 +418,7 @@ label[for="ps_capital"] {
 
 .logo__g, .logo__bridge, .logo__sep, .logo__hex--line {
 	stroke: #222;
-	stroke-width: 0.0065em;
+	stroke-width: 1.5px;
 }
 
 .logo__g, .logo__bridge, .logo__sep {
