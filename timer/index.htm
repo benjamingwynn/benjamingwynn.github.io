@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en-GB">
+	<head>
+		<title>Timer</title>
+		<meta charset="utf-8">
+
+		<style>
+			:root {
+				--colour-primary: #999;
+				--colour-focus: white;
+				--colour-active: SteelBlue;
+				--colour-background: black;
+			}
+
+			html, body {
+				height: 100%;
+				width: 100%;
+				overflow: hidden;
+				background: var(--colour-background);
+			}
+
+			main {
+				font-size: 7vw;
+				font-family: "Hack";
+				color: var(--colour-primary);
+			}
+
+			* {
+				box-sizing: content-box;
+			}
+
+			*:not(input):not(textarea) {
+				user-select: none;
+			}
+
+			timer-body {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				text-align: center;
+			}
+
+			timer-part {
+				white-space: pre;
+			}
+
+			copy-wrapper {
+				display: flex;
+			}
+
+			copy-wrapper > div {
+				flex: 100% 1 1;
+			}
+
+			button {
+				font-size: 0.5em;
+				display: flex;
+				flex-flow: column nowrap;
+				margin: 0.3em;
+				background-color: transparent;
+				border: none;
+				padding: 0 0.5em;
+				width: 1em;
+				height: 1em;
+				outline: none;
+				line-height: 0;
+				justify-content: center;
+				align-items: center;
+				color: inherit;
+
+				transition: all 0.15s;
+			}
+
+			button:hover {
+				color: var(--colour-focus);
+			}
+
+			button:active {
+				color: var(--colour-active);
+				transform: scale(0.9);
+			}
+
+			button::after {
+				content: attr(data-tooltip);
+				background: var(--colour-focus);
+				color: var(--colour-background);
+				padding: 0.9em;
+				font-size: 0.2em;
+				text-align: center;
+				display: block;
+				visibility: hidden;
+				width: 100%;
+
+				transition: all 0.15s;
+				opacity: 0;
+				transform: translateY(-1em);
+			}
+
+			button:hover::after {
+				visibility: visible;
+				opacity: 1;
+				transform: none;
+			}
+
+			timer-main {
+				display: block;
+				margin: 0.2em 0;
+			}
+
+			timer-main > .timer_controls {
+				display: flex;
+				flex-flow: row nowrap;
+			}
+
+			timer-body {
+				cursor: pointer;
+				transition: all 0.15s;
+			}
+
+			timer-body[ticking] {
+				color: var(--colour-focus);
+			}
+
+			timer-add-button {
+				display: flex;
+				justify-content: center;
+			}
+
+			input {
+				flex: auto 1 0;
+				background: transparent;
+				border: solid thin transparent;
+				color: var(--colour-primary);
+				font-size: 0.25em;
+				font-family: inherit;
+				padding: 0.5em;
+				height: 1em;
+				margin: auto 0;
+				transition: all 0.15s;
+				font-style: italic;
+			}
+
+			input:focus {
+				font-style: normal;
+				outline: none;
+				color: var(--colour-active);
+			}
+		</style>
+
+		<link rel='stylesheet' href='https://cdn.jsdelivr.net/font-hack/2.020/css/hack.min.css'>
+		<script async src="./index.js"></script>
+	</head>
+
+	<body>
+		<main>
+			<timer-main></timer-main>
+			<timer-main></timer-main>
+			<timer-add-button></timer-add-button>
+		</main>
+	</body>
+</html>
