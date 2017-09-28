@@ -13,16 +13,27 @@
 			}
 
 			html, body {
-				height: 100%;
 				width: 100%;
-				overflow: hidden;
+				/* overflow: hidden; */
 				background: var(--colour-background);
+				margin: 0;
+				overflow-x: hidden;
+				min-height: 100%;
+			}
+
+			body {
+				height: 100%;
+				overflow: visible;
 			}
 
 			main {
+				display: flex;
+				flex-flow: column nowrap;
 				font-size: 7vw;
 				font-family: "Hack";
 				color: var(--colour-primary);
+				overflow: visible;
+				min-height: 100%;
 			}
 
 			* {
@@ -31,6 +42,40 @@
 
 			*:not(input):not(textarea) {
 				user-select: none;
+			}
+
+			drag-wrapper {
+				cursor: -webkit-grab;
+				flex-flow: row nowrap;
+
+				transform: none;
+				transition-duration: 0.3s;
+				position: relative;
+				top: 0;
+				transition-property: all;
+				border-bottom: transparent solid thin;
+			}
+
+			drag-wrapper[inserting] {
+				border-bottom-color: var(--colour-active);
+			}
+
+			drag-wrapper[moving] {
+				transform: scale(0.9);
+				transform-origin: bottom;
+				transition-property: transform;
+			}
+
+			drag-wrapper > * {
+				flex: auto 1 1;
+			}
+
+			drag-wrapper:not([head])::after {
+				display: block;
+				content: "•••";
+				margin: auto;
+				text-align: center;
+				font-size: 0.3em;
 			}
 
 			timer-body {
@@ -59,7 +104,7 @@
 				margin: 0.3em;
 				background-color: transparent;
 				border: none;
-				padding: 0 0.5em;
+				padding: 0 0.25em;
 				width: 1em;
 				height: 1em;
 				outline: none;
@@ -89,11 +134,15 @@
 				text-align: center;
 				display: block;
 				visibility: hidden;
-				width: 100%;
 
 				transition: all 0.15s;
 				opacity: 0;
 				transform: translateY(-1em);
+				line-height: 1;
+				position: absolute;
+				margin-top: 0.7em;
+				margin-left: 1.5em;
+				box-shadow: 0 -0.2em 1em rgba(0,0,0,0.5);
 			}
 
 			button:hover::after {
@@ -103,13 +152,23 @@
 			}
 
 			timer-main {
-				display: block;
+				display: flex;
+				flex-flow: column nowrap;
 				margin: 0.2em 0;
 			}
 
 			timer-main > .timer_controls {
 				display: flex;
 				flex-flow: row nowrap;
+			}
+
+			timer-add-button {
+				display: flex;
+				justify-content: center;
+			}
+
+			timer-part {
+				animation-duration: 0.2s;
 			}
 
 			timer-body {
@@ -121,9 +180,77 @@
 				color: var(--colour-focus);
 			}
 
-			timer-add-button {
-				display: flex;
-				justify-content: center;
+			timer-body[ff-tick] {
+				animation: ff-tick 0.5s;
+			}
+
+			@keyframes ff-tick {
+				0% {
+					transform: none;
+					filter: none;
+				}
+
+				40% {
+					transform: translateX(.75em);
+					filter: blur(.5em);
+				}
+
+				60% {
+					transform: translateX(-.75em);
+					filter: blur(.5em);
+
+				}
+
+				100% {
+					filter: blur(.5em);
+					transform: none;
+				}
+			}
+
+			timer-body[ff-tock] {
+				animation: ff-tock 0.3s;
+			}
+
+			@keyframes ff-tock {
+				from {
+					filter: blur(.5em);
+				}
+
+				to {
+					filter: none;
+				}
+			}
+
+			timer-part[tick] {
+				animation-name: tick;
+			}
+
+			@keyframes tick {
+				0% {
+					opacity: 1;
+					transform: none;
+				}
+
+				100% {
+					opacity: 0;
+					transform: translateY(-.5em);
+				}
+			}
+
+			timer-part[tock] {
+				animation-name: tock;
+			}
+
+			@keyframes tock {
+				0% {
+					opacity: 0;
+					transform: translateY(.5em);
+				}
+
+				100% {
+					opacity: 1;
+					transform: none;
+				}
 			}
 
 			input {
@@ -144,6 +271,17 @@
 				font-style: normal;
 				outline: none;
 				color: var(--colour-active);
+				border-color: var(--colour-primary);
+				border-radius: 0.2em;
+			}
+
+			footer {
+				color: var(--colour-primary);
+				font-style: italic;
+				opacity: 0.4;
+				text-align: center;
+				font-family: "Hack";
+				margin: 2ex 0;
 			}
 		</style>
 
@@ -153,9 +291,9 @@
 
 	<body>
 		<main>
-			<timer-main></timer-main>
-			<timer-main></timer-main>
-			<timer-add-button></timer-add-button>
+			<drag-wrapper head></drag-wrapper>
+			<timer-add-button>Your browser is outdated so this won't work. Stop living in the past and update your browser please.</timer-add-button>
 		</main>
+		<footer>A super useful timer - Written by Benjamin Gwynn</footer>
 	</body>
 </html>
