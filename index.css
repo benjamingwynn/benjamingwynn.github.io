@@ -90,7 +90,7 @@ p, ul {
 	font-weight: 300;
 }
 
-.header {
+.nav {
 	/* everything here will scale perfectly across devices since its linked to vh */
 	font-size: 5vmin;
 
@@ -105,27 +105,73 @@ p, ul {
 	transition: all 0.3s;
 }
 
-.header__logo {
+.nav__logo {
 	font-size: 8em;
 	margin: auto;
 	width: 1em;
 	display: block;
 }
 
-.header__text {
+.nav__text {
 	text-align: center;
 	margin: 0;
 }
 
-.header__text--primary {
+.nav__text--primary {
 	font-weight: 300;
 	font-size: 1em;
 }
 
-.header__text--secondary {
+.nav__text--secondary {
 	font-weight: 300;
 	font-size: 0.5em;
 	margin-bottom: auto;
+}
+
+.slideshow {
+	display: flex;
+	flex-flow: row nowrap;
+	height: 35em;
+}
+
+.slideshow__slide {
+	display: flex;
+	flex-flow: column nowrap;
+	flex: 100% 0 0;
+	height: inherit;
+	background: royalblue;
+}
+
+.slideshow__heading, .slideshow__subtitle, .slideshow__caption {
+	color: white;
+	text-align: center;
+	text-transform: none;
+}
+
+.slideshow__heading {
+	font-size: 2.34em;
+	margin-top: 1ex;
+}
+
+.slideshow__subtitle {
+	font-size: 1.5em;
+	margin-bottom: 2ex;
+	opacity: 0.9;
+}
+
+.slideshow__picture {
+	flex: 100% 1 1;
+	width: 35em;
+	margin: auto;
+	background-color: white;
+	box-shadow: 0.5em 0 2em 0 rgba(0, 0, 0, 0.24);
+}
+
+.slideshow__caption {
+	font-style: italic;
+	opacity: 0.8;
+	color: white;
+	margin: 2.5ex 0;
 }
 
 .services__text {
@@ -439,13 +485,13 @@ label[for="ps_capital"] {
 
 /* animate in everything else */
 
-.header__text {
+.nav__text {
 	animation: htextin 0.4s;
 	animation-delay: .2s;
 	animation-fill-mode: both;
 }
 
-body > *:not(.header) {
+body > *:not(.nav) {
 	animation: restin 0.4s;
 	animation-delay: .5s;
 	animation-fill-mode: both;
@@ -662,12 +708,12 @@ body > *:not(.header) {
 	}
 }
 
-body.secret0 .header {
+body.secret0 .nav {
 	background: crimson;
 	color: white;
 }
 
-body.secret0 .header {
+body.secret0 .nav {
 	background: crimson;
 	color: white;
 }
