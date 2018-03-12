@@ -271,7 +271,7 @@ p, ul {
 
 .portfolio {
 	font-size: 0.8em;
-	margin: 1em 0;
+	/* margin: 1em 0; */
 	display: flex;
 	flex-flow: column nowrap;
 }
@@ -292,6 +292,7 @@ p, ul {
 	background-color: grey;
 	background-position: center;
 	background-size: cover;
+	cursor: pointer;
 }
 
 .portfolio__text {
@@ -304,7 +305,7 @@ p, ul {
 }
 
 .portfolio__title {
-	height: 2.25em;
+	height: 2.20em;
 	padding: 0 1.5rem;
 	align-items: center;
 	display: flex;
@@ -321,6 +322,7 @@ p, ul {
 	font-weight: bold;
 	margin-left: auto;
 	transition: 0.3s all;
+	cursor: pointer;
 }
 
 .portfolio__inner {
@@ -336,6 +338,7 @@ p, ul {
 	padding: 0;
 	min-height: 25em;
 	overflow: auto;
+	cursor: default !important;
 }
 
 .portfolio__selection:checked + .portfolio__item .portfolio__text {
@@ -362,6 +365,14 @@ label[for="ps_ctop"] {
 
 label[for="ps_capital"] {
 	background-image: url(./lawyers.jpg);
+}
+
+label[for="ps_ll"] {
+	background-image: url(./server.png);
+}
+
+label[for="ps_redkite"] {
+	background-image: url(./cotw.png);
 }
 
 .footer__credit {
