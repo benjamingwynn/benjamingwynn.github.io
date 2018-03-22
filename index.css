@@ -21,9 +21,6 @@ a {
 	border-bottom: dashed thin;
 }
 
-a[target="noopener"] {
-}
-
 a[target="noopener"]::after {
 	content: "⇱";
 	font-family: monospace;
@@ -64,7 +61,7 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 h1, h2, h3, h4, h5, h6 {
-	margin: 0.5ex 0;
+	margin: 0 0 0.5ex 0;
 	font-size: 2em;
 	font-family: "Source Sans Pro", sans-serif;
 	text-transform: uppercase;
@@ -90,6 +87,11 @@ p, ul {
 	font-weight: 300;
 }
 
+p {
+	max-width: 60ch;
+	margin-right: auto;
+}
+
 .header {
 	/* everything here will scale perfectly across devices since its linked to vh */
 	font-size: 5vmin;
@@ -103,6 +105,62 @@ p, ul {
 	display: flex;
 	flex-flow: column nowrap;
 	transition: all 0.3s;
+	overflow: hidden;
+}
+
+body.blink .header__background, body.blink .header__background::before, body.blink .header__background::after {
+	background-attachment: fixed;
+}
+
+.header__background, .header__background::before, .header__background::after {
+	content: "";
+	--gradient-stop: 20%;
+	--gradient-alpha: 0.05;
+	font-size: 1.2rem;
+	background-image: radial-gradient(var(--gradient-colour) var(--gradient-stop), transparent var(--gradient-stop));
+	background-size: 1em 1em;
+	/* background-position: center; */
+
+	height: inherit;
+	width: 100%;
+	position: absolute;
+	transform: none;
+	animation-duration: 2s;
+	animation-fill-mode: both;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	/* animation-timing-function: cubic-bezier(1, 0.16, 0.45, 0.63); */
+	
+}
+
+.header__background {
+	--gradient-colour: rgba(0, 0, 0, var(--gradient-alpha));
+}
+
+.header__background::before {
+	--gradient-colour: rgba(0, 0, 0, var(--gradient-alpha));
+	animation-name: header-primary;
+	/* perspective-origin: 15em; */
+}
+
+.header__background::after {
+	--gradient-colour: rgba(0, 0, 0, var(--gradient-alpha));
+	animation-name: header-secondary;
+}
+
+@keyframes header-primary {
+	0%, 75% {}
+	to {
+		/* transform: rotateY(14deg); */
+		transform: scale(0.985);
+	}
+}
+
+@keyframes header-secondary {
+	0%, 75% {}
+	to {
+		transform: scale(1.025);
+	}
 }
 
 .header__logo {
@@ -110,6 +168,7 @@ p, ul {
 	margin: auto;
 	width: 1em;
 	display: block;
+	z-index: 1;
 }
 
 .header__text {
@@ -710,6 +769,7 @@ body.secret0 header::before {
 	font-size: 17vh;
 	text-align: center;
 	transition: all 0.3s;
+	z-index: 2;
 }
 
 .intro__pic::after {
@@ -719,15 +779,23 @@ body.secret0 header::before {
 	display: block;
 	opacity: 0;
 	transition: all 0.3s;
+	background-position: center;
+	position: relative;
+	background-size: 100%;
 }
 
 body.secret1 .intro__pic::after {
 	opacity: 1;
 	background-image: url(./hat.png);
-	background-position: center;
-	background-size: 100%;
-	position: relative;
 	top: -0.6em;
 	left: 0.4em;
 	transform: rotate(66.1deg);
+}
+
+body.secret2 .intro__pic::after {
+	opacity: 1;
+	background-image: url(./hat-xmas.png);
+	top: -0.4em;
+	left: 0.39em;
+	transform: rotate(30deg);
 }

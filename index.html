@@ -120,7 +120,7 @@
 		<link rel="stylesheet" href="index.css">
 	</head>
 
-	<body>
+	<body class="">
 		<script>
 			if (!!navigator.userAgent.split("Trident")[1] || !!navigator.userAgent.split("MSIE")[1]) {
 				window.internetExplorer = true
@@ -134,6 +134,7 @@
 		</script>
 
 		<header class="header">
+			<div class="header__background"></div>
 			<svg class="header__logo logo" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
 				<g>
 					<g class="logo__outer">
@@ -157,16 +158,16 @@
 		<section class="intro">
 			<div class="intro__text">
 				<h1>About Me</h1>
-				<h2>I design and develop bespoke websites for businesses and individuals.</h2>
-				<p>You're looking for a reliable expert that takes pride in his work, who has worked with clients of all shapes and sizes.</p>
-				<p>I am Benjamin Gwynn, a flexible freelance web developer and designer based in Cardiff Bay. I believe the web should be open and accessible to everyone - regardless of who they are or their budget. Whether you're looking for a modification to a Wordpress site or a complete overhaul of your website and it's infrastructure, I can help.</p>
+				<h2>Benjamin Gwynn</h2>
+				<p>I design and develop bespoke websites for businesses and individuals. You're looking for a reliable expert that takes pride in his work, who has worked with all types of clients, and who can deliver quickly and efficiently.</p>
+				<p>I am a flexible freelance web developer and designer based in Cardiff Bay. I believe the web should be open and accessible to everyone - regardless of who they are or their budget. Whether you're looking for a modification to a Wordpress site or a complete overhaul of your website and it's infrastructure, I can help.</p>
 			</div>
 			<div class="intro__pic"></div>
 		</section>
 
 		<section class="consultancy">
 			<h1>Web Consultancy</h1>
-			<p>I provide web consultancy, handling the design, development and deployment of your website, and providing any technical services that you require.</p>
+			<p>I provide full web consultancy, handling the design, development and deployment of your website, and providing any technical services that you require.</p>
 		</section>
 
 		<section class="services">
@@ -396,6 +397,19 @@
 			</ul>
 		</footer>
 	</body>
+
+	<script>
+		(function testForChrome () {
+			var p=[]
+			for (var i=0; i < navigator.plugins.length; i++) {
+				if (navigator.plugins[i].name.indexOf("Chrom") > -1) {
+					document.body.classList.add("blink")
+					break
+				}
+			}
+		}())
+	</script>
+
 	<script>
 		(function () {
 			if (window.internetExplorer || !console || !console.log) return
@@ -420,13 +434,32 @@
 	</script>
 
 	<script>
-		setTimeout(function () {
-			var dates = [{"d": 21, "m": 11}, {"d": 23, "m": 8}], today = new Date (), todayD = today.getDate(), todayM = today.getMonth()
-			for (var i = 0; i < dates.length; i += 1) {
-				var date = dates[i]
+		(function () {
+			var keys = []
+			var match = "heart"
+			
+			document.addEventListener("keypress", function (event) {
+				keys.push(event.key)
 
-				if (date.d === todayD && date.m === todayM) document.body.classList.add("secret" + i)
-			}
-		}, 900)
+				if (keys.slice(keys.length - match.length, keys.length).join("") === match) {
+					document.body.classList.add("secret0")
+				}
+			})
+
+			setTimeout(function () {
+				var dates = [null, {"d": 23, "m": 8}, {"d": 25, "m": 11}],
+					today = new Date (),
+					todayD = today.getDate(),
+					todayM = today.getMonth()
+				
+				for (var i = 0; i < dates.length; i += 1) {
+					var date = dates[i]
+
+					if (!date) continue
+
+					if (date.d === todayD && date.m === todayM) document.body.classList.add("secret" + i)
+				}
+			}, 900)
+		}())
 	</script>
 </html>
