@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en-GB">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+			
+		<title>Math Game</title>
+
+		<style>
+			* {
+				font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+				font-weight: normal;
+			}
+
+			form {
+				justify-content: center;
+				align-items: center;
+			}
+
+			input {
+				background: rgba(255, 255, 255, 0.1);
+				color: white;
+				border: none;
+				padding: 2rem 1rem;
+				border: solid 0.1em #ddd;
+				text-align: center;
+				font-size: 1.5em;
+			}
+
+			html, body {
+				margin:0;
+				width: 100%;
+				height: 100%;
+			}
+
+			main {
+				transition: 0.15s all;
+				display: flex;
+				flex-flow: column nowrap;
+				justify-content: center;
+				align-items: center;
+				width: 100%;
+				height: 100%;
+				background: #111;
+				color: white;
+			}
+
+			main[data-answer="right"] {
+				background: green;
+			}
+
+			main[data-answer="wrong"] {
+				background: red;
+			}
+		</style>
+	</head>
+	<body>
+		<main>
+			<h1 class="question"></h1>
+			
+			<form>
+				<input class="answer" type="number" />
+			</form>
+
+			<h2 class="streak">0</h2>
+		</main>
+
+		<script>
+			(function () {
+				const $main = document.querySelector("main")
+				const $question = document.querySelector(".question")
+				let answer
+
+				function generateQuestion () {
+					const numberA = Math.floor(Math.random() * 100)
+					const numberB = Math.floor(Math.random() * 100)
+					const question = numberA + (Math.random() > 0.5 ? " + " : " - ") + numberB
+					$question.innerText = question
+					answer = eval(question)
+				}
+
+				const $form = document.querySelector("form")
+				const $answer = document.querySelector(".answer")
+				const $streak = document.querySelector(".streak")
+				$form.addEventListener("submit", (event) => {
+					if ($answer.value.trim() == answer) {
+						// okay answer
+						$main.dataset.answer = "right"
+						$streak.innerHTML = parseInt($streak.innerHTML) + 1
+						generateQuestion() // gen new questions
+					} else {
+						// bad answer
+						$main.dataset.answer = "wrong"
+						$streak.innerHTML = "0"
+					}
+
+					$answer.value = ""
+
+					setTimeout(() => {
+						$main.dataset.answer = ""
+					}, 500)
+
+					event.preventDefault()
+				})
+
+				generateQuestion()
+			}())
+		</script>
+	</body>
+</html>
