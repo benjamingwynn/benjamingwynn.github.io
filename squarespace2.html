@@ -1,0 +1,276 @@
+<div class="yeet"></div>
+<button class="start" type="button">
+    <h1>click anywhere to start the game</h1>
+    <small>written by <a href="http://xenxier.com" target="noopener">benjamin gwynn</a> 2019</small>
+    <title>squarespace 2</title>
+</button>
+<canvas></canvas>
+<div class="win" hidden>
+    <h1>you done a win</h1>
+    <p>well done - click anywhere to AGAIN</p>
+</div>
+<style>
+    * {
+        user-select: none;
+    }
+
+    .start {
+        appearance: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        background: white;
+        color: black;
+        font-size: 1em;
+        border: 0;
+    }
+
+    .yeet {
+        position: absolute;
+        z-index: -1;
+        top: -25vmax;
+        left: -25vmax;
+        right: 0;
+        bottom: 0;
+        width: 150vmax;
+        height: 150vmax;
+        background-image: linear-gradient(royalblue, yellow, red, limegreen);
+        /* background-image: url("asset.jpg"); */
+        animation: spin 10s infinite linear;
+        transform-origin: center;
+    }
+    
+    @keyframes spin {
+        from {transform: rotate(0deg)}
+        to {transform: rotate(360deg)}
+    }
+
+    html, body {
+        margin: 0;
+        overflow: hidden;
+    }
+
+    canvas {
+        display: block;
+        width: 100%;
+        height: 100%;
+        transition: all 0.3s;
+        z-index: 0;
+    }
+
+    .win {
+        position: fixed;
+        display: flex;
+        flex-flow: column nowrap;
+        z-index: 1;
+        color: white;
+        text-shadow: 0 0 1em black;
+        font-family: monospace;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        justify-content: center;
+        align-items: center;
+        font-size: 4vw;
+        line-height: 0;
+        cursor: pointer;
+        transition: all 0.15s;
+
+        opacity: 1;
+        transform: scale(1);
+        visibility: visible;
+    }
+
+    .win[hidden] {
+        opacity: 0;
+        transform: scale(0.8);
+        visibility: hidden;
+    }
+</style>
+<script>
+    let rects = []
+    let paused = false
+    let tStart
+    const $canvas = document.querySelector("canvas")
+    const size = 64
+    const ctx = $canvas.getContext("2d")
+
+    let audioCtx = new AudioContext()
+    let allowSound = true
+
+    ctx.globalAlpha = 0.7
+
+    function sleep (ms) {
+        return new Promise(resolve => setTimeout(resolve, ms))
+    }
+    
+    async function makeWinNoise () {
+        const step = 0.1
+        const notes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+        for (let i = 0; i < notes.length; i++) {
+            const note = notes[i]
+            let oscillator = audioCtx.createOscillator()
+            
+            oscillator.frequency.value = 440 * 1.0959 * note
+            
+            oscillator.connect(audioCtx.destination)
+            oscillator.start()
+            oscillator.stop(audioCtx.currentTime + step)
+            await sleep(step * 1000)
+        }
+    }
+
+    function createSound () {
+        if (allowSound) {
+            allowSound = false
+            setTimeout(() => allowSound=true, 100)
+            let oscillator = audioCtx.createOscillator()
+            
+            oscillator.frequency.value = 400 + (Math.random() * 350)
+            
+            oscillator.connect(audioCtx.destination)
+            oscillator.start()
+            oscillator.stop(audioCtx.currentTime + 0.1)
+        }
+    }
+
+    function newRect (x, y) {
+        if (x < 0 || x > $canvas.width || y < 0 || y > $canvas.height) return // do not add things out of range
+        rects.push({
+            x,
+            y,
+            r: Math.floor(Math.random() * 255),
+            g: Math.floor(Math.random() * 255),
+            b: Math.floor(Math.random() * 255),
+            a: (Math.random() * (1 - minAlpha)) + minAlpha,
+        })
+        createSound()
+    }
+
+    function isRectHere(x, y) {
+        for (let i = 0; i < rects.length; i++) {
+            if (rects[i].x === x && rects[i].y === y) return true 
+        }
+    }
+
+    function winConditionCheck () {
+        for (let x = 0; x < $canvas.width/* + size*/; x += size) {
+            for (let y = 0; y < $canvas.height/*+ size*/; y += size) {
+                if (!isRectHere(x, y)) return false
+            }
+        }
+
+        return true
+    }
+
+    function win () {
+        makeWinNoise()
+        document.querySelector(".win").removeAttribute("hidden")
+        paused = true
+    }
+
+    const minAlpha = 0.8
+    const stepAlpha = 0.01
+
+    const frame = () => {
+        if (!paused) {
+            $canvas.width = $canvas.width
+            $canvas.height = $canvas.height
+
+            rects.forEach((r) => {
+                if (r.d) {
+                    r.a -= stepAlpha
+                } else {
+                    r.a += stepAlpha
+                }
+
+                if (r.a <= minAlpha) {
+                    r.a = minAlpha
+                    r.d = false
+                }
+
+                if (r.a > 1) {
+                    r.a = 1
+                    r.d = true
+                }
+
+
+                ctx.fillStyle = `rgba(${r.r}, ${r.g}, ${r.b}, ${r.a})`
+                ctx.fillRect(r.x, r.y, size, size)
+            })
+
+            const time = ((performance.now() - tStart) / 1000).toFixed(2)
+            ctx.fillStyle = "black"
+            ctx.font = "64px monospace"
+            ctx.fillText(time, 0, 64)
+            ctx.fillStyle = "white"
+            ctx.fillText(time, 0, 65)
+        }
+
+        requestAnimationFrame(frame)
+    }
+
+    $canvas.addEventListener("mousemove", (event) => {
+        rects.forEach((r, i) => {
+            if (event.clientX > r.x && event.clientX < r.x + size) {
+                if (event.clientY > r.y && event.clientY < r.y + size) {
+                    let x = r.x
+                    let y = r.y
+
+                    switch (Math.floor(Math.random() * 4)) {
+                        case 0: // down
+                            while (isRectHere(x,y)) { y += size }
+                            break
+
+                        case 1: // up
+                            while (isRectHere(x,y)) { y -= size }
+                            break
+
+                        case 2: // left
+                            while (isRectHere(x,y)) { x += size }
+                            break
+
+                        case 3: // right
+                            while (isRectHere(x,y)) { x -= size }
+                            break
+                    }
+
+                    newRect(x, y)
+
+                    if (winConditionCheck()) {
+                        win()
+                    }
+                }
+            }
+        })
+    })
+
+    const init = () => {
+        tStart = performance.now()
+        rects = []
+        paused = false
+        const box = $canvas.getBoundingClientRect()
+        $canvas.width = box.width
+        $canvas.height = box.height
+        newRect(Math.floor($canvas.width / 2 / size) * size, Math.floor($canvas.height / 2 / size) * size) // start in centre
+    }
+    
+    const $btn = document.querySelector(".start")
+    $btn.onclick = () => {
+        $btn.remove()
+        init()
+    }
+
+    document.querySelector(".win").addEventListener("click", function () {
+        this.setAttribute("hidden", "")
+        init()
+    })
+
+    window.onresize = init
+    requestAnimationFrame(frame)
+</script>
